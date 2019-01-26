@@ -36,7 +36,7 @@ class TransMaster(models.Model):
     def _onchange_amount_to_swipe(self):
         if self.commission_included == True:
             self.commission = (self.amount_to_swipe * self.sales_percentage / 100)
-            self.amount_to_customer = (self.amount_to_swipe +self.commission)
+            self.amount_to_customer = (self.amount_to_swipe - self.commission)
             self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
             self.cash_paid_customer = self.amount_to_customer
             self.balance = self.amount_to_customer -self.cash_paid_customer
