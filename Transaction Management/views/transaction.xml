@@ -57,6 +57,12 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record id="seq_transaction" model="ir.sequence">
+            <field name="name">Transaction</field>
+            <field name="code">trans.master</field>
+            <field name="prefix">T</field>
+            <field name="padding">4</field>
+        </record>
 
         <menuitem name="Transaction" id="menu_transaction" parent="menu_transaction_management" sequence="1"
                   action="action_transaction"/>
