@@ -52,6 +52,7 @@
             <field name="name">Transaction</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">trans.master</field>
+            <field name="context">{'readonly_by_pass': True}</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
