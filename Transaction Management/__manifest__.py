@@ -9,6 +9,7 @@
     'depends': ['account', 'account_accountant','account_cancel'],
     'data': [
                 'views/customer_bank_view.xml','views/machine_master_view.xml','views/transaction_management_view.xml',
+        'views/transaction.xml'
             ],
     'demo': [
 

@@ -48,7 +48,7 @@
         </record>
 
         <menuitem name="Transaction Management" id="menu_transaction_management" sequence="41"/>
-        <menuitem name="Customer Banks" id="menu_customer_banks" parent="menu_transaction_management" sequence="3"
+        <menuitem name="Customer Banks" id="menu_customer_banks" parent="menu_transaction_management" sequence="4"
                   action="action_customer_bank"/>
     </data>
 </odoo>
