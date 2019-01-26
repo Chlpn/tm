@@ -1,3 +1,3 @@
 #import transaction_management
-#import machine_master
+import machine_master
 import customer_bank
