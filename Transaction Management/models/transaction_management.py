@@ -5,6 +5,7 @@ from odoo import api, fields, models, _
 class TransMaster(models.Model):
     _name = "trans.master"
     _description = "Transaction Management"
+    _rec_name = 'transaction_no'
 
     transaction_no = fields.Char(string='Transaction Number', readonly=True)
     transaction_date = fields.Date(string='Date')
@@ -19,7 +20,7 @@ class TransMaster(models.Model):
     machine_name = fields.Many2one('machine.master')
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage', readonly=True)
-    merchant_bank_ac = fields.Many2one('account.account', string="Partner Account")
+    customer = fields.Many2one('res.partner', string="Customer")
     state = fields.Selection([
         ('draft', 'Draft'),
         ('posted', 'Posted'),
