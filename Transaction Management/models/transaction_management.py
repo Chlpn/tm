@@ -8,7 +8,7 @@ class TransMaster(models.Model):
     _rec_name = 'transaction_no'
 
     transaction_no = fields.Char(string='Transaction Number', readonly=True)
-    transaction_date = fields.Date(string='Date')
+    transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
     commission_included = fields.Boolean(string='is commission included')
     amount_to_swipe = fields.Float(string='Amount to Swipe')
     amount_to_customer = fields.Float(string='Amount to customer')
