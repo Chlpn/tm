@@ -32,17 +32,9 @@ class TransMaster(models.Model):
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
 
-    @api.onchange('amount_to_swipe')
-    def _onchange_amount_to_swipe(self):
-        if self.commission_included == True:
-            self.commission = (self.amount_to_swipe * self.sales_percentage / 100)
-            self.amount_to_customer = (self.amount_to_swipe - self.commission)
-            self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
-            self.cash_paid_customer = self.amount_to_customer
-            self.balance = self.amount_to_customer -self.cash_paid_customer
-            self.margin =self.commission - self.cost_to_commission
 
-    @api.onchange('amount_to_customer','amount_to_swipe','commission_included','sales_percentage','machine_name')
+
+    @api.onchange('amount_to_customer','amount_to_swipe','sales_percentage')
     def _onchange_amount_to_customer(self):
         if self.commission_included == False:
             self.amount_to_swipe = (self.amount_to_customer * 100/(100-self.sales_percentage))
