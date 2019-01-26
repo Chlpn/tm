@@ -11,8 +11,8 @@ class TransMaster(models.Model):
     transaction_no = fields.Char(string='Transaction Number')
     transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
     commission_included = fields.Boolean(string='is commission included')
-    amount_to_swipe = fields.Float(string='Amount to Swipe')
-    amount_to_customer = fields.Float(string='Amount to customer')
+    amount_to_swipe = fields.Float(string='Amount to Swipe',store=True)
+    amount_to_customer = fields.Float(string='Amount to customer',store=True)
     commission = fields.Float(string='Commission')
     cost_to_commission = fields.Float(string='Cost of Commission')
     margin = fields.Float(string='margin')
@@ -37,24 +37,23 @@ class TransMaster(models.Model):
 
     @api.onchange('amount_to_customer','amount_to_swipe','sales_percentage')
     def _onchange_amount_to_customer(self):
-        if not self.machine_name:
-            raise UserError(_('Please select the Machine Name'))
+        #if not self.machine_name:
+            #raise UserError(_('Please select the Machine Name'))
+        #else:
+        if self.commission_included == False:
+            self.amount_to_swipe = (self.amount_to_customer * 100 / (100 - self.sales_percentage))
+            self.commission = self.amount_to_swipe - self.amount_to_customer
+            self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
+            self.cash_paid_customer = self.amount_to_customer
+            self.balance = self.amount_to_customer - self.cash_paid_customer
+            self.margin = self.commission - self.cost_to_commission
         else:
-
-            if self.commission_included == False:
-                self.amount_to_swipe = (self.amount_to_customer * 100/(100-self.sales_percentage))
-                self.commission = self.amount_to_swipe - self.amount_to_customer
-                self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
-                self.cash_paid_customer = self.amount_to_customer
-                self.balance = self.amount_to_customer - self.cash_paid_customer
-                self.margin = self.commission - self.cost_to_commission
-            else:
-                self.commission = (self.amount_to_swipe * self.sales_percentage / 100)
-                self.amount_to_customer = (self.amount_to_swipe - self.commission)
-                self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
-                self.cash_paid_customer = self.amount_to_customer
-                self.balance = self.amount_to_customer - self.cash_paid_customer
-                self.margin = self.commission - self.cost_to_commission
+            self.commission = (self.amount_to_swipe * self.sales_percentage / 100)
+            self.amount_to_customer = (self.amount_to_swipe - self.commission)
+            self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
+            self.cash_paid_customer = self.amount_to_customer
+            self.balance = self.amount_to_customer - self.cash_paid_customer
+            self.margin = self.commission - self.cost_to_commission
 
     @api.multi
     def save(self):

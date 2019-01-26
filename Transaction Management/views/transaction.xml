@@ -14,15 +14,14 @@
                     </div>
                         <group colspan="4" col="4">
                     <field name="transaction_date"/>
-                            <field name="machine_name"/>
-                            <field name="sales_percentage"/>
+                    <field name="machine_name"/>
+                    <field name="sales_percentage"/>
                     <field name="commission_included"/>
                     <field name="amount_to_swipe" attrs="{'readonly': [('commission_included', '=', False)]}" />
                     <field name="amount_to_customer" attrs="{'readonly': [('commission_included', '=', True)]}" />
-                    <field name="commission"/>
-                            <field name="cash_paid_customer"/>
+                    <field name="commission" readonly="1"/>
+                    <field name="cash_paid_customer"/>
                     <field name="balance"/>
-
                     <field name="customer"/>
                         </group>
 

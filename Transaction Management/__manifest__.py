@@ -6,7 +6,7 @@
     'author': "iSquare Informatics",
     'website': 'https://www.isi.ae',
     'summary': '',
-    'depends': ['account', 'account_accountant','account_cancel'],
+    'depends': ['account', 'account_accountant','account_cancel','Read Only ByPass'],
     'data': [
                 'views/customer_bank_view.xml','views/machine_master_view.xml','views/transaction_management_view.xml',
         'views/transaction.xml'
