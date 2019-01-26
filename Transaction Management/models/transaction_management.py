@@ -53,15 +53,4 @@ class TransMaster(models.Model):
 
 
 
-    @api.multi
-    def create(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Create Transaction',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_model': 'trans.master',
-            'target': 'new',
-            'context': 'None'
-        }
 
