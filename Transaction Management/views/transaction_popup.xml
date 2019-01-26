@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <!--  Transaction master form View -->
+        <record model="ir.ui.view" id="transaction_wizard">
+            <field name="name">transaction.form</field>
+            <field name="model">trans.master</field>
+            <field name="arch" type="xml">
+                <form string="Transaction">
+                    <sheet>
+                    <div class="oe_title">
+                    <h1>TRANSACTION NO: <field name="transaction_no" readonly="1"/></h1>
+                    </div>
+                        <group colspan="4" col="4">
+                    <field name="transaction_date"/>
+                            <field name="machine_name"/>
+                            <field name="sales_percentage"/>
+
+                    <field name="commission_included"/>
+                    <field name="amount_to_swipe" string="Amount Swiped"/>
+                    <field name="amount_to_customer"/>
+                    <field name="commission"/>
+
+                    <field name="cash_paid_customer"/>
+                    <field name="balance"/>
+                             <field name="customer"/>
+
+
+
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>
