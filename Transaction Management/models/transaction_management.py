@@ -25,7 +25,7 @@ class TransMaster(models.Model):
         ('draft', 'Draft'),
         ('posted', 'Posted'),
         ('cancelled', 'Cancelled'),
-    ], string='Status', readonly=True)
+    ], string='Status', default='draft',readonly=True)
 
     @api.onchange('machine_name')
     def _onchange_machine_name(self):
@@ -49,3 +49,16 @@ class TransMaster(models.Model):
         self.cash_paid_customer = self.amount_to_customer
         self.balance = self.amount_to_customer - self.cash_paid_customer
         self.margin = self.commission - self.cost_to_commission
+
+    @api.multi
+    def create(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Create Transaction',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'trans.master',
+            'target': 'new',
+            'context': 'None'
+        }
+
