@@ -13,6 +13,6 @@ class MachineMaster(models.Model):
     bank_name = fields.Many2one('customer.bank', string='Bank Name')
     rented =fields.Boolean(string='is Machine Rented')
     rented_from = fields.Many2one('res.partner', string="Rented From")
-    sales_percentage = fields.Integer(string='Default Sales Percentage')
-    cost_percentage = fields.Integer(string='Cost Percentage')
+    sales_percentage = fields.Float(string='Default Sales Percentage')
+    cost_percentage = fields.Float(string='Cost Percentage')
     merchant_bank_ac = fields.Many2one('account.account', string="Partner Account")
