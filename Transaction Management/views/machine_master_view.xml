@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  Machine master form View -->
+        <record model="ir.ui.view" id="machine_master_form">
+            <field name="name">machine.master.form</field>
+            <field name="model">machine.master</field>
+            <field name="arch" type="xml">
+                <form string="Machine Master">
+                    <sheet>
+                    <group colspan="4" col="4">
+                    <field name="name"/>
+                    <field name="merchant_id"/>
+                    <field name="terminal_id"/>
+                    <field name="bank_name"/>
+                    <field name="rented"/>
+                    <field name="rented_from" attrs="{'invisible': [('rented', '=', False)]}"/>
+                    <field name="sales_percentage"/>
+                    <field name="cost_percentage"/>
+                    <field name="merchant_bank_ac" attrs="{'invisible': [('rented', '=', True)]}"/>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Machine master Tree View -->
+        <record model="ir.ui.view" id="machine_master_tree">
+            <field name="name">machine.master.tree</field>
+            <field name="model">machine.master</field>
+            <field name="arch" type="xml">
+                <tree string="Machine Master">
+                    <field name="name"/>
+                    <field name="bank_name"/>
+                    <field name="rented"/>
+                    <field name="sales_percentage"/>
+                    <field name="cost_percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_machine_master">
+            <field name="name">Machine Master</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">machine.master</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Machine Master" id="menu_machine_master" parent="menu_transaction_management" sequence="2"
+                  action="action_machine_master"/>
+
+    </data>
+</odoo>
