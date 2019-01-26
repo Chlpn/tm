@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 class TransMaster(models.Model):
     _name = "trans.master"
@@ -36,21 +37,25 @@ class TransMaster(models.Model):
 
     @api.onchange('amount_to_customer','amount_to_swipe','sales_percentage')
     def _onchange_amount_to_customer(self):
-        if self.commission_included == False:
-            self.amount_to_swipe = (self.amount_to_customer * 100/(100-self.sales_percentage))
-            self.commission = self.amount_to_swipe - self.amount_to_customer
-            self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
-            self.cash_paid_customer = self.amount_to_customer
-            self.balance = self.amount_to_customer - self.cash_paid_customer
-            self.margin = self.commission - self.cost_to_commission
+        if self.machine_name == '':
+            raise UserError(_('Please select the Machine Name'))
         else:
-            self.commission = (self.amount_to_swipe * self.sales_percentage / 100)
-            self.amount_to_customer = (self.amount_to_swipe - self.commission)
-            self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
-            self.cash_paid_customer = self.amount_to_customer
-            self.balance = self.amount_to_customer - self.cash_paid_customer
-            self.margin = self.commission - self.cost_to_commission
 
+            if self.commission_included == False:
+                self.amount_to_swipe = (self.amount_to_customer * 100/(100-self.sales_percentage))
+                self.commission = self.amount_to_swipe - self.amount_to_customer
+                self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
+                self.cash_paid_customer = self.amount_to_customer
+                self.balance = self.amount_to_customer - self.cash_paid_customer
+                self.margin = self.commission - self.cost_to_commission
+            else:
+                self.commission = (self.amount_to_swipe * self.sales_percentage / 100)
+                self.amount_to_customer = (self.amount_to_swipe - self.commission)
+                self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
+                self.cash_paid_customer = self.amount_to_customer
+                self.balance = self.amount_to_customer - self.cash_paid_customer
+                self.margin = self.commission - self.cost_to_commission
 
-
-
+    @api.multi
+    def save(self):
+        self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
