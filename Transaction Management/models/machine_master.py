@@ -16,3 +16,4 @@ class MachineMaster(models.Model):
     sales_percentage = fields.Float(string='Default Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     merchant_bank_ac = fields.Many2one('account.account', string="Bank Account")
+

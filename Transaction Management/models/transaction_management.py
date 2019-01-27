@@ -60,7 +60,12 @@ class TransMaster(models.Model):
         self.balance = self.amount_to_customer - self.cash_paid_customer
 
 
-    @api.multi
-    def create(self):
-        self.margin = self.margin + 1000
-        
+   # @api.model
+   # def create(self):
+      #  self.margin = self.margin + 1000
+
+    @api.model
+    def create(self, vals):
+        vals = {'margin': self.margin + 1000}
+        res = super(TransMaster, self).create(vals)
+        return res
