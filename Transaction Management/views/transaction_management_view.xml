@@ -7,7 +7,12 @@
             <field name="name">transaction.master.form</field>
             <field name="model">trans.master</field>
             <field name="arch" type="xml">
-                <form string="Transaction Master">
+                <form string="Transaction Master" delete='false'>
+                    <header>
+                        <button name="cancel" states="posted" string="Cancel" type="object"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,posted,cancel"/>
+                    </header>
                     <sheet>
                     <group>
                     <field name="transaction_no" readonly="1"/>

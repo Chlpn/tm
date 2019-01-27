@@ -59,6 +59,8 @@ class TransMaster(models.Model):
     def _cash_paid_customer(self):
         self.balance = self.amount_to_customer - self.cash_paid_customer
 
+
     @api.multi
-    def save(self):
-        self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
+    def create(self):
+        self.margin = self.margin + 1000
+        
