@@ -10,7 +10,7 @@ class TransMaster(models.Model):
 
     transaction_no = fields.Char(string='Transaction Number')
     transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
-    commission_included = fields.Boolean(string='is commission included')
+    commission_included = fields.Boolean(string='Include Commission')
     amount_to_swipe = fields.Float(string='Amount to Swipe',store=True)
     amount_to_customer = fields.Float(string='Amount to customer',store=True)
     commission = fields.Float(string='Commission')
@@ -54,6 +54,10 @@ class TransMaster(models.Model):
             self.cash_paid_customer = self.amount_to_customer
             self.balance = self.amount_to_customer - self.cash_paid_customer
             self.margin = self.commission - self.cost_to_commission
+
+    @api.onchange('cash_paid_customer')
+    def _cash_paid_customer(self):
+        self.balance = self.amount_to_customer - self.cash_paid_customer
 
     @api.multi
     def save(self):
