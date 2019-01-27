@@ -19,6 +19,8 @@
                     <field name="sales_percentage"/>
                     <field name="cost_percentage"/>
                     <field name="merchant_bank_ac" attrs="{'invisible': [('rented', '=', True)],'required': [('rented', '=', False)]}" widget="selection"/>
+                    <field name="cost_ac"  widget="selection"/>
+                    <field name="income_ac"  widget="selection"/>
                     </group>
                     </sheet>
                 </form>

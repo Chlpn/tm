@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <form string="Transaction Master" delete='false'>
                     <header>
+                        <button name="post" states="draft" string="Post" type="object"/>
                         <button name="cancel" states="posted" string="Cancel" type="object"/>
                         <field name="state" widget="statusbar"
                                statusbar_visible="draft,posted,cancel"/>
