@@ -41,7 +41,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="action_machine_master">
-            <field name="name">Machine Master</field>
+            <field name="name">Machines</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">machine.master</field>
             <field name="view_type">form</field>
@@ -49,7 +49,7 @@
         </record>
 
 
-        <menuitem name="Machine Master" id="menu_machine_master" parent="menu_transaction_management" sequence="3"
+        <menuitem name="Machines" id="menu_machine_master" parent="menu_transaction_settings" sequence="3"
                   action="action_machine_master"/>
 
     </data>

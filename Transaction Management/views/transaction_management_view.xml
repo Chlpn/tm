@@ -58,7 +58,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="action_transaction_master">
-            <field name="name">Transaction Master</field>
+            <field name="name">Transactions</field>
             <field name="type">ir.actions.act_window</field>
             <field name="context">{'readonly_by_pass': True}</field>
             <field name="res_model">trans.master</field>
@@ -67,7 +67,7 @@
         </record>
 
 
-        <menuitem name="Transaction Master" id="menu_transaction_master" parent="menu_transaction_management" sequence="2"
+        <menuitem name="Transactions" id="menu_transaction_master" parent="menu_transactions" sequence="2"
                   action="action_transaction_master"/>
     </data>
 </odoo>
