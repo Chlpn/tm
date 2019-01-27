@@ -22,6 +22,8 @@ class TransMaster(models.Model):
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     customer = fields.Many2one('res.partner', string="Customer")
+    journal_ref = fields.Many2one('account.move', string="Accounting Reference")
+
     state = fields.Selection([
         ('draft', 'Draft'),
         ('posted', 'Posted'),
@@ -62,24 +64,24 @@ class TransMaster(models.Model):
     @api.multi
     def post(self):
         ir_model_obj = self.env['ir.model.data']
-        model, journal_id = ir_model_obj.get_object_reference('trans_master', 'transaction_journal')
-        if self.machine_name.isrented is True :
+        model, journal_id = ir_model_obj.get_object_reference('transaction_management', 'transaction_journal')
+        if self.machine_name.rented is True :
             if self.balance > 0:
                 line_ids = [
                     (0, 0,
                      {'journal_id': journal_id, 'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
-                      'name': self.machine_name + '/' + self.transaction_no,'partner_id': self.machine_name.rented_from.id,
+                      'name': self.machine_name.name + "/" + 'testing','partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe + self.cost_to_commission}),
-                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id, 'name':self.machine_name + '/' + self.transaction_no,
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id, 'name':self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'debit': self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
-                            'name':self.machine_name + '/' + self.transaction_no,
+                            'name':self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
-                            'name': self.machine_name + '/' + self.transaction_no,'partner_id': self.customer.id,
+                            'name': self.machine_name.name + "/" + 'testing','partner_id': self.customer.id,
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer})
 
                 ]
@@ -88,20 +90,20 @@ class TransMaster(models.Model):
                     (0, 0,
                      {'journal_id': journal_id,
                       'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
-                      'name': self.machine_name + '/' + self.transaction_no,
+                      'name': self.machine_name.name + "/" + 'testing',
                       'partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe + self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'debit': self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
-                            'name': self.machine_name + '/' + self.transaction_no, 'partner_id': self.customer.id,
+                            'name': self.machine_name.name + "/" + 'testing', 'partner_id': self.customer.id,
                             'amount_currency': 0.0, 'debit': self.cash_paid_customer})
 
                 ]
@@ -110,17 +112,17 @@ class TransMaster(models.Model):
                     (0, 0,
                      {'journal_id': journal_id,
                       'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
-                      'name': self.machine_name + '/' + self.transaction_no,
+                      'name': self.machine_name.name + "/" + 'testing',
                       'partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe + self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'debit': self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.commission}),
 
                 ]
@@ -129,18 +131,18 @@ class TransMaster(models.Model):
                 line_ids = [
                     (0, 0,
                      {'journal_id': journal_id, 'account_id': self.machine_name.merchant_bank_ac.id,
-                      'name': self.machine_name + '/' + self.transaction_no,'partner_id': self.machine_name.rented_from.id,
+                      'name': self.machine_name.name + "/" + 'testing','partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe + self.cost_to_commission}),
-                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id, 'name':self.machine_name + '/' + self.transaction_no,
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id, 'name':self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'debit': self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
-                            'name':self.machine_name + '/' + self.transaction_no,
+                            'name':self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
-                            'name': self.machine_name + '/' + self.transaction_no,'partner_id': self.customer.id,
+                            'name': self.machine_name.name + "/" + 'testing','partner_id': self.customer.id,
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer})
 
                 ]
@@ -149,20 +151,20 @@ class TransMaster(models.Model):
                     (0, 0,
                      {'journal_id': journal_id,
                       'account_id': self.machine_name.merchant_bank_ac.id,
-                      'name': self.machine_name + '/' + self.transaction_no,
+                      'name': self.machine_name.name + "/" + 'testing',
                       'partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe + self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'debit': self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
-                            'name': self.machine_name + '/' + self.transaction_no, 'partner_id': self.customer.id,
+                            'name': self.machine_name.name + "/" + 'testing', 'partner_id': self.customer.id,
                             'amount_currency': 0.0, 'debit': self.cash_paid_customer})
 
                 ]
@@ -170,31 +172,31 @@ class TransMaster(models.Model):
                 line_ids = [
                     (0, 0,
                      {'journal_id': journal_id,
-                      'account_id': self.machine_name.rented_from.merchant_bank_ac.id,
-                      'name': self.machine_name + '/' + self.transaction_no,
+                      'account_id': self.machine_name.merchant_bank_ac.id,
+                      'name': self.machine_name.name + "/" + 'testing',
                       'partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe + self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'debit': self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
-                            'name': self.machine_name + '/' + self.transaction_no,
+                            'name': self.machine_name.name + "/" + 'testing',
                             'amount_currency': 0.0, 'credit': self.commission}),
 
                 ]
 
         vals = {
             'journal_id': journal_id,
-            'ref': self.machine_name + '/' + self.transaction_no,
+            'ref': self.machine_name.name + "/" + 'testing',
             'date': self.transaction_date,
             'line_ids': line_ids,
         }
         account_move = self.env['account.move'].create(vals)
         account_move.post()
-        self.issue_journal_entry = account_move.id
+        self.account_ref = account_move.id
         self.state = 'posted'
 
 

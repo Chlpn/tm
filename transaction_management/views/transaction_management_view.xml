@@ -36,6 +36,8 @@
                     <field name="cost_to_commission" readonly="1"/>
                     <field name="margin" readonly="1"/>
                     <field name="cost_percentage" readonly="1"/>
+                            <field name="journal_ref" readonly="1"/>
+
                         </group>
 
                     </sheet>
