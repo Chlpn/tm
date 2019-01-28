@@ -18,10 +18,10 @@
                     <field name="rented_from" attrs="{'invisible': [('rented', '=', False)],'required': [('rented', '=', True)]}" options="{'no_quick_create': True}"/>
                     <field name="sales_percentage"/>
                     <field name="cost_percentage"/>
-                    <field name="merchant_bank_ac" attrs="{'invisible': [('rented', '=', True)],'required': [('rented', '=', False)]}" widget="selection"/>
-                    <field name="cost_ac"  widget="selection"/>
-                    <field name="income_ac"  widget="selection"/>
-                    <field name="cash_ac"  widget="selection"/>
+                    <field name="merchant_bank_ac" attrs="{'invisible': [('rented', '=', True)],'required': [('rented', '=', False)]}" options="{'no_create': True}"/>
+                    <field name="cost_ac"  options="{'no_create': True}"/>
+                    <field name="income_ac"  options="{'no_create': True}"/>
+                    <field name="cash_ac"  options="{'no_create': True}"/>
                     </group>
                     </sheet>
                 </form>
