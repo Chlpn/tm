@@ -196,7 +196,7 @@ class TransMaster(models.Model):
         }
         account_move = self.env['account.move'].create(vals)
         account_move.post()
-        self.account_ref = account_move.id
+        self.journal_ref = account_move.id
         self.state = 'posted'
 
 
