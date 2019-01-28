@@ -82,7 +82,7 @@ class TransMaster(models.Model):
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.machine_name.name + "/" + 'testing','partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'credit': self.cash_paid_customer})
+                            'amount_currency': 0.0, 'credit': self.balance})
 
                 ]
             elif self.balance < 0:
@@ -104,7 +104,7 @@ class TransMaster(models.Model):
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.machine_name.name + "/" + 'testing', 'partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'debit': self.cash_paid_customer})
+                            'amount_currency': 0.0, 'debit': self.balance})
 
                 ]
             else :
@@ -143,7 +143,7 @@ class TransMaster(models.Model):
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.machine_name.name + "/" + 'testing','partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'credit': self.cash_paid_customer})
+                            'amount_currency': 0.0, 'credit': self.balance})
 
                 ]
             elif self.balance < 0:
@@ -165,7 +165,7 @@ class TransMaster(models.Model):
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.machine_name.name + "/" + 'testing', 'partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'debit': self.cash_paid_customer})
+                            'amount_currency': 0.0, 'debit': self.balance})
 
                 ]
             else :
