@@ -199,6 +199,23 @@ class TransMaster(models.Model):
         self.journal_ref = account_move.id
         self.state = 'posted'
 
+    @api.multi
+    def unlink(self):
+        for trans in self:
+            if trans.state == 'posted':
+                raise UserError(_('You can not delete posted Transaction.'))
+        return super(TransMaster, self).unlink()
 
 
-
+    @api.multi
+    def cancel(self):
+        if self.env['res.users'].has_group('account.group_account_manager'):
+            account_entry = self.journal_ref.id
+            journal_entry = self.env['account.move'].search([('id', '=', account_entry)])
+            if len(journal_entry):
+                journal_entry.button_cancel()
+                journal_entry.unlink()
+                self.write({'state': 'cancel'})
+        else:
+            raise UserError(
+                _('You can not cancel the entry,to delete this entry user should belong to the Advisor group'))

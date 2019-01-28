@@ -15,8 +15,12 @@ class MachineMaster(models.Model):
     rented_from = fields.Many2one('res.partner', string="Rented From")
     sales_percentage = fields.Float(string='Default Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
-    merchant_bank_ac = fields.Many2one('account.account', string="Bank Account")
-    cost_ac = fields.Many2one('account.account', string="Cost Account")
-    income_ac = fields.Many2one('account.account', string="Income Account")
-    cash_ac = fields.Many2one('account.account', string="Cash Account")
+    merchant_bank_ac = fields.Many2one('account.account', string="Bank Account",
+                    domain=lambda self: [('user_type_id', '=', self.env.ref('data_account_type_liquidity').id)])
+    cost_ac = fields.Many2one('account.account', string="Cost Account",required=True,
+                    domain=lambda self: [('user_type_id', '=', self.env.ref('data_account_type_direct_costs').id)])
+    income_ac = fields.Many2one('account.account', string="Income Account",required=True,
+                    domain=lambda self: [('user_type_id', '=', self.env.ref('data_account_type_revenue').id)])
+    cash_ac = fields.Many2one('account.account', string="Cash Account",required=True,
+                    domain=lambda self: [('user_type_id', '=', self.env.ref('data_account_type_liquidity').id)])
 

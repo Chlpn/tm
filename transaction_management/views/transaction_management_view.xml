@@ -7,7 +7,7 @@
             <field name="name">transaction.master.form</field>
             <field name="model">trans.master</field>
             <field name="arch" type="xml">
-                <form string="Transaction Master" delete='false'>
+                <form string="Transaction Master">
                     <header>
                         <button name="post" states="draft" string="Post" type="object"/>
                         <button name="cancel" states="posted" string="Cancel" type="object"/>
