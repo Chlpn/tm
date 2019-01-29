@@ -15,7 +15,7 @@
             <field name="name">transaction.master.form</field>
             <field name="model">trans.master</field>
             <field name="arch" type="xml">
-                <form string="Transaction Master">
+                <form string="Transaction Master" duplicate="0">
                     <header>
                         <button name="post" states="draft" string="Post" type="object"/>
                         <button name="action_cancel" states="posted" string="Cancel" type="object"/>
@@ -23,20 +23,21 @@
                                statusbar_visible="draft,posted"/>
                     </header>
                     <sheet>
-                    <group>
-                    <field name="transaction_no" readonly="1"/>
-                    </group>
-                    <separator string="TRANSACTION DETAILS" colspan="4" />
+                        <header class="oe_highlight">
+                            <h1><group><field name="transaction_no" readonly="1"/></group></h1>
+                        </header>
+
+                    <separator colspan="4" />
                         <group colspan="4" col="4">
                             <seperator colspan="4"/>
-                    <field name="transaction_date" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="transaction_date" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="commission_included" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                    <field name="amount_to_swipe" attrs="{'readonly': [('commission_included', '=',False )]}"/>
-                    <field name="machine_name" widget="selection" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                    <field name="amount_to_customer" attrs="{'readonly': [('commission_included', '=',True )]}"/>
+                    <field name="amount_to_swipe" required='True' attrs="{'readonly': ['|',('state','in',('posted', 'cancelled')),('commission_included', '=',False )]}"/>
+                    <field name="machine_name" widget="selection" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="amount_to_customer" required='True' attrs="{'readonly': ['|',('state','in',('posted', 'cancelled')),('commission_included', '=',True )]}"/>
                             <separator string="ADVANCED TRANSACTION DETAILS" colspan="4" />
                             <separator colspan="4"/>
-                    <field name="sales_percentage" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="sales_percentage" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="commission" readonly="1"/>
                     <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="balance" readonly="1"/>
@@ -44,9 +45,13 @@
                     <field name="cost_to_commission" readonly="1"/>
                     <field name="margin" readonly="1"/>
                     <field name="cost_percentage" readonly="1"/>
-                    <field name="journal_ref" readonly="1"/>
-
+                            <separator string="JOURNAL DETAILS" colspan="4" />
+                            <separator colspan="4"/>
+                    <field name="journal_ref" readonly="1" nolabel="1"/>
                         </group>
+                    <separator string="NOTES" colspan="4" />
+                            <separator colspan="4"/>
+                    <field name="note" copy="False"/>
 
                     </sheet>
                 </form>
@@ -58,7 +63,7 @@
             <field name="name">transaction.master.tree</field>
             <field name="model">trans.master</field>
             <field name="arch" type="xml">
-                <tree string="Transaction Master">
+                <tree string="Transaction Master" default_order="transaction_date desc">
                     <field name="transaction_no"/>
                     <field name="transaction_date"/>
                     <field name="machine_name"/>

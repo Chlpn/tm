@@ -23,6 +23,7 @@ class TransMaster(models.Model):
     cost_percentage = fields.Float(string='Cost Percentage')
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
+    note = fields.Text(string="Notes")
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -203,7 +204,7 @@ class TransMaster(models.Model):
     @api.multi
     def unlink(self):
         for trans in self:
-            if trans.state == 'posted':
+            if trans.state == 'posted' or 'cancelled':
                 raise UserError(_('You can not delete posted Transaction.'))
         return super(TransMaster, self).unlink()
 
@@ -220,3 +221,14 @@ class TransMaster(models.Model):
         else:
             raise UserError(
                 _('You can not cancel the entry,to delete this entry user should belong to the Advisor group'))
+
+
+    @api.constrains('amount_to_swipe','amount_to_customer','sales_percentage')
+    def _check_something(self):
+        for record in self:
+            if record.amount_to_swipe <= 0:
+                raise ValueError("Value of Amount to swipe must be greater than Zero")
+            if record.amount_to_customer <= 0:
+                raise ValueError("Value of Amount to Customer must be greater than Zero")
+            if record.sales_percentage <= 0:
+                raise ValueError("Value of Sales Percentage must be greater than Zero")
