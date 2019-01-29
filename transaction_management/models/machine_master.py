@@ -4,6 +4,7 @@ from odoo import api, fields, models, _
 
 
 class MachineMaster(models.Model):
+    _inherit = ["multi.company.abstract"]
     _name = "machine.master"
     _description = "Machine Master"
 
