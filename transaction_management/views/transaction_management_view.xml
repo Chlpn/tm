@@ -10,9 +10,9 @@
                 <form string="Transaction Master">
                     <header>
                         <button name="post" states="draft" string="Post" type="object"/>
-                        <button name="cancel" states="posted" string="Cancel" type="object"/>
+                        <button name="action_cancel" states="posted" string="Cancel" type="object"/>
                         <field name="state" widget="statusbar"
-                               statusbar_visible="draft,posted,cancel"/>
+                               statusbar_visible="draft,posted"/>
                     </header>
                     <sheet>
                     <group>
