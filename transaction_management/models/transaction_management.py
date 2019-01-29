@@ -104,7 +104,7 @@ class TransMaster(models.Model):
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.machine_name.name + "/" + 'testing', 'partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'debit': self.balance})
+                            'amount_currency': 0.0, 'debit': abs(self.balance)})
 
                 ]
             else :
@@ -165,7 +165,7 @@ class TransMaster(models.Model):
                             'amount_currency': 0.0, 'credit': self.commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.machine_name.name + "/" + 'testing', 'partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'debit': self.balance})
+                            'amount_currency': 0.0, 'debit': abs(self.balance)})
 
                 ]
             else :
@@ -216,7 +216,7 @@ class TransMaster(models.Model):
             if len(journal_entry):
                 journal_entry.button_cancel()
                 journal_entry.unlink()
-                self.write({'state': 'cancel'})
+                self.write({'state': 'cancelled'})
         else:
             raise UserError(
                 _('You can not cancel the entry,to delete this entry user should belong to the Advisor group'))
