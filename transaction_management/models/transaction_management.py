@@ -18,11 +18,11 @@ class TransMaster(models.Model):
     margin = fields.Float(string='margin')
     cash_paid_customer = fields.Float(string='Cash Paid')
     balance = fields.Float(string='Balance')
-    machine_name = fields.Many2one('machine.master')
+    machine_name = fields.Many2one('machine.master', ondelete='restrict')
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
-    customer = fields.Many2one('res.partner', string="Customer")
-    journal_ref = fields.Many2one('account.move', string="Accounting Reference")
+    customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
+    journal_ref = fields.Many2one('account.move', string="Accounting Reference", ondelete='restrict')
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -198,6 +198,7 @@ class TransMaster(models.Model):
         account_move.post()
         self.journal_ref = account_move.id
         self.state = 'posted'
+        self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
 
     @api.multi
     def unlink(self):

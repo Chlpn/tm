@@ -2,6 +2,14 @@
 <odoo>
     <data>
 
+                 <!--  Transaction master sequence -->
+        <record id="seq_transaction" model="ir.sequence">
+            <field name="name">Transaction</field>
+            <field name="code">trans.master</field>
+            <field name="prefix">T</field>
+            <field name="padding">4</field>
+        </record>
+
          <!--  Transaction master form View -->
         <record model="ir.ui.view" id="transaction_master_form">
             <field name="name">transaction.master.form</field>
@@ -21,22 +29,22 @@
                     <separator string="TRANSACTION DETAILS" colspan="4" />
                         <group colspan="4" col="4">
                             <seperator colspan="4"/>
-                    <field name="transaction_date"/>
-                    <field name="commission_included"/>
-                    <field name="amount_to_swipe" attrs="{'readonly': [('commission_included', '=',False )]}"/>
+                    <field name="transaction_date" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="commission_included" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="amount_to_swipe" attrs="{'readonly': [('commission_included', '=',False )],[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="machine_name" widget="selection"/>
-                    <field name="amount_to_customer" attrs="{'readonly': [('commission_included', '=',True )]}"/>
-                        <separator string="ADVANCED TRANSACTION DETAILS" colspan="4" />
+                    <field name="amount_to_customer" attrs="{'readonly': [('commission_included', '=',True )],[('state','in',('posted', 'cancelled'))]}"/>
+                            <separator string="ADVANCED TRANSACTION DETAILS" colspan="4" />
                             <separator colspan="4"/>
-                    <field name="sales_percentage"/>
+                    <field name="sales_percentage" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="commission" readonly="1"/>
-                    <field name="cash_paid_customer"/>
+                    <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="balance" readonly="1"/>
-                    <field name="customer" attrs="{'required': [('balance', '!=',0)]}"/>
-                    <field name="cost_to_commission" readonly="1"/>
-                    <field name="margin" readonly="1"/>
-                    <field name="cost_percentage" readonly="1"/>
-                    <field name="journal_ref" readonly="1"/>
+                    <field name="customer" attrs="{'required': [('balance', '!=',0)]},{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="cost_to_commission" readonly="1" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="margin" readonly="1" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="cost_percentage" readonly="1" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="journal_ref" readonly="1" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
 
                         </group>
 
