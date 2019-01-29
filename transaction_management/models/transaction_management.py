@@ -208,7 +208,7 @@ class TransMaster(models.Model):
 
 
     @api.multi
-    def cancel(self):
+    def action_cancel(self):
         if self.env['res.users'].has_group('account.group_account_manager'):
             account_entry = self.journal_ref.id
             journal_entry = self.env['account.move'].search([('id', '=', account_entry)])
