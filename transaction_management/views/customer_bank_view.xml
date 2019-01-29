@@ -3,9 +3,9 @@
     <data>
 
      <!--  Customer Bank Form View -->
-        <record model="ir.ui.view" id="customer_bank_form">
-            <field name="name">customer.bank.form</field>
-            <field name="model">customer.bank</field>
+        <record model="ir.ui.view" id="machine_bank_form">
+            <field name="name">machine.bank.form</field>
+            <field name="model">machine.bank</field>
             <field name="arch" type="xml">
                 <form string="Customer Bank">
                     <sheet>
@@ -18,9 +18,9 @@
         </record>
 
         <!--  Customer Bank Tree View -->
-        <record model="ir.ui.view" id="customer_bank_tree">
-            <field name="name">customer.bank.tree</field>
-            <field name="model">customer.bank</field>
+        <record model="ir.ui.view" id="machine_bank_tree">
+            <field name="name">machine.bank.tree</field>
+            <field name="model">machine.bank</field>
             <field name="arch" type="xml">
                 <tree string="Customer Banks">
                     <field name="name"/>
@@ -29,9 +29,9 @@
         </record>
 
         <!--  Customer Bank Search View -->
-        <record model="ir.ui.view" id="customer_bank_search">
-            <field name="name">customer.bank.search</field>
-            <field name="model">customer.bank</field>
+        <record model="ir.ui.view" id="machine_bank_search">
+            <field name="name">machine.bank.search</field>
+            <field name="model">machine.bank</field>
             <field name="arch" type="xml">
                 <search string="Customer Banks">
                     <field name="name"/>
@@ -39,10 +39,10 @@
             </field>
         </record>
 
-         <record model="ir.actions.act_window" id="action_customer_bank">
+         <record model="ir.actions.act_window" id="action_machine_bank">
             <field name="name">Banks</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">customer.bank</field>
+            <field name="res_model">machine.bank</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -53,7 +53,7 @@
         <menuitem name="Settings" id="menu_transaction_settings" parent="menu_transaction_management" sequence="3"/>
         <menuitem name="Reports" id="menu_transaction_reports" parent="menu_transaction_management" sequence="2"/>
 
-        <menuitem name="Banks" id="menu_customer_banks" parent="menu_transaction_settings" sequence="4"
-                  action="action_customer_bank"/>
+        <menuitem name="Banks" id="menu_machine_banks" parent="menu_transaction_settings" sequence="4"
+                  action="action_machine_bank"/>
     </data>
 </odoo>

@@ -8,7 +8,7 @@
     'summary': '',
     'depends': ['account', 'account_accountant','account_cancel','web_readonly_bypass'],
     'data': [
-                'views/customer_bank_view.xml',
+                'views/machine_bank_view.xml',
                 'views/machine_master_view.xml',
                 'views/transaction_management_view.xml',
                 'data/masters.xml',

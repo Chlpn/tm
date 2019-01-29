@@ -9,88 +9,88 @@
 
         </record>
 
-        <record id="1_bank" model="customer.bank">
+        <record id="1_bank" model="machine.bank">
             <field name="name">Abu Dhabi Commercial Bank</field>
         </record>
-        <record id="2_bank" model="customer.bank">
+        <record id="2_bank" model="machine.bank">
             <field name="name">Abu Dhabi Islamic Bank</field>
         </record>
-        <record id="3_bank" model="customer.bank">
+        <record id="3_bank" model="machine.bank">
             <field name="name">Arab Bank plc</field>
         </record>
-        <record id="4_bank" model="customer.bank">
+        <record id="4_bank" model="machine.bank">
             <field name="name">Arab Emirates Investment Bank</field>
         </record>
-        <record id="5_bank" model="customer.bank">
+        <record id="5_bank" model="machine.bank">
             <field name="name">Bank of Baroda</field>
         </record>
-        <record id="6_bank" model="customer.bank">
+        <record id="6_bank" model="machine.bank">
             <field name="name">Bank of Sharjah</field>
         </record>
-        <record id="7_bank" model="customer.bank">
+        <record id="7_bank" model="machine.bank">
             <field name="name">Citibank UAE</field>
         </record>
-        <record id="8_bank" model="customer.bank">
+        <record id="8_bank" model="machine.bank">
             <field name="name">Commercial Bank International</field>
         </record>
-        <record id="9_bank" model="customer.bank">
+        <record id="9_bank" model="machine.bank">
             <field name="name">Commercial Bank of Dubai</field>
         </record>
-        <record id="10_bank" model="customer.bank">
+        <record id="10_bank" model="machine.bank">
             <field name="name">Dubai Islamic Bank</field>
         </record>
-        <record id="11_bank" model="customer.bank">
+        <record id="11_bank" model="machine.bank">
             <field name="name">Emirates Islamic Bank</field>
         </record>
-        <record id="12_bank" model="customer.bank">
+        <record id="12_bank" model="machine.bank">
             <field name="name">Emirates NBD</field>
         </record>
-        <record id="13_bank" model="customer.bank">
+        <record id="13_bank" model="machine.bank">
             <field name="name">First Abudhabi Bank</field>
         </record>
-        <record id="14_bank" model="customer.bank">
+        <record id="14_bank" model="machine.bank">
             <field name="name">First Gulf Bank</field>
         </record>
-        <record id="15_bank" model="customer.bank">
+        <record id="15_bank" model="machine.bank">
             <field name="name">Habib Bank AG Zurich</field>
         </record>
-        <record id="16_bank" model="customer.bank">
+        <record id="16_bank" model="machine.bank">
             <field name="name">HSBC Bank Middle East Limited</field>
         </record>
-        <record id="17_bank" model="customer.bank">
+        <record id="17_bank" model="machine.bank">
             <field name="name">Invest Bank</field>
         </record>
-        <record id="18_bank" model="customer.bank">
+        <record id="18_bank" model="machine.bank">
             <field name="name">Mashreqbank</field>
         </record>
-        <record id="19_bank" model="customer.bank">
+        <record id="19_bank" model="machine.bank">
             <field name="name">National Bank of Abu Dhabi</field>
         </record>
-        <record id="20_bank" model="customer.bank">
+        <record id="20_bank" model="machine.bank">
             <field name="name">National Bank of Fujairah</field>
         </record>
-        <record id="21_bank" model="customer.bank">
+        <record id="21_bank" model="machine.bank">
             <field name="name">National Bank of Umm Al-Qaiwain</field>
         </record>
-        <record id="22_bank" model="customer.bank">
+        <record id="22_bank" model="machine.bank">
             <field name="name">Noor Bank</field>
         </record>
-        <record id="23_bank" model="customer.bank">
+        <record id="23_bank" model="machine.bank">
             <field name="name">RAKBANK</field>
         </record>
-        <record id="24_bank" model="customer.bank">
+        <record id="24_bank" model="machine.bank">
             <field name="name">Sharja Islamic Bank</field>
         </record>
-        <record id="25_bank" model="customer.bank">
+        <record id="25_bank" model="machine.bank">
             <field name="name">Union National Bank</field>
         </record>
-        <record id="26_bank" model="customer.bank">
+        <record id="26_bank" model="machine.bank">
             <field name="name">United Arab Bank</field>
         </record>
-        <record id="27_bank" model="customer.bank">
+        <record id="27_bank" model="machine.bank">
             <field name="name">United Emirates Bank</field>
         </record>
-        <record id="28_bank" model="customer.bank">
+        <record id="28_bank" model="machine.bank">
             <field name="name">United Bank LTD</field>
         </record>
 
