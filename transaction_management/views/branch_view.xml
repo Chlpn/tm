@@ -12,7 +12,6 @@
                     <sheet>
                          <group>
                              <field name="company_id"/>
-                             <field name="name"/>
                              <field name="cash_ac"/>
                              <field name="journal_id"/>
 
