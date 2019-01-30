@@ -65,6 +65,7 @@ class TransMaster(models.Model):
 
     @api.multi
     def post(self):
+        self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
         ir_model_obj = self.env['ir.model.data']
         model, journal_id = ir_model_obj.get_object_reference('transaction_management', 'transaction_journal')
         if self.machine_name.rented is True :
@@ -200,7 +201,7 @@ class TransMaster(models.Model):
         account_move.post()
         self.journal_ref = account_move.id
         self.state = 'posted'
-        self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
+
 
     @api.multi
     def unlink(self):
