@@ -12,6 +12,7 @@
                 'views/machine_master_view.xml',
                 'views/transaction_management_view.xml',
                 'data/masters.xml',
+                'security/ir.model.access.csv',
 
 
 
