@@ -12,8 +12,10 @@
                     <sheet>
                          <group>
                              <field name="company_id"/>
-                             <field name="cash_ac"/>
-                             <field name="journal_id"/>
+                             <field name="cash_ac" domain="[('company_id', 'in',
+                                                      company_id)]"/>
+                             <field name="journal_id" domain="[('company_id', 'in',
+                                                      company_id)]"/>
 
                          </group>
                     </sheet>
