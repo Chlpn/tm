@@ -13,7 +13,7 @@
                 'views/transaction_management_view.xml',
                 'views/payment_voucher.xml',
                 'views/receipt_voucher.xml',
-                'views/branch_view.xml'
+                'views/branch_view.xml',
                 'data/masters.xml',
                 'security/ir.model.access.csv',
 
