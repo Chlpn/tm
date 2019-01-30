@@ -9,7 +9,8 @@ class branch(models.Model):
     _rec_name = "company_id"
 
     company_id =fields.Many2one('res.company', string="Branch", required=True, ondelete='restrict')
-    _sql_constraints = [('name_uniq', 'unique (company_id)', 'The branch name must be unique !')]
+
+    _sql_constraints = [('company_id_uniq', 'UNIQUE (company_id)', 'The branch name must be unique !')]
 
     cash_ac = fields.Many2one('account.account', string="Cash Account", required=True, ondelete='restrict',
                               domain=lambda self: [
