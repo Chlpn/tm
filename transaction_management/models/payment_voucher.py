@@ -4,6 +4,11 @@ from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from odoo.tools import amount_to_text_en
 
+class AccountJournal(models.Model):
+    _inherit = 'account.journal'
+
+    cash_journal = fields.Boolean('Cash Journal ?')
+
 
 class PaymentVoucher(models.Model):
     _inherit = ["multi.company.abstract"]

@@ -2,6 +2,24 @@
 <odoo>
     <data>
 
+        <!--  Modified Journal Voucher -->
+        <record model = "ir.ui.view" id = "modify_account_journal_form_view">
+            <field name="name">account.journal.form.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='group_invoice_lines']" position="before">
+                    <field name="cash_journal"/>
+                </xpath>
+                <xpath expr="//field[@name='default_debit_account_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('cash_journal','=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='default_credit_account_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('cash_journal','=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
         <record id="seq_payment_voucher" model="ir.sequence">
             <field name="name">Payment</field>
             <field name="code">payment.voucher</field>
