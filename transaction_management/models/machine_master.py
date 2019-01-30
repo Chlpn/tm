@@ -8,7 +8,7 @@ class MachineMaster(models.Model):
     _name = "machine.master"
     _description = "Machine Master"
 
-    company_id = fields.Many2one('res.company', string ="Branch")
+    company_id = fields.Many2one('company_branch', string ="Branch")
     name = fields.Char(string='Machine Name')
     merchant_id = fields.Char(string='Merchant ID',)
     terminal_id = fields.Char(string='Terminal ID', )
@@ -25,6 +25,6 @@ class MachineMaster(models.Model):
 
     @api.onchange('company_id')
     def _onchange_company_id(self):
-        self.cost_ac = self.company.branch.cost_ac
-        self.income_ac = self.company.branch.income_ac
-        self.cash_ac = self.company.branch.cash_ac
+        self.cost_ac = self.company_id.cost_ac
+        self.income_ac = self.company_id.income_ac
+        self.cash_ac = self.company_id.cash_ac
