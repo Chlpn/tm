@@ -88,6 +88,8 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <menuitem name="Payment Voucher" id="menu_payment_voucher" parent="menu_transaction_management" sequence="2"/>
+
 
     </data>
 </odoo>

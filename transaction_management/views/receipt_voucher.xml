@@ -86,6 +86,6 @@
         </record>
 
         <menuitem name="Receipt Voucher" id="menu_receipt_voucher" parent="menu_transaction_management" sequence="3"/>
-        
+
     </data>
 </odoo>
