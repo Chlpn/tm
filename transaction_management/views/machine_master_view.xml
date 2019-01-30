@@ -10,6 +10,7 @@
                 <form string="Machine Master" duplicate="0">
                     <sheet>
                     <group colspan="4" col="4">
+                    <field name="company_id" string="Branch Name:"/>
                     <field name="name"/>
                     <field name="merchant_id"/>
                     <field name="terminal_id"/>
@@ -19,9 +20,9 @@
                     <field name="sales_percentage"/>
                     <field name="cost_percentage"/>
                     <field name="merchant_bank_ac" attrs="{'invisible': [('rented', '=', True)],'required': [('rented', '=', False)]}" options="{'no_create': True}"/>
-                    <field name="cost_ac"  options="{'no_create': True}"/>
-                    <field name="income_ac"  options="{'no_create': True}"/>
-                    <field name="cash_ac"  options="{'no_create': True}"/>
+                    <field name="cost_ac"  readonly="1"/>
+                    <field name="income_ac"  readonly="1"/>
+                    <field name="cash_ac"  readonly="1"/>
                     </group>
                     </sheet>
                 </form>

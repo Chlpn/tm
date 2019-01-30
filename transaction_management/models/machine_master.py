@@ -25,3 +25,8 @@ class MachineMaster(models.Model):
     cash_ac = fields.Many2one('account.account', string="Cash Account",required=True, ondelete='restrict',
                               domain=lambda self: [('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id)])
 
+    @api.onchange('company_id')
+    def _onchange_company_id(self):
+        self.cost_ac = self.company.branch.cost_ac
+        self.income_ac = self.company.branch.income_ac
+        self.cash_ac = self.company.branch.cash_ac
