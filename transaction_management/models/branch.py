@@ -6,10 +6,10 @@ from odoo import fields, models
 class branch(models.Model):
     _inherit = ["multi.company.abstract"]
     _name = "company.branch"
-    _rec_name = "company_id"
+    _rec_name = "bname"
 
     company_id =fields.Many2one('res.company', string="Branch", required=True, ondelete='restrict')
-
+    bname = fields.Char(string="Branch Name:")
     _sql_constraints = [('company_id_uniq', 'UNIQUE (company_id)', 'The branch name must be unique !')]
 
     cash_ac = fields.Many2one('account.account', string="Cash Account", required=True, ondelete='restrict',
@@ -22,3 +22,7 @@ class branch(models.Model):
                                 domain=lambda self: [
                                     ('user_type_id', '=', self.env.ref('account.data_account_type_revenue').id)])
     journal_id = fields.Many2one('account.journal', string="Journal", ondelete='restrict', required=True)
+
+    @api.onchange('company_id')
+    def _onchange_company_id(self):
+        self.bname = self.company_id.name
