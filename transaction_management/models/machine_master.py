@@ -25,6 +25,6 @@ class MachineMaster(models.Model):
 
     @api.onchange('company_id')
     def _onchange_company_id(self):
-        self.cost_ac = self.company_id.cost_ac
-        self.income_ac = self.company_id.income_ac
-        self.cash_ac = self.company_id.cash_ac
+        self.cost_ac = self.company_id.cost_ac.id
+        self.income_ac = self.company_id.income_ac.id
+        self.cash_ac = self.company_id.cash_ac.id
