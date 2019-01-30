@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="seq_receipt_voucher" model="ir.sequence">
+            <field name="name">Receipt</field>
+            <field name="code">receipt.voucher</field>
+            <field name="prefix">RECEIPT</field>
+            <field name="padding">3</field>
+        </record>
+     <!--  Cash Receipt Voucher Form View -->
+        <record model="ir.ui.view" id="receipt_voucher_form">
+            <field name="name">receipt.voucher.form</field>
+            <field name="model">receipt.voucher</field>
+            <field name="arch" type="xml">
+                <form string="Cash Receipt Voucher">
+                    <header>
+                        <button name="print_cash" states="post" string="Print" type="object"/>
+                        <button name="post" states="draft" string="Post" type="object"/>
+                        <button name="action_cancel" states="post" string="Cancel" type="object"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,post,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+
+                         <group>
+                             <group>
+                                <field name="journal_id" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
+                                <field name="partner_id" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
+                                <field name="account_id" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
+                                <field name="amount" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
+                             </group>
+                             <group>
+                                <field name="transaction_date" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
+                                <field name="account_move_id" attrs="{'invisible':[('state','in',('draft'))]}"/>
+                                <field name="description" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Cash Receipt Voucher Tree View -->
+        <record model="ir.ui.view" id="receipt_voucher_tree">
+            <field name="name">receipt.voucher.tree</field>
+            <field name="model">receipt.voucher</field>
+            <field name="arch" type="xml">
+                <tree string="Cash Receipt Voucher">
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="partner_id"/>
+                    <field name="transaction_date"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Cash Receipt Voucher Search View -->
+        <record model="ir.ui.view" id="receipt_voucher_search">
+            <field name="name">receipt.voucher.search</field>
+            <field name="model">receipt.voucher</field>
+            <field name="arch" type="xml">
+                <search string="Cash Receipt Voucher">
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="partner_id"/>
+                    <field name="transaction_date"/>
+                </search>
+            </field>
+        </record>
+
+
+         <record model="ir.actions.act_window" id="action_receipt_voucher">
+            <field name="name">Cash Receipt Voucher</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">receipt.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_cash_receipt_voucher" action="action_receipt_voucher"
+                  name="Cash Receipt Voucher" parent="advanced_accounting.menu_cash_voucher"
+                  sequence="1"/>
+    </data>
+</odoo>
