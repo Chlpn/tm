@@ -8,6 +8,7 @@ class MachineMaster(models.Model):
     _name = "machine.master"
     _description = "Machine Master"
 
+    company_id = fields.Many2one('res.company', string ="Branch")
     name = fields.Char(string='Machine Name')
     merchant_id = fields.Char(string='Merchant ID',)
     terminal_id = fields.Char(string='Terminal ID', )
@@ -17,13 +18,10 @@ class MachineMaster(models.Model):
     sales_percentage = fields.Float(string='Default Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     merchant_bank_ac = fields.Many2one('account.account', string="Bank Account", ondelete='restrict',
-                                       domain=lambda self: [('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id)])
-    cost_ac = fields.Many2one('account.account', string="Cost Account",required=True, ondelete='restrict',
-                              domain=lambda self: [('user_type_id', '=', self.env.ref('account.data_account_type_direct_costs').id)])
-    income_ac = fields.Many2one('account.account', string="Income Account",required=True, ondelete='restrict',
-                                domain=lambda self: [('user_type_id', '=', self.env.ref('account.data_account_type_revenue').id)])
-    cash_ac = fields.Many2one('account.account', string="Cash Account",required=True, ondelete='restrict',
-                              domain=lambda self: [('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id)])
+                                       domain=lambda self: [('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id),])
+    cost_ac = fields.Many2one('account.account', string="Cost Account",required=True, ondelete='restrict')
+    income_ac = fields.Many2one('account.account', string="Income Account",required=True, ondelete='restrict')
+    cash_ac = fields.Many2one('account.account', string="Cash Account",required=True, ondelete='restrict')
 
     @api.onchange('company_id')
     def _onchange_company_id(self):
