@@ -88,7 +88,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Payment Voucher" id="menu_payment_voucher" action="action_payment_voucher" parent="menu_transaction_management" sequence="2"/>
+        <menuitem name="Payment Voucher" id="menu_payment_voucher" action="action_payment_voucher" parent="menu_transactions" sequence="2"/>
 
 
     </data>

@@ -85,7 +85,8 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Receipt Voucher" id="menu_receipt_voucher" action="action_receipt_voucher" parent="menu_transaction_management" sequence="3"/>
+        <menuitem name="Receipt Voucher" id="menu_receipt_voucher" action="action_receipt_voucher"
+                  parent="menu_transactions" sequence="3"/>
 
     </data>
 </odoo>
