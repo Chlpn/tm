@@ -4,9 +4,10 @@ from odoo import fields, models
 
 
 class branch(models.Model):
-    _inherit = ["res.company"]
+    _inherit = ["multi.company.abstract"]
     _name = "company.branch"
 
+    name = fields.Char(string='Bank Name', required=True)
     cash_ac = fields.Many2one('account.account', string="Cash Account", required=True, ondelete='restrict',
                               domain=lambda self: [
                                   ('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id)])
