@@ -5,13 +5,14 @@
      <!--  Branch Form View -->
         <record model="ir.ui.view" id="branch_form">
             <field name="name">branch.form</field>
-            <field name="name">branch.form</field>
             <field name="model">company.branch</field>
             <field name="arch" type="xml">
                 <form string="Branches" duplicate="0">
                     <sheet>
                          <group>
                              <field name="company_id"/>
+                             <field name="bname"/>
+
                              <field name="cash_ac" domain="[('company_id', '=',
                                                       company_id)]"/>
                              <field name="cost_ac" domain="[('company_id', '=',
