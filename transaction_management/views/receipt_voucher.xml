@@ -85,8 +85,6 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="menu_cash_receipt_voucher" action="action_receipt_voucher"
-                  name="Cash Receipt Voucher" parent="advanced_accounting.menu_cash_voucher"
-                  sequence="1"/>
+        
     </data>
 </odoo>
