@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-     <!--  Customer Bank Form View -->
+     <!--  Branch Form View -->
         <record model="ir.ui.view" id="branch_form">
             <field name="name">branch.form</field>
             <field name="model">company.branch</field>
@@ -20,45 +20,39 @@
             </field>
         </record>
 
-        <!--  Customer Bank Tree View -->
-        <record model="ir.ui.view" id="machine_bank_tree">
-            <field name="name">machine.bank.tree</field>
-            <field name="model">machine.bank</field>
+        <!--  Branch Tree View -->
+        <record model="ir.ui.view" id="branch_tree">
+            <field name="name">company.branch.tree</field>
+            <field name="model">company.branch</field>
             <field name="arch" type="xml">
-                <tree string="Customer Banks">
+                <tree string="Branches">
                     <field name="name"/>
                 </tree>
             </field>
         </record>
 
-        <!--  Customer Bank Search View -->
-        <record model="ir.ui.view" id="machine_bank_search">
-            <field name="name">machine.bank.search</field>
-            <field name="model">machine.bank</field>
+        <!--  Branch Search View -->
+        <record model="ir.ui.view" id="branch_search">
+            <field name="name">company.branch.search</field>
+            <field name="model">company.branch</field>
             <field name="arch" type="xml">
-                <search string="Customer Banks">
+                <search string="Branches">
                     <field name="name"/>
                 </search>
             </field>
         </record>
 
-         <record model="ir.actions.act_window" id="action_machine_bank">
-            <field name="name">Banks</field>
+         <record model="ir.actions.act_window" id="action_company_branch">
+            <field name="name">Branch</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">machine.bank</field>
+            <field name="res_model">company.branch</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Transaction Management" id="menu_transaction_management" sequence="41"/>
 
-        <menuitem name="Transaction Management" id="menu_transactions" parent="menu_transaction_management" sequence="1"/>
-        <menuitem name="Payment Voucher" id="menu_payment_voucher" parent="menu_transaction_management" sequence="2"/>
-        <menuitem name="Receipt Voucher" id="menu_receipt_voucher" parent="menu_transaction_management" sequence="3"/>
-        <menuitem name="Settings" id="menu_transaction_settings" parent="menu_transaction_management" sequence="5"/>
-        <menuitem name="Reports" id="menu_transaction_reports" parent="menu_transaction_management" sequence="4"/>
 
-        <menuitem name="Banks" id="menu_machine_banks" parent="menu_transaction_settings" sequence="6"
-                  action="action_machine_bank"/>
+        <menuitem name="Branches" id="menu_company_branch" parent="menu_transaction_settings" sequence="7"
+                  action="action_company_branch"/>
     </data>
 </odoo>
