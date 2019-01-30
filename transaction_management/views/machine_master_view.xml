@@ -10,8 +10,8 @@
                 <form string="Machine Master" duplicate="0">
                     <sheet>
                     <group colspan="4" col="4">
-                    <field name="company_id" string="id"/>
-                    <field name="name" widget="selection"/>
+                    <field name="company_id" widget="selection"/>
+                    <field name="name"/>
                     <field name="merchant_id"/>
                     <field name="terminal_id"/>
                     <field name="bank_name"/>
@@ -47,6 +47,7 @@
         <record model="ir.actions.act_window" id="action_machine_master">
             <field name="name">Machines</field>
             <field name="type">ir.actions.act_window</field>
+            <field name="context">{'readonly_by_pass': True}</field>
             <field name="res_model">machine.master</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
