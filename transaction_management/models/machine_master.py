@@ -8,7 +8,7 @@ class MachineMaster(models.Model):
     _name = "machine.master"
     _description = "Machine Master"
 
-    bname = fields.Many2one('company_branch', string ="Branch")
+    bname = fields.Many2one('company.branch', string ="Branch")
     name = fields.Char(string='Machine Name')
     merchant_id = fields.Char(string='Merchant ID',)
     terminal_id = fields.Char(string='Terminal ID', )
