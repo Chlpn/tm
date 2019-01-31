@@ -11,6 +11,7 @@ class TransMaster(models.Model):
 
     transaction_no = fields.Char(string='Transaction Number')
     transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
+    transaction_amount = fields.Float(string='Amount',)
     commission_included = fields.Boolean(string='Include Commission')
     amount_to_swipe = fields.Float(string='Amount to Swipe',store=True)
     amount_to_customer = fields.Float(string='Amount to customer',store=True)
@@ -39,12 +40,13 @@ class TransMaster(models.Model):
 
 
 
-    @api.onchange('amount_to_customer','amount_to_swipe','sales_percentage')
+    @api.onchange('transaction_amount','commission_included','sales_percentage')
     def _onchange_amount_to_customer(self):
         #if not self.machine_name:
             #raise UserError(_('Please select the Machine Name'))
         #else:
         if self.commission_included == False:
+            self.amount_to_customer = self.transaction_amount
             self.amount_to_swipe = (self.amount_to_customer * 100 / (100 - self.sales_percentage))
             self.commission = self.amount_to_swipe - self.amount_to_customer
             self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
@@ -52,6 +54,7 @@ class TransMaster(models.Model):
             self.balance = self.amount_to_customer - self.cash_paid_customer
             self.margin = self.commission - self.cost_to_commission
         else:
+            self.amount_to_swipe = self.transaction_amount
             self.commission = (self.amount_to_swipe * self.sales_percentage / 100)
             self.amount_to_customer = (self.amount_to_swipe - self.commission)
             self.cost_to_commission = (self.amount_to_swipe * self.cost_percentage / 100)
