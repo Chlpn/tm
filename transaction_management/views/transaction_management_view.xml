@@ -30,13 +30,14 @@
                     <separator colspan="4" />
                         <group colspan="4" col="4">
                             <seperator colspan="4"/>
-                    <field name="transaction_amount" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="machine_name" widget="selection" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    
                     <field name="transaction_date" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
 
                     <field name="commission_included" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="amount_to_swipe" required='True' readonly="1"/>
-                    <field name="machine_name" widget="selection" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                    <field name="amount_to_customer" required='True' readonly="1"/>
+                    <field name="transaction_amount" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                            <field name="amount_to_customer" required='True' readonly="1"/>
                             <separator string="ADVANCED TRANSACTION DETAILS" colspan="4" />
                             <separator colspan="4"/>
                     <field name="sales_percentage" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
