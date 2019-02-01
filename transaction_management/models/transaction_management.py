@@ -209,7 +209,8 @@ class TransMaster(models.Model):
     @api.model
     def create(self,values):
         record = super(TransMaster, self).create(values)
-        raise UserWarning(_('itworks'))
+        if self.transaction_no is False:
+            record['transaction_no'] = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
         return record
 
 
