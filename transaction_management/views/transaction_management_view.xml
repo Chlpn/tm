@@ -52,6 +52,7 @@
                             <separator string="JOURNAL DETAILS" colspan="4" />
                             <separator colspan="4"/>
                     <field name="journal_ref" readonly="1" nolabel="1"/>
+                    <field name="company_id" required='True' invisible="1"/>
                         </group>
                     <separator string="NOTES" colspan="4" />
                             <separator colspan="4"/>
