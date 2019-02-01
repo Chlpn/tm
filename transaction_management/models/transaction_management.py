@@ -28,6 +28,7 @@ class TransMaster(models.Model):
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
+    customer_mobile = fields.related('partner_id','mobile',type='char',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
     note = fields.Text(string="Notes")
 
@@ -41,6 +42,11 @@ class TransMaster(models.Model):
     def _onchange_machine_name(self):
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
+
+    @api.onchange('customer_mobile')
+    def _onchange_customer_mobile(self):
+        self.customer = self.machine_name.sales_percentage
+        self.cost_percentage = self.machine_name.cost_percentage
 
 
     @api.onchange('transaction_amount','commission_included','sales_percentage')
