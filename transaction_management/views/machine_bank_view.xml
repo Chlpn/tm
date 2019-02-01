@@ -3,7 +3,7 @@
     <data>
 
      <!--  Customer Bank Form View -->
-        <!--record model="ir.ui.view" id="machine_bank_form">
+        <record model="ir.ui.view" id="machine_bank_form">
             <field name="name">machine.bank.form</field>
             <field name="model">machine.bank</field>
             <field name="arch" type="xml">
@@ -15,7 +15,7 @@
                     </sheet>
                 </form>
             </field>
-        </record-->
+        </record>
 
         <!--  Customer Bank Tree View -->
         <record model="ir.ui.view" id="machine_bank_tree">
