@@ -59,7 +59,7 @@
                     </sheet>
                 </form>
             </field>
-        </record>K
+        </record>
 
         <!--  Transaction master tree View -->
         <record model="ir.ui.view" id="transaction_master_tree">
