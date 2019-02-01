@@ -208,6 +208,7 @@ class TransMaster(models.Model):
 
     @api.model
     def create(self,values):
+        record = super(TransMaster, self).create(values)
         if self.transaction_no is False:
             self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
         ir_model_obj = self.env['ir.model.data']
@@ -350,7 +351,9 @@ class TransMaster(models.Model):
         account_move.post()
         self.journal_ref = account_move.id
         self.state = 'posted'
-        record = super(TransMaster,self).create(values)
+        return record
+
+
 
 
     @api.multi
