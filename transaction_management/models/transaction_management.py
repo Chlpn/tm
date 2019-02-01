@@ -209,8 +209,11 @@ class TransMaster(models.Model):
     @api.multi
     def unlink(self):
         for trans in self:
-            if trans.state == 'posted' or 'cancelled':
+            if trans.state == 'posted' :
                 raise UserError(_('You can not delete posted Transaction.'))
+            if trans.transaction_no is False :
+                raise UserError(_('You can not delete posted or cancelled Transaction.'))
+
         return super(TransMaster, self).unlink()
 
 
@@ -226,6 +229,11 @@ class TransMaster(models.Model):
         else:
             raise UserError(
                 _('You can not cancel the entry,to delete this entry user should belong to the Advisor group'))
+
+    @api.multi
+    def action_draft(self):
+        self.write({'state': 'cancelled'})
+        
 
 
     @api.constrains('amount_to_swipe','amount_to_customer','sales_percentage')
