@@ -209,7 +209,7 @@ class TransMaster(models.Model):
     @api.model
     def create(self,values):
         record = super(TransMaster, self).create(values)
-        self.write({'state': 'cancelled'})
+        raise UserError(_('itworks'))
         return record
 
 
