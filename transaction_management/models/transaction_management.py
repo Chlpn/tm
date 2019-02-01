@@ -28,7 +28,7 @@ class TransMaster(models.Model):
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
-    customer_mobile = fields.related('partner_id','mobile',type='char',string='Mobile')
+    customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
     note = fields.Text(string="Notes")
 
@@ -219,12 +219,12 @@ class TransMaster(models.Model):
         record.post()
         return record
 
-    @api.multi
-    def write(self, values):
+    #@api.multi
+    #def write(self, values):
 
-        record = super(TransMaster, self).write(values)
-        record.post()
-        return record
+        #record = super(TransMaster, self).write(values)
+        #record.post()
+        #return record
 
     @api.multi
     def unlink(self):
