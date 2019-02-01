@@ -209,9 +209,9 @@ class TransMaster(models.Model):
     @api.model
     def create(self,values):
         record = super(TransMaster, self).create(values)
-        return self.post(self,values)
+        post = self.post()
 
-        return record
+        return record, post
 
 
 
