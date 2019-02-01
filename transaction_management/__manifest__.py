@@ -16,8 +16,7 @@
                 'views/branch_view.xml',
                 'data/masters.xml',
                 'security/ir.model.access.csv',
-
-
+                'reports/report.xml',
 
             ],
     'demo': [
