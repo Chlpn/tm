@@ -210,7 +210,7 @@ class TransMaster(models.Model):
     def create(self,values):
 
         record = super(TransMaster, self).create(values)
-        self.post()
+        record.post()
 
 
         return record
