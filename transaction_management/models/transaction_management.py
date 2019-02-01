@@ -206,7 +206,7 @@ class TransMaster(models.Model):
         self.journal_ref = account_move.id
         self.state = 'posted'
 
-    @api.model
+    '''@api.model
     def create(self,values):
         record = super(TransMaster, self).create(values)
         if self.transaction_no is False:
@@ -351,8 +351,7 @@ class TransMaster(models.Model):
         account_move.post()
         record['journal_ref'] = account_move.id
         record['state'] = 'posted'
-        return record
-
+        return record '''
 
 
 
