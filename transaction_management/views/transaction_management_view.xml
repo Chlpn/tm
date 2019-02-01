@@ -44,14 +44,13 @@
                     <field name="sales_percentage" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="commission" readonly="1"/>
                     <field name="customer" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                    <!--field name="customer_mobile" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                    -->
-                            <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
 
+                    <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="balance" readonly="1"/>
                     <field name="cost_to_commission" readonly="1"/>
                     <field name="margin" readonly="1"/>
                     <field name="cost_percentage" readonly="1"/>
+                            <field name="customer_mobile" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                             <separator string="JOURNAL DETAILS" colspan="4" />
                             <separator colspan="4"/>
                     <field name="journal_ref" readonly="1" nolabel="1"/>
