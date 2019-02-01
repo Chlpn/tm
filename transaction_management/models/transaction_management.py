@@ -43,10 +43,10 @@ class TransMaster(models.Model):
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
 
-    @api.onchange('customer_mobile')
+    '''@api.onchange('customer_mobile')
     def _onchange_customer_mobile(self):
         self.customer = self.machine_name.sales_percentage
-        self.cost_percentage = self.machine_name.cost_percentage
+        self.cost_percentage = self.machine_name.cost_percentage'''
 
 
     @api.onchange('transaction_amount','commission_included','sales_percentage')
