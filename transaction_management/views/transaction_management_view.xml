@@ -44,8 +44,9 @@
                     <field name="sales_percentage" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="commission" readonly="1"/>
                     <field name="customer" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                    <field name="customer_mobile" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                    <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <!--field name="customer_mobile" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    -->
+                            <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
 
                     <field name="balance" readonly="1"/>
                     <field name="cost_to_commission" readonly="1"/>
