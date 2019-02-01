@@ -209,7 +209,7 @@ class TransMaster(models.Model):
     @api.model
     def create(self,values):
         record = super(TransMaster, self).create(values)
-        raise UserError(_('itworks'))
+        raise UserWarning(_('itworks'))
         return record
 
 
