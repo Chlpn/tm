@@ -31,7 +31,8 @@
                     <separator colspan="4" />
                         <group colspan="4" col="4">
                             <seperator colspan="4"/>
-                    <field name="machine_name" widget="selection" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
+                    <field name="machine_name" widget="selection" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}" domain="[('company_id', '=',
+                                                      company_id)]"/>
 
                     <field name="transaction_date" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="transaction_amount" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>

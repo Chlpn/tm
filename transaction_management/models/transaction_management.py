@@ -25,7 +25,7 @@ class TransMaster(models.Model):
     margin = fields.Float(string='margin')
     cash_paid_customer = fields.Float(string='Cash Paid')
     balance = fields.Float(string='Balance')
-    machine_name = fields.Many2one('machine.master', ondelete='restrict',domain=lambda self: [('company_id', '=', self.company_id)])
+    machine_name = fields.Many2one('machine.master', ondelete='restrict')
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
