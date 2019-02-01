@@ -211,6 +211,146 @@ class TransMaster(models.Model):
         record = super(TransMaster, self).create(values)
         if self.transaction_no is False:
             record['transaction_no'] = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
+        ir_model_obj = self.env['ir.model.data']
+        model, journal_id = ir_model_obj.get_object_reference('transaction_management', 'transaction_journal')
+        if self.machine_name.rented is True:
+            if self.balance > 0:
+                line_ids = [
+                    (0, 0,
+                     {'journal_id': journal_id,
+                      'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
+                      'name': self.machine_name.name + "/" + self.transaction_no,
+                      'partner_id': self.machine_name.rented_from.id,
+                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no, 'partner_id': self.customer.id,
+                            'amount_currency': 0.0, 'credit': self.balance})
+
+                ]
+            elif self.balance < 0:
+                line_ids = [
+                    (0, 0,
+                     {'journal_id': journal_id,
+                      'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
+                      'name': self.machine_name.name + "/" + self.transaction_no,
+                      'partner_id': self.machine_name.rented_from.id,
+                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no, 'partner_id': self.customer.id,
+                            'amount_currency': 0.0, 'debit': abs(self.balance)})
+
+                ]
+            else:
+                line_ids = [
+                    (0, 0,
+                     {'journal_id': journal_id,
+                      'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
+                      'name': self.machine_name.name + "/" + self.transaction_no,
+                      'partner_id': self.machine_name.rented_from.id,
+                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.commission}),
+
+                ]
+        else:
+            if self.balance > 0:
+                line_ids = [
+                    (0, 0,
+                     {'journal_id': journal_id, 'account_id': self.machine_name.merchant_bank_ac.id,
+                      'name': self.machine_name.name + "/" + self.transaction_no,
+                      'partner_id': self.machine_name.rented_from.id,
+                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no, 'partner_id': self.customer.id,
+                            'amount_currency': 0.0, 'credit': self.balance})
+
+                ]
+            elif self.balance < 0:
+                line_ids = [
+                    (0, 0,
+                     {'journal_id': journal_id,
+                      'account_id': self.machine_name.merchant_bank_ac.id,
+                      'name': self.machine_name.name + "/" + self.transaction_no,
+                      'partner_id': self.machine_name.rented_from.id,
+                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no, 'partner_id': self.customer.id,
+                            'amount_currency': 0.0, 'debit': abs(self.balance)})
+
+                ]
+            else:
+                line_ids = [
+                    (0, 0,
+                     {'journal_id': journal_id,
+                      'account_id': self.machine_name.merchant_bank_ac.id,
+                      'name': self.machine_name.name + "/" + self.transaction_no,
+                      'partner_id': self.machine_name.rented_from.id,
+                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                    (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
+                            'name': self.machine_name.name + "/" + self.transaction_no,
+                            'amount_currency': 0.0, 'credit': self.commission}),
+
+                ]
+
+        vals = {
+            'journal_id': journal_id,
+            'ref': self.machine_name.name + "/" + self.transaction_no,
+            'date': self.transaction_date,
+            'line_ids': line_ids,
+        }
+        account_move = self.env['account.move'].create(vals)
+        account_move.post()
+        record['journal_ref'] = account_move.id
+        record['state'] = 'posted'
         return record
 
 
