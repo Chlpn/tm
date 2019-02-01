@@ -211,11 +211,14 @@ class TransMaster(models.Model):
 
         record = super(TransMaster, self).create(values)
         record.post()
-
-
         return record
 
+    @api.multi
+    def write(self, values):
 
+        record = super(TransMaster, self).create(values)
+        record.post()
+        return record
 
     @api.multi
     def unlink(self):
