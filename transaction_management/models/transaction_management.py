@@ -9,6 +9,11 @@ class TransMaster(models.Model):
     _description = "Transaction Management"
     _rec_name = 'transaction_no'
 
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        default=lambda self: self.env.user.company_id
+    )
     transaction_no = fields.Char(string='Transaction Number')
     transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
     transaction_amount = fields.Float(string='Amount',)
@@ -20,7 +25,7 @@ class TransMaster(models.Model):
     margin = fields.Float(string='margin')
     cash_paid_customer = fields.Float(string='Cash Paid')
     balance = fields.Float(string='Balance')
-    machine_name = fields.Many2one('machine.master', ondelete='restrict')
+    machine_name = fields.Many2one('machine.master', ondelete='restrict',domain=lambda self: [('company_id', '=', self.company_id)])
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
@@ -37,7 +42,6 @@ class TransMaster(models.Model):
     def _onchange_machine_name(self):
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
-
 
 
     @api.onchange('transaction_amount','commission_included','sales_percentage')
