@@ -232,8 +232,8 @@ class TransMaster(models.Model):
 
     @api.multi
     def action_draft(self):
-        self.write({'state': 'cancelled'})
-        
+        self.write({'state': 'draft'})
+
 
 
     @api.constrains('amount_to_swipe','amount_to_customer','sales_percentage')
