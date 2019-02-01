@@ -68,7 +68,8 @@ class TransMaster(models.Model):
 
     @api.multi
     def post(self):
-        self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
+        if self.transaction_no is False:
+            self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
         ir_model_obj = self.env['ir.model.data']
         model, journal_id = ir_model_obj.get_object_reference('transaction_management', 'transaction_journal')
         if self.machine_name.rented is True :
@@ -211,7 +212,7 @@ class TransMaster(models.Model):
         for trans in self:
             if trans.state == 'posted' :
                 raise UserError(_('You can not delete posted Transaction.'))
-            if trans.transaction_no is False :
+            if not trans.transaction_no is False :
                 raise UserError(_('You can not delete posted or cancelled Transaction.'))
 
         return super(TransMaster, self).unlink()
