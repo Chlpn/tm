@@ -216,7 +216,7 @@ class TransMaster(models.Model):
     @api.multi
     def write(self, values):
 
-        record = super(TransMaster, self).create(values)
+        record = super(TransMaster, self).write(values)
         record.post()
         return record
 
