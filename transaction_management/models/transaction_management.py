@@ -4,7 +4,6 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 class TransMaster(models.Model):
-    _inherit = ["multi.company.abstract"]
     _name = "trans.master"
     _description = "Transaction Management"
     _rec_name = 'transaction_no'

@@ -4,7 +4,6 @@ from odoo import fields, models, api
 
 
 class branch(models.Model):
-    _inherit = ["multi.company.abstract"]
     _name = "company.branch"
     _rec_name = "company_id"
 
