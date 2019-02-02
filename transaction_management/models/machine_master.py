@@ -7,6 +7,7 @@ class MachineMaster(models.Model):
     _name = "machine.master"
     _description = "Machine Master"
 
+    active = fields.Boolean(string="Active", default=1)
     branch = fields.Many2one('company.branch', string ="Branch")
     name = fields.Char(string='Machine Name')
     merchant_id = fields.Char(string='Merchant ID',)

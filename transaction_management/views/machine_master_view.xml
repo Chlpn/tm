@@ -9,6 +9,11 @@
             <field name="arch" type="xml">
                 <form string="Machine Master" duplicate="0">
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-archive">
+                            <field name="active" />
+                        </button>
+                    </div>
                     <group colspan="4" col="4">
                     <field name="branch" widget="selection"/>
                     <field name="name"/>
