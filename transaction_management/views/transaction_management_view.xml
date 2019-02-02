@@ -29,7 +29,7 @@
                         </header>
 
                     <separator colspan="4" />
-                       <!-- <group colspan="4" col="4">-->
+                        <group colspan="4" col="4">
                             <seperator colspan="4"/>
                     <field name="machine_name" widget="selection" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}" domain="[('branch', '=',
                                                       company_id)]"/>
