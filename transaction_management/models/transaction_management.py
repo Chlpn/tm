@@ -48,7 +48,7 @@ class TransMaster(models.Model):
 
     @api.onchange('customer')
     def _compute_cbal(self):
-        if not self.customer == False:
+        if self.customer :
             account = self.customer.property_account_receivable_id.id
             customer = self.customer.id
             self.env.cr.execute(
@@ -60,7 +60,7 @@ class TransMaster(models.Model):
 
     @api.onchange('machine_name')
     def _compute_mbal(self):
-        if not self.machine_name == False:
+        if self.machine_name:
             account = self.machine_name.rented_from.property_account_receivable_id.id
             customer = self.machine_name.rented_from.id
             self.env.cr.execute(
