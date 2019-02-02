@@ -49,14 +49,14 @@ class TransMaster(models.Model):
         self.cost_percentage =self.machine_name.cost_percentage
 
 
-    @api.depends('onchange')
-    def compute_cbal(self):
+    @api.onchange('customer')
+    def _compute_cbal(self):
         account = self.customer.property_account_receivable_id.id
         customer = self.customer.id
         self.env.cr.execute(
             """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",(account,customer))
         self.customer_balance = self.env.cr.fetchall()
-        
+
 
 
 
