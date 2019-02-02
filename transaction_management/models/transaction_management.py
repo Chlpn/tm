@@ -30,9 +30,10 @@ class TransMaster(models.Model):
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
-    customer_balance =fields.Float(related='customer.credit',string="Customer Balance")
+    customer_balance =fields.Float(computer='compute_cbal',string="Customer Balance",readonly="True")
     machine_balance = fields.Float(related='machine_name.rented_from.credit',string="Machine Balance")
     cash_balance = fields.Float(string="Cash Balance")
+
 
     note = fields.Text(string="Notes")
 
@@ -46,6 +47,16 @@ class TransMaster(models.Model):
     def _onchange_machine_name(self):
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
+
+    @api.multi
+    @api.depends('customer')
+    def compute_cbal(self):
+        account = self.customer.property_account_receivable_id.id
+        customer =self.customer
+        self.env.cr.execute(
+            """select a.debit-a.credit from account_move_line where account_id=account and partner_id=customer and  state='posted' group by account""")
+        bal = self.env.cr.fetchall()
+        return bal
 
 
 
