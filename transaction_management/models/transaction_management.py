@@ -53,10 +53,11 @@ class TransMaster(models.Model):
             customer = self.customer.id
             self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",(account,customer))
-            if self.env.cr.fetchone()[0] is None:
+            value = self.env.cr.fetchone()[0]
+            if value is None:
                 self.customer_balance = 0
             else:
-                self.customer_balance = self.env.cr.fetchone()[0]
+                self.customer_balance = value
 
     @api.onchange('machine_name')
     def _compute_mbal(self):
@@ -66,10 +67,11 @@ class TransMaster(models.Model):
             self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
                 (account, customer))
-            if self.env.cr.fetchone()[0] is None:
+            value = self.env.cr.fetchone()[0]
+            if value is None:
                 self.machine_balance = 0
             else:
-                self.machine_balance = self.env.cr.fetchone()[0]
+                self.machine_balance = value
 
 
 
