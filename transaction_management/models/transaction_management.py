@@ -52,9 +52,9 @@ class TransMaster(models.Model):
     @api.depends('customer')
     def compute_cbal(self):
         account = self.customer.property_account_receivable_id.id
-        customer =self.customer
+        customer = self.customer
         self.env.cr.execute(
-            """select sum(debit-credit) from account_move_line where account_id=account and partner_id=customer and  state='posted' group by account""")
+            """select sum(debit-credit) from account_move_line where account_id=account and partner_id=customer and  state='posted' group by account_id""")
         bal = self.env.cr.fetchall()
         return bal
 
