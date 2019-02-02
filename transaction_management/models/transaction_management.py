@@ -54,7 +54,7 @@ class TransMaster(models.Model):
         account = self.customer.property_account_receivable_id.id
         customer =self.customer
         self.env.cr.execute(
-            """select sum(a.debit-a.credit) from account_move_line where account_id=account and partner_id=customer and  state='posted' group by account""")
+            """select sum(debit-credit) from account_move_line where account_id=account and partner_id=customer and  state='posted' group by account""")
         bal = self.env.cr.fetchall()
         return bal
 
