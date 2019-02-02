@@ -56,7 +56,7 @@ class TransMaster(models.Model):
             if self.env.cr.fetchone()[0] is None:
                 self.customer_balance = 0
             else:
-                self.customer_balance = float(self.env.cr.fetchone()[0])
+                self.customer_balance = self.env.cr.fetchone()[0]
 
     @api.onchange('machine_name')
     def _compute_mbal(self):
