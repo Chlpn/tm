@@ -50,6 +50,7 @@
                     <field name="journal_ref" readonly="1" nolabel="1"/>
                         </group>
                         <separator string="BALANCE DETAILS" colspan="4" />
+                         <group colspan="6" col="6">
                     <field name="cash_balance" readonly="1" />
                     <field name="machine_balance" readonly="1" attrs="{'invisible': [('machine', '=', False)]}" />
                     <field name="customer_balance" readonly="1" attrs="{'invisible': [('customer', '=', False)]}" />
