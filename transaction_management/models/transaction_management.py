@@ -30,6 +30,10 @@ class TransMaster(models.Model):
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
+    customer_balance =fields.Float(string="Customer Balance")
+    machine_balance = fields.Float(string="Machine Balance")
+    cash_balance = fields.Float(string="Cash Balance")
+
     note = fields.Text(string="Notes")
 
     state = fields.Selection([

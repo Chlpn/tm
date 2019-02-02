@@ -49,6 +49,11 @@
                             <separator string="JOURNAL DETAILS" colspan="4" />
                     <field name="journal_ref" readonly="1" nolabel="1"/>
                         </group>
+                        <separator string="BALANCE DETAILS" colspan="4" />
+                    <field name="cash_balance" readonly="1" />
+                    <field name="machine_balance" readonly="1" attrs="{'invisible': [('machine', '=', False)]}" />
+                    <field name="customer_balance" readonly="1" attrs="{'invisible': [('customer', '=', False)]}" />
+                        </group>
                     <separator string="NOTES" colspan="4" />
                     <field name="note" copy="False"/>
 
