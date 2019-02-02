@@ -31,10 +31,8 @@ class TransMaster(models.Model):
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
     customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True")
-    machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True")
+    machine_balance = fields.Char(string="Machine Balance", store=True,  readonly="True")
     cash_balance = fields.Float(string="Cash Balance")
-
-
     note = fields.Text(string="Notes")
 
     state = fields.Selection([
@@ -57,7 +55,7 @@ class TransMaster(models.Model):
         if self.env.cr.fetchone()[0] == False:
             self.customer_balance = 0
         else:
-            self.customer_balance = self.env.cr.fetchone()[0]
+            self.customer_balance = float(self.env.cr.fetchone()[0])
 
     @api.onchange('machine_name')
     def _compute_mbal(self):
