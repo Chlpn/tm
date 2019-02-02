@@ -54,7 +54,7 @@ class TransMaster(models.Model):
         customer = self.customer.id
         self.env.cr.execute(
             """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",(account,customer))
-        self.customer_balance = self.env.cr.fetchall()[0[0]]
+        self.customer_balance = self.env.cr.fetchall()[0(0)]
 
 
 
