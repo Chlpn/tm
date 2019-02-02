@@ -27,37 +27,29 @@
                         <header class="oe_highlight">
                             <h1><group><field name="transaction_no" readonly="1"/></group></h1>
                         </header>
-
-                    <separator colspan="4" />
-                        <group colspan="4" col="4">
-                            <seperator colspan="4"/>
+                       <group colspan="4" col="4">
                     <field name="machine_name" widget="selection" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}" domain="[('branch', '=',
                                                       company_id)]"/>
-
                     <field name="transaction_date" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="transaction_amount" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="amount_to_swipe" required='True' readonly="1"/>
                     <field name="commission_included" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="amount_to_customer" required='True' readonly="1"/>
                             <separator string="ADVANCED TRANSACTION DETAILS" colspan="4" />
-                            <separator colspan="4"/>
                     <field name="sales_percentage" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="commission" readonly="1"/>
                     <field name="customer" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="customer_mobile" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-                      <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
-
+                    <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="balance" readonly="1"/>
                     <field name="cost_to_commission" readonly="1"/>
                     <field name="margin" readonly="1"/>
                     <field name="cost_percentage" readonly="1"/>
-                            <separator string="JOURNAL DETAILS" colspan="4" />
-                            <separator colspan="4"/>
-                    <field name="journal_ref" readonly="1" nolabel="1"/>
                     <field name="company_id" required='True' invisible="1"/>
+                            <separator string="JOURNAL DETAILS" colspan="4" />
+                    <field name="journal_ref" readonly="1" nolabel="1"/>
                         </group>
                     <separator string="NOTES" colspan="4" />
-                            <separator colspan="4"/>
                     <field name="note" copy="False"/>
 
                     </sheet>
