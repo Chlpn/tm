@@ -31,7 +31,7 @@ class TransMaster(models.Model):
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
     customer_balance =fields.Float(compute='compute_cbal',string="Customer Balance",readonly="True")
-    machine_balance = fields.Float(related='machine_name.rented_from.credit',string="Machine Balance")
+    machine_balance = fields.Float(string="Machine Balance", readonly="True")
     cash_balance = fields.Float(string="Cash Balance")
 
 
