@@ -31,7 +31,7 @@ class TransMaster(models.Model):
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
     customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True")
-    machine_balance = fields.Char(string="Machine Balance", store=True,  readonly="True")
+    machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True")
     cash_balance = fields.Float(string="Cash Balance")
     note = fields.Text(string="Notes")
 
@@ -48,26 +48,28 @@ class TransMaster(models.Model):
 
     @api.onchange('customer')
     def _compute_cbal(self):
-        account = self.customer.property_account_receivable_id.id
-        customer = self.customer.id
-        self.env.cr.execute(
-            """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",(account,customer))
-        if self.env.cr.fetchone()[0] == False:
-            self.customer_balance = 0
-        else:
-            self.customer_balance = float(self.env.cr.fetchone()[0])
+        if not self.customer == False:
+            account = self.customer.property_account_receivable_id.id
+            customer = self.customer.id
+            self.env.cr.execute(
+                """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",(account,customer))
+            if self.env.cr.fetchone()[0] is None:
+                self.customer_balance = 0
+            else:
+                self.customer_balance = float(self.env.cr.fetchone()[0])
 
     @api.onchange('machine_name')
     def _compute_mbal(self):
-        account = self.machine_name.rented_from.property_account_receivable_id.id
-        customer = self.machine_name.rented_from.id
-        self.env.cr.execute(
-            """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
-            (account, customer))
-        if self.env.cr.fetchone()[0] == False:
-            self.machine_balance = 0
-        else:
-            self.machine_balance = self.env.cr.fetchone()[0]
+        if not self.machine_name == False:
+            account = self.machine_name.rented_from.property_account_receivable_id.id
+            customer = self.machine_name.rented_from.id
+            self.env.cr.execute(
+                """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
+                (account, customer))
+            if self.env.cr.fetchone()[0] is None:
+                self.machine_balance = 0
+            else:
+                self.machine_balance = self.env.cr.fetchone()[0]
 
 
 
