@@ -30,8 +30,8 @@ class TransMaster(models.Model):
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
-    customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True")
-    machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True")
+    customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True", compute="_compute_cbal")
+    machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True", compute="_compute_mbal")
     cash_balance = fields.Float(string="Cash Balance")
     note = fields.Text(string="Notes")
 
@@ -46,7 +46,7 @@ class TransMaster(models.Model):
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
 
-    @api.onchange('customer')
+    @api.depends('customer')
     def _compute_cbal(self):
         if self.customer :
             account = self.customer.property_account_receivable_id.id
@@ -59,7 +59,7 @@ class TransMaster(models.Model):
             else:
                 self.customer_balance = value
 
-    @api.onchange('machine_name')
+    @api.depends('machine_name')
     def _compute_mbal(self):
         if self.machine_name:
             account = self.machine_name.rented_from.property_account_receivable_id.id
