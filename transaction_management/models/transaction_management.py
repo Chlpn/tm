@@ -32,7 +32,7 @@ class TransMaster(models.Model):
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
     customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True", compute="_compute_cbal")
     machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True", compute="_compute_mbal")
-    cash_balance = fields.Float(string="Cash Balance")
+    cash_balance = fields.Float(string="Cash Balance", store=True,  readonly="True", compute="_compute_bal")
     note = fields.Text(string="Notes")
 
     state = fields.Selection([
@@ -59,19 +59,32 @@ class TransMaster(models.Model):
             else:
                 self.customer_balance = value
 
+
     @api.depends('machine_name')
     def _compute_mbal(self):
         if self.machine_name:
             account = self.machine_name.rented_from.property_account_receivable_id.id
             customer = self.machine_name.rented_from.id
+            caccount = self.machine_name.branch.cost_ac.id
             self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
                 (account, customer))
+
             value = self.env.cr.fetchone()[0]
+            self.env.cr.execute(
+                """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
+                (caccount))
+            value2 = self.env.cr.fetchone()[0]
+
             if value is None:
                 self.machine_balance = 0
             else:
                 self.machine_balance = value
+
+            if value2 is None:
+                self.cash_balance = 0
+            else:
+                self.cash_balance = value2
 
 
 
