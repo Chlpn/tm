@@ -14,7 +14,7 @@ class MachineMaster(models.Model):
     terminal_id = fields.Char(string='Terminal ID', )
     bank_name = fields.Many2one('machine.bank', string='Bank Name', ondelete='restrict')
     rented =fields.Boolean(string='is Machine Rented')
-    rented_from = fields.Many2one('res.partner', string="Rented From", ondelete='restrict')
+    rented_from = fields.Many2one('res.partner', string="Rented From", ondelete='restrict', domain=[('supplier', '=', '1')])
     sales_percentage = fields.Float(string='Default Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     merchant_bank_ac = fields.Many2one('account.account', string="Bank Account", ondelete='restrict',

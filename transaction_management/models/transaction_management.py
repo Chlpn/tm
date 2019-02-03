@@ -27,7 +27,7 @@ class TransMaster(models.Model):
     machine_name = fields.Many2one('machine.master', ondelete='restrict')
     sales_percentage = fields.Float(string='Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
-    customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
+    customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict', domain=[('customer', '=', '1')])
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
     customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True", compute="_compute_cbal")
@@ -53,11 +53,11 @@ class TransMaster(models.Model):
             customer = self.customer.id
             self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",(account,customer))
-            value = self.env.cr.fetchone()[0]
+            value = self.env.cr.fetchone()
             if value is None:
                 self.customer_balance = 0
             else:
-                self.customer_balance = value
+                self.customer_balance = value[0]
 
 
     @api.depends('machine_name')
@@ -70,21 +70,21 @@ class TransMaster(models.Model):
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
                 (account, customer))
 
-            value = self.env.cr.fetchone()[0]
+            value = self.env.cr.fetchone()
             self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
                 (caccount,))
-            value2 = self.env.cr.fetchone()[0]
+            value2 = self.env.cr.fetchone()
 
             if value is None:
                 self.machine_balance = 0
             else:
-                self.machine_balance = value
+                self.machine_balance = value[0]
 
             if value2 is None:
                 self.cash_balance = 0
             else:
-                self.cash_balance = value2
+                self.cash_balance = value2[0]
 
 
 
