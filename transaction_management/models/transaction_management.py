@@ -63,7 +63,7 @@ class TransMaster(models.Model):
     @api.depends('machine_name')
     def _compute_mbal(self):
         if self.machine_name:
-            account = self.machine_name.rented_from.property_account_receivable_id.id
+            account = self.machine_name.rented_from.property_account_payable_id.id
             customer = self.machine_name.rented_from.id
             caccount = self.machine_name.branch.cost_ac.id
             self.env.cr.execute(
@@ -126,7 +126,7 @@ class TransMaster(models.Model):
             if self.balance > 0:
                 line_ids = [
                     (0, 0,
-                     {'journal_id': journal_id, 'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
+                     {'journal_id': journal_id, 'account_id': self.machine_name.rented_from.property_account_payable_id.id,
                       'name': self.machine_name.name + "/" + self.transaction_no,'partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id, 'name':self.machine_name.name + "/" + self.transaction_no,
@@ -146,7 +146,7 @@ class TransMaster(models.Model):
                 line_ids = [
                     (0, 0,
                      {'journal_id': journal_id,
-                      'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
+                      'account_id': self.machine_name.rented_from.property_account_payable_id.id,
                       'name': self.machine_name.name + "/" + self.transaction_no,
                       'partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
@@ -168,7 +168,7 @@ class TransMaster(models.Model):
                 line_ids = [
                     (0, 0,
                      {'journal_id': journal_id,
-                      'account_id': self.machine_name.rented_from.property_account_receivable_id.id,
+                      'account_id': self.machine_name.rented_from.property_account_payable_id.id,
                       'name': self.machine_name.name + "/" + self.transaction_no,
                       'partner_id': self.machine_name.rented_from.id,
                       'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
