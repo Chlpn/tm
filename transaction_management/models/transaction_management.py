@@ -41,6 +41,16 @@ class TransMaster(models.Model):
         ('cancelled', 'Cancelled'),
     ], string='Status', default='draft',readonly=True)
 
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+
+        res = super(TransMaster, self).name_search(name='', args=None, operator='ilike', limit=100)
+
+        ids = self.search(args + [('customer.mobile', '=', name)], limit=limit)
+
+        if ids:
+            return ids.name_get()
+
     @api.onchange('machine_name')
     def _onchange_machine_name(self):
         self.sales_percentage = self.machine_name.sales_percentage
@@ -314,3 +324,4 @@ class TransMaster(models.Model):
                 raise ValueError("Value of Amount to Customer must be greater than Zero")
             if record.sales_percentage <= 0:
                 raise ValueError("Value of Sales Percentage must be greater than Zero")
+
