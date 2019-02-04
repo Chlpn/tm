@@ -324,7 +324,7 @@ class trans_ResPartner(models.Model):
     def name_search(self, name='', args=None, operator='ilike', limit=100):
         res = super(trans_ResPartner, self).name_search(name='', args=None, operator='ilike', limit=100)
 
-        ids = self.search(args + [('mobile', '=', name)], limit=limit)
+        ids = self.search(args + [('mobile', operator, name)], limit=limit)
         return ids.name_get()
 
 
