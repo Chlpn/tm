@@ -322,11 +322,9 @@ class trans_ResPartner(models.Model):
 
     @api.model
     def name_search(self, name='', args=None, operator='ilike', limit=100):
-        prem = self.search(args + [('mobile', operator, name)], limit=limit)
-        if not prem.ids:
-            return super(trans_ResPartner, self).name_search(name='', args=args, operator=operator, limit=100)
+        res = super(trans_ResPartner, self).name_search(name='', args=None, operator='ilike', limit=100)
 
-
-        return prem.name_get()
+        ids = self.search(args + ['|',('name', operator, name),('mobile', operator, name)], limit=limit)
+        return ids.name_get()
 
 
