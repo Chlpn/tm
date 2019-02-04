@@ -79,7 +79,7 @@ class TransMaster(models.Model):
             if value is None:
                 self.machine_balance = 0
             else:
-                self.machine_balance = value[0]
+                self.machine_balance = -1 * value[0]
 
             if value2 is None:
                 self.cash_balance = 0
