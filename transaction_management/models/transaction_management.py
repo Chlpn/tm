@@ -63,8 +63,11 @@ class TransMaster(models.Model):
     @api.depends('machine_name')
     def _compute_mbal(self):
         if self.machine_name:
-            account = self.machine_name.rented_from.property_account_payable_id.id
             customer = self.machine_name.rented_from.id
+            if self.machine_name.rented:
+                account = self.machine_name.rented_from.property_account_payable_id.id
+            else:
+                account = self.machine_name.merchant_bank_ac
             caccount = self.machine_name.branch.cash_ac.id
             self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
