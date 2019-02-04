@@ -63,19 +63,22 @@ class TransMaster(models.Model):
     @api.depends('machine_name')
     def _compute_mbal(self):
         if self.machine_name:
-            customer = self.machine_name.rented_from.id
-            if self.machine_name.rented is True:
-                account = self.machine_name.rented_from.property_account_payable_id.id
-                self.env.cr.execute(
-                    """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
-                    (account, customer))
-            else:
+
+            if self.machine_name.rented is False:
                 account = self.machine_name.merchant_bank_ac.id
                 self.env.cr.execute(
                     """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
                     (account,))
-            caccount = self.machine_name.branch.cash_ac.id
+
+            else:
+                account = self.machine_name.rented_from.property_account_payable_id.id
+                customer = self.machine_name.rented_from.id
+                self.env.cr.execute(
+                    """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
+                    (account, customer))
+
             value = self.env.cr.fetchone()
+            caccount = self.machine_name.branch.cash_ac.id
             self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
                 (caccount,))
@@ -90,9 +93,6 @@ class TransMaster(models.Model):
                 self.cash_balance = 0
             else:
                 self.cash_balance = value2[0]
-
-
-
 
 
     @api.onchange('transaction_amount','commission_included','sales_percentage')
