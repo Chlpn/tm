@@ -10,6 +10,8 @@ class MachineMaster(models.Model):
     active = fields.Boolean(string="Active", default=1)
     branch = fields.Many2one('company.branch', string ="Branch")
     name = fields.Char(string='Machine Name')
+    rent_again = fields.Boolean(string='Rent to Branch')
+    parent_name = fields.Many2one('machine.master',string='Parent Machine', ondelete='restrict')
     merchant_id = fields.Char(string='Merchant ID',)
     terminal_id = fields.Char(string='Terminal ID', )
     bank_name = fields.Many2one('machine.bank', string='Bank Name', ondelete='restrict')
