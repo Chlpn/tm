@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
+import odoo.addons.decimal_precision as dp
 from odoo.exceptions import UserError
 
 class TransMaster(models.Model):
@@ -15,24 +16,24 @@ class TransMaster(models.Model):
     )
     transaction_no = fields.Char(string='Transaction Number')
     transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
-    transaction_amount = fields.Float(string='Amount',)
+    transaction_amount = fields.Float(string='Amount', digits=dp.get_precision('Account'))
     commission_included = fields.Boolean(string='Include Commission')
-    amount_to_swipe = fields.Float(string='Amount to Swipe',store=True)
-    amount_to_customer = fields.Float(string='Amount to customer',store=True)
-    commission = fields.Float(string='Commission')
-    cost_to_commission = fields.Float(string='Cost of Commission')
-    margin = fields.Float(string='margin')
-    cash_paid_customer = fields.Float(string='Cash Paid')
-    balance = fields.Float(string='Balance')
+    amount_to_swipe = fields.Float(string='Amount to Swipe',store=True, digits=dp.get_precision('Account'))
+    amount_to_customer = fields.Float(string='Amount to customer',store=True, digits=dp.get_precision('Account'))
+    commission = fields.Float(string='Commission', digits=dp.get_precision('Account'))
+    cost_to_commission = fields.Float(string='Cost of Commission', digits=dp.get_precision('Account'))
+    margin = fields.Float(string='margin', digits=dp.get_precision('Account'))
+    cash_paid_customer = fields.Float(string='Cash Paid', digits=dp.get_precision('Account'))
+    balance = fields.Float(string='Balance', digits=dp.get_precision('Account'))
     machine_name = fields.Many2one('machine.master', ondelete='restrict')
-    sales_percentage = fields.Float(string='Sales Percentage')
-    cost_percentage = fields.Float(string='Cost Percentage')
+    sales_percentage = fields.Float(string='Sales Percentage', digits=dp.get_precision('Account'))
+    cost_percentage = fields.Float(string='Cost Percentage', digits=dp.get_precision('Account'))
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict', domain=[('customer', '=', '1')])
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     journal_ref = fields.Many2one('account.move', string="Accounting Reference")
-    customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True", compute="_compute_cbal")
-    machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True", compute="_compute_mbal")
-    cash_balance = fields.Float(string="Cash Balance", store=True,  readonly="True", compute="_compute_bal")
+    customer_balance =fields.Float(string="Customer Balance", store=True, readonly="True", compute="_compute_cbal", digits=dp.get_precision('Account'))
+    machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True", compute="_compute_mbal", digits=dp.get_precision('Account'))
+    cash_balance = fields.Float(string="Cash Balance", store=True,  readonly="True", compute="_compute_bal", digits=dp.get_precision('Account'))
     note = fields.Text(string="Notes")
 
     state = fields.Selection([
