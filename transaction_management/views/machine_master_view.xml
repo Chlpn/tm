@@ -22,11 +22,11 @@
                     <field name="merchant_id"/>
                     <field name="terminal_id"/>
                     <field name="bank_name" required="1"/>
-                    <field name="rented"/>
-                    <field name="rented_from" attrs="{'invisible': [('rented', '=', False)],'required': [('rented', '=', True)]}" options="{'no_quick_create': True}"/>
+                    <field name="rented" attrs="{'invisible': [('rent_again', '=', True)]}" />
+                    <field name="rented_from" attrs="{'invisible': [('rented', '=', False),('rent_again', '=', True)],'required': [('rented', '=', True)]}" options="{'no_quick_create': True}"/>
                     <field name="sales_percentage"/>
                     <field name="cost_percentage"/>
-                    <field name="merchant_bank_ac" attrs="{'invisible': [('rented', '=', True)],'required': [('rented', '=', False)]}" options="{'no_create': True}"/>
+                    <field name="merchant_bank_ac" attrs="{'invisible': [('rented', '=', True),('rent_again', '=', True)],'required': [('rented', '=', False)]}" options="{'no_create': True}"/>
                     <field name="cost_ac"  readonly="1"/>
                     <field name="income_ac"  readonly="1"/>
                     <field name="cash_ac"  readonly="1"/>
