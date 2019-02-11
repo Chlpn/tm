@@ -26,10 +26,10 @@
                     <sheet>
 
                     <div class="oe_button_box" name="button_box">
-                        <button type="action" name='56' icon="fa-user" class="oe_stat_button" attrs="{'readonly':[('state','in',('posted', 'draft'))]}">
+                        <button type="action" name='56' icon="fa-user" class="oe_stat_button">
                             <div class="o_form_field  o_stat_info">
                             <span class="o_stat_value">
-                        <field name="customer_balance" attrs="{'invisible': [('customer', '=', False)]}" />
+                        <field name="customer_balance" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('customer', '=', False)]}" />
                             </span>
                                 <span class="o_stat_text"><strong><font size="1">Customer Balance</font></strong></span>
                             </div>
@@ -37,7 +37,7 @@
                         <button type="action" name='254' icon="fa-mobile" class="oe_stat_button">
                             <div class="o_form_field  o_stat_info">
                             <span class="o_stat_value">
-						        <field name="machine_balance" readonly="1" attrs="{'invisible': [('machine_name', '=', False)]}" />
+						        <field name="machine_balance" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('machine_name', '=', False)]}" />
                             </span>
                             <span class="o_stat_text"><strong><font size="1">Machine Balance</font></strong></span>
                             </div>
@@ -45,7 +45,7 @@
                         <button type="action" name='' icon="fa-money" class="oe_stat_button">
                             <div class="o_form_field  o_stat_info">
                             <span class="o_stat_value">
-						        <field name="cash_balance" readonly="1" />
+						        <field name="cash_balance" widget="monetary" options="{'currency_field': 'currency_id'}" />
                             </span>
                             <span class="o_stat_text"><strong><font size="1">Cash Balance</font></strong></span>
                             </div>
