@@ -40,7 +40,7 @@ class PaymentVoucher(models.Model):
     def _onchange_partner(self):
 
         if self.partner_id.is_company:
-            comp = self.parnter_id.company_id.id
+            comp = self.partner_id.company_id.id
             ccomp = self.env.user.company_id.id
             recs = self.env['inter.company']
             for rec in recs:
