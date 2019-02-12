@@ -44,8 +44,8 @@ class PaymentVoucher(models.Model):
             ccomp = self.env.user.company_id.id
             recs = self.env['inter.company']
             for rec in recs:
-                if recs.company_id == ccomp & recs.related_company_id == comp:
-                    self.account_id = recs.related_ac
+                if rec.company_id == ccomp & rec.related_company_id == comp:
+                    self.account_id = rec.related_ac
 
 
 
