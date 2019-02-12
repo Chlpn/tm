@@ -40,12 +40,15 @@ class PaymentVoucher(models.Model):
     def _onchange_partner(self):
 
         if self.partner_id.is_company:
+            print "outside"
             comp = self.partner_id.company_id.id
             ccomp = self.env.user.company_id.id
             recs = self.env['inter.company']
             for rec in recs:
+                print "inside for"
                 if rec.company_id == ccomp & rec.related_company_id == comp:
                     self.account_id = rec.related_ac
+                    print "inside if"
                     print self.account_id
 
 
