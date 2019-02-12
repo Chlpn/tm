@@ -46,6 +46,7 @@ class PaymentVoucher(models.Model):
             for rec in recs:
                 if rec.company_id == ccomp & rec.related_company_id == comp:
                     self.account_id = rec.related_ac
+                    print self.account_id
 
 
 
