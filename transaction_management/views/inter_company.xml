@@ -11,7 +11,7 @@
                     <sheet>
                          <group>
                              <field name="company_id"/>
-                             <field name="related_company_id"/>
+                             <field name="related_company_id" domain="[('company_id','!=',company_id)]"/>
 
                              <field name="related_ac" domain="[('company_id', '=',
                                                       company_id)]"/>
