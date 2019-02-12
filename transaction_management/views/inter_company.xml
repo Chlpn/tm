@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+     <!--  Branch Form View -->
+        <record model="ir.ui.view" id="branch_form">
+            <field name="name">inter.company.form</field>
+            <field name="model">inter.company</field>
+            <field name="arch" type="xml">
+                <form string="Inter Company Accounts" duplicate="0">
+                    <sheet>
+                         <group>
+                             <field name="company_id"/>
+                             <field name="related_company_id"/>
+
+                             <field name="related_ac" domain="[('company_id', '=',
+                                                      company_id)]"/>
+
+                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Branch Tree View -->
+        <record model="ir.ui.view" id="branch_tree">
+            <field name="name">inter.company.tree</field>
+            <field name="model">inter.company</field>
+            <field name="arch" type="xml">
+                <tree string="Inter Company Account">
+                    <field name="company_id"/>
+                    <field name="related_company_id"/>
+                    <field name="related_ac"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Branch Search View -->
+        <record model="ir.ui.view" id="branch_search">
+            <field name="name">inter.company.search</field>
+            <field name="model">inter.company</field>
+            <field name="arch" type="xml">
+                <search string="Inter Company Accounts">
+                    <field name="company_id"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_inter_company">
+            <field name="name">Intercompany Accounts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inter.company</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem name="Intercompany Accounts" id="menu_inter_company" parent="menu_transaction_settings" sequence="8"
+                  action="action_inter_company"/>
+    </data>
+</odoo>

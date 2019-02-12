@@ -10,6 +10,7 @@
     'data': [
                 'views/machine_bank_view.xml',
                 'views/machine_master_view.xml',
+                'views/inter_company.xml',
                 'views/transaction_management_view.xml',
                 'views/payment_voucher.xml',
                 'views/receipt_voucher.xml',

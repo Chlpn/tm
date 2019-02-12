@@ -4,3 +4,4 @@ import machine_bank
 import payment_voucher
 import receipt_voucher
 import branch
+import inter_company
