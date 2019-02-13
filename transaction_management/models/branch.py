@@ -19,6 +19,9 @@ class branch(models.Model):
     income_ac = fields.Many2one('account.account', string="Income Account", required=True, ondelete='restrict',
                                 domain=lambda self: [
                                     ('user_type_id', '=', self.env.ref('account.data_account_type_revenue').id)])
-    journal_id = fields.Many2one('account.journal', string="Journal", ondelete='restrict', required=True)
+
+    journal_id = fields.Many2one('account.journal', string="Transaction Journal", ondelete='restrict', required=True)
+
+    cash_journal_id = fields.Many2one('account.journal', string="Cash Journal", ondelete='restrict', required=True)
 
 

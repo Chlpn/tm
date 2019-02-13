@@ -21,6 +21,8 @@
                                                       company_id)]"/>
                              <field name="journal_id" domain="[('company_id', '=',
                                                       company_id)]"/>
+                             <field name="cash_journal_id" domain="[('company_id', '=',
+                                                      company_id)]"/>
 
                          </group>
                     </sheet>
