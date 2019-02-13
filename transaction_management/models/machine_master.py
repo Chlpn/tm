@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class MachineMaster(models.Model):
@@ -44,7 +45,7 @@ class MachineMaster(models.Model):
             else:
                 self.merchant_bank_ac = value[0]
 
-    @api.constrains('name','parent_name')
+    @api.constrains('branch','parent_name')
     def _check_company(self):
-        if self.name.company_id.id == self.parent_name.comapny_id.id:
-            raise ValueError("You cannot rent to same branch")
+        if self.branch.company_id.id == self.parent_name.branch.comapny_id.id:
+            raise UserError("You cannot rent to same branch")
