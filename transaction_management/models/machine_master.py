@@ -46,5 +46,5 @@ class MachineMaster(models.Model):
 
     @api.constrains('branch','parent_name')
     def _check_company(self):
-        if self.branch.company_id.id == self.parent_name.branch.comapny_id.id:
+        if self.branch.company_id.id == self.parent_name.branch.company_id.id:
             raise UserError("You cannot rent to same branch")
