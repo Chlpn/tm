@@ -18,7 +18,7 @@
                     <field name="branch" widget="selection"/>
                     <field name="name" required="1"/>
                     <field name="rent_again"/>
-                    <field name="parent_name" attrs="{'invisible': [('rent_again', '=', False)],'required': [('rent_again', '=', True)]}" options="{'no_quick_create':True,'no_create_edit':True}"/>/>
+                    <field name="parent_name" attrs="{'invisible': [('rent_again', '=', False)],'required': [('rent_again', '=', True)]}" options="{'no_quick_create':True,'no_create_edit':True}" domain="[('rent_again', '=', False)]"/>
                     <field name="merchant_id"/>
                     <field name="terminal_id"/>
                     <field name="bank_name" required="1"/>
