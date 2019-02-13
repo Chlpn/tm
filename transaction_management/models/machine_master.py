@@ -30,3 +30,15 @@ class MachineMaster(models.Model):
         self.cost_ac = self.branch.cost_ac.id
         self.income_ac = self.branch.income_ac.id
         self.cash_ac = self.branch.cash_ac.id
+
+    @api.onchange('parent_name')
+    def _onchange_parent_name(self):
+        comp = self.branch.company_id.id
+        ccomp = self.parent_name.branch.company_id.id
+        self.env.cr.execute(
+                """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
+        value = self.env.cr.fetchone()
+        if value is None:
+            self.merchant_bank_ac = 0
+        else:
+            self.merchant_bank_ac = value[0]

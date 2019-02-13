@@ -19,6 +19,8 @@
                                                       company_id)]"/>
                              <field name="income_ac" domain="[('company_id', '=',
                                                       company_id)]"/>
+                             <field name="rentagain_income_ac" domain="[('company_id', '=',
+                                                      company_id)]"/>
                              <field name="journal_id" domain="[('company_id', '=',
                                                       company_id)]"/>
                              <field name="cash_journal_id" domain="[('company_id', '=',
