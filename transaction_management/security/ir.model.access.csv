@@ -23,3 +23,7 @@ access_payment_voucher_accountant,payment.voucher.accountant,model_payment_vouch
 access_company_branch_billing,company.branch.billing,model_company_branch,account.group_account_invoice,1,1,1,0
 access_company_branch_advisor,company.branch.advisor,model_company_branch,account.group_account_manager,1,1,1,1
 access_company_branch_accountant,company.branch.accountant,model_company_branch,account.group_account_user,1,1,1,0
+
+access_inter_company_billing,inter.company.billing,model_inter_company,account.group_account_invoice,1,0,0,0
+access_inter_company_advisor,inter.company.advisor,model_inter_company,account.group_account_manager,1,1,1,1
+access_inter_company_accountant,inter.company.accountant,model_inter_company,account.group_account_user,1,0,0,0
