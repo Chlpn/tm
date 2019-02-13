@@ -40,7 +40,7 @@ class PaymentVoucher(models.Model):
     @api.onchange('partner_id')
     def _onchange_partner(self):
 
-        if self.partner_id.iscompany:
+        if self.partner_id.is_company:
             comp = self.partner_id.company_id.id
             ccomp = self.env.user.company_id.id
             self.env.cr.execute(
@@ -85,7 +85,7 @@ class PaymentVoucher(models.Model):
                 journal_entry.button_cancel()
                 journal_entry.unlink()
 
-            if self.partner_id.iscompany:
+            if self.partner_id.is_company:
                 baccount_entry = self.intercompany_move_id.id
                 bjournal_entry = self.env['account.move'].search([('id', '=', baccount_entry)])
             if len(bjournal_entry):
@@ -124,7 +124,7 @@ class PaymentVoucher(models.Model):
         }
         account_move = self.env['account.move'].create(vals)
         account_move.post()
-        if self.partner_id.iscompany:
+        if self.partner_id.is_company:
             comp = self.partner_id.company_id.id
             ccomp = self.env.user.company_id.id
             self.env.cr.execute(
