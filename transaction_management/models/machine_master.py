@@ -33,12 +33,18 @@ class MachineMaster(models.Model):
 
     @api.onchange('parent_name')
     def _onchange_parent_name(self):
-        comp = self.branch.company_id.id
-        ccomp = self.parent_name.branch.company_id.id
-        self.env.cr.execute(
-                """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
-        value = self.env.cr.fetchone()
-        if value is None:
-            self.merchant_bank_ac = 0
-        else:
-            self.merchant_bank_ac = value[0]
+        if self.rent_again:
+            comp = self.branch.company_id.id
+            ccomp = self.parent_name.branch.company_id.id
+            self.env.cr.execute(
+                    """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
+            value = self.env.cr.fetchone()
+            if value is None:
+                self.merchant_bank_ac = 0
+            else:
+                self.merchant_bank_ac = value[0]
+
+    @api.constrains('name','parent_name')
+    def _check_company(self):
+        if self.name.company_id.id == self.parent_name.comapny_id.id:
+            raise ValueError("You cannot rent to same branch")
