@@ -28,6 +28,7 @@ class PaymentVoucher(models.Model):
     phone = fields.Char(string='Receiver Mobile No.')
     amount = fields.Float('Amount', required=True)
     account_move_id = fields.Many2one('account.move', string="Accounting Entry", readonly=True)
+    intercompany_move_id = fields.Many2one('account.move', string="Intercompany Entry", readonly=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('post', 'Post'),
@@ -39,7 +40,18 @@ class PaymentVoucher(models.Model):
     @api.onchange('partner_id')
     def _onchange_partner(self):
 
-        if self.partner_id.supplier:
+        if self.partner_id.iscompany:
+            comp = self.partner_id.company_id.id
+            ccomp = self.env.user.company_id.id
+            self.env.cr.execute(
+                """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
+            value = self.env.cr.fetchone()
+            if value is None:
+                self.account_id = 0
+            else:
+                self.account_id = value[0]
+
+        elif self.partner_id.supplier:
             self.account_id = self.partner_id.property_account_payable_id
         elif self.partner_id.customer:
             self.account_id = self.partner_id.property_account_receivable_id
@@ -72,7 +84,16 @@ class PaymentVoucher(models.Model):
             if len(journal_entry):
                 journal_entry.button_cancel()
                 journal_entry.unlink()
-                self.write({'state': 'cancel'})
+
+            if self.partner_id.iscompany:
+                baccount_entry = self.intercompany_move_id.id
+                bjournal_entry = self.env['account.move'].search([('id', '=', baccount_entry)])
+            if len(bjournal_entry):
+                bjournal_entry.button_cancel()
+                bjournal_entry.unlink()
+
+            self.write({'state': 'cancel'})
+
         else:
             raise UserError(_('You can not cancel the entry,to delete this entry user should belong to the Advisor group'))
             
@@ -88,10 +109,10 @@ class PaymentVoucher(models.Model):
         line_ids = [
             (0, 0,
              {'journal_id': self.journal_id.id, 'account_id': self.account_id.id,
-              'name': description, 'partner_id': self.commercial_partner_id.id,
+              'name': voucher_name, 'partner_id': self.commercial_partner_id.id,
               'amount_currency': 0.0, 'debit': self.amount}),
             (0, 0, {'journal_id': self.journal_id.id, 'account_id': self.journal_id.default_credit_account_id.id,
-                    'name': description, 'amount_currency': 0.0, 'credit': self.amount,
+                    'name': voucher_name, 'amount_currency': 0.0, 'credit': self.amount,
                     })
         ]
         vals = {
@@ -103,4 +124,41 @@ class PaymentVoucher(models.Model):
         }
         account_move = self.env['account.move'].create(vals)
         account_move.post()
-        self.write({'state': 'post', 'name': voucher_name, 'account_move_id': account_move.id})
+        if self.partner_id.iscompany:
+            comp = self.partner_id.company_id.id
+            ccomp = self.env.user.company_id.id
+            self.env.cr.execute(
+                """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (comp, ccomp))
+            value = self.env.cr.fetchone()
+            if value is None:
+                maccount_id = 0
+            else:
+                maccount_id = value[0]
+            self.env.cr.execute(
+                """select cash_ac,cash_journal from company_branch where company_id=%s""", (comp))
+            value = self.env.cr.fetchone()
+            if value is None:
+                baccount_id = 0
+                bjournal_id =0
+            else:
+                baccount = value[0]
+                bjournal_id = value[1]
+            bline_ids = [
+                (0, 0,
+                 {'journal_id': bjournal_id, 'account_id': maccount_id,
+                  'name': voucher_name, 'partner_id': self.commercial_partner_id.id,
+                  'amount_currency': 0.0, 'credit': self.amount}),
+                (0, 0, {'journal_id': bjournal_id, 'account_id': baccount_id,
+                        'name': voucher_name, 'amount_currency': 0.0, 'debit': self.amount,
+                        })
+            ]
+            vals = {
+                'journal_id': bjournal_id,
+                'ref': voucher_name,
+                'narration': description,
+                'date': self.transaction_date,
+                'line_ids': bline_ids,
+            }
+            baccount_move = self.env['account.move'].create(vals)
+            baccount_move.post()
+        self.write({'state': 'post', 'name': voucher_name, 'account_move_id': account_move.id,'intercompany_move_id': baccount_move.id})
