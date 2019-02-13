@@ -135,7 +135,7 @@ class PaymentVoucher(models.Model):
             else:
                 maccount_id = value[0]
             self.env.cr.execute(
-                """select cash_ac,cash_journal from company_branch where company_id=%s""", (comp))
+                """select cash_ac,cash_journal from company_branch where company_id=%s""", (comp,))
             value = self.env.cr.fetchone()
             if value is None:
                 baccount_id = 0
