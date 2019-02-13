@@ -141,7 +141,7 @@ class PaymentVoucher(models.Model):
                 baccount_id = 0
                 bjournal_id =0
             else:
-                baccount = value[0]
+                baccount_id = value[0]
                 bjournal_id = value[1]
             bline_ids = [
                 (0, 0,
