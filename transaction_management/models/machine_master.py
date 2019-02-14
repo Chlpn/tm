@@ -36,13 +36,21 @@ class MachineMaster(models.Model):
         if self.rent_again:
             comp = self.branch.company_id.id
             ccomp = self.parent_name.branch.company_id.id
-            self.env.cr.execute(
-                    """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
-            value = self.env.cr.fetchone()
-            if value is None:
-                self.merchant_bank_ac = 0
+            value = self.env['machine.master'].search([('machine_name', '=', self.parent_name)])
+            if comp == ccomp:
+                raise UserError("You cannot rent to same branch")
+
+            elif value :
+                raise UserError("Machine Already rented")
+
             else:
-                self.merchant_bank_ac = value[0]
+                self.env.cr.execute(
+                    """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
+                value = self.env.cr.fetchone()
+                if value is None:
+                    self.merchant_bank_ac = 0
+                else:
+                    self.merchant_bank_ac = value[0]
 
     @api.constrains('branch','parent_name')
     def _check_company(self):
