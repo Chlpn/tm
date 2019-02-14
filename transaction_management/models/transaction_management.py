@@ -233,7 +233,7 @@ class TransMaster(models.Model):
         self.journal_ref = account_move.id
 
         if self.machine_name.rent_again:
-            rjournal_id = self.machine_name.parent_name.branch.journal_id
+            rjournal_id = self.machine_name.parent_name.branch.journal_id.id
             if self.machine_name.parent_name.rented:
                 parent_account = self.machine_name.parent_name.rented_from.property_account_payable_id.id
             else:
