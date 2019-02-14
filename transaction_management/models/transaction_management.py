@@ -254,15 +254,15 @@ class TransMaster(models.Model):
                         'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_parent}),
 
             ]
-        pvals = {
-            'journal_id': rjournal_id,
-            'ref': self.machine_name.name + "/" + self.transaction_no,
-            'date': self.transaction_date,
-            'line_ids': rline_ids,
-        }
-        raccount_move = self.env['account.move'].create(pvals)
-        raccount_move.post()
-        self.rentagain_journal_ref = raccount_move.id
+            pvals = {
+                'journal_id': rjournal_id,
+                'ref': self.machine_name.name + "/" + self.transaction_no,
+                'date': self.transaction_date,
+                'line_ids': rline_ids,
+            }
+            raccount_move = self.env['account.move'].create(pvals)
+            raccount_move.post()
+            self.rentagain_journal_ref = raccount_move.id
         self.state = 'posted'
 
     @api.model
