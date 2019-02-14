@@ -234,6 +234,17 @@ class TransMaster(models.Model):
 
         if self.machine_name.rent_again:
             rjournal_id = self.machine_name.parent_name.branch.journal_id.id
+            comp = self.machine_name.company_id.id
+            ccomp = self.machine_name.parent_name.company_id.id
+            self.env.cr.execute(
+                """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
+                (comp, ccomp))
+            vvalue = self.env.cr.fetchone()
+            if vvalue is None:
+                paccount = 0
+            else:
+                paccount = vvalue[0]
+
             if self.machine_name.parent_name.rented:
                 parent_account = self.machine_name.parent_name.rented_from.property_account_payable_id.id
             else:
@@ -241,7 +252,7 @@ class TransMaster(models.Model):
             rline_ids = [
                 (0, 0,
                  {'journal_id': rjournal_id,
-                  'account_id': post_account,
+                  'account_id': paccount,
                   'name': self.machine_name.name + "/" + self.transaction_no,
                   'partner_id': self.machine_name.branch.company_id.id,
                   'amount_currency': 0.0, 'credit': self.amount_to_swipe - self.cost_to_commission}),
