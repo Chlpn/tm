@@ -36,7 +36,7 @@ class MachineMaster(models.Model):
         if self.rent_again:
             comp = self.branch.company_id.id
             ccomp = self.parent_name.branch.company_id.id
-            value = self.env['machine.master'].search([('name', '=', self.parent_name)])
+            value = self.env['machine.master'].search([('parent_name', '=', self.parent_name)])
             if comp == ccomp:
                 raise UserError("You cannot rent to same branch")
 
