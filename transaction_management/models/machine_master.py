@@ -9,7 +9,11 @@ class MachineMaster(models.Model):
     _description = "Machine Master"
 
     active = fields.Boolean(string="Active", default=1)
-    company_id = fields.Many2one('res.company', string="company", required=True, ondelete='restrict')
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        default=lambda self: self.env.user.company_id
+    )
     branch = fields.Many2one('company.branch', string ="Branch")
     name = fields.Char(string='Machine Name')
     rent_again = fields.Boolean(string='Rent to Branch')
