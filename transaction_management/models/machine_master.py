@@ -59,3 +59,7 @@ class MachineMaster(models.Model):
     def _check_company(self):
         if self.branch.company_id.id == self.parent_name.branch.company_id.id:
             raise UserError("You cannot rent to same branch")
+        if self.cost_percentage == 0:
+            raise UserError("You cannot save without cost percentage ")
+        if self.sales_percentage == 0:
+            raise UserError("You cannot save without Default sales percentage ")
