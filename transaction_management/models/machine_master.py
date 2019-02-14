@@ -31,25 +31,24 @@ class MachineMaster(models.Model):
         self.income_ac = self.branch.income_ac.id
         self.cash_ac = self.branch.cash_ac.id
 
-    @api.onchange('parent_name')
+    @api.onchange('parent_name','branch')
     def _onchange_parent_name(self):
         if self.rent_again:
-            comp = self.branch.company_id.id
-            ccomp = self.parent_name.branch.company_id.id
-            value = self.env['machine.master'].search([('parent_name', '=', self.parent_name.id)])
-            if comp == ccomp:
-                raise UserError("You cannot rent to same branch")
-
-            elif value :
-                raise UserError("Machine Already rented")
-
-            else:
-                self.env.cr.execute(
-                    """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
-                value = self.env.cr.fetchone()
-                if value is None:
+           if self.parent_name:
+               comp = self.branch.company_id.id
+               ccomp = self.parent_name.branch.company_id.id
+               value = self.env['machine.master'].search([('parent_name', '=', self.parent_name.id)])
+               if comp == ccomp:
+                   raise UserError("You cannot rent to same branch")
+               elif value :
+                    raise UserError("Machine Already rented")
+               else:
+                    self.env.cr.execute(
+                        """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
+                    value = self.env.cr.fetchone()
+               if value is None:
                     self.merchant_bank_ac = 0
-                else:
+               else:
                     self.merchant_bank_ac = value[0]
 
     @api.constrains('branch','parent_name')
