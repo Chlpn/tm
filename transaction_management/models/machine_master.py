@@ -25,16 +25,14 @@ class MachineMaster(models.Model):
     income_ac = fields.Many2one('account.account', string="Income Account",required=True, ondelete='restrict')
     cash_ac = fields.Many2one('account.account', string="Cash Account",required=True, ondelete='restrict')
 
-    @api.onchange('branch')
-    def _onchange_company_id(self):
+    @api.onchange('parent_name','branch')
+    def _onchange_parent_name(self):
         self.cost_ac = self.branch.cost_ac.id
         self.income_ac = self.branch.income_ac.id
         self.cash_ac = self.branch.cash_ac.id
-
-    @api.onchange('parent_name','branch')
-    def _onchange_parent_name(self):
         if self.rent_again:
            if self.parent_name:
+
                comp = self.branch.company_id.id
                ccomp = self.parent_name.branch.company_id.id
                value = self.env['machine.master'].search([('parent_name', '=', self.parent_name.id)])
