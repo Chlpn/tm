@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 
 
 class MachineMaster(models.Model):
+    _inherit = ["multi.company.abstract"]
     _name = "machine.master"
     _description = "Machine Master"
 
