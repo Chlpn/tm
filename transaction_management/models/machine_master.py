@@ -63,3 +63,14 @@ class MachineMaster(models.Model):
             raise UserError("You cannot save without cost percentage ")
         if self.sales_percentage == 0:
             raise UserError("You cannot save without Default sales percentage ")
+
+    @api.multi
+    def toggle_active(self):
+        for name in self:
+            if not name.active and name.rent_again:
+                if self.env['machine.master'].search([('parent_name', '=', self.parent_name.id)]):
+                    raise UserError("You cannot Activate the record")
+                else:
+                    super(MachineMaster, self).toggle_active()
+            else:
+                super(MachineMaster, self).toggle_active()
