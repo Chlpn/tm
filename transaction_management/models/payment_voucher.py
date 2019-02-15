@@ -160,5 +160,5 @@ class PaymentVoucher(models.Model):
                 'line_ids': bline_ids,
             }
             baccount_move = self.env['account.move'].create(vals)
-            baccount_move.post()
+            baccount_move.sudo().post()
         self.write({'state': 'post', 'name': voucher_name, 'account_move_id': account_move.id,'intercompany_move_id': baccount_move.id})
