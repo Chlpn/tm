@@ -240,10 +240,10 @@ class TransMaster(models.Model):
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                 (ccomp, comp))
             vvalue = self.env.cr.fetchone()
-            if vvalue is None:
-                paccount = 0
-            else:
-                paccount = vvalue[0]
+            #if vvalue is None:
+                #paccount = 0
+            #else:
+            paccount = vvalue[0]
 
             if self.machine_name.parent_name.rented:
                 parent_account = self.machine_name.parent_name.rented_from.property_account_payable_id.id
