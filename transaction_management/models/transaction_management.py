@@ -73,8 +73,8 @@ class TransMaster(models.Model):
 
             if self.machine_name.rented is False:
                 if self.machine_name.rent_again:
-                    comp = self.machine_name.company_id.id
-                    ccomp = self.machine_name.parent_name.company_id.id
+                    comp = self.machine_name.branch.company_id.id
+                    ccomp = self.machine_name.parent_name.branch.company_id.id
                     self.env.cr.execute(
                         """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                         (comp, ccomp))
@@ -234,8 +234,8 @@ class TransMaster(models.Model):
 
         if self.machine_name.rent_again:
             rjournal_id = self.machine_name.parent_name.branch.journal_id.id
-            comp = self.machine_name.company_id.id
-            ccomp = self.machine_name.parent_name.company_id.id
+            comp = self.machine_name.branch.company_id.id
+            ccomp = self.machine_name.parent_name.branch.company_id.id
             self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                 (ccomp, comp))
