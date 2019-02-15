@@ -242,8 +242,8 @@ class TransMaster(models.Model):
             vvalue = self.env.cr.fetchone()
             if vvalue is None:
                 paccount = 0
-            
-            paccount = vvalue[0]
+            else:
+                paccount = vvalue[0]
 
             if self.machine_name.parent_name.rented:
                 parent_account = self.machine_name.parent_name.rented_from.property_account_payable_id.id
