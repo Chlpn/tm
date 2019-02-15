@@ -249,7 +249,7 @@ class TransMaster(models.Model):
             else:
                 parent_account = self.machine_name.parent_name.merchant_bank_ac.id
 
-            raise UserError(_('comp %s ccomp %s rjournal_id %s paccount %s parent_account %s'(comp,ccomp,rjournal_id,paccount,parent_account)))
+            raise UserError(_('comp %d ccomp %d rjournal_id %d paccount %d parent_account %d'(comp,ccomp,rjournal_id,paccount,parent_account)))
             rline_ids = [
                 (0, 0,
                  {'journal_id': rjournal_id,
