@@ -48,7 +48,7 @@ class MachineMaster(models.Model):
                     raise UserError("Machine Already rented")
                else:
                     self.env.cr.execute(
-                        """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
+                        """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (comp, ccomp))
                     value = self.env.cr.fetchone()
                if value is None:
                     self.merchant_bank_ac = 0
