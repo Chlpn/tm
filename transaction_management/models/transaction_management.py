@@ -77,7 +77,7 @@ class TransMaster(models.Model):
                     ccomp = self.machine_name.parent_name.company_id.id
                     self.env.cr.execute(
                         """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
-                        (ccomp, comp))
+                        (comp, ccomp))
                     value = self.env.cr.fetchone()
                     if value is None:
                         account = 0
@@ -238,7 +238,7 @@ class TransMaster(models.Model):
             ccomp = self.machine_name.parent_name.company_id.id
             self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
-                (comp, ccomp))
+                (ccomp, comp))
             vvalue = self.env.cr.fetchone()
             if vvalue is None:
                 paccount = 0
