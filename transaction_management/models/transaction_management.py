@@ -234,11 +234,8 @@ class TransMaster(models.Model):
 
         if self.machine_name.rent_again:
             rjournal_id = self.machine_name.parent_name.branch.journal_id.id
-            print rjournal_id
             comp = self.machine_name.branch.company_id.id
-            print comp
             ccomp = self.machine_name.parent_name.branch.company_id.id
-            print ccomp
             self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                 (ccomp, comp))
@@ -247,12 +244,12 @@ class TransMaster(models.Model):
                 paccount = 0
             else:
                 paccount = vvalue[0]
-            print paccount
             if self.machine_name.parent_name.rented:
                 parent_account = self.machine_name.parent_name.rented_from.property_account_payable_id.id
             else:
                 parent_account = self.machine_name.parent_name.merchant_bank_ac.id
-            print parent_account
+
+            raise UserError(_('comp %s ccomp %s rjournal_id %s paccount %s parent_account %s'(comp,ccomp,rjournal_id,paccount,parent_account)))
             rline_ids = [
                 (0, 0,
                  {'journal_id': rjournal_id,
