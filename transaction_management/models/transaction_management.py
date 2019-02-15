@@ -150,8 +150,8 @@ class TransMaster(models.Model):
     def post(self):
         if self.transaction_no is False:
             self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
-        ir_model_obj = self.env['ir.model.data']
-        model, journal_id = ir_model_obj.get_object_reference('transaction_management', 'transaction_journal')
+
+        journal_id = self.machine_name.branch.journal_id.id
         if self.machine_name.rented is True :
             post_account = self.machine_name.rented_from.property_account_payable_id.id
         else :
@@ -232,14 +232,14 @@ class TransMaster(models.Model):
         account_move.post()
         self.journal_ref = account_move.id
 
-        #if self.machine_name.rent_again:
-        #    rjournal_id = self.machine_name.parent_name.branch.journal_id.id
-        #    comp = self.machine_name.company_id.id
-        #    ccomp = self.machine_name.parent_name.company_id.id
-        #    self.env.cr.execute(
-        #        """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
-        #        (ccomp, comp))
-        """vvalue = self.env.cr.fetchone()
+        if self.machine_name.rent_again:
+            rjournal_id = self.machine_name.parent_name.branch.journal_id.id
+            comp = self.machine_name.company_id.id
+            ccomp = self.machine_name.parent_name.company_id.id
+            self.env.cr.execute(
+                """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
+                (ccomp, comp))
+            vvalue = self.env.cr.fetchone()
             if vvalue is None:
                 paccount = 0
             else:
@@ -273,7 +273,7 @@ class TransMaster(models.Model):
             }
             raccount_move = self.env['account.move'].create(pvals)
             raccount_move.post()
-            self.rentagain_journal_ref = raccount_move.id"""
+            self.rentagain_journal_ref = raccount_move.id
         self.state = 'posted'
 
     @api.model

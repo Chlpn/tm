@@ -70,8 +70,8 @@
                     <field name="cost_to_commission" readonly="1"/>
                     <field name="margin" readonly="1"/>
                     <field name="cost_percentage" readonly="1"/>
-                   
-                    <field name="company_id" required='True' />
+
+                    <field name="company_id" required='True' readonly="1" />
                             <separator string="JOURNAL DETAILS" colspan="4" />
                     <field name="journal_ref" readonly="1" nolabel="1"/>
                         </group>
