@@ -41,7 +41,7 @@ class PaymentVoucher(models.Model):
     def _onchange_partner(self):
 
         if self.partner_id.is_company:
-            comp = self.partner_id.branch.company_id.id
+            comp = self.partner_id.company_id.id
             ccomp = self.env.user.company_id.id
             self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (ccomp, comp))
@@ -125,7 +125,7 @@ class PaymentVoucher(models.Model):
         account_move = self.env['account.move'].create(vals)
         account_move.post()
         if self.partner_id.is_company:
-            comp = self.partner_id.branch.company_id.id
+            comp = self.partner_id.company_id.id
             ccomp = self.env.user.company_id.id
             self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (comp, ccomp))
