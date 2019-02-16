@@ -81,9 +81,9 @@ class ReceiptVoucher(models.Model):
                 if self.partner_id.is_company:
                     baccount_entry = self.intercompany_move_id.id
                     bjournal_entry = self.env['account.move'].search([('id', '=', baccount_entry)])
-                if len(bjournal_entry):
-                    bjournal_entry.button_cancel()
-                    bjournal_entry.unlink()
+                    if len(bjournal_entry):
+                        bjournal_entry.button_cancel()
+                        bjournal_entry.unlink()
                 self.write({'state': 'cancel'})
         else:
             raise UserError(_('You can not cancel the entry,to delete this entry user should belong to the Advisor group'))
