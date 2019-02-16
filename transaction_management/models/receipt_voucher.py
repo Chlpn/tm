@@ -144,14 +144,15 @@ class ReceiptVoucher(models.Model):
                         'name': voucher_name, 'amount_currency': 0.0, 'credit': self.amount,
                         })
             ]
-            vals = {
+            bvals = {
                 'journal_id': bjournal_id,
                 'ref': voucher_name,
                 'narration': description,
                 'date': self.transaction_date,
                 'line_ids': bline_ids,
             }
-            baccount_move = self.env['account.move'].create(vals)
+            baccount_move = self.env['account.move'].create(bvals)
             baccount_move.post()
-        self.write({'state': 'post', 'name': voucher_name, 'account_move_id': account_move.id,'intercompany_move_id': baccount_move.id})
+            self.write({'intercompany_move_id': baccount_move.id})
+        self.write({'state': 'post', 'name': voucher_name, 'account_move_id': account_move.id})
 
