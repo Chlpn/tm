@@ -127,14 +127,14 @@ class PaymentVoucher(models.Model):
         if self.partner_id.is_company:
             comp = self.partner_id.company_id.id
             ccomp = self.env.user.company_id.id
-            self.env.cr.sudo().execute(
+            self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""", (comp, ccomp))
-            value = self.env.cr.sudo().fetchone()
+            value = self.env.cr.fetchone()
             if value is None:
                 maccount_id = 0
             else:
                 maccount_id = value[0]
-            self.env.cr.sudo().execute(
+            self.env.cr.execute(
                 """select cash_ac,cash_journal_id from company_branch where company_id=%s""", (comp,))
             value = self.env.cr.fetchone()
             if value is None:
@@ -159,6 +159,6 @@ class PaymentVoucher(models.Model):
                 'date': self.transaction_date,
                 'line_ids': bline_ids,
             }
-            baccount_move = self.env['account.move'].sudo().create(vals)
-            baccount_move.sudo().post()
+            baccount_move = self.env['account.move'].create(vals)
+            baccount_move.post()
         self.write({'state': 'post', 'name': voucher_name, 'account_move_id': account_move.id,'intercompany_move_id': baccount_move.id})
