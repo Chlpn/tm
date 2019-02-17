@@ -28,7 +28,7 @@ class ccPayment(models.Model):
     amount_swiped = fields.Float(string='Amount swiped', store=True, digits=dp.get_precision('Account'), readonly=True)
 
 
-    customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict', domain=[('customer', '=', '1')])
+    customer = fields.Many2one('res.partner', string="Customer", required=True, ondelete='restrict', domain=[('customer', '=', '1')])
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
     payment_ref = fields.Many2one('account.move', string="Payment Reference")
     deposit_ref = fields.Many2one('account.move', string="Deposit Reference")
