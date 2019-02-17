@@ -78,7 +78,7 @@ class ccPayment(models.Model):
         }
         if not state is 'dr':
             if self.serial is False:
-                self.serial = self.env['ir.sequence'].next_by_code('serial') or 'new'
+                self.serial = self.env['ir.sequence'].next_by_code('cc.payment') or 'new'
 
 
     @api.multi
