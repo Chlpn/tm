@@ -18,7 +18,7 @@ class ReceiveCommission(models.TransientModel):
                    'journal_id':cc_payment.machine_name.branch.cash_journal_id,
                     'partner_id':cc_payment.customer,
                     'transaction_date':self.rec_date,
-                    'account_id':cc_payment.customer.property_account_receivable_id,
+                    'account_id':cc_payment.customer.property_account_receivable_id.id,
                     'amount': self.rec_amount
         }
         receipt_voucher = self.env['receipt.voucher'].create(vals)
