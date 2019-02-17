@@ -29,3 +29,21 @@ class ReceiveCommission(models.TransientModel):
                           'total_to_swipe': cc_payment.total_to_swipe - self.rec_amount,
                           'payment_ref': receipt_voucher.id
                           })
+
+
+
+class ProcessDeposit(models.TransientModel):
+    _name = "process.deposit.wizard"
+
+    rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
+    rec_amount = fields.Float(string='Amount Deposited')
+
+
+class SwipeCard(models.TransientModel):
+    _name = "swipe.card.wizard"
+
+    rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
+    rec_amount = fields.Float(string='Amount Swiped')
+
+
+

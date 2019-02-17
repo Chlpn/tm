@@ -22,5 +22,45 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="wizard_process_deposit">
+            <field name="name">process.deposit.wizard</field>
+            <field name="model">process.deposit.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Deposit Payment">
+                    <group>
+
+                            <field name="rec_date"/>
+                            <field name="rec_amount"/>
+
+
+                    </group>
+                    <footer>
+                        <button name="dep_pay" string="Deposit" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="wizard_swipe_card">
+            <field name="name">swipe.card.wizard</field>
+            <field name="model">swipe.card.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Swipe Card">
+                    <group>
+
+                            <field name="rec_date"/>
+                            <field name="rec_amount"/>
+
+
+                    </group>
+                    <footer>
+                        <button name="swipe" string="Swipe" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
     </data>
 </odoo>

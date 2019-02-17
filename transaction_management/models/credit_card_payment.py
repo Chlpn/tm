@@ -65,6 +65,41 @@ class ccPayment(models.Model):
             'context': 'None'
         }
 
+    @api.multi
+    def dep_pay(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Deposit Payment',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'process.deposit.wizard',
+            'target': 'new',
+            'context': 'None'
+        }
+
+    @api.multi
+    def dep_pay(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Deposit Payment',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'process.deposit.wizard',
+            'target': 'new',
+            'context': 'None'
+        }
+
+    @api.multi
+    def swipe(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Swipe Card',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'swipe.card.wizard',
+            'target': 'new',
+            'context': 'None'
+        }
 
 
 
