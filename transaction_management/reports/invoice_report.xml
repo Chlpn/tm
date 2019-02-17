@@ -9,18 +9,7 @@
                    <t t-set="company" t-value="res_company"></t>
                 </t>
                 <div class="header">
-                    <div class="row">
-                        <div class="col-xs-3">
-                        </div>
-                        <div class="col-xs-13 text-left" style="font:18px lucida-console,sans-serif !important; padding-left:320px;" >
-                         <br></br>  <br></br> <br></br> <br></br> <br></br>
-                            <h1>
-                    <span ><font color="#000000">TAX INVOICE</font></span>
 
-                            </h1>
-
-                        </div>
-                    </div><t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
 
 
         <div class="row" style="padding-top:20px;">
@@ -45,7 +34,7 @@
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br><br></br></br><br><br><br></br></br></br>
     <div style="padding-top:25px;"></div>
                 <!-- Is there a discount on at least one line? -->
-                <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
 
                 <table class="table table-condensed table table-striped" >
                     <thead style="font:15px lucida-console,sans-serif !important; ">
