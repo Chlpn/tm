@@ -20,6 +20,7 @@
                 'security/ir.model.access.csv',
                 'reports/report.xml',
                 'reports/invoice_report.xml',
+                'views/all_wizard_view.xml',
 
             ],
     'demo': [

@@ -6,3 +6,4 @@ import receipt_voucher
 import branch
 import inter_company
 import credit_card_payment
+import all_wizard
