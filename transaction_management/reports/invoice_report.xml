@@ -130,8 +130,8 @@
     <div style="padding-top:50px;">
     </div>
     <div style=" color:#000000 !important; font:18px lucida-console,sans-serif !important; ">
-                <p t-if="Amount Once paid cannot be refunded.">
-                <strong><span>Comments:</span> </strong> <span t-field="o.comment" />
+        <p>
+                <strong><span>Comments:</span> </strong> Amount Once paid will not be refunded>
                 </p>
                 </div>
                 <div class="oe_structure"/>
