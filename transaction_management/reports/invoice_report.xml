@@ -38,7 +38,7 @@
 
             <div>INV.No: <font color="#000000"><span t-field="o.transaction_number"/></font></div>
             <div>TRN: <span style="color:#000000 !important;" t-field="1234567899874562" /></div>
-            <div>PO REF: <span style="color:#000000 !important;"> Address: </> </div>
+            <div>PO REF: <span style="color:#000000 !important;"> Address: </span></div>
         </div></div></div>
         <t t-call="report.external_layout">
             <div class="page">
