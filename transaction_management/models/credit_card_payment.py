@@ -30,7 +30,7 @@ class ccPayment(models.Model):
 
     customer = fields.Many2one('res.partner', string="Customer", required=True, ondelete='restrict', domain=[('customer', '=', '1')])
     customer_mobile = fields.Char(related='customer.mobile',string='Mobile')
-    payment_ref = fields.Many2Many('receipt.voucher','cc_receipt_rel','cc_id','rec_id', 'Receipt Reference')
+    payment_ref = fields.Many2many('receipt.voucher','cc_receipt_rel','cc_id','rec_id', 'Receipt Reference')
     deposit_ref = fields.Many2one('account.move', string="Deposit Reference")
     transaction_ref = fields.Many2one('account.move', string="Transaction Reference")
     note = fields.Text(string="payment_details")

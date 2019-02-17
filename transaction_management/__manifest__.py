@@ -11,7 +11,7 @@
                 'views/machine_bank_view.xml',
 
                 'views/credit_card_payment_view.xml',
-'views/all_wizard_view.xml',
+                'views/all_wizard_view.xml',
                 'views/machine_master_view.xml',
                 'views/inter_company.xml',
                 'views/transaction_management_view.xml',
