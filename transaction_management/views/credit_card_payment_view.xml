@@ -62,7 +62,7 @@
             <field name="name">transaction.master.tree</field>
             <field name="model">trans.master</field>
             <field name="arch" type="xml">
-                <tree string="Transaction Master" default_order="transaction_date desc">
+                <tree string="Transaction Master" default_order="payment_date desc">
                     <field name="serial"/>
                     <field name="customer" />
                     <field name="payment_date" />
