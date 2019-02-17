@@ -76,18 +76,10 @@ class ccPayment(models.Model):
             'target': 'new',
             'context': 'None'
         }
+        if not state is 'dr':
+            if self.serial is False:
+                self.serial = self.env['ir.sequence'].next_by_code('serial') or 'new'
 
-    @api.multi
-    def dep_pay(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Deposit Payment',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_model': 'process.deposit.wizard',
-            'target': 'new',
-            'context': 'None'
-        }
 
     @api.multi
     def swipe(self):
