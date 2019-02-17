@@ -2,12 +2,9 @@
     <openerp>
        <data>
            <template id="invoice_report">
-               <t t-if="o and 'company_id' in o">
-                   <t t-set="company" t-value="o.company_id"></t>
-               </t>
-               <t t-if="not o or not 'company_id' in o">
-                   <t t-set="company" t-value="res_company"></t>
-                </t>
+               <t t-call="report.html_container">
+               <t t-foreach="docs" t-as="o">
+
                 <div class="header">
 
 
@@ -132,6 +129,8 @@
 
             </div>
         </t>
+               </t>
+               </t>
     </template>
     <report
             id="report_invoice_report"
