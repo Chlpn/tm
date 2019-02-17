@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <openerp>
        <data>
-           <template id="odoo_std_report_invoice_format">
+           <template id="invoice_report">
                <t t-if="o and 'company_id' in o">
                    <t t-set="company" t-value="o.company_id"></t>
                </t>
