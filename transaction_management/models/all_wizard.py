@@ -27,8 +27,5 @@ class ReceiveCommission(models.TransientModel):
                           'commission_paid': cc_payment.commission_paid + self.rec_amount,
                           'commission_pay': cc_payment.commission_pay - self.rec_amount,
                           'total_to_swipe': cc_payment.total_to_swipe - self.rec_amount,
-                          'designation': self.designation,
-                          'phone': self.phone,
-                          'cheque_date_issue': self.date_issue,
                           'payment_ref': receipt_voucher.voucher_name
                           })
