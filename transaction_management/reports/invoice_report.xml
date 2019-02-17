@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <openerp>
+       <data>
+           <template id="odoo_std_report_invoice_format">
+               <t t-if="o and 'company_id' in o">
+                   <t t-set="company" t-value="o.company_id"></t>
+               </t>
+               <t t-if="not o or not 'company_id' in o">
+                   <t t-set="company" t-value="res_company"></t>
+                </t>
+                <div class="header">
+                    <div class="row">
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-13 text-left" style="font:18px lucida-console,sans-serif !important; padding-left:320px;" >
+                         <br></br>  <br></br> <br></br> <br></br> <br></br>
+                            <h1>
+                    <span ><font color="#000000">TAX INVOICE</font></span>
+
+                            </h1>
+
+                        </div>
+                    </div><t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+
+
+        <div class="row" style="padding-top:20px;">
+            <div class="col-xs-3" style="font:18px lucida-console,sans-serif !important;" ><br></br>
+                            <span style="color:#000000 !important;"> Name: Cash Customer </span><br/>
+                            <span style="color:#000000 !important;" > Address: </span> /><br/>
+
+                            <span style="color:#000000 !important;" > City: </span> /><br/>
+                            <span style="color:#000000 !important;" > Country: </span> /><br/>
+                            TRN: <span style="color:#000000 !important;" > Customer VAT: </span> /><br/>
+            </div>
+    <div class="col-xs-3" />
+
+        <div class="col-xs-6 text-left" style="font:18px lucida-console,sans-serif !important; padding-left:150px " ><br></br>
+
+            <div>INV.No: <font color="#000000"><span t-field="o.transaction_number"/></font></div>
+            <div>TRN: <span style="color:#000000 !important;" t-field="1234567899874562" /></div>
+            <div>PO REF: <span style="color:#000000 !important;"> Address: </> </div>
+
+        <t t-call="report.external_layout">
+            <div class="page">
+            <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br><br></br></br><br><br><br></br></br></br>
+    <div style="padding-top:25px;"></div>
+                <!-- Is there a discount on at least one line? -->
+                <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
+                <table class="table table-condensed table table-striped" >
+                    <thead style="font:15px lucida-console,sans-serif !important; ">
+                        <tr ><b>
+                            <th><font color="#000000">Sl.</font></th>
+                            <th><font color="#000000">Part Number</font></th>
+                            <th><font color="#000000"> Description</font></th>
+                            <th><font color="#000000">Quantity </font></th>
+                            <th><font color="#000000">Unit Price</font></th>
+                            <th><font color="#000000">Taxes</font></th>
+                            <th><font color="#000000">Price</font></th></b>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+                        <t><tr>
+                            <td class="text-left" >
+                                <span style="height:50px;"> 001</span>
+                            </td>
+                            <td class="text-left">
+                                <span style="height:50px;">BC </span>
+                            </td>
+                            <td> <span style="height:50px;">Brokerage Charges </span></td>
+                            <td class="text-right">
+                                <span style="height:50px;">01 </span>
+
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="o.amount_to_swipe * 100 / 105"/>
+                            </td>
+
+                            <td>
+                               <span t-esc="o.amount_to_swipe * 5 / 105"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="o.amount_to_swipe"
+                                t-options='{"widget": "monetary", "display_currency": "o.currency_id"}' style="height:50px;"/>
+                            </td>
+
+
+
+
+
+                        </tr>
+
+
+                        </t>
+
+
+                    </tbody>
+
+                </table>
+
+                <div class="row">
+                    <div class="col-xs-4 pull-right">
+                        <table class="table table-condensed">
+                            <tr class="border-black">
+                                <td><strong>Subtotal</strong></td>
+                                <td class="text-right">
+                                   <span t-esc="o.amount_to_swipe * 100 / 105"/>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td><strong>Taxes</strong></td>
+                                <td class="text-right">
+                                     <span t-esc="o.amount_to_swipe * 5 / 105"/>
+                                </td>
+                            </tr>
+
+                            <tr class="border-black">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                     <span t-field="o.amount_to_swipe" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+    <div style="padding-top:50px;">
+    </div>
+    <div style=" color:#000000 !important; font:18px lucida-console,sans-serif !important; ">
+                <p t-if="Amount Once paid cannot be refunded.">
+                <strong><span>Comments:</span> </strong> <span t-field="o.comment" />
+                </p>
+                </div>
+                <div class="oe_structure"/>
+                <b>
+                <br>Received By :</br>
+                <div class="col-xs-13 text-left" style=" padding-left:490px;">Authorized Signature : </div>
+                    </b>
+
+
+            </div>
+        </t>
+    </template>
+    </data>
+    </openerp>
