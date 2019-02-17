@@ -144,5 +144,14 @@
             </div>
         </t>
     </template>
+    <report
+            id="report_invoice_report"
+            string="Tax Invoice"
+            model="trans.master"
+            report_type="qweb-pdf"
+            file="transaction_management.invoice_report"
+            name="transaction_management.invoice_report"
+            menu="False"
+        />
     </data>
     </openerp>
