@@ -70,7 +70,7 @@
                             </td>
                             <td class="text-right">
                                 <span t-field="o.amount_to_swipe"
-                                t-options='{"widget": "monetary", "display_currency": "o.currency_id"}' style="height:50px;"/>
+                                t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}' style="height:50px;"/>
                             </td>
 
 
@@ -104,9 +104,9 @@
                             </tr>
 
                             <tr class="border-black">
-                                <td><strong>Total AED. </strong></td>
+                                <td><strong>Total </strong></td>
                                 <td class="text-right">
-                                     <span t-field="o.amount_to_swipe" />
+                                     <span t-field="o.amount_to_swipe" t-options='{"widget": "monetary", "display_currency": "o.company_id.currency_id"}' />
                                 </td>
                             </tr>
 
