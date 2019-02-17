@@ -42,7 +42,7 @@ class ccPayment(models.Model):
         ('ps', 'Partially Swiped'),
         ('fs', 'Processed'),
         ('cl', 'Cancelled')
-    ], string='Status', default='draft',readonly=True)
+    ], string='Status', default='dr',readonly=True)
 
 
     @api.onchange('payment_amount','commission')
