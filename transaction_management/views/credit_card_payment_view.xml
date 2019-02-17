@@ -58,11 +58,11 @@
         </record>
 
         <!--  Transaction master tree View -->
-        <record model="ir.ui.view" id="transaction_master_tree">
-            <field name="name">transaction.master.tree</field>
-            <field name="model">trans.master</field>
+        <record model="ir.ui.view" id="cc_payment_tree">
+            <field name="name">cc.payment.tree</field>
+            <field name="model">cc.payment</field>
             <field name="arch" type="xml">
-                <tree string="Transaction Master" default_order="payment_date desc">
+                <tree string="Credit Card Payment" default_order="payment_date desc">
                     <field name="serial"/>
                     <field name="customer" />
                     <field name="payment_date" />
