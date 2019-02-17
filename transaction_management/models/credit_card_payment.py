@@ -41,6 +41,7 @@ class ccPayment(models.Model):
         ('fd', 'Fully Deposited'),
         ('ps', 'Partially Swiped'),
         ('fs', 'Processed'),
+        ('cl', 'Cancelled')
     ], string='Status', default='draft',readonly=True)
 
 

@@ -339,6 +339,14 @@ class TransMaster(models.Model):
             if record.sales_percentage <= 0:
                 raise ValueError("Value of Sales Percentage must be greater than Zero")
 
+    @api.multi
+    def print_invoice(self):
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'transaction_management.invoice_report'
+        }
+
+
 
 class trans_ResPartner(models.Model):
     _inherit = 'res.partner'

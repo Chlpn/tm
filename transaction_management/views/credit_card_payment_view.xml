@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+                 <!--  Process management master sequence -->
+        <record id="seq_process" model="ir.sequence">
+            <field name="name">Process</field>
+            <field name="code">cc.payment</field>
+            <field name="prefix">P</field>
+            <field name="padding">4</field>
+        </record>
+
+         <!--  Credit Card Payment form View -->
+        <record model="ir.ui.view" id="cc_payment_form">
+            <field name="name">cc.payment.form</field>
+            <field name="model">cc.payment</field>
+            <field name="arch" type="xml">
+                <form string="Credit Card Payment" duplicate="0">
+                    <header>
+                        <button name="dr" states="dr" string="Draft" type="object"/>
+                        <button name="up" states="up" string="Under Process" type="object"/>
+                        <button name="pd" states="pd" string="Partially Deposited" type="object"/>
+                        <button name="fd" states="fd" string="Fully Deposited" type="object"/>
+                        <button name="ps" states="ps" string="Partially Swiped" type="object"/>
+                        <button name="fs" states="fs" string="Processed" type="object"/>
+                        <button name="cl" states="cl" string="Cancelled" type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+
+
+                        <h1><field name="serial" readonly="1"/></h1>
+                       <group colspan="4" col="4">
+                    <field name="processing_date" />
+                           <field name="payment_amount" />
+                           <field name="commission" />
+                            <field name="commission_pay" />
+                            <field name="commission_paid" />
+                            <field name="total_to_swipe" />
+                            <field name="payment_date" />
+                            <field name="amount_deposited" />
+                            <field name="amount_to_deposit" />
+                            <field name="amount_swiped" />
+                            <field name="customer" />
+                            <field name="customer_mobile" />
+                            <field name="payment_ref" />
+                            <field name="deposit_ref" />
+                            <field name="transaction_ref" />
+
+
+                        </group>
+                    <separator string="NOTES" colspan="4" />
+                    <field name="note" copy="False"/>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Transaction master tree View -->
+        <record model="ir.ui.view" id="transaction_master_tree">
+            <field name="name">transaction.master.tree</field>
+            <field name="model">trans.master</field>
+            <field name="arch" type="xml">
+                <tree string="Transaction Master" default_order="transaction_date desc">
+                    <field name="serial"/>
+                    <field name="customer" />
+                    <field name="payment_date" />
+                    <field name="commission_paid" />
+                    <field name="amount_deposited" />
+                    <field name="amount_swiped" />
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_cc_payment">
+            <field name="name">Credit Card Payment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+            <field name="res_model">cc.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Credit Card Payments" id="menu_cc_payment" parent="menu_transactions" sequence="3"
+                  action="action_cc_payment"/>
+    </data>
+</odoo>

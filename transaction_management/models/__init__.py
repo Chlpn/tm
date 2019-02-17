@@ -5,3 +5,4 @@ import payment_voucher
 import receipt_voucher
 import branch
 import inter_company
+import credit_card_payment
