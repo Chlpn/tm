@@ -91,7 +91,7 @@
         </record>
 
 
-        <menuitem name="Credit Card Payments" id="menu_cc_payment" parent="menu_transactions" sequence="3"
+        <menuitem name="Credit Card Payments" id="menu_cc_payment" parent="menu_transactions" sequence="6"
                   action="action_cc_payment"/>
     </data>
 </odoo>
