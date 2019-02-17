@@ -65,7 +65,7 @@ class SwipeCard(models.TransientModel):
     rec_amount = fields.Float(string='Amount Swiped')
 
     @api.multi
-    def rec_com(self):
+    def swipe(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         vals = {
             'machine_name': cc_payment.machine_name.id,

@@ -64,6 +64,9 @@ class ccPayment(models.Model):
             'target': 'new',
             'context': 'None'
         }
+        if not state is 'dr':
+            if self.serial is False:
+                self.serial = self.env['ir.sequence'].next_by_code('cc.payment') or 'new'
 
     @api.multi
     def dep_pay(self):
@@ -76,9 +79,7 @@ class ccPayment(models.Model):
             'target': 'new',
             'context': 'None'
         }
-        if not state is 'dr':
-            if self.serial is False:
-                self.serial = self.env['ir.sequence'].next_by_code('cc.payment') or 'new'
+
 
 
     @api.multi
