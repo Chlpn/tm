@@ -18,13 +18,14 @@ class ccPayment(models.Model):
     processing_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
     payment_amount = fields.Float(string='Payment Amount', digits=dp.get_precision('Account'))
     commission = fields.Float(string='Commission', default=3.0,digits=dp.get_precision('Account'))
-    commission_pay = fields.Float(string='Commission to be Paid', digits=dp.get_precision('Account'))
-    commission_paid = fields.Float(string='Commission Paid', digits=dp.get_precision('Account'))
-    total_to_swipe = fields.Float(string='Amount to Swipe', store=True, digits=dp.get_precision('Account'))
+    commission_pay = fields.Float(string='Commission to be Paid', digits=dp.get_precision('Account'), readonly=True)
+    commission_paid = fields.Float(string='Commission Paid', digits=dp.get_precision('Account'), readonly=True)
+    total_to_swipe = fields.Float(string='Amount to Swipe', store=True, digits=dp.get_precision('Account'), readonly=True)
     payment_date = fields.Date(string='Due Date', default=fields.Date.context_today, required=True)
-    amount_deposited = fields.Float(string='Amount deposited', store=True, digits=dp.get_precision('Account'))
-    amount_to_deposit = fields.Float(string='Amount remaining to deposit', store=True, digits=dp.get_precision('Account'))
-    amount_swiped = fields.Float(string='Amount swiped', store=True, digits=dp.get_precision('Account'))
+    amount_deposited = fields.Float(string='Amount deposited', store=True, digits=dp.get_precision('Account'), readonly=True)
+    amount_to_deposit = fields.Float(string='Amount remaining to deposit', store=True, digits=dp.get_precision('Account'), readonly=True)
+    machine_name = fields.Many2one('machine.master', ondelete='restrict')
+    amount_swiped = fields.Float(string='Amount swiped', store=True, digits=dp.get_precision('Account'), readonly=True)
 
 
     customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict', domain=[('customer', '=', '1')])
@@ -50,7 +51,19 @@ class ccPayment(models.Model):
         self.commission_pay = self.payment_amount * self.commission / 100
         self.commission_paid = 0.0
         self.total_to_swipe = self.payment_amount + self.commission_pay
-        self.amount_to_deposit = self.total_to_swipe
+        self.amount_to_deposit = self.payment_amount
+
+    @api.multi
+    def rec_com(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Receive Commission',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'receive.commission.wizard',
+            'target': 'new',
+            'context': 'None'
+        }
 
 
 

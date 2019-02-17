@@ -17,13 +17,11 @@
             <field name="arch" type="xml">
                 <form string="Credit Card Payment" duplicate="0">
                     <header>
-                        <button name="dr" states="dr" string="Draft" type="object"/>
-                        <button name="up" states="up" string="Under Process" type="object"/>
-                        <button name="pd" states="pd" string="Partially Deposited" type="object"/>
-                        <button name="fd" states="fd" string="Fully Deposited" type="object"/>
-                        <button name="ps" states="ps" string="Partially Swiped" type="object"/>
-                        <button name="fs" states="fs" string="Processed" type="object"/>
-                        <button name="cl" states="cl" string="Cancelled" type="object"/>
+                        <button name="rec_com" string="Commission" type="object"/>
+                        <button name="dep_pay" string="Deposit Payment" type="object"/>
+                        <button name="swipe" string="Swipe Amount" type="object"/>
+                        <button name="cancel_trans" string="Cancel" type="object"/>
+
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -37,6 +35,8 @@
                             <field name="commission_pay" />
                             <field name="commission_paid" />
                             <field name="total_to_swipe" />
+                           <field name="machine_name" options="{'no_quick_create':True,'no_create_edit':True}" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}" domain="[('branch.company_id', '=',
+                                                      company_id)]"/>
                             <field name="payment_date" />
                             <field name="amount_deposited" />
                             <field name="amount_to_deposit" />
