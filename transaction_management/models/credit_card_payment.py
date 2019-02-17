@@ -21,7 +21,7 @@ class ccPayment(models.Model):
     commission_pay = fields.Float(string='Commission to be Paid', digits=dp.get_precision('Account'))
     commission_paid = fields.Float(string='Commission Paid', digits=dp.get_precision('Account'))
     total_to_swipe = fields.Float(string='Amount to Swipe', store=True, digits=dp.get_precision('Account'))
-    payment_date = fields.Date(string='Credit Card Payment Date', default=fields.Date.context_today, required=True)
+    payment_date = fields.Date(string='Due Date', default=fields.Date.context_today, required=True)
     amount_deposited = fields.Float(string='Amount deposited', store=True, digits=dp.get_precision('Account'))
     amount_to_deposit = fields.Float(string='Amount remaining to deposit', store=True, digits=dp.get_precision('Account'))
     amount_swiped = fields.Float(string='Amount swiped', store=True, digits=dp.get_precision('Account'))
