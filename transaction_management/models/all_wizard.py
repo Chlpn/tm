@@ -16,7 +16,7 @@ class ReceiveCommission(models.TransientModel):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         vals = {
                    'journal_id':cc_payment.machine_name.branch.cash_journal_id.id,
-                    'partner_id':cc_payment.customer,
+                    'partner_id':cc_payment.customer.id,
                     'transaction_date':self.rec_date,
                     'account_id':cc_payment.customer.property_account_receivable_id.id,
                     'amount': self.rec_amount
