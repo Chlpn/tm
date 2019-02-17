@@ -9,7 +9,7 @@ class ReceiveCommission(models.TransientModel):
     _name = "receive.commission.wizard"
 
     rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
-    rec_amount = fields.Float(string='Amount', readonly=True)
+    rec_amount = fields.Float(string='Amount')
 
     @api.multi
     def rec_com(self):
