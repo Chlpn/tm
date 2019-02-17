@@ -22,7 +22,7 @@
 
         <div class="col-xs-6 text-left" style="font:18px lucida-console,sans-serif !important; padding-left:150px " ><br></br>
 
-            <div>INV.No: <font color="#000000"><span t-field="o.transaction_number"/></font></div>
+            <div>INV.No: <font color="#000000"><span t-field="o.transaction_no"/></font></div>
             <div>TRN: <span style="color:#000000 !important;"> 1234567899874562 </span></div>
             <div>PO REF: <span style="color:#000000 !important;"> Address: </span></div>
         </div></div></div>
