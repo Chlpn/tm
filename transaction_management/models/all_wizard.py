@@ -27,7 +27,7 @@ class ReceiveCommission(models.TransientModel):
                           'commission_paid': cc_payment.commission_paid + self.rec_amount,
                           'commission_pay': cc_payment.commission_pay - self.rec_amount,
                           'total_to_swipe': cc_payment.total_to_swipe - self.rec_amount,
-                          'payment_ref': receipt_voucher.id
+                          #'payment_ref': receipt_voucher.id
                           })
 
 
@@ -54,7 +54,7 @@ class ProcessDeposit(models.TransientModel):
                           'amount_deposited': cc_payment.amount_deposited + self.rec_amount,
                           'amount_to_deposit': cc_payment.amount_to_deposit - self.rec_amount,
 
-                          'deposit_ref': payment_voucher.id
+                          #'deposit_ref': payment_voucher.id
                           })
 
 
@@ -81,7 +81,7 @@ class SwipeCard(models.TransientModel):
         cc_payment.write({'state': 'ps',
                           'total_to_swipe': cc_payment.total_to_swipe - self.rec_amount,
                           'amount_swiped': cc_payment.amount_swiped + self.rec_amount,
-                          'transaction_ref': trans_master.id
+                          #'transaction_ref': trans_master.id
                           })
 
 
