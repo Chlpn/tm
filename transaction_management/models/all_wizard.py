@@ -47,7 +47,7 @@ class ProcessDeposit(models.TransientModel):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         if cc_payment.amount_to_deposit < self.rec_amount:
             raise UserError(_('Amount remaining to deposit is %f, please change the amount')%(cc_payment.amount_to_deposit))
-        if cc_payment.state == 'up':
+        if cc_payment.state == 'up' or cc_payment.state == 'pd':
             if (cc_payment.amount_to_deposit -self.rec_amount) == 0:
                 chstate = 'fd'
             else:
@@ -86,7 +86,7 @@ class SwipeCard(models.TransientModel):
         else:
             par_cost = 0.0
 
-        if cc_payment.state == 'pd' or cc_payment.state == 'fd':
+        if cc_payment.state == 'pd' or cc_payment.state == 'fd' or cc_payment.state == 'ps':
             if (cc_payment.total_to_swipe -self.rec_amount) == 0:
                 chstate = 'fs'
             else:
