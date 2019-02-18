@@ -47,6 +47,11 @@ class ProcessDeposit(models.TransientModel):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         if cc_payment.amount_to_deposit < self.rec_amount:
             raise UserError(_('Amount remaining to deposit is %f, please change the amount')%(cc_payment.amount_to_deposit))
+        if cc_payment.state == 'up':
+            if (cc_payment.amount_to_deposit -self.rec_amount) == 0:
+                chstate = 'fd'
+            else:
+                chstate = 'pd'
 
         vals = {
             'journal_id': cc_payment.machine_name.branch.cash_journal_id.id,
@@ -57,7 +62,7 @@ class ProcessDeposit(models.TransientModel):
         }
         payment_voucher = self.env['payment.voucher'].create(vals)
         payment_voucher.post()
-        cc_payment.write({
+        cc_payment.write({ 'state': chstate,
                           'amount_deposited': cc_payment.amount_deposited + self.rec_amount,
                           'amount_to_deposit': cc_payment.amount_to_deposit - self.rec_amount,
 
@@ -81,6 +86,11 @@ class SwipeCard(models.TransientModel):
         else:
             par_cost = 0.0
 
+        if cc_payment.state == 'pd' or cc_payment.state == 'fd':
+            if (cc_payment.amount_to_swipe -self.rec_amount) == 0:
+                chstate = 'fs'
+            else:
+                chstate = 'ps'
 
         vals = {
             'machine_name': cc_payment.machine_name.id,
@@ -105,7 +115,7 @@ class SwipeCard(models.TransientModel):
         }
         trans_master = self.env['trans.master'].create(vals)
         trans_master.post()
-        cc_payment.write({
+        cc_payment.write({'state':chstate,
                           'total_to_swipe': cc_payment.total_to_swipe - self.rec_amount,
                           'amount_swiped': cc_payment.amount_swiped + self.rec_amount,
                           'transaction_ref': [(4, trans_master.id)]

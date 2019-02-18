@@ -53,20 +53,7 @@ class ccPayment(models.Model):
         self.total_to_swipe = self.payment_amount + self.commission_pay
         self.amount_to_deposit = self.payment_amount
 
-    @api.onchange('commission_paid', 'amount_deposited','amount_swiped')
-    def _onchange_amt(self):
 
-        if self.payment_amount>0:
-            if self.state == 'dr' or self.state == 'up':
-                if self.amount_deposited ==0:
-                    self.state = 'fd'
-                elif self.amount_to_deposit != self.amount_deposited:
-                    self.state = 'pd'
-                if self.state == 'fd':
-                    if self.amount_swiped ==0:
-                        self.state = 'fs'
-                    elif self.amount_to_swipe != self.amount_swiped:
-                        self.state = 'ps'
 
     @api.multi
     def rec_com(self):
