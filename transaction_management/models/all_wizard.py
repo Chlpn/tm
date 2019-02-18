@@ -76,6 +76,11 @@ class SwipeCard(models.TransientModel):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         if cc_payment.total_to_swipe < self.rec_amount:
             raise UserError(_('Amount remaining to swipe is %f, please change the amount')%(cc_payment.total_to_swipe))
+        if cc_payment.machine_name.rent_again:
+            par_cost = cc_payment.machine_name.parent_name.cost_percentage
+        else:
+            par_cost = 0.0
+
 
         vals = {
             'machine_name': cc_payment.machine_name.id,
@@ -87,14 +92,13 @@ class SwipeCard(models.TransientModel):
             'sales_percentage': cc_payment.commission,
             'commission': (self.rec_amount * cc_payment.commission / 100.0),
             'cost_to_commission': (self.rec_amount * cc_payment.machine_name.cost_percentage / 100.0),
-            'parent_percentage': cc_payment.machine_name.parent_name.cost_percentage or 0.0,
-            'cost_to_parent': (self.rec_amount * (cc_payment.machine_name.parent_name.cost_percentage or 0.0) / 100.0),
+            'parent_percentage': par_cost,
+            'cost_to_parent': (self.rec_amount * par_cost / 100.0),
             'margin': (self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * cc_payment.machine_name.cost_percentage / 100.0),
             'cash_paid_customer': 0.0,
             'amount_to_customer': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
             'balance': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
             'customer': cc_payment.customer.id,
-            'parent_percentage': cc_payment,
             'customer_mobile': cc_payment.customer_mobile,
             'note': cc_payment.note
 
