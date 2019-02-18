@@ -87,7 +87,7 @@ class SwipeCard(models.TransientModel):
             par_cost = 0.0
 
         if cc_payment.state == 'pd' or cc_payment.state == 'fd':
-            if (cc_payment.amount_to_swipe -self.rec_amount) == 0:
+            if (cc_payment.total_to_swipe -self.rec_amount) == 0:
                 chstate = 'fs'
             else:
                 chstate = 'ps'
