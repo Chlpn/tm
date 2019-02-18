@@ -29,9 +29,9 @@
 
                         <h1><field name="serial" readonly="1"/></h1>
                        <group colspan="4" col="4">
-                    <field name="processing_date" attrs="{'readonly':[('state','not in',('dr'))]}"/>
-                           <field name="payment_amount" attrs="{'readonly':[('state','not in',('dr'))]}" />
-                           <field name="commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
+                    <field name="processing_date" attrs="{'readonly':[('state','not in',('dr',''))]}"/>
+                           <field name="payment_amount" attrs="{'readonly':[('state','not in',('dr',''))]}" />
+                           <field name="commission" attrs="{'readonly':[('state','not in',('dr',''))]}"/>
                             <field name="commission_pay" readonly="1"/>
                             <field name="commission_paid" readonly="1"/>
                             <field name="total_to_swipe" readonly="1"/>
@@ -41,8 +41,8 @@
                             <field name="amount_deposited" readonly="1" />
                             <field name="amount_to_deposit" readonly="1"/>
                             <field name="amount_swiped" readonly="1"/>
-                            <field name="customer" attrs="{'readonly':[('state','not in',('dr'))]}"/>
-                            <field name="customer_mobile" attrs="{'readonly':[('state','not in',('dr'))]}"/>
+                            <field name="customer" attrs="{'readonly':[('state','not in',('dr',''))]}"/>
+                            <field name="customer_mobile" attrs="{'readonly':[('state','not in',('dr',''))]}"/>
                            <field name="company_id" required='True' readonly="1" />
                         </group>
                     <separator string="NOTES" colspan="4" />
