@@ -29,33 +29,33 @@
 
                         <h1><field name="serial" readonly="1"/></h1>
                        <group colspan="4" col="4">
-                    <field name="processing_date" />
-                           <field name="payment_amount" />
-                           <field name="commission" />
-                            <field name="commission_pay" />
-                            <field name="commission_paid" />
-                            <field name="total_to_swipe" />
+                    <field name="processing_date" attrs="{'readonly':[('state','not in',('dr'))]}"/>
+                           <field name="payment_amount" attrs="{'readonly':[('state','not in',('dr'))]}" />
+                           <field name="commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
+                            <field name="commission_pay" readonly="1"/>
+                            <field name="commission_paid" readonly="1"/>
+                            <field name="total_to_swipe" readonly="1"/>
                            <field name="machine_name" options="{'no_quick_create':True,'no_create_edit':True}" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}" domain="[('branch.company_id', '=',
                                                       company_id)]"/>
                             <field name="payment_date" />
-                            <field name="amount_deposited" />
-                            <field name="amount_to_deposit" />
-                            <field name="amount_swiped" />
-                            <field name="customer" />
-                            <field name="customer_mobile" />
+                            <field name="amount_deposited" readonly="1" />
+                            <field name="amount_to_deposit" readonly="1"/>
+                            <field name="amount_swiped" readonly="1"/>
+                            <field name="customer" attrs="{'readonly':[('state','not in',('dr'))]}"/>
+                            <field name="customer_mobile" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                            <field name="company_id" required='True' readonly="1" />
                         </group>
                     <separator string="NOTES" colspan="4" />
                     <field name="note" copy="False"/>
                         <notebook>
                             <page string="Payment Reference">
-                                <field name="payment_ref" />
+                                <field name="payment_ref" readonly="1" />
                             </page>
                             <page string="Deposit Reference">
-                                <field name="deposit_ref" />
+                                <field name="deposit_ref" readonly="1"/>
                             </page>
                             <page string="Transaction Reference">
-                                <field name="transaction_ref" />
+                                <field name="transaction_ref" readonly="1"/>
                             </page>
                         </notebook>
 

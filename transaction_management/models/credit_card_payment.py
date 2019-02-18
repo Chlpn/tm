@@ -17,7 +17,7 @@ class ccPayment(models.Model):
     serial = fields.Char(string='Ref. No:')
     processing_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
     payment_amount = fields.Float(string='Payment Amount', digits=dp.get_precision('Account'))
-    commission = fields.Float(string='Commission', default=3.0,digits=dp.get_precision('Account'))
+    commission = fields.Float(string='Commission Percentage', default=3.0,digits=dp.get_precision('Account'))
     commission_pay = fields.Float(string='Commission to be Paid', digits=dp.get_precision('Account'), readonly=True)
     commission_paid = fields.Float(string='Commission Paid', digits=dp.get_precision('Account'), readonly=True)
     total_to_swipe = fields.Float(string='Amount to Swipe', store=True, digits=dp.get_precision('Account'), readonly=True)
@@ -53,6 +53,19 @@ class ccPayment(models.Model):
         self.total_to_swipe = self.payment_amount + self.commission_pay
         self.amount_to_deposit = self.payment_amount
 
+    @api.onchange('commission_paid', 'amount_deposited','amount_swiped')
+    def _onchange_amt(self):
+        if self.state == 'dr' or self.state == 'up':
+            if self.amount_deposited ==0:
+                self.state = 'fd'
+            elif self.amount_to_deposit != self.amount_deposited:
+                self.state = 'pd'
+        if self.state == 'fd':
+            if self.amount_swiped ==0:
+                self.state = 'fs'
+            elif self.amount_to_swipe != self.amount_swiped:
+                self.state = 'ps'
+
     @api.multi
     def rec_com(self):
         return {
@@ -64,9 +77,7 @@ class ccPayment(models.Model):
             'target': 'new',
             'context': 'None'
         }
-        if not state is 'dr':
-            if self.serial is False:
-                self.serial = self.env['ir.sequence'].next_by_code('cc.payment') or 'new'
+
 
     @api.multi
     def dep_pay(self):
@@ -94,6 +105,12 @@ class ccPayment(models.Model):
             'context': 'None'
         }
 
+    @api.model
+    def create(self, values):
 
+        record = super(ccPayment, self).create(values)
+        if self.serial is False:
+            self.serial = self.env['ir.sequence'].next_by_code('cc.payment') or 'new'
+        return record
 
 
