@@ -110,7 +110,8 @@ class SwipeCard(models.TransientModel):
             'balance': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
             'customer': cc_payment.customer.id,
             'customer_mobile': cc_payment.customer_mobile,
-            'note': cc_payment.note
+            'note': cc_payment.note,
+            'ccpayment_ref':cc_payment.serial
 
         }
         trans_master = self.env['trans.master'].create(vals)

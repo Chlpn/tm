@@ -38,6 +38,7 @@ class TransMaster(models.Model):
     machine_balance = fields.Float(string="Machine Balance", store=True,  readonly="True", compute="_compute_mbal", digits=dp.get_precision('Account'))
     cash_balance = fields.Float(string="Cash Balance", store=True,  readonly="True", compute="_compute_bal", digits=dp.get_precision('Account'))
     note = fields.Text(string="Notes")
+    ccpayment_ref=fields.Char(string="Credit Card Payment Reference")
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -301,9 +302,17 @@ class TransMaster(models.Model):
 
         return super(TransMaster, self).unlink()
 
-
     @api.multi
     def action_cancel(self):
+        if self.ccpayment_ref:
+            raise UserError(
+                _('You can not edit this transaction as it is generated from Credit Card Payment'))
+        else:
+            return self.cancel_trans()
+
+
+    @api.multi
+    def cancel_trans(self):
         if self.env['res.users'].has_group('account.group_account_manager'):
             account_entry = self.journal_ref.id
             journal_entry = self.env['account.move'].search([('id', '=', account_entry)])
@@ -325,7 +334,11 @@ class TransMaster(models.Model):
 
     @api.multi
     def action_draft(self):
-        self.write({'state': 'draft'})
+        if self.ccpayment_ref:
+            raise UserError(
+                _('You can not edit this transaction as it is generated from Credit Card Payment'))
+        else:
+            self.write({'state': 'draft'})
 
 
 
