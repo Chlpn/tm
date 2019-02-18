@@ -43,7 +43,7 @@ class ccPayment(models.Model):
         ('ps', 'Partially Swiped'),
         ('fs', 'Processed'),
         ('cl', 'Cancelled')
-    ], string='Status' ,readonly=True)
+    ], string='Status', default='dr' ,readonly=True)
 
 
     @api.onchange('payment_amount','commission')
@@ -56,16 +56,17 @@ class ccPayment(models.Model):
     @api.onchange('commission_paid', 'amount_deposited','amount_swiped')
     def _onchange_amt(self):
 
-        if self.state == 'dr' or self.state == 'up':
-            if self.amount_deposited ==0:
-                self.state = 'fd'
-            elif self.amount_to_deposit != self.amount_deposited:
-                self.state = 'pd'
-            if self.state == 'fd':
-                if self.amount_swiped ==0:
-                    self.state = 'fs'
-                elif self.amount_to_swipe != self.amount_swiped:
-                    self.state = 'ps'
+        if self.payment_amount>0:
+            if self.state == 'dr' or self.state == 'up':
+                if self.amount_deposited ==0:
+                    self.state = 'fd'
+                elif self.amount_to_deposit != self.amount_deposited:
+                    self.state = 'pd'
+                if self.state == 'fd':
+                    if self.amount_swiped ==0:
+                        self.state = 'fs'
+                    elif self.amount_to_swipe != self.amount_swiped:
+                        self.state = 'ps'
 
     @api.multi
     def rec_com(self):
