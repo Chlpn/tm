@@ -112,7 +112,7 @@ class ccPayment(models.Model):
 
         record = super(ccPayment, self).create(values)
         if self.serial is False:
-            self.serial = self.env['ir.sequence'].next_by_code('cc.payment') or 'new'
+            record.serial = self.env['ir.sequence'].next_by_code('cc.payment') or 'new'
         return record
 
 
