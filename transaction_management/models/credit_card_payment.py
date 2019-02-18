@@ -55,12 +55,12 @@ class ccPayment(models.Model):
 
     @api.onchange('commission_paid', 'amount_deposited','amount_swiped')
     def _onchange_amt(self):
-        if self.payment_amount:
-            if self.state == 'dr' or self.state == 'up':
-                if self.amount_deposited ==0:
-                    self.state = 'fd'
-                elif self.amount_to_deposit != self.amount_deposited:
-                    self.state = 'pd'
+
+        if self.state == 'dr' or self.state == 'up':
+            if self.amount_deposited ==0:
+                self.state = 'fd'
+            elif self.amount_to_deposit != self.amount_deposited:
+                self.state = 'pd'
             if self.state == 'fd':
                 if self.amount_swiped ==0:
                     self.state = 'fs'
