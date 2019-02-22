@@ -140,7 +140,7 @@ class SwipeCard(models.TransientModel):
             'cost_to_commission': (self.rec_amount * self.machine_name.cost_percentage / 100.0),
             'parent_percentage': par_cost,
             'cost_to_parent': (self.rec_amount * par_cost / 100.0),
-            'margin': (self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * cc_payment.self.cost_percentage / 100.0),
+            'margin': (self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * self.machine_name.cost_percentage / 100.0),
             'cash_paid_customer': 0.0,
             'amount_to_customer': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
             'balance': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
