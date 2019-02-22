@@ -99,24 +99,24 @@ class ccPayment(models.Model):
         if self.env['res.users'].has_group('account.group_account_manager'):
             for ccp in self.transaction_ref:
 
-                trans_entry = self.transaction_ref[ccp]
+                trans_entry = ccp.id
                 trans_master = self.env['trans.master'].search([('id','=',trans_entry)])
                 trans_master.cancel_trans()
 
 
             for ccp in self.payment_ref:
 
-                receipt_voucher = self.payment_ref[ccp]
+                receipt_voucher = ccp.id
                 receipt_master =self.env['receipt.voucher'].search([('id','=',receipt_voucher)])
                 receipt_master.action_cancel()
 
 
             for ccp in self.deposit_ref:
 
-                payment_voucher = self.deposit_ref[ccp]
+                payment_voucher = ccp.id
                 payment_master =self.env['payment.voucher'].search([('id','=',payment_voucher)])
                 payment_master.action_cancel()
-            self.write({'state': 'cancelled'})
+            self.write({'state': 'cl'})
         else:
             raise UserError(
                 _('You can not cancel the entry,to delete this entry user should belong to the Advisor group'))
