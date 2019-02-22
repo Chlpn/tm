@@ -25,7 +25,7 @@ class ReceiveCommission(models.TransientModel):
         if cc_payment.commission_pay < self.rec_amount:
             raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
         self.env.cr.execute(
-                    """select cash_journal_id from company.branch where company_id=%s""",
+                    """select cash_journal_id from company_branch where company_id=%s""",
                     (self.company_id.id,))
 
         value = self.env.cr.fetchone()
@@ -75,7 +75,7 @@ class ProcessDeposit(models.TransientModel):
             else:
                 chstate = 'pd'
         self.env.cr.execute(
-                    """select cash_journal_id from company.branch where company_id=%s""",
+                    """select cash_journal_id from company_branch where company_id=%s""",
                     (self.company_id.id,))
 
         value = self.env.cr.fetchone()
