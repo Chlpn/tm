@@ -20,7 +20,7 @@ class ReceiveCommission(models.TransientModel):
 
 
         vals = {
-                   'journal_id':cc_payment.machine_name.branch.cash_journal_id.id,
+                   'journal_id':self.machine_name.branch.cash_journal_id.id,
                     'partner_id':cc_payment.customer.id,
                     'transaction_date':self.rec_date,
                     'account_id':cc_payment.customer.property_account_receivable_id.id,
@@ -56,7 +56,7 @@ class ProcessDeposit(models.TransientModel):
                 chstate = 'pd'
 
         vals = {
-            'journal_id': cc_payment.machine_name.branch.cash_journal_id.id,
+            'journal_id': self.machine_name.branch.cash_journal_id.id,
             'partner_id': cc_payment.customer.id,
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
@@ -75,7 +75,14 @@ class ProcessDeposit(models.TransientModel):
 class SwipeCard(models.TransientModel):
     _name = "swipe.card.wizard"
 
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        default=lambda self: self.env.user.company_id
+    )
+
     rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
+    machine_name = fields.Many2one('machine.master', ondelete='restrict')
     rec_amount = fields.Float(string='Amount Swiped')
 
     @api.multi
@@ -84,8 +91,8 @@ class SwipeCard(models.TransientModel):
         chstate = cc_payment.state
         if cc_payment.total_to_swipe < self.rec_amount:
             raise UserError(_('Amount remaining to swipe is %f, please change the amount')%(cc_payment.total_to_swipe))
-        if cc_payment.machine_name.rent_again:
-            par_cost = cc_payment.machine_name.parent_name.cost_percentage
+        if self.machine_name.rent_again:
+            par_cost = self.machine_name.parent_name.cost_percentage
         else:
             par_cost = 0.0
 
@@ -96,18 +103,18 @@ class SwipeCard(models.TransientModel):
                 chstate = 'ps'
 
         vals = {
-            'machine_name': cc_payment.machine_name.id,
+            'machine_name': self.machine_name.id,
             'transaction_amount': self.rec_amount,
             'commission_included': True,
             'transaction_date': self.rec_date,
             'amount_to_swipe': self.rec_amount,
-            'cost_percentage': cc_payment.machine_name.cost_percentage,
+            'cost_percentage': self.machine_name.cost_percentage,
             'sales_percentage': cc_payment.commission,
             'commission': (self.rec_amount * cc_payment.commission / 100.0),
-            'cost_to_commission': (self.rec_amount * cc_payment.machine_name.cost_percentage / 100.0),
+            'cost_to_commission': (self.rec_amount * self.machine_name.cost_percentage / 100.0),
             'parent_percentage': par_cost,
             'cost_to_parent': (self.rec_amount * par_cost / 100.0),
-            'margin': (self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * cc_payment.machine_name.cost_percentage / 100.0),
+            'margin': (self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * cc_payment.self.cost_percentage / 100.0),
             'cash_paid_customer': 0.0,
             'amount_to_customer': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
             'balance': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
@@ -118,7 +125,7 @@ class SwipeCard(models.TransientModel):
 
         }
 
-        
+
         trans_master = self.env['trans.master'].create(vals)
         trans_master.post()
         cc_payment.write({'state':chstate,

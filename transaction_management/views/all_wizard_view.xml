@@ -10,7 +10,10 @@
                     <group>
 
                             <field name="rec_date"/>
+                            <field name="machine_name" options="{'no_quick_create':True,'no_create_edit':True}" required='True'  domain="[('branch.company_id', '=',
+                                                      company_id)]"/>
                             <field name="rec_amount"/>
+                            <field name="company_id" required='True' readonly="1" />
 
 
                     </group>
