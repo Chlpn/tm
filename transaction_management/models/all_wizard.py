@@ -14,6 +14,7 @@ class ReceiveCommission(models.TransientModel):
     @api.multi
     def rec_com(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
+        chstate = cc_payment.state
         if cc_payment.commission_pay < self.rec_amount:
             raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
 
@@ -45,6 +46,7 @@ class ProcessDeposit(models.TransientModel):
     @api.multi
     def dep_pay(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
+        chstate = cc_payment.state
         if cc_payment.amount_to_deposit < self.rec_amount:
             raise UserError(_('Amount remaining to deposit is %f, please change the amount')%(cc_payment.amount_to_deposit))
         if cc_payment.state == 'up' or cc_payment.state == 'pd':
@@ -79,6 +81,7 @@ class SwipeCard(models.TransientModel):
     @api.multi
     def swipe(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
+        chstate = cc_payment.state
         if cc_payment.total_to_swipe < self.rec_amount:
             raise UserError(_('Amount remaining to swipe is %f, please change the amount')%(cc_payment.total_to_swipe))
         if cc_payment.machine_name.rent_again:
