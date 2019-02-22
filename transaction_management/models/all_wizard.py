@@ -29,7 +29,7 @@ class ReceiveCommission(models.TransientModel):
                     (self.company_id,))
 
         value = self.env.cr.fetchone()
-        cjournal = value[]
+        cjournal = value[0]
 
 
         vals = {
@@ -79,7 +79,7 @@ class ProcessDeposit(models.TransientModel):
                     (self.company_id,))
 
         value = self.env.cr.fetchone()
-        cjournal = value[]
+        cjournal = value[0]
 
         vals = {
             'journal_id': cjournal,
