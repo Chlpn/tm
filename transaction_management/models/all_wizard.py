@@ -117,6 +117,8 @@ class SwipeCard(models.TransientModel):
             'ccpayment_ref':cc_payment.serial
 
         }
+
+        
         trans_master = self.env['trans.master'].create(vals)
         trans_master.post()
         cc_payment.write({'state':chstate,
