@@ -7,6 +7,13 @@ from datetime import datetime
 
 class ReceiveCommission(models.TransientModel):
     _name = "receive.commission.wizard"
+    
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        default=lambda self: self.env.user.company_id
+    )
+
 
     rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
     rec_amount = fields.Float(string='Amount')
@@ -17,10 +24,16 @@ class ReceiveCommission(models.TransientModel):
         chstate = cc_payment.state
         if cc_payment.commission_pay < self.rec_amount:
             raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
+        self.env.cr.execute(
+                    """select cash_journal_id from company.branch where company_id=%s""",
+                    (self.company_id,))
+
+        value = self.env.cr.fetchone()
+        cjournal = value[]
 
 
         vals = {
-                   'journal_id':self.machine_name.branch.cash_journal_id.id,
+                   'journal_id':cjournal,
                     'partner_id':cc_payment.customer.id,
                     'transaction_date':self.rec_date,
                     'account_id':cc_payment.customer.property_account_receivable_id.id,
@@ -39,6 +52,13 @@ class ReceiveCommission(models.TransientModel):
 
 class ProcessDeposit(models.TransientModel):
     _name = "process.deposit.wizard"
+    
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        default=lambda self: self.env.user.company_id
+    )
+
 
     rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
     rec_amount = fields.Float(string='Amount Deposited')
@@ -54,9 +74,15 @@ class ProcessDeposit(models.TransientModel):
                 chstate = 'fd'
             else:
                 chstate = 'pd'
+        self.env.cr.execute(
+                    """select cash_journal_id from company.branch where company_id=%s""",
+                    (self.company_id,))
+
+        value = self.env.cr.fetchone()
+        cjournal = value[]
 
         vals = {
-            'journal_id': self.machine_name.branch.cash_journal_id.id,
+            'journal_id': cjournal,
             'partner_id': cc_payment.customer.id,
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
