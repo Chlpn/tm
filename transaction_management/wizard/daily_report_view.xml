@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_daily_report">
+            <field name="name">daily.report.form</field>
+            <field name="model">daily.report</field>
+            <field name="arch" type="xml">
+                <form string="Daily Report">
+                    <group>
+                            <field name="report_date"/>
+                            <field name="report_branch"/>
+                    </group>
+                    <footer>
+                        <button name="" string="Print" type="action" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_daily_report" model="ir.actions.act_window">
+            <field name="name">Daily Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">daily.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem name="Daily Report" id="menu_daily_reports" parent="menu_transaction_management" action="action_wizard_daily_report" sequence="5"/>
+
+
+    </data>
+</odoo>
