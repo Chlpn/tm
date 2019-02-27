@@ -29,8 +29,8 @@
         </record>
 
 
-        <menuitem name="Daily Report" id="menu_daily_reports" parent="menu_transaction_management" action="action_wizard_daily_report" sequence="5"/>
-
+        <menuitem name="Daily Report" id="menu_daily_reports" parent="menu_transaction_reports" action="action_wizard_daily_report" sequence="2"/>
+        
 
     </data>
 </odoo>
