@@ -12,7 +12,7 @@
                             <field name="report_branch"/>
                     </group>
                     <footer>
-                        <button name="" string="Print" type="action" class="oe_highlight"/>
+                        <button name="daily_print_method" string="Print" type="object" class="oe_highlight"/>
                         or <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
                 </form>

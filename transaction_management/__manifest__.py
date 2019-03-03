@@ -21,6 +21,7 @@
                 'security/ir.model.access.csv',
                 'reports/report.xml',
                 'reports/invoice_report.xml',
+                'reports/daily_report_print.xml',
                 'wizard/daily_report_view.xml',
 
             ],
