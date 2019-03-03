@@ -11,7 +11,7 @@
                                 <h3><span>DAILY REPORT </span></h3>
                             </div>
 
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Branch Name:-<span t-esc="o.report_branch"/></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Branch Name:-<span t-esc="o.report_branch.company_id"/></div>
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Account:-<span t-esc="o.cash_op_bal"/></div>
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Date <span t-esc="o.report_date"/> </div>
                             <br/>
