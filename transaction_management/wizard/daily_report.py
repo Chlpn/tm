@@ -20,12 +20,16 @@ class DailyReport(models.TransientModel):
         }
 
     @api.multi
-    @api.onchange(report_date,report_branch)
+    @api.onchange('report_date','report_branch')
     def calc_values(self):
+        if self.report_branch:
+            print self.report_branch.cash_ac.id
+            print datetime.strptime(self.report_date, '%Y-%m-%d')
+            self.env.cr.execute("""select sum(debit-credit) from account_move_line where account_id=%s and date<%s""",
+                            (self.report_branch.cash_ac.id, datetime.strptime(self.report_date, '%Y-%m-%d')))
+            self.cash_op_bal = self.env.cr.fetchone()[0]
 
-        self.env.cr.execute("""select sum(debit-credit) from account_move_line where account_id=%s and date<%s""",
-                            (self.report_branch.cash_ac.id, datetime.datetime.strptime(self.report_date, '%Y-%m-%d')))
-        self.cash_op_bal = self.env.cr.fetchall()[0]
-        if self.cash_op_bal is None:
-            self.cash_op_bal = 0.0
+            if self.cash_op_bal is None:
+                self.cash_op_bal = 0.0
 
+        
