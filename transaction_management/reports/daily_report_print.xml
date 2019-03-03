@@ -11,9 +11,9 @@
                                 <h3><span>DAILY REPORT </span></h3>
                             </div>
 
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Customer Name:-<span t-esc="partner_name"/></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Branch Name:-<span t-esc="report_branch"/></div>
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Account:-<span t-esc="cash_op_bal"/></div>
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Period From <span t-esc="date_from"/> To <span t-esc="date_to"/> </div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Date <span t-esc="report_date"/> </div>
                             <br/>
 
 
