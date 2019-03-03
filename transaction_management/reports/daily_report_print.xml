@@ -12,7 +12,7 @@
                             </div>
 
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Customer Name:-<span t-esc="partner_name"/></div>
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Account:-<span t-esc="account_name"/></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Account:-<span t-esc="cash_op_bal"/></div>
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Period From <span t-esc="date_from"/> To <span t-esc="date_to"/> </div>
                             <br/>
 
