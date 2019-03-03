@@ -10,6 +10,7 @@
                     <group>
                             <field name="report_date"/>
                             <field name="report_branch"/>
+                            <field name="cash_op_bal"/>
                     </group>
                     <footer>
                         <button name="daily_print_method" string="Print" type="object" class="oe_highlight"/>
