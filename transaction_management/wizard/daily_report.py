@@ -24,7 +24,7 @@ class DailyReport(models.TransientModel):
     def calc_values(self):
 
         self.env.cr.execute("""select sum(debit-credit) from account_move_line where account_id=%s and date<%s""",
-                            (self.report_branch.cash_ac.id, self.report_date))
+                            (self.report_branch.cash_ac.id, datetime.datetime.strptime(self.report_date, '%Y-%m-%d')))
         self.cash_op_bal = self.env.cr.fetchall()[0]
         if self.cash_op_bal is None:
             self.cash_op_bal = 0.0
