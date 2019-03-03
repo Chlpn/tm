@@ -7,7 +7,7 @@ class DailyReport(models.TransientModel):
 
     report_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
     report_branch = fields.Many2one('company.branch', string="branch", required=True)
-    cash_op_bal =fields.Float()
+    cash_op_bal =fields.Float(string="Cash Opening Balance")
 
 
 
