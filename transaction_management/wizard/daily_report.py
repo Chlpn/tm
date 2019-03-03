@@ -32,4 +32,4 @@ class DailyReport(models.TransientModel):
             if self.cash_op_bal is None:
                 self.cash_op_bal = 0.0
 
-        
+            print self.cash_op_bal
