@@ -73,6 +73,9 @@
                     <field name="cost_percentage" readonly="1"/>
 
                     <field name="company_id" required='True' readonly="1" />
+                           <field name="parent_percentage" invisible="1" />
+                           <field name="cost_to_parent" invisible="1" />
+
                             <separator string="JOURNAL DETAILS" colspan="4" />
                     <field name="journal_ref" readonly="1" nolabel="1"/>
                         </group>
