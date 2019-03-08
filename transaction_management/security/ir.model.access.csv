@@ -27,3 +27,7 @@ access_company_branch_accountant,company.branch.accountant,model_company_branch,
 access_inter_company_billing,inter.company.billing,model_inter_company,account.group_account_invoice,1,0,0,0
 access_inter_company_advisor,inter.company.advisor,model_inter_company,account.group_account_manager,1,1,1,1
 access_inter_company_accountant,inter.company.accountant,model_inter_company,account.group_account_user,1,0,0,0
+
+access_cc_payment_billing,cc.payment.billing,model_cc_payment,account.group_account_invoice,1,1,1,0
+access_cc_payment_advisor,cc.payment.advisor,model_cc_payment,account.group_account_manager,1,1,1,0
+access_cc_payment_accountant,cc.payment.accountant,model_cc_payment,account.group_account_user,1,1,1,0
