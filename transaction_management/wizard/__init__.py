@@ -1,1 +1,2 @@
 import daily_report
+import daily_report_render
