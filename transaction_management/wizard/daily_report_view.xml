@@ -11,8 +11,7 @@
                             <field name="report_date"/>
                             <field name="report_branch"/>
                             <field name="cash_op_bal" readonly="1"/>
-                            <field name="cash_cl_bal" readonly="1"/>
-                            <field name="cash_to_customer" readonly="1"/>
+                            
 
 
                     </group>
