@@ -13,6 +13,8 @@
 
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Branch Name:-<span t-esc="o.report_branch.company_id.name"/></div>
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Cash Opening Balance:-<span t-esc="o.cash_op_bal"/></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Cash Opening Balance:-<span t-esc="o.cash_to_customer"/></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Cash Opening Balance:-<span t-esc="o.cash_cl_bal"/></div>
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Date <span t-esc="o.report_date"/> </div>
                             <br/>
 
