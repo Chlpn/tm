@@ -10,7 +10,11 @@
                     <group>
                             <field name="report_date"/>
                             <field name="report_branch"/>
-                            <field name="cash_op_bal"/>
+                            <field name="cash_op_bal" readonly="1"/>
+                            <field name="cash_cl_bal" readonly="1"/>
+                            <field name="cash_to_customer" readonly="1"/>
+
+
                     </group>
                     <footer>
                         <button name="daily_print_method" string="Print" type="object" class="oe_highlight"/>
