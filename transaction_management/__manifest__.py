@@ -22,8 +22,7 @@
                 'reports/report.xml',
                 'reports/invoice_report.xml',
 
-                'dynamic/custom_statement_customer.xml',
-                'dynamic/statement_customer.xml',
+
             ],
     'demo': [
 

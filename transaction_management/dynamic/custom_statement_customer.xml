@@ -4,17 +4,14 @@
 
 
     
-        <record id="account_custom_customer_statement_report_view" model="ir.ui.view">
-        <field name="name">Statement of Account (Customers)</field>
-        <field name="model">custom.customer.statement</field>
+        <record id="daily_summary_report_view" model="ir.ui.view">
+        <field name="name">Daily Summary Report </field>
+        <field name="model">daily.report.statement</field>
         <field name="arch" type="xml">
-        <form string="Report Options">
+        <form string="Options">
             <group col="4">
-                <field name="date_from"/>
-                <field name="date_to"/>
-                <field name="partner_id"/>
-                <field name="account_id"/>
-                
+                <field name="report_date"/>
+
             </group>
          
             <footer>
@@ -26,29 +23,20 @@
         </field>
         </record>
 
-    <record id="action_custom_customer_statement_menu" model="ir.actions.act_window">
-        <field name="name">Statement of Account (Customers)</field>
+    <record id="action_daily_summary_report" model="ir.actions.act_window">
+        <field name="name">Daily Summary Report</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">custom.customer.statement</field>
+        <field name="res_model">daily.report.statement</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
-<!--        <field name="view_id" ref="account_custom_ledger_report_view"/>-->
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_custom_customer_statement_report"
-        name="SOA (Customers)"
+    <menuitem id="menu_daily_summary_report"
+        name="Daily Summary Report"
         parent="menu_transaction_reports"
-        action="action_custom_customer_statement_menu"
+        action="action_daily_summary_report"
         sequence="6"/>
 
-    <record id="action_custom_ledger_report_values1" model="ir.values">
-        <field name="model_id" ref="account.model_account_account" />
-        <field name="name">Custom ledger</field>
-        <field name="key2">client_print_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_custom_ledger_menu'))" />
-        <field name="key">action</field>
-        <field name="model">account.account</field>
-    </record>
 
 </odoo>

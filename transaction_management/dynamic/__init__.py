@@ -1,2 +1,0 @@
-import custom_statement_customer
-import statement_customer
