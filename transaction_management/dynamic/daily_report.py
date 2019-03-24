@@ -9,4 +9,11 @@ class daily_report_statement(models.TransientModel):
     report_date = fields.Date(string='Date From', default=fields.Date.context_today, required=True)
 
 
-    
+    def print_report(self, data):
+
+
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'transaction_management.daily_summary_report'
+        }
+
