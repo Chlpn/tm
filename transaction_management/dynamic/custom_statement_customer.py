@@ -24,7 +24,7 @@ class custom_customer_statement(models.TransientModel):
 
 
     def print_report(self, data):
-        print "printttt_chequeeeeee"
+
 
         return {
             'type': 'ir.actions.report.xml',

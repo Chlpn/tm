@@ -15,7 +15,7 @@ class render_ldger(models.AbstractModel):
 
     @api.model
     def render_html(self, docids, data=None):
-        print'docids==',docids
+
         move_dic={}
         move_list=[]
         
@@ -24,7 +24,7 @@ class render_ldger(models.AbstractModel):
         ledger_data=report_obj.browse(docids)
         self.env.cr.execute("""select a.partner_id, a.date,b.name,a.debit as debit, a.credit, a.debit-a.credit as balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.partner_id=%s and a.account_id=%s and  b.state='posted' and a.date>=%s and a.date<=%s order by a.date""",(ledger_data.partner_id.id,ledger_data.account_id.id,datetime.datetime.strptime(ledger_data.date_from, '%Y-%m-%d'),datetime.datetime.strptime(ledger_data.date_to, '%Y-%m-%d'),))
         datass = self.env.cr.fetchall()
-        print datass
+
         
 
 #        moveline_datas=moveline_obj.search([('account_id','=',ledger_data.account_id.id),('date','>=',ledger_data.date_from),('date','<=', ledger_data.date_to)])
@@ -35,12 +35,12 @@ class render_ldger(models.AbstractModel):
 #        query = """SELECT * from account_move_line where date= %s;"""
 #        self.env.cr.execute(query, (ledger_data.date_from))
         openin_balance = self.env.cr.fetchone()[0]
-        print 'openin_balance=====',openin_balance
+
         if openin_balance is None:
             openin_balance=0.0
         closing_balance=0.0
         for moveline_data in datass:
-            print'moveline_data===',moveline_data,moveline_data[0]
+
             move_dic['date']=moveline_data[1]
             move_dic['account']=ledger_data.partner_id.name
             move_dic['particulars']=moveline_data[2]
@@ -52,7 +52,7 @@ class render_ldger(models.AbstractModel):
             move_dic={}
         
         data=move_list
-        print'----',data
+
         model = self.env.context.get('active_model')
         docs = self.env[model].browse(self.env.context.get('active_id'))
         docargs = {
