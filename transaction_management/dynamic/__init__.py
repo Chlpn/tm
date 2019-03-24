@@ -1,2 +1,2 @@
-import custom_statment_customer
-import statement_customer
+import daily_report
+import render_daily_report
