@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--ledger report account wise-->
+        <report
+            id="report_gl1"
+            string="Print Ledger Report"
+            model="general.ledger.report"
+            report_type="qweb-pdf"
+            file="account_reporting.ledger_print_report"
+            name="account_reporting.ledger_print_report"
+            menu="False"
+        />
+        
+          <report
+            id="report_gl2"
+            string="Statement of Account Customerwise"
+            model="statement.customer.report"
+            report_type="qweb-pdf"
+            file="account_reporting.statement_customerwise_print_report"
+            name="account_reporting.statement_customerwise_print_report"
+            menu="False"
+        />
+           
+                        <report
+            id="report_gl3"
+            string="Statement of Account Vendorwise"
+            model="statement.vendor.report"
+            report_type="qweb-pdf"
+            file="account_reporting.statement_vendorwise_print_report"
+            name="account_reporting.statement_vendorwise_print_report"
+            menu="False"
+        />
+    </data>
+</odoo>
