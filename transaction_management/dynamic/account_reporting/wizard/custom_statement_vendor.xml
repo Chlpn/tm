@@ -38,8 +38,9 @@
 
     <menuitem id="menu_custom_vendor_statement_report"
         name="SOA (Vendors)"
-        parent="account_reporting.enhance_reporting_custom"
-        action="action_custom_vendor_statement_menu"/>
+        parent="menu_transaction_reports"
+        action="action_custom_vendor_statement_menu"
+        sequence="5"/>
 
 <!--    <record id="action_custom_ledger_report_values1" model="ir.values">
         <field name="model_id" ref="account.model_account_account" />

@@ -38,8 +38,9 @@
 
     <menuitem id="menu_custom_general_report"
         name="general ledger Report"
-        parent="account_reporting.enhance_reporting_custom"
-        action="action_custom_ledger_menu"/>
+        parent="menu_transaction_reports"
+        action="action_custom_ledger_menu"
+        sequence="6"/>
 
     <record id="action_custom_ledger_report_values1" model="ir.values">
         <field name="model_id" ref="account.model_account_account" />
