@@ -6,14 +6,13 @@
     'author': "iSquare Informatics",
     'website': 'https://www.isi.ae',
     'summary': '',
-    'depends': ['account', 'account_accountant','account_cancel','web_readonly_bypass','base_multi_company','report'],
+    'depends': ['account', 'account_accountant','account_cancel','web_readonly_bypass','base_multi_company'],
     'data': [
                 'views/machine_bank_view.xml',
                 'views/credit_card_payment_view.xml',
                 'views/all_wizard_view.xml',
                 'views/machine_master_view.xml',
                 'views/inter_company.xml',
-                'dynamic/daily_report_view.xml',
                 'views/transaction_management_view.xml',
                 'views/payment_voucher.xml',
                 'views/receipt_voucher.xml',
@@ -22,6 +21,7 @@
                 'security/ir.model.access.csv',
                 'reports/report.xml',
                 'reports/invoice_report.xml',
+                'dynamic/daily_report_view.xml',
                 'dynamic/report_daily_summary_template.xml'
 
 
