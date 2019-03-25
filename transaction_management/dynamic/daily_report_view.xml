@@ -42,8 +42,8 @@
             string="Daily Summary Report"
             model="trans.master"
             report_type="qweb-pdf"
-            file="transaction_management.report_daily_summary"
-            name="transaction_management.report_daily_summary"
+            file="transaction_management.report_daily_summary1"
+            name="transaction_management.report_daily_summary1"
             menu="False"
         />
 

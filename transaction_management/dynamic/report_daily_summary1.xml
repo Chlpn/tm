@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="report_daily_summary">
+        <template id="report_daily_summary1">
 
             <t t-call="report.html_container">
                 <t t-foreach="docs" t-as="o">
-                  
+                    <t t-call="report.internal_layout">
                         <div class="page">
                             <div style="text-align:center;">
                             <h2><span  t-esc="res_company.name"/></h2>
@@ -95,7 +95,7 @@
                         </div>
 
                            
-
+                    </t>
                     
                 </t>
             </t>
