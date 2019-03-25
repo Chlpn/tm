@@ -12,9 +12,8 @@
                                 <h3><span>STATEMENT OF ACCOUNT (Customer)</span></h3>
                             </div>
 
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Customer Name:-<span t-esc="partner_name"/></div>
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Account:-<span t-esc="account_name"/></div>
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Period From <span t-esc="date_from"/> To <span t-esc="date_to"/> </div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Report Date:-<span t-esc="report_date"/></div>
+
                             <br/>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
