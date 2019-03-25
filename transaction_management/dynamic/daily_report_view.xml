@@ -9,7 +9,7 @@
         <field name="model">daily.report.statement</field>
         <field name="arch" type="xml">
         <form string="Options">
-            <group col="4">
+            <group>
                 <field name="report_date"/>
 
             </group>
@@ -37,6 +37,14 @@
         parent="menu_transaction_reports"
         action="action_daily_summary_report"
         sequence="6"/>
-
+    <report
+            id="report_daily_summary"
+            string="Daily Summary Report"
+            model="trans.master"
+            report_type="qweb-pdf"
+            file="transaction_management.report_daily_summary"
+            name="transaction_management.report_daily_summary"
+            menu="False"
+        />
 
 </odoo>
