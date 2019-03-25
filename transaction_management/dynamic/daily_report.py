@@ -14,6 +14,6 @@ class daily_report_statement(models.TransientModel):
 
         return {
             'type': 'ir.actions.report.xml',
-            'report_name': 'transaction_management.daily_summary_report'
+            'report_name': 'transaction_management.report_daily_summary'
         }
 
