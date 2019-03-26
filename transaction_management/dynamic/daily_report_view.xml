@@ -11,6 +11,7 @@
         <form string="Options">
             <group>
                 <field name="report_date"/>
+                <field name="branch_name"/>
 
             </group>
          
