@@ -22,14 +22,14 @@ class render_ldger(models.AbstractModel):
         report_obj=self.env['trans.master']
         moveline_obj=self.env['account.move.line']
         ledger_data=report_obj.browse(docids)
-        self.env.cr.execute("""select a.partner_id, a.date,b.name,a.debit as debit, a.credit, a.debit-a.credit as balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.partner_id=%s and a.account_id=%s and  b.state='posted' and a.date>=%s and a.date<=%s order by a.date""",(ledger_data.partner_id.id,ledger_data.account_id.id,datetime.datetime.strptime(ledger_data.date_from, '%Y-%m-%d'),datetime.datetime.strptime(ledger_data.date_to, '%Y-%m-%d'),))
+        self.env.cr.execute("""select a.partner_id, a.date,b.name,a.debit as debit, a.credit, a.debit-a.credit as balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.partner_id=%s and a.account_id=%s and  b.state='posted' and a.date>=%s and a.date<=%s order by a.date""",(ledger_data.customer.id,ledger_data.account_id.id,datetime.datetime.strptime(ledger_data.date_from, '%Y-%m-%d'),datetime.datetime.strptime(ledger_data.date_to, '%Y-%m-%d'),))
         datass = self.env.cr.fetchall()
 
         
 
 #        moveline_datas=moveline_obj.search([('account_id','=',ledger_data.account_id.id),('date','>=',ledger_data.date_from),('date','<=', ledger_data.date_to)])
 #        print'----',moveline_datas
-        self.env.cr.execute("""select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.partner_id=%s and a.account_id=%s and  b.state='posted' and a.date<%s""",(ledger_data.partner_id.id,ledger_data.account_id.id,datetime.datetime.strptime(ledger_data.date_from, '%Y-%m-%d'),))
+        self.env.cr.execute("""select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.partner_id=%s and a.account_id=%s and  b.state='posted' and a.date<%s""",(ledger_data.customer.id,ledger_data.account_id.id,datetime.datetime.strptime(ledger_data.date_from, '%Y-%m-%d'),))
 #        self.env.cr.execute("""select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.partner_id=184 and  b.state='posted' and a.date<'2018-01-10';""")
 #        print'jjj',datetime.datetime.strptime(ledger_data.date_from, '%Y-%m-%d')
 #        query = """SELECT * from account_move_line where date= %s;"""
@@ -63,7 +63,7 @@ class render_ldger(models.AbstractModel):
             'date_from':ledger_data.date_from,
             'openin_balance':openin_balance,
             'closing_balance':closing_balance,
-            'partner_name':ledger_data.partner_id.name,
+            'partner_name':ledger_data.customer.name,
             'account_name':ledger_data.account_id.name,
             'docs': docs,
         }
