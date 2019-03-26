@@ -10,7 +10,7 @@ import datetime
 
 class render_ldger(models.AbstractModel):
 
-    _name = 'report.account_reporting.statement_customerwise_print_report'
+    _name = 'report.transaction_management.report_daily_summary_template'
 
 
     @api.model
@@ -19,7 +19,7 @@ class render_ldger(models.AbstractModel):
         move_dic={}
         move_list=[]
         
-        report_obj=self.env['custom.customer.statement']
+        report_obj=self.env['trans.master']
         moveline_obj=self.env['account.move.line']
         ledger_data=report_obj.browse(docids)
         self.env.cr.execute("""select a.partner_id, a.date,b.name,a.debit as debit, a.credit, a.debit-a.credit as balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.partner_id=%s and a.account_id=%s and  b.state='posted' and a.date>=%s and a.date<=%s order by a.date""",(ledger_data.partner_id.id,ledger_data.account_id.id,datetime.datetime.strptime(ledger_data.date_from, '%Y-%m-%d'),datetime.datetime.strptime(ledger_data.date_to, '%Y-%m-%d'),))
