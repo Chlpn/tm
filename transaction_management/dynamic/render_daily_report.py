@@ -60,7 +60,7 @@ class render_ldger(models.AbstractModel):
             'doc_model': model,
             'data': data,
             'report_date':ledger_data.report_date,
-            'company_id':ledger_data.company_id,
+            'branch_name':ledger_data.branch_name,
             'docs': docs,
         }
         return self.env['report'].render('account_reporting.statement_customerwise_print_report', docargs)
