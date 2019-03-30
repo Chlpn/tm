@@ -36,7 +36,7 @@
                                     <td> </td>
                                     <td> </td>
                                     <t t-set="ab" t-value="0"/>
-                                    <t t-set="ab" t-value="ab + openin_balance"/>
+                                    <t t-set="ab" t-value="ab "/>
                                     <t t-set="ob" t-value="ab"/>
                                     <td style=" width:10%; text-align:right;" ><b><span t-esc="ab"/></b></td>
                                     <t t-set="sdebit" t-value="0"/>
@@ -46,15 +46,9 @@
                                  <br></br>
  <tr t-foreach="data" t-as="da">
         <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
-        <td style=" width:10%; text-align:left;"> <span t-esc="da['date']"/> </td>
-        <td style=" width:25%; text-align:left; padding-left:8px"> <span t-esc="da['account']"/> </td>
-        <td style=" width:20%; text-align:left;"> <span t-esc="da['particulars']"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da['debit']"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da['credit']"/> </td>
-        <t t-set="ob" t-value="((ob + da['debit'])- da['credit']) "/>
-     <t t-set="sdebit" t-value="sdebit + da['debit'] "/>
-      <t t-set="scredit" t-value="scredit + da['credit'] "/>
-        <td style=" width:10%; text-align:right;"><span t-esc="ob"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da['balance']"/> </td>
+
 
 
                                   </tr>
@@ -83,11 +77,11 @@
                                 <th style=" width:20%; text-align:right;">Closing Balance</th>
                             </tr>
                             <tr>
-                            <td style=" width:20%; text-align:left;"><span t-esc="account_name"/></td>
+                           <!-- <td style=" width:20%; text-align:left;"><span t-esc="account_name"/></td>
                             <td style=" width:20%; text-align:right;"><span t-esc="openin_balance"/></td>
                             <td style=" width:20%; text-align:right;"><span t-esc="sdebit"/></td>
                             <td style=" width:20%; text-align:right;"><span t-esc="scredit"/></td>
-                            <td style=" width:20%; text-align:right;"><span t-esc="ob"/></td>
+                            <td style=" width:20%; text-align:right;"><span t-esc="ob"/></td> -->
                             </tr>
                         </table>
 
