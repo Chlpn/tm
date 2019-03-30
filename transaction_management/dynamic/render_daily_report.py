@@ -43,10 +43,10 @@ class render_ldger(models.AbstractModel):
 #            openin_balance=0.0
 #        closing_balance=0.0
         for moveline_data in datass:
-            if moveline_data[2] != 0:
+            if moveline_data[1] != 0:
 
-                move_dic['customer']=moveline_data[1]
-                move_dic['balance']=moveline_data[2]
+                move_dic['customer']=moveline_data[0]
+                move_dic['balance']=moveline_data[1]
 
                 move_list.append(move_dic)
                 move_dic={}
