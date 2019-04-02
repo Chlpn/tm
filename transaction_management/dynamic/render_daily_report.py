@@ -63,4 +63,4 @@ class render_ldger(models.AbstractModel):
             'branch_name':ledger_data.branch_name,
             'docs': docs,
         }
-        return self.env['report'].render('account_reporting.statement_customerwise_print_report', docargs)
+        return self.env['report'].render('transaction_management.report_daily_summary_template', docargs)
