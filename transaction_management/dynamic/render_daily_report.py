@@ -33,8 +33,8 @@ class render_ldger(models.AbstractModel):
         else:
             bid = vvalue[0]
 
-        rec = vvalue.acc_rec_id
-        pay = vvalue.acc_payable_id
+        rec = bid.acc_rec_id
+        pay = bid.acc_payable_id
 
 
         self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as partner, sum(a.debit-a.credit) as balance from account_move_line as a left join
