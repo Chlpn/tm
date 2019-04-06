@@ -27,4 +27,8 @@ class branch(models.Model):
 
     cash_journal_id = fields.Many2one('account.journal', string="Cash Journal", ondelete='restrict', required=True)
 
+    acc_payable_id = fields.Many2one('account.account', string="Accounts Payable", ondelete='restrict')
+    acc_rec_id = fields.Many2one('account.account', string="Accounts Receivable", ondelete='restrict')
+
+
 

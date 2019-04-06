@@ -19,6 +19,8 @@
                              <field name="rentagain_income_ac" />
                              <field name="journal_id" />
                              <field name="cash_journal_id" />
+                             <field name="acc_payable_id" />
+                             <field name="acc_rec_id" />
 
                          </group>
                     </sheet>
