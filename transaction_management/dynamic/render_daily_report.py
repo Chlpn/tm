@@ -26,7 +26,7 @@ class render_ldger(models.AbstractModel):
         ledger_data=report_obj.browse(docids)
 
         self.env.cr.execute(
-            """select company_branch where company_id=%s""",(ledger_data.branch_name.id,))
+            """select id from company_branch where company_id=%s""",(ledger_data.branch_name.id,))
         vvalue = self.env.cr.fetchone()
         if vvalue is None:
             bid = 0
