@@ -6,7 +6,7 @@ class daily_report_statement(models.TransientModel):
     _name = "daily.report.statement"
     _description = "Daily Report Summary"
 
-    branch_name = fields.Many2one('res.company', string="Branch", required=True, default=lambda self: self.env.user.company_id)
+    branch_name = fields.Many2one('company.branch', string="Branch", required=True)
     report_date = fields.Date(string='Date From', default=fields.Date.context_today, required=True)
 
 
