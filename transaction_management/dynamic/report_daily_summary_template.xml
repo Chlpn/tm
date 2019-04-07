@@ -37,7 +37,7 @@
                                 <br></br>
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
-        <td style=" width:10%; text-align:left;"> <span> Total </> </td>
+        <td style=" width:10%; text-align:left;"> Total  </td>
         <td style=" width:25%; text-align:right;"> <span t-esc="balance"/> </td>
 
 
