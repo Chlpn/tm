@@ -51,18 +51,6 @@ class render_ldger(models.AbstractModel):
         
         data=move_list
 
-        self.env.cr.execute(
-            """select id from company.branch where company_id=%s""",
-            (ledger_data.branch_name.id))
-        vvalue = self.env.cr.fetchone()
-        if vvalue is None:
-            bid = 0
-        else:
-            bid = vvalue[0]
-
-
-
-
 
         model = self.env.context.get('active_model')
         docs = self.env[model].browse(self.env.context.get('active_id'))
