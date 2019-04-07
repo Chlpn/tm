@@ -30,12 +30,19 @@
  <tr t-foreach="data" t-as="da">
         <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da['balance']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="da['balance']"/> </td>
+     balance = balance + da['balance']
 
-
-
-                                  </tr>
+ </tr>
                                 <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"> <span> Total </> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="balance"/> </td>
+     
+
+ </tr>
+
 
                             </tbody>
                         </table>
