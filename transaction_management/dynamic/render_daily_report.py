@@ -24,7 +24,7 @@ class render_ldger(models.AbstractModel):
         report_obj = self.env['daily.report.statement']
         moveline_obj=self.env['account.move.line']
         ledger_data=report_obj.browse(docids)
-
+        # fetch company_id
         self.env.cr.execute(
             """select company_id from company_branch where id=%s""",(ledger_data.branch_name.id,))
         vvalue = self.env.cr.fetchone()
@@ -32,6 +32,27 @@ class render_ldger(models.AbstractModel):
             cid = 0
         else:
             cid = vvalue[0]
+        # fetch cash opening balance
+        self.env.cr.execute(
+            """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=1 and a.company_id=%s and  b.state='posted' and a.date<%s""", (ledger_data.branch_name.cash_ac.id,cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        op = self.env.cr.fetchone()
+        if op is None:
+            cob = 0
+        else:
+            cob = op[0]
+
+        # fetch cash closing balance
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=1 and a.company_id=%s and  b.state='posted' and a.date<=%s""",
+                (ledger_data.branch_name.cash_ac.id, cid,
+                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        cl = self.env.cr.fetchone()
+        if cl is None:
+            ccb = 0
+        else:
+            ccb = cl[0]
+
+
 
 
         self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as partner, sum(a.debit-a.credit) as balance from account_move_line as a left join
@@ -76,6 +97,8 @@ class render_ldger(models.AbstractModel):
         docargs = {
             'doc_ids': self.ids,
             'doc_model': model,
+            'cob':cob,
+            'ccb':ccb,
             'data': data,
             'data1': data1,
             'report_date':ledger_data.report_date,
