@@ -51,6 +51,25 @@ class render_ldger(models.AbstractModel):
         
         data=move_list
 
+        move_dic1 = {}
+        move_list1 = []
+
+        self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as partner, sum(a.debit-a.credit) as balance from account_move_line as a left join
+                 account_move as b on a.move_id=b.id where a.account_id=%s and b.company_id=%s and b.state='posted' and a.date<=%s group by 
+                 a.partner_id """, (
+        ledger_data.branch_name.acc_payable_id.id, cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datass1 = self.env.cr.fetchall()
+
+        for moveline_data1 in datass1:
+            if moveline_data1[1] != 0:
+                move_dic1['vendor'] = moveline_data[0]
+                move_dic1['balance'] = moveline_data[1]
+
+                move_list1.append(move_dic1)
+                move_dic1 = {}
+
+        data1 = move_list1
+
 
         model = self.env.context.get('active_model')
         docs = self.env[model].browse(self.env.context.get('active_id'))
