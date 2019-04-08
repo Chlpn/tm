@@ -34,7 +34,7 @@ class render_ldger(models.AbstractModel):
             cid = vvalue[0]
         # fetch cash opening balance
         self.env.cr.execute(
-            """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=1 and a.company_id=%s and  b.state='posted' and a.date<%s""", (ledger_data.branch_name.cash_ac.id,cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<%s""", (ledger_data.branch_name.cash_ac.id,cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         op = self.env.cr.fetchone()
         if op is None:
             cob = 0
@@ -43,7 +43,7 @@ class render_ldger(models.AbstractModel):
 
         # fetch cash closing balance
         self.env.cr.execute(
-                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=1 and a.company_id=%s and  b.state='posted' and a.date<=%s""",
+                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<=%s""",
                 (ledger_data.branch_name.cash_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cl = self.env.cr.fetchone()
