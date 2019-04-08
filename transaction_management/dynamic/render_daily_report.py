@@ -77,6 +77,7 @@ class render_ldger(models.AbstractModel):
             'doc_ids': self.ids,
             'doc_model': model,
             'data': data,
+            'data1': data1,
             'report_date':ledger_data.report_date,
             'branch_name':ledger_data.branch_name,
             'docs': docs,
