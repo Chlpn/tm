@@ -15,6 +15,7 @@
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Report Date:-<span t-esc="report_date"/></div>
 
                             <br/>
+                            <!-- customer receivable summary-->
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -46,6 +47,41 @@
 
                             </tbody>
                         </table>
+     <!-- Vendor payable Summary -->
+   <br/> <br/> <br/>
+
+           <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Customer</th>
+                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+<t t-set="balance" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data" t-as="da">
+        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="da['balance']"/> </td>
+     <t t-set="balance" t-value="balance + da['balance']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"> Total  </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="balance"/> </td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+
                         <br/>
 
 
