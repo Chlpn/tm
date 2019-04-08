@@ -64,7 +64,7 @@
                                  <br></br>
  <tr t-foreach="data1" t-as="da1">
         <td style=" width:5%; text-align:center;"><span t-esc="da1_index+1"/></td>
-        <td style=" width:10%; text-align:left;"> <span t-esc="da1['customer']"/> </td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="da1['vendor']"/> </td>
         <td style=" width:25%; text-align:right;"> <span t-esc="da1['balance']"/> </td>
      <t t-set="balance1" t-value="balance1 + da1['balance']"/>
 
