@@ -62,8 +62,8 @@ class render_ldger(models.AbstractModel):
 
         for moveline_data1 in datass1:
             if moveline_data1[1] != 0:
-                move_dic1['vendor'] = moveline_data[0]
-                move_dic1['balance'] = moveline_data[1]
+                move_dic1['vendor'] = moveline_data1[0]
+                move_dic1['balance'] = moveline_data1[1]
 
                 move_list1.append(move_dic1)
                 move_dic1 = {}
