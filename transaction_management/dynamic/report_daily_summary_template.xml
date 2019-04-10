@@ -49,47 +49,6 @@
                         </table>
 
                             <!-- machine summary-->
-                        <table class="table table-condensed" style=" width:100%;">
-                            <thead >
-                                <tr >
-                                <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Machine Name</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Amount Swiped</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Amount to Pay</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Amount Paid</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Commission</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Cost to Commission</th>
-                                <th style=" width:10%; padding-left:8px; text-align:left;">Margin</th>
-                                <t t-set="as" t-value="0"/>
-                                <t t-set="apy" t-value="0"/>
-                                <t t-set="apd" t-value="0"/>
-                                <t t-set="comm" t-value="0"/>
-                                <t t-set="ctc" t-value="0"/>
-                                <t t-set="mar" t-value="0"/>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                 <br></br>
-                                <br></br>
- <tr>
-
-        <td style=" width:5%; text-align:left;"> .  </td>
-        <td style=" width:10%; text-align:left;"> Total  </td>
-        <td style=" width:15%; text-align:center;"><span t-esc="as"/></td>
-        <td style=" width:15%; text-align:left;"> <span t-esc="apy"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="apd"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="comm"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="ctc"/> </td>
-        <td style=" width:10%; text-align:right;"> <span t-esc="mar"/> </td>
-
-
-
- </tr>
-
-
-                            </tbody>
-                        </table>
                             <!-- customer receivable summary-->
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
