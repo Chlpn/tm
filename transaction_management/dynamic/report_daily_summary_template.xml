@@ -80,7 +80,7 @@
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
         <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
-     <t t-set="as" t-value="as + da2['amount_swiped']"/>
+    
      <t t-set="apy" t-value="apy + da2['amount_pay']"/>
      <t t-set="apd" t-value="apd + da2['amount_paid']"/>
      <t t-set="comm" t-value="comm + da2['commission']"/>
@@ -121,7 +121,7 @@
 
                                  <br></br>
  <tr t-foreach="data" t-as="da">
-        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
+        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/>4</td>
         <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
         <td style=" width:25%; text-align:right;"> <span t-esc="da['balance']"/> </td>
      <t t-set="balance" t-value="balance + da['balance']"/>
