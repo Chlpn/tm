@@ -81,6 +81,7 @@
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
         <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
 
+     <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
 
 
  </tr>
