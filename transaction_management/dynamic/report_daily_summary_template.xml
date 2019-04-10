@@ -73,17 +73,24 @@
                                  <br></br>
  <tr t-foreach="data2" t-as="da2">
         <td style=" width:5%; text-align:center;"><span t-esc="da2_index+1"/></td>
+
         <td style=" width:10%; text-align:left;"> <span t-esc="da2['machine']"/> </td>
+
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_swiped']"/> </td>
+     <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
+
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_pay']"/> </td>
+     <t t-set="apy" t-value="apy + da2['amount_pay']"/>
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
+     <t t-set="apd" t-value="apd + da2['amount_paid']"/>
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
+     <t t-set="comm" t-value="comm + da2['commission']"/>
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
+     <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
         <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
 
-     <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
-     <t t-set="apy" t-value="apy + da2['amount_pay']"/>
-     
+     <t t-set="mar" t-value="mar + da2['margin']"/>
+
 
 
  </tr>
