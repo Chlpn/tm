@@ -60,7 +60,12 @@
                                 <th style=" width:15%; padding-left:8px; text-align:left;">Commission</th>
                                 <th style=" width:15%; padding-left:8px; text-align:left;">Cost to Commission</th>
                                 <th style=" width:10%; padding-left:8px; text-align:left;">Margin</th>
-
+                                <t t-set="as" t-value="0"/>
+                                <t t-set="apy" t-value="0"/>
+                                <t t-set="apd" t-value="0"/>
+                                <t t-set="comm" t-value="0"/>
+                                <t t-set="ctc" t-value="0"/>
+                                <t t-set="mar" t-value="0"/>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,25 +81,24 @@
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
         <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
 
-
+     <t t-set="apy" t-value="apy + da2['amount_pay']"/>
+     <t t-set="apd" t-value="apd + da2['amount_paid']"/>
+     <t t-set="comm" t-value="comm + da2['commission']"/>
+     <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
+     <t t-set="mar" t-value="mar + da2['margin']"/>
 
  </tr>
                                 <br></br>
  <tr>
-        <t t-set="as" t-value="0"/>
-                                <t t-set="apy" t-value="0"/>
-                                <t t-set="apd" t-value="0"/>
-                                <t t-set="comm" t-value="0"/>
-                                <t t-set="ctc" t-value="0"/>
-                                <t t-set="mar" t-value="0"/>
+
         <td style=" width:5%; text-align:left;"> .  </td>
         <td style=" width:10%; text-align:left;"> Total  </td>
-        <td style=" width:15%; text-align:center;"><span t-set="apy" t-value="apy + da2['amount_pay']"/></td>
-        <td style=" width:15%; text-align:left;"> <span t-set="apd" t-value="apd + da2['amount_paid']"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-set="comm" t-value="comm + da2['commission']"/> </td>
-
-        <td style=" width:15%; text-align:right;"> <span t-set="ctc" t-value="ctc + da2['cost_commission']"/> </td>
-        <td style=" width:10%; text-align:right;"> <span t-set="mar" t-value="mar + da2['margin']"/> </td>
+        <td style=" width:15%; text-align:center;"><span t-esc="as"/></td>
+        <td style=" width:15%; text-align:left;"> <span t-esc="apy"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc="apd"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc="comm"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc="ctc"/> </td>
+        <td style=" width:10%; text-align:right;"> <span t-esc="mar"/> </td>
 
 
 
