@@ -81,7 +81,7 @@
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
         <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
 
-     
+
 
  </tr>
                                 <br></br>
