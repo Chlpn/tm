@@ -91,7 +91,7 @@
                                 <br></br>
  <tr>
 
-        <td style=" width:5%; text-align:left;"> .  </td>
+        <td style=" width:5%; text-align:left;">  </td>
         <td style=" width:10%; text-align:left;"> Total  </td>
         <td style=" width:15%; text-align:center;"><span t-esc="as"/></td>
         <td style=" width:15%; text-align:left;"> <span t-esc="apy"/> </td>
