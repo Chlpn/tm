@@ -8,7 +8,7 @@
                     <t t-call="report.internal_layout">
                         <div class="page">
                             <div style="text-align:center;">
-                            <h2><span  t-esc="branch_name.name"/></h2>
+                            <h2><span  t-esc="branch_name.company_id.name"/></h2>
                                 <h3><span>Daily Summary Report</span></h3>
                             </div>
 
