@@ -93,7 +93,7 @@ class render_ldger(models.AbstractModel):
         if gen is None:
             gex = 0
         else:
-            gexg = gen
+            gex = gen[0]
 
 
         # fetch cash closing balance
@@ -181,6 +181,10 @@ class render_ldger(models.AbstractModel):
             'doc_model': model,
             'cob':cob,
             'ccb':ccb,
+            'core':core,
+            'rg': rg,
+            'ce': ce,
+            'gex':gex,
             'data': data,
             'data1': data1,
             'data2': data2,

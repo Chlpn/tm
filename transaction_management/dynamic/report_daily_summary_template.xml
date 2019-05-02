@@ -123,6 +123,48 @@
 
                             </tbody>
                         </table>
+
+
+    <!-- Revenue Summary-->
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Particulars</th>
+                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr >
+        <td style=" width:5%; text-align:center;">1.</td>
+        <td style=" width:10%; text-align:left;"> Cash Opening Balance </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="cob"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">2.</td>
+        <td style=" width:10%; text-align:left;"> Cash Paid to Customer </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * apd"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">10.</td>
+        <td style=" width:10%; text-align:left;"> Cash Closing Balance </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="ccb"/> </td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
                             <!-- customer receivable summary-->
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
