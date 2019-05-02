@@ -225,9 +225,10 @@
 
                             </tbody>
                         </table>
+                            <br/> <br/> <br/>
      <!-- Vendor payable Summary -->
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Vendor Payment</div>
-   <br/> <br/> <br/>
+
 
            <table class="table table-condensed" style=" width:100%;">
                             <thead >
