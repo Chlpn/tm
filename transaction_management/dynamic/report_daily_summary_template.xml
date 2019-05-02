@@ -8,45 +8,14 @@
                     <t t-call="report.internal_layout">
                         <div class="page">
                             <div style="text-align:center;">
-                            <h2><span  t-esc="res_company.name"/></h2>
+                            <h2><span  t-esc="branch_name"/></h2>
                                 <h3><span>Daily Summary Report</span></h3>
                             </div>
 
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Report Date:-<span t-esc="report_date"/></div>
 
                             <br/>
-                            <!-- Basic summary-->
-                        <table class="table table-condensed" style=" width:100%;">
-                            <thead >
-                                <tr >
-                                <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Particulars</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                 <br></br>
- <tr >
-        <td style=" width:5%; text-align:center;">1.</td>
-        <td style=" width:10%; text-align:left;"> Cash Opening Balance </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="cob"/> </td>
-
-
- </tr>
-
- <tr >
-        <td style=" width:5%; text-align:center;">2.</td>
-        <td style=" width:10%; text-align:left;"> Cash Closing Balance </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="ccb"/> </td>
-
-
- </tr>
-
-
-                            </tbody>
-                        </table>
 
                             <!-- machine summary-->
                         <table class="table table-condensed" style=" width:100%;">
@@ -138,7 +107,7 @@
  <tr >
         <td style=" width:5%; text-align:center;">2.</td>
         <td style=" width:10%; text-align:left;"> Cash Paid to Customer </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * cob"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * apd"/> </td>
 
 
  </tr>
