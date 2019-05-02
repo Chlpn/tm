@@ -116,6 +116,22 @@
  </tr>
 
  <tr >
+        <td style=" width:5%; text-align:center;">3.</td>
+        <td style=" width:10%; text-align:left;"> Other Payments </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * pamnt"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">4.</td>
+        <td style=" width:10%; text-align:left;"> Other Receipts </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="ramnt"/> </td>
+
+
+ </tr>
+
+ <tr >
         <td style=" width:5%; text-align:center;">10.</td>
         <td style=" width:10%; text-align:left;"> Cash Closing Balance </td>
         <td style=" width:25%; text-align:right;"> <span t-esc="ccb"/> </td>

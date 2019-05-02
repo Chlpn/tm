@@ -40,6 +40,23 @@ class render_ldger(models.AbstractModel):
             cob = 0
         else:
             cob = op[0]
+        # fetch cash payments
+        self.env.cr.execute(
+            """select sum(amount) as amount from payment_voucher where state='post' and company_id=%s and transaction_date<%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        pv = self.env.cr.fetchone()
+        if pv is None:
+            pamnt = 0
+        else:
+            pamnt = pv[0]
+        # fetch cash receipts
+        self.env.cr.execute(
+            """select sum(amount) as amount from receipt_voucher where state='post' and company_id=%s and transaction_date<%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        rv = self.env.cr.fetchone()
+        if rv is None:
+            ramnt = 0
+        else:
+            ramnt = rv[0]
+
 
         # fetch commission received
         self.env.cr.execute(
@@ -181,6 +198,8 @@ class render_ldger(models.AbstractModel):
             'doc_model': model,
             'cob':cob,
             'ccb':ccb,
+            'ramnt':ramnt,
+            'pamnt':pamnt,
             'core':core,
             'rg': rg,
             'ce': ce,
