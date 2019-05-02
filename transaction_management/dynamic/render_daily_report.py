@@ -85,6 +85,17 @@ class render_ldger(models.AbstractModel):
         else:
             rg = rag[0]
 
+        # fetch general expenses
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and company_id=%s and a.date=%s""",
+                (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        gen = self.env.cr.fetchone()
+        if gen is None:
+            gex = 0
+        else:
+            gexg = gen
+
+            
         # fetch cash closing balance
         self.env.cr.execute(
                 """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<=%s""",
