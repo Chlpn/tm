@@ -113,7 +113,7 @@
  </tr>
 
  <tr >
-        <td style=" width:5%; text-align:center;">2.</td>
+        <td style=" width:5%; text-align:center;">10.</td>
         <td style=" width:10%; text-align:left;"> Cash Closing Balance </td>
         <td style=" width:25%; text-align:right;"> <span t-esc="ccb"/> </td>
 
@@ -137,7 +137,7 @@
 
                                  <br></br>
  <tr t-foreach="data" t-as="da">
-        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/>4</td>
+        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
         <td style=" width:25%; text-align:right;"> <span t-esc="da['balance']"/> </td>
      <t t-set="balance" t-value="balance + da['balance']"/>

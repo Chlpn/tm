@@ -41,6 +41,50 @@ class render_ldger(models.AbstractModel):
         else:
             cob = op[0]
 
+        # fetch commission received
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+                (ledger_data.branch_name.income_ac.id, cid,
+                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        commnr = self.env.cr.fetchone()
+        if commnr is None:
+            core = 0
+        else:
+            core = commnr[0]
+
+        # fetch rent to branch income
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+                (ledger_data.branch_name.rentagain_income_ac.id, cid,
+                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        rag = self.env.cr.fetchone()
+        if rag is None:
+            rg = 0
+        else:
+            rg = rag[0]
+
+        # fetch commission expenses
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+                (ledger_data.branch_name.cost_ac.id, cid,
+                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        cost = self.env.cr.fetchone()
+        if cost is None:
+            ce = 0
+        else:
+            ce = cost[0]
+
+        # fetch rent to branch income
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+                (ledger_data.branch_name.rentagain_income_ac.id, cid,
+                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        rag = self.env.cr.fetchone()
+        if rag is None:
+            rg = 0
+        else:
+            rg = rag[0]
+
         # fetch cash closing balance
         self.env.cr.execute(
                 """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<=%s""",
