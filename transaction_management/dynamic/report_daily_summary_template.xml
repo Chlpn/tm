@@ -14,10 +14,12 @@
 
                             <div style="margin-left:auto;margin-right:auto;text-align:center;">Report Date:-<span t-esc="report_date"/></div>
 
+
                             <br/>
 
 
                             <!-- machine summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Machine Summary</div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -84,6 +86,7 @@
                         </table>
 
                         <!-- Basic summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Cash Summary</div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -126,6 +129,7 @@
 
 
     <!-- Revenue Summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Revenue Summary</div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -189,6 +193,7 @@
                             </tbody>
                         </table>
                             <!-- customer receivable summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Customer Receivable</div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -221,6 +226,7 @@
                             </tbody>
                         </table>
      <!-- Vendor payable Summary -->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Vendor Payment</div>
    <br/> <br/> <br/>
 
            <table class="table table-condensed" style=" width:100%;">
