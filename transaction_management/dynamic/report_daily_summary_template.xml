@@ -277,6 +277,82 @@
 
                             </tbody>
                         </table>
+                            <br/> <br/> <br/>
+     <!-- Payment Summary -->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Payment Vouchers</div>
+
+
+           <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Partner</th>
+                                    <th style=" width:10%; text-align:center;">Account</th>
+                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+<t t-set="balancep" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data3" t-as="dap">
+        <td style=" width:5%; text-align:center;"><span t-esc="dap_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dap['partner']"/> </td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dap['account']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="dap['balance']"/> </td>
+     <t t-set="balancep" t-value="balancep + dap['balance']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"> Total  </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="balancep"/> </td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br/> <br/> <br/>
+     <!-- Payment Summary -->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Payment Vouchers</div>
+
+
+           <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Partner</th>
+                                    <th style=" width:10%; text-align:center;">Account</th>
+                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+<t t-set="balancer" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data4" t-as="dar">
+        <td style=" width:5%; text-align:center;"><span t-esc="dar_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dar['partner']"/> </td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dar['account']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="dar['balance']"/> </td>
+     <t t-set="balancer" t-value="balancer + dar['balance']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"> Total  </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="balancer"/> </td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
 
                         <br/>
 
