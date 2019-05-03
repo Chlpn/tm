@@ -25,12 +25,12 @@
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
                                 <th style=" width:10%; text-align:center;">Machine Name</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Amount Swiped</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Amount to Pay</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Amount Paid</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Commission</th>
-                                <th style=" width:15%; padding-left:8px; text-align:left;">Cost to Commission</th>
-                                <th style=" width:10%; padding-left:8px; text-align:left;">Margin</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Swiped</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount to Pay</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Paid</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Commission</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Cost to Commission</th>
+                                <th style=" width:10%; padding-left:8px; text-align:right;">Margin</th>
                                 <t t-set="ams" t-value="0"/>
                                 <t t-set="apy" t-value="0"/>
                                 <t t-set="apd" t-value="0"/>
