@@ -190,6 +190,46 @@ class render_ldger(models.AbstractModel):
 
         data2 = move_list2
 
+        # fetch payment vouchers
+
+        move_dic3 = {}
+        move_list3 = []
+
+        self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as part,(select name from account_account where id=a.account_id) as pacc,sum(amount) from payment_voucher as a inner join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s group by partner_id,account_id order by pacc,part""", (
+            cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datass3 = self.env.cr.fetchall()
+
+        for moveline_data3 in datass3:
+            move_dic3['partner'] = moveline_data3[0]
+            move_dic3['account'] = moveline_data3[1]
+            move_dic3['amount'] = moveline_data3[2]
+
+            move_list3.append(move_dic3)
+            move_dic3 = {}
+
+        data3 = move_list3
+
+        # fetch receipt vouchers
+
+        move_dic4 = {}
+        move_list4 = []
+
+        self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as part,(select name from account_account where id=a.account_id) as pacc,sum(amount) from receipt_voucher as a inner join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s group by partner_id,account_id order by pacc,part""", (
+            cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datass4= self.env.cr.fetchall()
+
+        for moveline_data4 in datass4:
+            move_dic4['partner'] = moveline_data4[0]
+            move_dic4['account'] = moveline_data4[1]
+            move_dic4['amount'] = moveline_data4[2]
+
+            move_list4.append(move_dic4)
+            move_dic4 = {}
+
+        data4 = move_list4
+
+
+
 
         model = self.env.context.get('active_model')
         docs = self.env[model].browse(self.env.context.get('active_id'))
