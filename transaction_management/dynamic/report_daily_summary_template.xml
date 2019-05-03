@@ -92,7 +92,7 @@
                             <thead >
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Particulars</th>
+                                <th style=" width:10%; text-align:left;">Particulars</th>
                                 <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 
                                 </tr>
@@ -151,7 +151,7 @@
                             <thead >
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Particulars</th>
+                                <th style=" width:10%; text-align:left;">Particulars</th>
                                 <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 
                                 </tr>
@@ -215,7 +215,7 @@
                             <thead >
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Customer</th>
+                                <th style=" width:10%; text-align:left;">Customer</th>
                                 <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 <t t-set="balance" t-value="0"/>
                                 </tr>
@@ -233,8 +233,8 @@
                                 <br></br>
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
-        <td style=" width:10%; text-align:left;"> Total  </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="balance"/> </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc="balance"/> </strong></td>
 
 
  </tr>
@@ -251,7 +251,7 @@
                             <thead >
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Vendor</th>
+                                <th style=" width:10%; text-align:left;">Vendor</th>
                                 <th style=" width:25%; padding-left:8px; text-align:right   ;">Balance</th>
 <t t-set="balance1" t-value="0"/>
                                 </tr>
@@ -269,8 +269,8 @@
                                 <br></br>
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
-        <td style=" width:10%; text-align:left;"> Total  </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="balance1"/> </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc="balance1"/> </strong></td>
 
 
  </tr>
@@ -307,9 +307,9 @@
                                 <br></br>
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
-        <td style=" width:10%; text-align:left;"> Total  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
         <td style=" width:10%; text-align:left;"><span /></td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="balancep"/> </td>
+        <td style=" width:25%; text-align:right;"> <strong><span t-esc="balancep"/> </strong></td>
 
 
  </tr>
@@ -346,9 +346,9 @@
                                 <br></br>
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
-        <td style=" width:10%; text-align:left;"> Total  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
         <td style=" width:10%; text-align:left;"><span /></td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="balancer"/> </td>
+        <td style=" width:25%; text-align:right;"> <strong><span t-esc="balancer"/></strong> </td>
 
 
  </tr>
