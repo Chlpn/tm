@@ -70,12 +70,12 @@
 
         <td style=" width:5%; text-align:left;">  </td>
         <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
-        <td style=" width:15%; text-align:right;"><span t-esc="ams"/></td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="apy"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="apd"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="comm"/> </td>
-        <td style=" width:15%; text-align:right;"> <span t-esc="ctc"/> </td>
-        <td style=" width:10%; text-align:right;"> <span t-esc="mar"/> </td>
+        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
+        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
 
 
 
