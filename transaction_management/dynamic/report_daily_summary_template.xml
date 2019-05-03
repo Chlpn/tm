@@ -299,8 +299,8 @@
         <td style=" width:5%; text-align:center;"><span t-esc="dap_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dap['partner']"/> </td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dap['account']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="dap['balance']"/> </td>
-     <t t-set="balancep" t-value="balancep + dap['balance']"/>
+        <td style=" width:25%; text-align:right;"> <span t-esc="dap['amount']"/> </td>
+     <t t-set="balancep" t-value="balancep + dap['amount']"/>
 
  </tr>
                                 <br></br>
@@ -337,8 +337,8 @@
         <td style=" width:5%; text-align:center;"><span t-esc="dar_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dar['partner']"/> </td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dar['account']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="dar['balance']"/> </td>
-     <t t-set="balancer" t-value="balancer + dar['balance']"/>
+        <td style=" width:25%; text-align:right;"> <span t-esc="dar['amount']"/> </td>
+     <t t-set="balancer" t-value="balancer + dar['amount']"/>
 
  </tr>
                                 <br></br>
