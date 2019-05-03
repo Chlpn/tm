@@ -19,7 +19,7 @@
 
 
                             <!-- machine summary-->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Machine Summary</div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Machine Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -87,7 +87,7 @@
 
                         <!-- Basic summary-->
                             <br/>
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Cash Summary</div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Cash Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -146,7 +146,7 @@
 
 
     <!-- Revenue Summary-->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Revenue Summary</div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Revenue Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -210,7 +210,7 @@
                             </tbody>
                         </table>
                             <!-- customer receivable summary-->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Customer Receivable</div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Customer Receivable</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -244,7 +244,7 @@
                         </table>
                             <br/> <br/> <br/>
      <!-- Vendor payable Summary -->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Vendor Payment</div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Vendor Payment</u></strong></div>
 
 
            <table class="table table-condensed" style=" width:100%;">
@@ -280,7 +280,7 @@
                         </table>
                             <br/> <br/> <br/>
      <!-- Payment Summary -->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Payment Vouchers</div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Payment Vouchers</u></strong></div>
 
 
            <table class="table table-condensed" style=" width:100%;">
@@ -319,7 +319,7 @@
                         </table>
                             <br/> <br/> <br/>
      <!-- Receipt Summary -->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Receipt Vouchers</div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Receipt Vouchers</u></strong></div>
 
 
            <table class="table table-condensed" style=" width:100%;">
