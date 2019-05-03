@@ -69,9 +69,9 @@
  <tr>
 
         <td style=" width:5%; text-align:left;">  </td>
-        <td style=" width:10%; text-align:left;"> Total  </td>
-        <td style=" width:15%; text-align:center;"><span t-esc="ams"/></td>
-        <td style=" width:15%; text-align:left;"> <span t-esc="apy"/> </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:15%; text-align:right;"><span t-esc="ams"/></td>
+        <td style=" width:15%; text-align:right;"> <span t-esc="apy"/> </td>
         <td style=" width:15%; text-align:right;"> <span t-esc="apd"/> </td>
         <td style=" width:15%; text-align:right;"> <span t-esc="comm"/> </td>
         <td style=" width:15%; text-align:right;"> <span t-esc="ctc"/> </td>
@@ -92,7 +92,7 @@
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
                                 <th style=" width:10%; text-align:center;">Particulars</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 
                                 </tr>
                             </thead>
@@ -151,7 +151,7 @@
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
                                 <th style=" width:10%; text-align:center;">Particulars</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 
                                 </tr>
                             </thead>
@@ -215,7 +215,7 @@
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
                                 <th style=" width:10%; text-align:center;">Customer</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 <t t-set="balance" t-value="0"/>
                                 </tr>
                             </thead>
@@ -251,7 +251,7 @@
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
                                 <th style=" width:10%; text-align:center;">Vendor</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right   ;">Balance</th>
 <t t-set="balance1" t-value="0"/>
                                 </tr>
                             </thead>
@@ -286,9 +286,9 @@
                             <thead >
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Partner</th>
-                                    <th style=" width:10%; text-align:center;">Account</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+                                <th style=" width:10%; text-align:left;">Partner</th>
+                                    <th style=" width:10%; text-align:left;">Account</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 <t t-set="balancep" t-value="0"/>
                                 </tr>
                             </thead>
@@ -324,9 +324,9 @@
                             <thead >
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
-                                <th style=" width:10%; text-align:center;">Partner</th>
-                                    <th style=" width:10%; text-align:center;">Account</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Balance</th>
+                                <th style=" width:10%; text-align:left;">Partner</th>
+                                    <th style=" width:10%; text-align:left;">Account</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
 <t t-set="balancer" t-value="0"/>
                                 </tr>
                             </thead>
