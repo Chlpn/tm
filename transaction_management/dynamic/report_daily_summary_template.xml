@@ -316,8 +316,8 @@
                             </tbody>
                         </table>
                             <br/> <br/> <br/>
-     <!-- Payment Summary -->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Payment Vouchers</div>
+     <!-- Receipt Summary -->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Receipt Vouchers</div>
 
 
            <table class="table table-condensed" style=" width:100%;">
