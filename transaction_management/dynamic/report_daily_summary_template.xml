@@ -133,7 +133,7 @@
  </tr>
 
  <tr >
-        <td style=" width:5%; text-align:center;">10.</td>
+        <td style=" width:5%; text-align:center;">5.</td>
         <td style=" width:10%; text-align:left;"> Cash Closing Balance </td>
         <td style=" width:25%; text-align:right;"> <span t-esc="ccb"/> </td>
 
