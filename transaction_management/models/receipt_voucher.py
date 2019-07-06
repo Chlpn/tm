@@ -95,7 +95,7 @@ class ReceiptVoucher(models.Model):
             raise UserError(_('Selected journal is not a Cash Journal.'))
 
         if self.description:
-            description = self.description
+            description = self.description +self.name
         else:
             description='label'
         line_ids = [
