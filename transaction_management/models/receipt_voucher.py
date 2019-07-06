@@ -91,6 +91,7 @@ class ReceiptVoucher(models.Model):
     @api.multi
     def post(self):
         voucher_name = self.env['ir.sequence'].next_by_code('receipt.voucher') or 'new'
+        self.write({'name': voucher_name})
         if not self.journal_id.cash_journal:
             raise UserError(_('Selected journal is not a Cash Journal.'))
 
@@ -154,5 +155,5 @@ class ReceiptVoucher(models.Model):
             baccount_move = self.env['account.move'].create(bvals)
             baccount_move.post()
             self.write({'intercompany_move_id': baccount_move.id})
-        self.write({'state': 'post', 'name': voucher_name, 'account_move_id': account_move.id})
+        self.write({'state': 'post', 'account_move_id': account_move.id})
 
