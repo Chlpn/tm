@@ -106,7 +106,7 @@ class PaymentVoucher(models.Model):
             raise UserError(_('Selected journal is not a Cash Journal.'))
 
         if self.description:
-            description = self.description +self.name
+            description = self.description + ' /' + self.name
         line_ids = [
             (0, 0,
              {'journal_id': self.journal_id.id, 'account_id': self.account_id.id,
