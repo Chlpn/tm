@@ -93,7 +93,7 @@ class ReceiptVoucher(models.Model):
         voucher_name = self.env['ir.sequence'].next_by_code('receipt.voucher') or 'new'
         if not self.journal_id.cash_journal:
             raise UserError(_('Selected journal is not a Cash Journal.'))
-        description = ""
+
         if self.description:
             description = self.description
         else:
