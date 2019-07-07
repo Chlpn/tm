@@ -155,7 +155,7 @@ class SwipeCard(models.TransientModel):
 
 
         trans_master = self.env['trans.master'].create(vals)
-        trans_master.post()
+
         cc_payment.write({'state':chstate,
                           'total_to_swipe': cc_payment.total_to_swipe - self.rec_amount,
                           'amount_swiped': cc_payment.amount_swiped + self.rec_amount,
