@@ -117,8 +117,8 @@ class SwipeCard(models.TransientModel):
     def swipe(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         chstate = cc_payment.state
-        if cc_payment.total_to_swipe < self.rec_amount:
-            raise UserError(_('Amount remaining to swipe is %f, please change the amount')%(cc_payment.total_to_swipe))
+        #if cc_payment.total_to_swipe < self.rec_amount:
+            #raise UserError(_('Amount remaining to swipe is %f, please change the amount')%(cc_payment.total_to_swipe))
         if self.machine_name.rent_again:
             par_cost = self.machine_name.parent_name.cost_percentage
         else:
