@@ -213,7 +213,7 @@ class SwipeCard(models.TransientModel):
                 'transaction_date': self.rec_date,
                 'amount_to_swipe': self.rec_amount,
                 'cost_percentage': mm_master.cost_percentage,
-                'sales_percentage': self.rec_precentage,
+                'sales_percentage': self.rec_percentage,
                 'commission': (self.rec_amount * self.rec_precentage / 100.0),
                 'cost_to_commission': (self.rec_amount * mm_master.cost_percentage / 100.0),
                 'parent_percentage': par_cost,
