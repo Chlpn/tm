@@ -230,3 +230,13 @@ class SwipeCard(models.TransientModel):
 
             trans_master2 = self.env['trans.master'].create(vals)
 
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Swipe Card',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'res_model': 'swipe.card.wizard2',
+                'target': 'new',
+                'context': 'None'
+            }
+
