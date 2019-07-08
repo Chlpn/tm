@@ -172,8 +172,8 @@ class SwipeCard(models.TransientModel):
             default=lambda self: self.env.user.company_id
         )
 
-        rec_amount = fields.Float(string='Amount Swiped', default='')
-        rec_percentage = fields.Float(string='Sales Percentage')
+        rec_amount = fields.Float(string='Amount Swiped', default='',digits=dp.get_precision('Account'))
+        rec_percentage = fields.Float(string='Sales Percentage',digits=dp.get_precision('Account'))
         rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
         rec_customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict')
         rec_customer_mobile = fields.Char(related='rec_customer.mobile', string='Mobile')

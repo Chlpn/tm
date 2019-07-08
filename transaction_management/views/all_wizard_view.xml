@@ -60,7 +60,7 @@
 
                     </group>
                     <footer>
-                        <button name="swipe2" string="Swipe" type="object" class="oe_highlight"/>
+                        <button name="swipe" string="Swipe" type="object" class="oe_highlight"/>
                         or <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
                 </form>
