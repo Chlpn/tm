@@ -199,7 +199,7 @@ class SwipeCard(models.TransientModel):
         def swipe2(self):
             mm_master = self.env['machine.master'].browse(self.env.context.get('active_id'))
 
-            if self.machine_name.rent_again:
+            if mm_master.rent_again:
                 par_cost = mm_master.parent_name.cost_percentage
             else:
                 par_cost = 0.0
