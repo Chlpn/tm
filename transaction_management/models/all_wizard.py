@@ -23,8 +23,8 @@ class ReceiveCommission(models.TransientModel):
     def rec_com(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         chstate = cc_payment.state
-        if cc_payment.commission_pay < self.rec_amount:
-            raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
+        #if cc_payment.commission_pay < self.rec_amount:
+            #raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
         self.env.cr.execute(
                     """select cash_journal_id from company_branch where company_id=%s""",
                     (self.company_id.id,))
@@ -69,8 +69,8 @@ class ProcessDeposit(models.TransientModel):
     def dep_pay(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         chstate = cc_payment.state
-        if cc_payment.amount_to_deposit < self.rec_amount:
-            raise UserError(_('Amount remaining to deposit is %f, please change the amount')%(cc_payment.amount_to_deposit))
+        #if cc_payment.amount_to_deposit < self.rec_amount:
+            #raise UserError(_('Amount remaining to deposit is %f, please change the amount')%(cc_payment.amount_to_deposit))
         if cc_payment.state == 'up' or cc_payment.state == 'pd':
             if (cc_payment.amount_to_deposit -self.rec_amount) == 0:
                 chstate = 'fd'
