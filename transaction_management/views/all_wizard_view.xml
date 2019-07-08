@@ -72,9 +72,13 @@
             <field name="model">swipe.card.wizard2</field>
             <field name="arch" type="xml">
                 <form string="Swipe Card">
+                    <script>
+                        $('.my-focus-field').focus()
+
+                    </script>
                     <group>
 
-                            <field name="rec_amount" default_focus="1"/>
+                            <field name="rec_amount" default_focus="1" class="my-focus-field"/>
                             <field name="rec_percentage"/>
                             <field name="rec_date"/>
                             <field name="rec_amount_to_customer" required='True' readonly="1"/>
