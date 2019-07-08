@@ -207,7 +207,7 @@ class SwipeCard(models.TransientModel):
 
 
             vals = {
-                'machine_name': mm_master.machine_name.id,
+                'machine_name': mm_master.id,
                 'transaction_amount': self.rec_amount,
                 'commission_included': True,
                 'transaction_date': self.rec_date,
