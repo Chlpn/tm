@@ -2,6 +2,7 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+import odoo.addons.decimal_precision as dp
 from datetime import datetime
 
 
@@ -162,5 +163,71 @@ class SwipeCard(models.TransientModel):
                           'transaction_ref': [(4, trans_master.id)]
                           })
 
+    class SwipeCard2(models.TransientModel):
+        _name = "swipe.card.wizard2"
 
+        company_id = fields.Many2one(
+            'res.company',
+            'Company',
+            default=lambda self: self.env.user.company_id
+        )
+
+        rec_amount = fields.Float(string='Amount Swiped')
+        rec_percentage = fields.Float(string='Sales Percentage')
+        rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
+        rec_customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict',
+                                   domain=[('customer', '=', '1')])
+        rec_customer_mobile = fields.Char(related='customer.mobile', string='Mobile')
+        rec_amount_to_customer = fields.Float(string='Amount to customer', store=True, digits=dp.get_precision('Account'))
+        rec_cash_paid_customer = fields.Float(string='Cash Paid', digits=dp.get_precision('Account'))
+        rec_balance = fields.Float(string='Balance', digits=dp.get_precision('Account'))
+
+
+
+        @api.onchange('rec_amount','rec_percentage')
+        def _onchange_amount_to_customer(self):
+            commission = (self.rec_amount * self.rec_percentage / 100)
+            self.rec_amount_to_customer = (self.rec_amount - commission)
+            self.rec_cash_paid_customer = self.rec_amount_to_customer
+            self.rec_balance = self.rec_amount_to_customer - self.rec_cash_paid_customer
+
+        @api.onchange('rec_cash_paid_customer')
+        def _cash_paid_customer(self):
+            self.rec_balance = self.rec_amount_to_customer - self.rec_cash_paid_customer
+
+        @api.multi
+        def swipe2(self):
+            mm_master = self.env['machine.master'].browse(self.env.context.get('active_id'))
+
+            if self.machine_name.rent_again:
+                par_cost = mm_master.parent_name.cost_percentage
+            else:
+                par_cost = 0.0
+
+
+
+            vals = {
+                'machine_name': mm_master.machine_name.id,
+                'transaction_amount': self.rec_amount,
+                'commission_included': True,
+                'transaction_date': self.rec_date,
+                'amount_to_swipe': self.rec_amount,
+                'cost_percentage': mm_master.cost_percentage,
+                'sales_percentage': self.rec_precentage,
+                'commission': (self.rec_amount * self.rec_precentage / 100.0),
+                'cost_to_commission': (self.rec_amount * mm_master.cost_percentage / 100.0),
+                'parent_percentage': par_cost,
+                'cost_to_parent': (self.rec_amount * par_cost / 100.0),
+                'margin': (self.rec_amount * self.rec_precentage / 100.0) - (
+                            self.rec_amount * mm_master.cost_percentage / 100.0),
+                'amount_to_customer': self.rec_amount - (self.rec_amount * self.rec_precentage / 100.0),
+                'cash_paid_customer': self.rec_cash_paid_customer,
+                'balance': (self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0))- self.rec_cash_paid_customer,
+                'customer': self.rec_customer.id,
+                'customer_mobile': self.rec_customer_mobile,
+
+
+            }
+
+            trans_master2 = self.env['trans.master'].create(vals)
 

@@ -8,6 +8,10 @@
             <field name="model">machine.master</field>
             <field name="arch" type="xml">
                 <form string="Machine Master" duplicate="0">
+                    <header>
+                        <button name="swipe_card" string="Swipe Card" type="object"/>
+
+                    </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                         <button name="toggle_active" class="oe_stat_button" type="object" icon="fa-archive">

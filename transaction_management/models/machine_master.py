@@ -65,6 +65,19 @@ class MachineMaster(models.Model):
             raise UserError("You cannot save without Default sales percentage ")
 
     @api.multi
+    def swipe_card(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Swipe Card',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'swipe.card.wizard2',
+            'target': 'new',
+            'context': 'None'
+        }
+
+
+    @api.multi
     def toggle_active(self):
         for name in self:
             if not name.active and name.rent_again:
