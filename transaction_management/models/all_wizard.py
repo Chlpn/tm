@@ -229,6 +229,6 @@ class SwipeCard(models.TransientModel):
             }
 
             trans_master2 = self.env['trans.master'].create(vals)
-
             mm_master.swipe_card()
+
 
