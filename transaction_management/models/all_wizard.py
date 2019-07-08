@@ -176,8 +176,8 @@ class SwipeCard(models.TransientModel):
         rec_percentage = fields.Float(string='Sales Percentage')
         rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
         rec_customer = fields.Many2one('res.partner', string="Customer", ondelete='restrict',
-                                   domain=[('customer', '=', '1')])
-        rec_customer_mobile = fields.Char(related='customer.mobile', string='Mobile')
+                                   domain=[('rec_customer', '=', '1')])
+        rec_customer_mobile = fields.Char(related='rec_customer.mobile', string='Mobile')
         rec_amount_to_customer = fields.Float(string='Amount to customer', store=True, digits=dp.get_precision('Account'))
         rec_cash_paid_customer = fields.Float(string='Cash Paid', digits=dp.get_precision('Account'))
         rec_balance = fields.Float(string='Balance', digits=dp.get_precision('Account'))
@@ -220,9 +220,9 @@ class SwipeCard(models.TransientModel):
                 'cost_to_parent': (self.rec_amount * par_cost / 100.0),
                 'margin': (self.rec_amount * self.rec_precentage / 100.0) - (
                             self.rec_amount * mm_master.cost_percentage / 100.0),
-                'amount_to_customer': self.rec_amount - (self.rec_amount * self.rec_precentage / 100.0),
+                'amount_to_customer': self.rec_amount_to_customer,
                 'cash_paid_customer': self.rec_cash_paid_customer,
-                'balance': (self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0))- self.rec_cash_paid_customer,
+                'balance': self.rec_balance,
                 'customer': self.rec_customer.id,
                 'customer_mobile': self.rec_customer_mobile,
 
