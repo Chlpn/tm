@@ -86,7 +86,11 @@
                             <field name="rec_balance"/>
                             <field name="rec_customer" attrs="{'required': [('rec_balance', '!=',0)]}"/>
                             <field name="rec_customer_mobile" attrs="{'required': [('rec_balance', '!=',0)]}"/>
-
+                            <field name="rec_commission" invisible="1" />
+                            <field name="rec_cost_to_commission" invisible="1" />
+                            <field name="rec_par_cost" invisible="1" />
+                            <field name="rec_cost_percentage" invisible="1" />
+                            <field name="rec_cost_to_parent" invisible="1" />
 
 
                          <field name="company_id" required='True' readonly="1" />
