@@ -28,7 +28,7 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute(
             """select company_id from company_branch where id=%s""",(ledger_data.branch_name.id,))
         vvalue = self.env.cr.fetchone()
-        if type(vvalue[0]) is not float:
+        if vvalue is None:
             cid = 0
         else:
             cid = vvalue[0]
@@ -36,7 +36,7 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute(
             """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<%s""", (ledger_data.branch_name.cash_ac.id,cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         op = self.env.cr.fetchone()
-        if type(op[0]) is not float:
+        if op is None:
             cob = 0
         else:
             cob = op[0]
@@ -44,7 +44,7 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute(
             """select sum(amount) as amount from payment_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         pv = self.env.cr.fetchone()
-        if type(pv[0]) is not float:
+        if pv is None:
             pamnt = 0
         else:
             pamnt = pv[0]
@@ -52,7 +52,7 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute(
             """select sum(amount) as amount from receipt_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         rv = self.env.cr.fetchone()
-        if type(rv[0]) is not float:
+        if rv is None:
             ramnt = 0
         else:
             ramnt = rv[0]
@@ -64,7 +64,7 @@ class render_ldger(models.AbstractModel):
                 (ledger_data.branch_name.income_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         commnr = self.env.cr.fetchone()
-        if type(commnr) is not float:
+        if commnr is None:
             core = 0
         else:
             core = commnr[0]
@@ -75,7 +75,7 @@ class render_ldger(models.AbstractModel):
                 (ledger_data.branch_name.rentagain_income_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         rag = self.env.cr.fetchone()
-        if type(rag[0]) is not float:
+        if rag is None:
             rg = 0
         else:
             rg = rag[0]
@@ -86,7 +86,7 @@ class render_ldger(models.AbstractModel):
                 (ledger_data.branch_name.cost_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cost = self.env.cr.fetchone()
-        if type(cost[0]) is not float:
+        if cost is None:
             ce = 0
         else:
             ce = cost[0]
@@ -97,7 +97,7 @@ class render_ldger(models.AbstractModel):
                 (ledger_data.branch_name.rentagain_income_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         rag = self.env.cr.fetchone()
-        if type(rag[0]) is not float:
+        if rag is None:
             rg = 0
         else:
             rg = rag[0]
@@ -120,7 +120,7 @@ class render_ldger(models.AbstractModel):
                 (ledger_data.branch_name.cash_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cl = self.env.cr.fetchone()
-        if type(cl[0]) is not float:
+        if cl is None:
             ccb = 0
         else:
             ccb = cl[0]
