@@ -86,6 +86,7 @@
                         </table>
 
                         <!-- Basic summary-->
+                            <!--
                             <br/>
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Cash Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
@@ -144,8 +145,11 @@
                             </tbody>
                         </table>
 
+                        -->
+
 
     <!-- Revenue Summary-->
+                            <!--
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Revenue Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
@@ -209,7 +213,9 @@
 
                             </tbody>
                         </table>
+                        -->
                             <!-- customer receivable summary-->
+                            <!--
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Customer Receivable</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
@@ -243,7 +249,9 @@
                             </tbody>
                         </table>
                             <br/> <br/> <br/>
+                            -->
      <!-- Vendor payable Summary -->
+                            <!--
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Vendor Payment</u></strong></div>
 
 
@@ -279,7 +287,10 @@
                             </tbody>
                         </table>
                             <br/> <br/> <br/>
+                            -->
      <!-- Payment Summary -->
+                            <!--
+
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Payment Vouchers</u></strong></div>
 
 
@@ -318,7 +329,10 @@
                             </tbody>
                         </table>
                             <br/> <br/> <br/>
+                            -->
      <!-- Receipt Summary -->
+                            <!--
+
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Receipt Vouchers</u></strong></div>
 
 
@@ -356,6 +370,8 @@
 
                             </tbody>
                         </table>
+
+                        -->
 
                         <br/>
 
