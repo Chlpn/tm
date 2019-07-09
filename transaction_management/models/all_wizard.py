@@ -193,7 +193,7 @@ class SwipeCard(models.TransientModel):
             mm_master = self.env['machine.master'].browse(self.env.context.get('active_id'))
             self.rec_cost_percentage = mm_master.cost_percentage
             self.rec_commission = (self.rec_amount * self.rec_percentage / 100)
-            self.rec_cost_to_commission = (self.rec_amount * mm_master.cost_percentage / 100.0)
+            self.rec_cost_to_commission = (self.rec_amount * self.rec_cost_percentage / 100.0)
             self.rec_amount_to_customer = (self.rec_amount - self.rec_commission)
             self.rec_cash_paid_customer = self.rec_amount_to_customer
             self.rec_balance = self.rec_amount_to_customer - self.rec_cash_paid_customer
