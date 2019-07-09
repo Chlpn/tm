@@ -215,7 +215,7 @@
                         </table>
 
                             <!-- customer receivable summary-->
-                            <!--
+
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Customer Receivable</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
@@ -249,9 +249,9 @@
                             </tbody>
                         </table>
                             <br/> <br/> <br/>
-                            -->
+
      <!-- Vendor payable Summary -->
-                            <!--
+
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Vendor Payment</u></strong></div>
 
 
@@ -289,7 +289,7 @@
                             <br/> <br/> <br/>
                             -->
      <!-- Payment Summary -->
-                            <!--
+
 
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Payment Vouchers</u></strong></div>
 
@@ -329,9 +329,9 @@
                             </tbody>
                         </table>
                             <br/> <br/> <br/>
-                            -->
+
      <!-- Receipt Summary -->
-                            <!--
+
 
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Receipt Vouchers</u></strong></div>
 
@@ -371,7 +371,7 @@
                             </tbody>
                         </table>
 
-                        -->
+                        
 
                         <br/>
 
