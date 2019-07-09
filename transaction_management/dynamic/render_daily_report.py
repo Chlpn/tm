@@ -28,18 +28,18 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute(
             """select company_id from company_branch where id=%s""",(ledger_data.branch_name.id,))
         vvalue = self.env.cr.fetchone()
-        if vvalue is None:
-            cid = 0
-        else:
+        if type(vvalue[0]) is float:
             cid = vvalue[0]
+        else:
+            cid = 0
         # fetch cash opening balance
         self.env.cr.execute(
             """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<%s""", (ledger_data.branch_name.cash_ac.id,cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         op = self.env.cr.fetchone()
-        if op is None:
-            cob = 0
-        else:
+        if type(op[0]) is float:
             cob = op[0]
+        else:
+            cob = 0
         # fetch cash payments
         self.env.cr.execute(
             """select sum(amount) as amount from payment_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
