@@ -198,14 +198,14 @@
  <tr >
         <td style=" width:5%; text-align:center;">5.</td>
         <td style=" width:10%; text-align:left;"> General Expenses </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="-1* gex"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1* 0"/> </td>
 
 
  </tr>
                                 <tr >
         <td style=" width:5%; text-align:center;">6.</td>
         <td style=" width:10%; text-align:left;"> Net Profit </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="-1*((core+rg)+ce+gex)"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1*((core+rg)+ce+0)"/> </td>
 
 
  </tr>
@@ -213,7 +213,7 @@
 
                             </tbody>
                         </table>
-                        
+
                             <!-- customer receivable summary-->
                             <!--
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Customer Receivable</u></strong></div>
