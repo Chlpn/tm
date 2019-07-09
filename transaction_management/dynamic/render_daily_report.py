@@ -107,10 +107,11 @@ class render_ldger(models.AbstractModel):
                 """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.company_id=%s and a.date=%s""",
                 (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         gen = self.env.cr.fetchone()
-        if type(gen[0]) is not 'float':
-            gex = 0
-        else:
+        if type(gen[0]) is float:
             gex = gen[0]
+
+        else:
+            gex = 0
 
 
         # fetch cash closing balance
