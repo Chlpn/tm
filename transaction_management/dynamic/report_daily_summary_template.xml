@@ -145,11 +145,11 @@
                             </tbody>
                         </table>
 
-                        
+
 
 
     <!-- Revenue Summary-->
-                            <!--
+
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Revenue Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
@@ -213,7 +213,7 @@
 
                             </tbody>
                         </table>
-                        -->
+                        
                             <!-- customer receivable summary-->
                             <!--
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Customer Receivable</u></strong></div>
