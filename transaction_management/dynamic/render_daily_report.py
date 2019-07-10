@@ -74,7 +74,7 @@ class render_ldger(models.AbstractModel):
             (ledger_data.branch_name.rentagain_income_ac.id, cid,
              datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         rag = self.env.cr.fetchone()
-        if type(rag[0]) is None:
+        if type(rag[0]) is float:
             rg = rag[0]
         else:
             rg = 0
