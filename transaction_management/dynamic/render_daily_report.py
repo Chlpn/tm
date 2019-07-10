@@ -90,16 +90,6 @@ class render_ldger(models.AbstractModel):
         else:
             ce = cost[0]
 
-        # fetch rent to branch income
-        self.env.cr.execute(
-            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
-            (ledger_data.branch_name.rentagain_income_ac.id, cid,
-             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
-        rag = self.env.cr.fetchone()
-        if rag is None:
-            rg = 0
-        else:
-            rg = rag[0]
 
         # fetch general expenses
         self.env.cr.execute(
