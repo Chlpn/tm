@@ -86,10 +86,10 @@ class render_ldger(models.AbstractModel):
                 (ledger_data.branch_name.cost_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cost = self.env.cr.fetchone()
-        if cost is None:
-            ce = 0
-        else:
+        if type(cost[0]) is float:
             ce = cost[0]
+        else:
+            ce = 0
 
 
 
