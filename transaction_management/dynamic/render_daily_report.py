@@ -8,108 +8,114 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import datetime
 
+
 class render_ldger(models.AbstractModel):
-
     _name = 'report.transaction_management.report_daily_summary_template'
-
 
     @api.model
     def render_html(self, docids, data=None):
 
-        move_dic={}
-        move_list=[]
-
-
+        move_dic = {}
+        move_list = []
 
         report_obj = self.env['daily.report.statement']
-        moveline_obj=self.env['account.move.line']
-        ledger_data=report_obj.browse(docids)
+        moveline_obj = self.env['account.move.line']
+        ledger_data = report_obj.browse(docids)
         # fetch company_id
         self.env.cr.execute(
-            """select company_id from company_branch where id=%s""",(ledger_data.branch_name.id,))
+            """select company_id from company_branch where id=%s""", (ledger_data.branch_name.id,))
         vvalue = self.env.cr.fetchone()
-        if type(vvalue[0]) is float:
-            cid = vvalue[0]
-        else:
+        if vvalue is None:
             cid = 0
+        else:
+            cid = vvalue[0]
         # fetch cash opening balance
         self.env.cr.execute(
-            """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<%s""", (ledger_data.branch_name.cash_ac.id,cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<%s""",
+            (ledger_data.branch_name.cash_ac.id, cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         op = self.env.cr.fetchone()
-        if type(op[0]) is float:
-            cob = op[0]
-        else:
+        if op is None:
             cob = 0
+        else:
+            cob = op[0]
         # fetch cash payments
         self.env.cr.execute(
-            """select sum(amount) as amount from payment_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(amount) as amount from payment_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""",
+            (cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         pv = self.env.cr.fetchone()
-        if type(pv[0]) is float:
-            pamnt = pv[0]
-        else:
+        if pv is None:
             pamnt = 0
+        else:
+            pamnt = pv[0]
         # fetch cash receipts
         self.env.cr.execute(
-            """select sum(amount) as amount from receipt_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(amount) as amount from receipt_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""",
+            (cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         rv = self.env.cr.fetchone()
         if rv is None:
             ramnt = 0
         else:
             ramnt = rv[0]
 
-
         # fetch commission received
         self.env.cr.execute(
-                """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
-                (ledger_data.branch_name.income_ac.id, cid,
-                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+            (ledger_data.branch_name.income_ac.id, cid,
+             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         commnr = self.env.cr.fetchone()
-        if type(commnr[0]) is None:
-            core = commnr[0]
-        else:
+        if commnr is None:
             core = 0
+        else:
+            core = commnr[0]
 
         # fetch rent to branch income
         self.env.cr.execute(
-                """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
-                (ledger_data.branch_name.rentagain_income_ac.id, cid,
-                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+            (ledger_data.branch_name.rentagain_income_ac.id, cid,
+             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         rag = self.env.cr.fetchone()
-        if type(rag[0]) is float:
-            rg = rag[0]
-        else:
+        if rag is None:
             rg = 0
+        else:
+            rg = rag[0]
 
         # fetch commission expenses
         self.env.cr.execute(
-                """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
-                (ledger_data.branch_name.cost_ac.id, cid,
-                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+            (ledger_data.branch_name.cost_ac.id, cid,
+             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cost = self.env.cr.fetchone()
-        if type(cost[0]) is float:
-            ce = cost[0]
-        else:
+        if cost is None:
             ce = 0
+        else:
+            ce = cost[0]
 
-
+        # fetch rent to branch income
+        self.env.cr.execute(
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
+            (ledger_data.branch_name.rentagain_income_ac.id, cid,
+             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        rag = self.env.cr.fetchone()
+        if rag is None:
+            rg = 0
+        else:
+            rg = rag[0]
 
         # fetch general expenses
         self.env.cr.execute(
-                """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.company_id=%s and a.date=%s""",
-                (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.company_id=%s and a.date=%s""",
+            (cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         gen = self.env.cr.fetchone()
-        if type(gen[0]) is float:
-            gex = gen[0]
-
-        else:
+        if gen is None:
             gex = 0
-
+        else:
+            gex = gen[0]
 
         # fetch cash closing balance
         self.env.cr.execute(
-                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<=%s""",
-                (ledger_data.branch_name.cash_ac.id, cid,
-                 datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date<=%s""",
+            (ledger_data.branch_name.cash_ac.id, cid,
+             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cl = self.env.cr.fetchone()
         if cl is None:
             ccb = 0
@@ -120,20 +126,19 @@ class render_ldger(models.AbstractModel):
 
         self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as partner, sum(a.debit-a.credit) as balance from account_move_line as a left join
          account_move as b on a.move_id=b.id where a.account_id=%s and b.company_id=%s and b.state='posted' and a.date<=%s group by 
-         a.partner_id """,(ledger_data.branch_name.acc_rec_id.id,cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+         a.partner_id """, (
+        ledger_data.branch_name.acc_rec_id.id, cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         datass = self.env.cr.fetchall()
-
 
         for moveline_data in datass:
             if moveline_data[1] != 0:
-
-                move_dic['customer']=moveline_data[0]
-                move_dic['balance']=moveline_data[1]
+                move_dic['customer'] = moveline_data[0]
+                move_dic['balance'] = moveline_data[1]
 
                 move_list.append(move_dic)
-                move_dic={}
-        
-        data=move_list
+                move_dic = {}
+
+        data = move_list
 
         # fetch vendor balance
 
@@ -143,7 +148,8 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as partner, sum(a.debit-a.credit) as balance from account_move_line as a left join
                  account_move as b on a.move_id=b.id where a.account_id=%s and b.company_id=%s and b.state='posted' and a.date<=%s group by 
                  a.partner_id """, (
-        ledger_data.branch_name.acc_payable_id.id, cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            ledger_data.branch_name.acc_payable_id.id, cid,
+            datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         datass1 = self.env.cr.fetchall()
 
         for moveline_data1 in datass1:
@@ -165,7 +171,7 @@ class render_ldger(models.AbstractModel):
         as amount_to_swipe,sum(amount_to_customer) as amount_to_customer,sum(cash_paid_customer) as cash_paid_customer,sum(commission) 
         as commission,sum(cost_to_commission) as cost_to_commission,sum(margin) as margin from trans_master where company_id=%s 
         and transaction_date=%s and state='posted' group by machine_name""", (
-            cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         datass2 = self.env.cr.fetchall()
 
         for moveline_data2 in datass2:
@@ -187,8 +193,10 @@ class render_ldger(models.AbstractModel):
         move_dic3 = {}
         move_list3 = []
 
-        self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as part,(select name from account_account where id=a.account_id) as pacc,sum(amount) from payment_voucher as a inner join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s group by partner_id,account_id order by pacc,part""", (
-            cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        self.env.cr.execute(
+            """select (select name from res_partner where id=a.partner_id) as part,(select name from account_account where id=a.account_id) as pacc,sum(amount) from payment_voucher as a inner join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s group by partner_id,account_id order by pacc,part""",
+            (
+                cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         datass3 = self.env.cr.fetchall()
 
         for moveline_data3 in datass3:
@@ -206,9 +214,11 @@ class render_ldger(models.AbstractModel):
         move_dic4 = {}
         move_list4 = []
 
-        self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as part,(select name from account_account where id=a.account_id) as pacc,sum(amount) from receipt_voucher as a inner join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s group by partner_id,account_id order by pacc,part""", (
-            cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
-        datass4= self.env.cr.fetchall()
+        self.env.cr.execute(
+            """select (select name from res_partner where id=a.partner_id) as part,(select name from account_account where id=a.account_id) as pacc,sum(amount) from receipt_voucher as a inner join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s group by partner_id,account_id order by pacc,part""",
+            (
+                cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datass4 = self.env.cr.fetchall()
 
         for moveline_data4 in datass4:
             move_dic4['partner'] = moveline_data4[0]
@@ -220,29 +230,26 @@ class render_ldger(models.AbstractModel):
 
         data4 = move_list4
 
-
-
-
         model = self.env.context.get('active_model')
         docs = self.env[model].browse(self.env.context.get('active_id'))
         docargs = {
             'doc_ids': self.ids,
             'doc_model': model,
-            'cob':cob,
-            'ccb':ccb,
-            'ramnt':ramnt,
-            'pamnt':pamnt,
-            'core':core,
+            'cob': cob,
+            'ccb': ccb,
+            'ramnt': ramnt,
+            'pamnt': pamnt,
+            'core': core,
             'rg': rg,
             'ce': ce,
-            'gex':gex,
+            'gex': gex,
             'data': data,
             'data1': data1,
             'data2': data2,
-            'data3':data3,
-            'data4':data4,
-            'report_date':ledger_data.report_date,
-            'branch_name':ledger_data.branch_name,
+            'data3': data3,
+            'data4': data4,
+            'report_date': ledger_data.report_date,
+            'branch_name': ledger_data.branch_name,
             'docs': docs,
         }
         return self.env['report'].render('transaction_management.report_daily_summary_template', docargs)
