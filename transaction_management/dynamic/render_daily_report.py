@@ -64,10 +64,10 @@ class render_ldger(models.AbstractModel):
                 (ledger_data.branch_name.income_ac.id, cid,
                  datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         commnr = self.env.cr.fetchone()
-        if commnr is None:
-            core = 0
-        else:
+        if type(commnr[0]) is None:
             core = commnr[0]
+        else:
+            core = 0
 
         # fetch rent to branch income
         self.env.cr.execute(
