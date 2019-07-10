@@ -44,10 +44,10 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute(
             """select sum(amount) as amount from payment_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         pv = self.env.cr.fetchone()
-        if pv is None:
-            pamnt = 0
-        else:
+        if type(pv[0]) is float:
             pamnt = pv[0]
+        else:
+            pamnt = 0
         # fetch cash receipts
         self.env.cr.execute(
             """select sum(amount) as amount from receipt_voucher as a left join account_account as b on a.account_id=b.id where a.state='post' and b.company_id=%s and transaction_date=%s""", (cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
