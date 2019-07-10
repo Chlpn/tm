@@ -74,10 +74,10 @@ class render_ldger(models.AbstractModel):
             (ledger_data.branch_name.rentagain_income_ac.id, cid,
              datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         rag = self.env.cr.fetchone()
-        if rag is None:
-            rg = 0
-        else:
+        if type(rag[0]) is None:
             rg = rag[0]
+        else:
+            rg = 0
 
         # fetch commission expenses
         self.env.cr.execute(
