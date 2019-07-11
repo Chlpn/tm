@@ -35,6 +35,7 @@
                             <field name="commission_pay" readonly="1"/>
                            <field name="swipe_commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                             <field name="commission_paid" readonly="1"/>
+                           <field name="commission_swiped" readonly="1"/>
                             <field name="total_to_swipe" readonly="1"/>
 
                             <field name="payment_date" attrs="{'readonly':[('state','in',('fs'))]}"/>
