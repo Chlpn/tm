@@ -264,6 +264,7 @@ class TransMaster(models.Model):
                   'amount_currency': 0.0, 'credit': self.cost_to_commission - self.cost_to_parent}),
                 (0, 0, {'journal_id': rjournal_id, 'account_id': parent_account,
                         'name': self.machine_name.name + "/" + self.transaction_no,
+                        'partner_id': self.machine_name.parent_name.rented_from.property_account_payable_id,
                         'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_parent}),
 
             ]
