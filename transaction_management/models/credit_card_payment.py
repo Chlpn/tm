@@ -47,7 +47,7 @@ class ccPayment(models.Model):
     ], string='Status', default='dr' ,readonly=True)
 
 
-    @api.onchange('payment_amount','commission')
+    @api.onchange('payment_amount','commission','swipe_commission')
     def _onchange_payment_amount(self):
         if self.swipe_commission is False:
             self.commission_pay = self.payment_amount * self.commission / 100
