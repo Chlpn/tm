@@ -154,13 +154,37 @@ class render_ldger(models.AbstractModel):
 
         # fetch machine balance
 
+        # fetch machine balance All
+        move_dica = {}
+        move_lista = []
+
+        self.env.cr.execute("""select (select name from machine_master where id=machine_name) as machine_name,sum(amount_to_swipe) 
+                as amount_to_swipe,sum(amount_to_customer) as amount_to_customer,sum(cash_paid_customer) as cash_paid_customer,sum(commission) 
+                as commission,sum(cost_to_commission) as cost_to_commission,sum(margin) as margin from trans_master where transaction_date=%s and state='posted' group by machine_name""", (
+            datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datassa = self.env.cr.fetchall()
+
+        for moveline_dataa in datassa:
+            move_dica['machine'] = moveline_dataa[0]
+            move_dica['amount_swiped'] = moveline_dataa[1]
+            move_dica['amount_pay'] = moveline_dataa[2]
+            move_dica['amount_paid'] = moveline_dataa[3]
+            move_dica['commission'] = moveline_dataa[4]
+            move_dica['cost_commission'] = moveline_dataa[5]
+            move_dica['margin'] = moveline_dataa[6]
+
+            move_lista.append(move_dica)
+            move_dica = {}
+
+        dataa = move_lista
+        # fetch machine balance Abu Dhabi
         move_dic2 = {}
         move_list2 = []
 
         self.env.cr.execute("""select (select name from machine_master where id=machine_name) as machine_name,sum(amount_to_swipe) 
-        as amount_to_swipe,sum(amount_to_customer) as amount_to_customer,sum(cash_paid_customer) as cash_paid_customer,sum(commission) 
-        as commission,sum(cost_to_commission) as cost_to_commission,sum(margin) as margin from trans_master where company_id=%s 
-        and transaction_date=%s and state='posted' group by machine_name""", (
+                as amount_to_swipe,sum(amount_to_customer) as amount_to_customer,sum(cash_paid_customer) as cash_paid_customer,sum(commission) 
+                as commission,sum(cost_to_commission) as cost_to_commission,sum(margin) as margin from trans_master where company_id=%s 
+                and transaction_date=%s and state='posted' group by machine_name""", (
             cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         datass2 = self.env.cr.fetchall()
 
@@ -177,6 +201,31 @@ class render_ldger(models.AbstractModel):
             move_dic2 = {}
 
         data2 = move_list2
+        # fetch machine balance Own Machine
+        move_dicb = {}
+        move_listb = []
+
+        self.env.cr.execute("""select (select name from machine_master where id=machine_name) as machine_name,sum(amount_to_swipe) 
+                as amount_to_swipe,sum(amount_to_customer) as amount_to_customer,sum(cash_paid_customer) as cash_paid_customer,sum(commission) 
+                as commission,sum(cost_to_commission) as cost_to_commission,sum(margin) as margin from trans_master as a inner join machine_master as b 
+                on a.machine_name=b.id where b.company_owned=1 and transaction_date=%s and state='posted' group by machine_name""", (
+            datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datassb = self.env.cr.fetchall()
+
+        for moveline_datab in datassb:
+            move_dicb['machine'] = moveline_datab[0]
+            move_dicb['amount_swiped'] = moveline_datab[1]
+            move_dicb['amount_pay'] = moveline_datab[2]
+            move_dicb['amount_paid'] = moveline_datab[3]
+            move_dicb['commission'] = moveline_datab[4]
+            move_dicb['cost_commission'] = moveline_datab[5]
+            move_dicb['margin'] = moveline_datab[6]
+
+            move_listb.append(move_dicb)
+            move_dicb = {}
+
+        datab = move_listb
+
 
         # fetch payment vouchers
 

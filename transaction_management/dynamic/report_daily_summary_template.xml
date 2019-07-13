@@ -18,7 +18,73 @@
                             <br/>
 
 
-                            <!-- machine summary-->
+                            <!-- machine summary All-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>All Machines Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Machine Name</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Swiped</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount to Pay</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Paid</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Commission</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Cost to Commission</th>
+                                <th style=" width:10%; padding-left:8px; text-align:right;">Margin</th>
+                                <t t-set="ams" t-value="0"/>
+                                <t t-set="apy" t-value="0"/>
+                                <t t-set="apd" t-value="0"/>
+                                <t t-set="comm" t-value="0"/>
+                                <t t-set="ctc" t-value="0"/>
+                                <t t-set="mar" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="dataa" t-as="da2">
+        <td style=" width:5%; text-align:center;"><span t-esc="da2_index+1"/></td>
+
+        <td style=" width:10%; text-align:left;"> <span t-esc="da2['machine']"/> </td>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_swiped']"/> </td>
+     <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_pay']"/> </td>
+     <t t-set="apy" t-value="apy + da2['amount_pay']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
+     <t t-set="apd" t-value="apd + da2['amount_paid']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
+     <t t-set="comm" t-value="comm + da2['commission']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
+     <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
+        <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
+
+     <t t-set="mar" t-value="mar + da2['margin']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
+        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <!-- machine summary - Abu Dhabi-->
                             <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Machine Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
@@ -85,6 +151,72 @@
                             </tbody>
                         </table>
 
+                        <!-- machine summary - Own Machine Summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Machine Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Machine Name</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Swiped</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount to Pay</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Paid</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Commission</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Cost to Commission</th>
+                                <th style=" width:10%; padding-left:8px; text-align:right;">Margin</th>
+                                <t t-set="ams" t-value="0"/>
+                                <t t-set="apy" t-value="0"/>
+                                <t t-set="apd" t-value="0"/>
+                                <t t-set="comm" t-value="0"/>
+                                <t t-set="ctc" t-value="0"/>
+                                <t t-set="mar" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="datab" t-as="da2">
+        <td style=" width:5%; text-align:center;"><span t-esc="da2_index+1"/></td>
+
+        <td style=" width:10%; text-align:left;"> <span t-esc="da2['machine']"/> </td>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_swiped']"/> </td>
+     <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_pay']"/> </td>
+     <t t-set="apy" t-value="apy + da2['amount_pay']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
+     <t t-set="apd" t-value="apd + da2['amount_paid']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
+     <t t-set="comm" t-value="comm + da2['commission']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
+     <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
+        <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
+
+     <t t-set="mar" t-value="mar + da2['margin']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
+        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
                         <!-- Basic summary-->
 
                             <br/>

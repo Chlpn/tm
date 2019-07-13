@@ -30,6 +30,7 @@ class MachineMaster(models.Model):
     cost_ac = fields.Many2one('account.account', string="Cost Account",required=True, ondelete='restrict')
     income_ac = fields.Many2one('account.account', string="Income Account",required=True, ondelete='restrict')
     cash_ac = fields.Many2one('account.account', string="Cash Account",required=True, ondelete='restrict')
+    company_owned = fields.Boolean(string='Company Owned')
 
     @api.onchange('parent_name','branch')
     def _onchange_parent_name(self):

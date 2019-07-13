@@ -34,6 +34,7 @@
                     <field name="cost_ac"  readonly="1"/>
                     <field name="income_ac"  readonly="1"/>
                     <field name="cash_ac"  readonly="1"/>
+                    <field name="company_owned"/>
                     </group>
                     </sheet>
                 </form>
