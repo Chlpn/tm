@@ -320,13 +320,12 @@
  <tr>
 
         <td style=" width:5%; text-align:left;">  </td>
-        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
-        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
-        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
-        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
-        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
-        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
-        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
+        <td style=" width:15%; text-align:left;"><strong></strong></td>
+        <td style=" width:20%; text-align:right;"><strong></strong></td>
+        <td style=" width:20%; text-align:right;"><strong>  </strong></td>
+        <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc="closing"/> </strong></td>
+
 
 
 
