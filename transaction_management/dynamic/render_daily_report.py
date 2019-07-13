@@ -172,6 +172,31 @@ class render_ldger(models.AbstractModel):
             move_dicbnk = {}
 
         databnk = move_listbnk
+
+        # fetch Merchant Balance
+
+        move_dicmer = {}
+        move_listmer = []
+
+        self.env.cr.execute(
+            """select name, (select sum(debit)-sum(credit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date<=%s and a.account_id=aa.id)as Opening_balance, (select sum(debit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date=%s and a.account_id=aa.id)as Debit, (select sum(credit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date=%s and a.account_id=aa.id)as Credit, (select sum(debit)-sum(credit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date<=%s and a.account_id=aa.id)as Closing_balance from account_account as aa where user_type_id=3""",
+            (
+                cid, ledger_data.report_date2, cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),
+                cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'), cid,
+                datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datassmer = self.env.cr.fetchall()
+
+        for moveline_datamer in datassmer:
+            move_dicmer['bank'] = moveline_datamer[0]
+            move_dicmer['opening'] = moveline_datamer[1]
+            move_dicmer['debit'] = moveline_datamer[2]
+            move_dicmer['credit'] = moveline_datamer[3]
+            move_dicmer['closing'] = moveline_datamer[4]
+
+            move_listmer.append(move_dicmer)
+            move_dicmer = {}
+
+        datamer = move_listmer
         # fetch machine balance
 
         # fetch machine balance All
@@ -310,6 +335,7 @@ class render_ldger(models.AbstractModel):
             'dataa': dataa,
             'datab': datab,
             'databnk': databnk,
+            'datamer': datamer,
             'report_date': ledger_data.report_date,
             'branch_name': ledger_data.branch_name,
             'docs': docs,
