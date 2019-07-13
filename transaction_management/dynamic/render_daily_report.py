@@ -151,7 +151,27 @@ class render_ldger(models.AbstractModel):
                 move_dic1 = {}
 
         data1 = move_list1
+        # fetch Bank Balance
 
+        move_dicbnk = {}
+        move_listbnk = []
+
+        self.env.cr.execute("""select name, (select sum(debit)-sum(credit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date<=%s and a.account_id=aa.id)as Opening_balance, (select sum(debit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date=%s and a.account_id=aa.id)as Debit, (select sum(credit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date=%s and a.account_id=aa.id)as Credit, (select sum(debit)-sum(credit) from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where c.state='posted' and a.company_id=%s and a.date<=%s and a.account_id=aa.id)as Closing_balance from account_account as aa where user_type_id=3""",
+                            (
+                                cid,datetime.datetime.strptime((ledger_data.report_date-1), '%Y-%m-%d'),cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),cid,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        datassbnk = self.env.cr.fetchall()
+
+        for moveline_databnk in datassbnk:
+            move_dicbnk['bank'] = moveline_databnk[0]
+            move_dicbnk['opening'] = moveline_databnk[1]
+            move_dicbnk['debit'] = moveline_databnk[2]
+            move_dicbnk['credit'] = moveline_databnk[3]
+            move_dicbnk['closing'] = moveline_databnk[4]
+
+            move_listbnk.append(move_dicbnk)
+            move_dicbnk = {}
+
+        databnk = move_listbnk
         # fetch machine balance
 
         # fetch machine balance All
@@ -289,6 +309,7 @@ class render_ldger(models.AbstractModel):
             'data4': data4,
             'dataa': dataa,
             'datab': datab,
+            'databnk': databnk,
             'report_date': ledger_data.report_date,
             'branch_name': ledger_data.branch_name,
             'docs': docs,

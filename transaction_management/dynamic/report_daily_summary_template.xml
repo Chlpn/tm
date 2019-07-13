@@ -279,6 +279,64 @@
                             </tbody>
                         </table>
 
+                        <!-- Bank Summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Bank Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:15%; text-align:center;">Account Name</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Opening Balance</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Debit</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Credit</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Closing Balance</th>
+
+
+                                <t t-set="total" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="databnk" t-as="daa">
+        <td style=" width:5%; text-align:center;"><span t-esc="daa_index+1"/></td>
+
+        <td style=" width:15%; text-align:left;"> <span t-esc="daa['bank']"/> </td>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc="daa['opening']"/> </td>
+     <t t-set="ams" t-value="ams + daa['amount_swiped']"/>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc="daa['debit']"/> </td>
+     <t t-set="apy" t-value="apy + daa['amount_pay']"/>
+        <td style=" width:20%; text-align:right;"> <span t-esc="daa['credit']"/> </td>
+     <t t-set="apd" t-value="apd + daa['amount_paid']"/>
+        <td style=" width:20%; text-align:right;"> <span t-esc="daa['closing']"/> </td>
+          <t t-set="total" t-value="total + daa['closing']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
+        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br></br><br></br><br></br>
+
 
 
 
