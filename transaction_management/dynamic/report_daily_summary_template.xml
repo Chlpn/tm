@@ -324,7 +324,7 @@
         <td style=" width:20%; text-align:right;"><strong></strong></td>
         <td style=" width:20%; text-align:right;"><strong>  </strong></td>
         <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
-        <td style=" width:20%; text-align:right;"><strong> <span t-esc="closing"/> </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc="total"/> </strong></td>
 
 
 
