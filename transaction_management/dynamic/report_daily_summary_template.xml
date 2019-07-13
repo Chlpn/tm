@@ -368,7 +368,7 @@
         <td style=" width:20%; text-align:right;"> <span t-esc="daa['credit']"/> </td>
 
         <td style=" width:20%; text-align:right;"> <span t-esc="daa['closing']"/> </td>
-          <t t-set="total" t-value="total + daa['closing']"/>
+        <!--  <t t-set="total" t-value="total + daa['closing']"/>-->
 
 
 
@@ -381,7 +381,7 @@
         <td style=" width:20%; text-align:right;"><strong></strong></td>
         <td style=" width:20%; text-align:right;"><strong>  </strong></td>
         <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
-        <td style=" width:20%; text-align:right;"><strong> <span t-esc="total"/> </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> XXXX </strong></td>
 
 
 
