@@ -169,8 +169,8 @@ class render_ldger(models.AbstractModel):
                 move_dicbnk['credit'] = moveline_databnk[3]
                 move_dicbnk['closing'] = moveline_databnk[4]
 
-            move_listbnk.append(move_dicbnk)
-            move_dicbnk = {}
+                move_listbnk.append(move_dicbnk)
+                move_dicbnk = {}
 
         databnk = move_listbnk
 
@@ -195,8 +195,8 @@ class render_ldger(models.AbstractModel):
                 move_dicmer['credit'] = moveline_datamer[3]
                 move_dicmer['closing'] = moveline_datamer[4]
 
-            move_listmer.append(move_dicmer)
-            move_dicmer = {}
+                move_listmer.append(move_dicmer)
+                move_dicmer = {}
 
         datamer = move_listmer
         # fetch machine balance
