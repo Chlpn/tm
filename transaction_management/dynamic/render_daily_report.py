@@ -162,11 +162,12 @@ class render_ldger(models.AbstractModel):
         datassbnk = self.env.cr.fetchall()
 
         for moveline_databnk in datassbnk:
-            move_dicbnk['bank'] = moveline_databnk[0]
-            move_dicbnk['opening'] = moveline_databnk[1]
-            move_dicbnk['debit'] = moveline_databnk[2]
-            move_dicbnk['credit'] = moveline_databnk[3]
-            move_dicbnk['closing'] = moveline_databnk[4]
+            if moveline_databnk[4] != 0:
+                move_dicbnk['bank'] = moveline_databnk[0]
+                move_dicbnk['opening'] = moveline_databnk[1]
+                move_dicbnk['debit'] = moveline_databnk[2]
+                move_dicbnk['credit'] = moveline_databnk[3]
+                move_dicbnk['closing'] = moveline_databnk[4]
 
             move_listbnk.append(move_dicbnk)
             move_dicbnk = {}
@@ -187,11 +188,12 @@ class render_ldger(models.AbstractModel):
         datassmer = self.env.cr.fetchall()
 
         for moveline_datamer in datassmer:
-            move_dicmer['bank'] = moveline_datamer[0]
-            move_dicmer['opening'] = moveline_datamer[1]
-            move_dicmer['debit'] = moveline_datamer[2]
-            move_dicmer['credit'] = moveline_datamer[3]
-            move_dicmer['closing'] = moveline_datamer[4]
+            if moveline_datamer[4] != 0:
+                move_dicmer['bank'] = moveline_datamer[0]
+                move_dicmer['opening'] = moveline_datamer[1]
+                move_dicmer['debit'] = moveline_datamer[2]
+                move_dicmer['credit'] = moveline_datamer[3]
+                move_dicmer['closing'] = moveline_datamer[4]
 
             move_listmer.append(move_dicmer)
             move_dicmer = {}
