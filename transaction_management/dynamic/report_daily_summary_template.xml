@@ -304,12 +304,12 @@
         <td style=" width:15%; text-align:left;"> <span t-esc="daa['bank']"/> </td>
 
         <td style=" width:20%; text-align:right;"> <span t-esc="daa['opening']"/> </td>
-     <t t-set="ams" t-value="ams + daa['amount_swiped']"/>
+
 
         <td style=" width:20%; text-align:right;"> <span t-esc="daa['debit']"/> </td>
-     <t t-set="apy" t-value="apy + daa['amount_pay']"/>
+
         <td style=" width:20%; text-align:right;"> <span t-esc="daa['credit']"/> </td>
-     <t t-set="apd" t-value="apd + daa['amount_paid']"/>
+
         <td style=" width:20%; text-align:right;"> <span t-esc="daa['closing']"/> </td>
           <t t-set="total" t-value="total + daa['closing']"/>
 
