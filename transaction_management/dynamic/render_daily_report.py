@@ -208,7 +208,7 @@ class render_ldger(models.AbstractModel):
         self.env.cr.execute("""select (select name from machine_master where id=machine_name) as machine_name,sum(amount_to_swipe) 
                 as amount_to_swipe,sum(amount_to_customer) as amount_to_customer,sum(cash_paid_customer) as cash_paid_customer,sum(commission) 
                 as commission,sum(cost_to_commission) as cost_to_commission,sum(margin) as margin from trans_master as a inner join machine_master as b 
-                on a.machine_name=b.id where b.company_owned=1 and transaction_date=%s and state='posted' group by machine_name""", (
+                on a.machine_name=b.id where b.company_owned=True and transaction_date=%s and state='posted' group by machine_name""", (
             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         datassb = self.env.cr.fetchall()
 
