@@ -84,8 +84,9 @@
 
                             </tbody>
                         </table>
+                            <br></br><br></br><br></br>
                             <!-- machine summary - Abu Dhabi-->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Machine Summary</u></strong></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Machine Summary- Abu Dhabi</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -150,9 +151,9 @@
 
                             </tbody>
                         </table>
-
+                        <br></br><br></br><br></br>
                         <!-- machine summary - Own Machine Summary-->
-                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Machine Summary</u></strong></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Own Machine Summary</u></strong></div>
                         <table class="table table-condensed" style=" width:100%;">
                             <thead >
                                 <tr >
@@ -217,6 +218,7 @@
 
                             </tbody>
                         </table>
+                            <br></br><br></br><br></br>
                         <!-- Basic summary-->
 
                             <br/>
