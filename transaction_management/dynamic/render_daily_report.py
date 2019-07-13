@@ -287,6 +287,8 @@ class render_ldger(models.AbstractModel):
             'data2': data2,
             'data3': data3,
             'data4': data4,
+            'dataa': dataa,
+            'datab': datab,
             'report_date': ledger_data.report_date,
             'branch_name': ledger_data.branch_name,
             'docs': docs,
