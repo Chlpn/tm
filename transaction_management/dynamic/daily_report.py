@@ -13,7 +13,7 @@ class daily_report_statement(models.TransientModel):
 
     @api.onchange('report_date')
     def _onchange_date(self):
-        self.report_date2 = self.report_date - datetime.timedelta(days=1)
+        self.report_date2 = datetime.datetime.strptime(self.report_date, '%Y-%m-%d') - datetime.timedelta(days=1)
 
 
 
