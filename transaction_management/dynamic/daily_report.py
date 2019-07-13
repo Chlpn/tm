@@ -1,5 +1,6 @@
 from odoo import fields, api, models, _
 from odoo.exceptions import UserError
+from odoo import datetime
 
 
 class daily_report_statement(models.TransientModel):
@@ -12,7 +13,7 @@ class daily_report_statement(models.TransientModel):
 
     @api.onchange('report_date')
     def _onchange_date(self):
-        self.report_date2 = self.report_date - 1
+        self.report_date2 = self.report_date - datetime.timedelta(days=1)
 
 
 
