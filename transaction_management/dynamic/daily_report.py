@@ -1,6 +1,6 @@
 from odoo import fields, api, models, _
 from odoo.exceptions import UserError
-from odoo import datetime
+from _datetime import datetime
 
 
 class daily_report_statement(models.TransientModel):
