@@ -12,6 +12,7 @@
             <group>
                 <field name="report_date"/>
                 <field name="branch_name"/>
+                <field name="report_date2" />
 
             </group>
          

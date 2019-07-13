@@ -8,6 +8,12 @@ class daily_report_statement(models.TransientModel):
 
     branch_name = fields.Many2one('company.branch', string="Branch", required=True)
     report_date = fields.Date(string='Date From', default=fields.Date.context_today, required=True)
+    report_date2 = fields.Date(string='Date From', required=True)
+
+    @api.onchange('report_date')
+    def _onchange_date(self):
+        self.report_date2 = self.report_date - 1
+
 
 
     def print_report(self, data):
