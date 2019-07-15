@@ -34,13 +34,13 @@
                              <group>
                                 <field name="transaction_date" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
                                 <field name="merchant_ac" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
-                                <field name="linked_bank_ac" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
+                                <field name="linked_bank_ac" readonly="1" />
                                 <field name="amount" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
 
                              </group>
                              <group>
-                                <field name="account_move_id" attrs="{'invisible':[('state','in',('draft'))]}"/>
-                                <field name="journal_id" attrs="{'invisible':[('state','in',('draft'))]}"/>
+                                <field name="account_move_id" readonly="1" />
+                                <field name="journal_id" readonly="1" />
                                 <field name="description" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
                             </group>
                         </group>
