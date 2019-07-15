@@ -19,8 +19,7 @@ class MerchantTransfer(models.Model):
                                   domain=lambda self: [
                                       ('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id)])
 
-    journal_id = fields.Many2one('account.journal', string="Journal",  required=True, readonly=True,
-                                 domain= lambda self:['journal_id','=',self.env.ref('transaction_management.merchant_journal').id ])
+    journal_id = fields.Many2one('account.journal', string="Journal",  required=True, readonly=True)
 
     description = fields.Char(string='Description')
     amount = fields.Float('Transferred Amount', required=True)
@@ -35,12 +34,16 @@ class MerchantTransfer(models.Model):
 
     @api.onchange('merchant_ac')
     def _onchange_merchant(self):
+        ir_model_obj = self.env['ir.model.data']
+        model, rjournal_id = ir_model_obj.get_object_reference('transaction_management', 'merchant_journal')
+        self.journal_id = rjournal_id
         if self.merchant_ac:
             self.env.cr.execute(
             """select linked_bank_ac from machine_master where merchant_bank_ac=%s LIMIT 1""", (self.merchant_ac.id,))
 
             value = self.env.cr.fetchone()
-            if value is int:
+
+            if value is None:
                 self.linked_bank_ac = value[0]
             else:
                 self.linked_bank_ac = 0
