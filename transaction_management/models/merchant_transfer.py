@@ -54,8 +54,14 @@ class MerchantTransfer(models.Model):
         for transaction in self:
             if transaction.state == 'post':
                 raise UserError(_('You can not delete posted transaction, kindly cancel it or edit it by set to draft'))
+            elif self.name :
+                raise UserError(_('You can not delete a transaction once posted, kindly cancel it or edit it by set to draft'))
+
         return super(MerchantTransfer, self).unlink()
 
+    @api.multi
+    def action_draft(self):
+             self.write({'state': 'draft'})
 
     @api.multi
     def action_cancel(self):
