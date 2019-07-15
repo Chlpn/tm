@@ -39,7 +39,7 @@ class MerchantTransfer(models.Model):
         self.journal_id = rjournal_id
         if self.merchant_ac:
             self.env.cr.execute(
-            """select linked_bank_ac from machine_master where merchant_bank_ac=%s LIMIT 1""", (self.merchant_ac.id,))
+            """select linked_bank_ac from machine_master where merchant_bank_ac=%s and  linked_bank_ac is not NULL LIMIT 1""", (self.merchant_ac.id,))
 
             value = self.env.cr.fetchone()
 
