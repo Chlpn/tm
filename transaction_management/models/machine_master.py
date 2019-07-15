@@ -27,7 +27,7 @@ class MachineMaster(models.Model):
     sales_percentage = fields.Float(string='Default Sales Percentage')
     cost_percentage = fields.Float(string='Cost Percentage')
     merchant_bank_ac = fields.Many2one('account.account', string="Merchant Account", ondelete='restrict')
-    linked_bank_ac = fields.Many2one('account.account', string="Merchant Account", ondelete='restrict')
+    linked_bank_ac = fields.Many2one('account.account', string="Linked Bank Account", ondelete='restrict')
     cost_ac = fields.Many2one('account.account', string="Cost Account",required=True, ondelete='restrict')
     income_ac = fields.Many2one('account.account', string="Income Account",required=True, ondelete='restrict')
     cash_ac = fields.Many2one('account.account', string="Cash Account",required=True, ondelete='restrict')
