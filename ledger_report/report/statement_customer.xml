@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="statement_customerwise_print_report">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.internal_layout">
+                        <div class="page">
+                            <div style="text-align:center;">
+                            <h2><span  t-esc="res_company.name"/></h2>
+                                <h3><span>STATEMENT OF ACCOUNT (Customer)</span></h3>
+                            </div>
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Customer Name:-<span t-esc="partner_name"/></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Account:-<span t-esc="account_name"/></div>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Period From <span t-esc="date_from"/> To <span t-esc="date_to"/> </div>
+                            <br/>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Date</th>
+                                <th style=" width:25%; padding-left:8px; text-align:left;">Customer</th>
+                                <th style=" width:20%; text-align:left;">Particulars</th>
+                                <th style=" width:15%; text-align:right;">Debit</th>
+                                <th style=" width:15%; text-align:right;">Credit</th>
+                                <th style=" width:10%; text-align:right;">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td ><b>Opening Balance</b></td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <t t-set="ab" t-value="0"/>
+                                    <t t-set="ab" t-value="ab + openin_balance"/>
+                                    <t t-set="ob" t-value="ab"/>
+                                    <td style=" width:10%; text-align:right;" ><b><span t-esc="ab"/></b></td>
+                                    <t t-set="sdebit" t-value="0"/>
+                                    <t t-set="scredit" t-value="0"/>
+
+                                </tr>
+                                 <br></br>
+ <tr t-foreach="data" t-as="da">
+        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="da['date']"/> </td>
+        <td style=" width:25%; text-align:left; padding-left:8px"> <span t-esc="da['ref']"/> </td>
+        <td style=" width:20%; text-align:left;"> <span t-esc="da['particulars']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da['debit']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da['credit']"/> </td>
+        <t t-set="ob" t-value="((ob + da['debit'])- da['credit']) "/>
+     <t t-set="sdebit" t-value="sdebit + da['debit'] "/>
+      <t t-set="scredit" t-value="scredit + da['credit'] "/>
+        <td style=" width:10%; text-align:right;"><span t-esc="ob"/></td>
+        
+        
+                                  </tr>
+                                <br></br>
+                                <tr>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td><b>Closing Balance</b></td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td style=" width:10%; text-align:right;"><b><span t-esc="ob"/></b></td>
+
+                                </tr>                        
+                            </tbody>
+                        </table>
+                        <br/>
+                        <div style="margin-left:auto;margin-right:auto;text-align:center;">SUMMARY</div>
+                            <br></br>
+                        <table class="table table-condensed" style="width:100%;">
+                            <tr>
+                                <th style=" width:20%; text-align:left;">Customer</th>
+                                <th style=" width:20%; text-align:center;">Opening Balance</th>
+                                <th style=" width:20%; text-align:center;">Debit</th>
+                                <th style=" width:20%; text-align:center;">Credit</th>
+                                <th style=" width:20%; text-align:right;">Closing Balance</th>
+                            </tr>
+                            <tr>
+                            <td style=" width:20%; text-align:left;"><span t-esc="account_name"/></td>
+                            <td style=" width:20%; text-align:right;"><span t-esc="openin_balance"/></td>
+                            <td style=" width:20%; text-align:right;"><span t-esc="sdebit"/></td>
+                            <td style=" width:20%; text-align:right;"><span t-esc="scredit"/></td>
+                            <td style=" width:20%; text-align:right;"><span t-esc="ob"/></td>
+                            </tr>
+                        </table>
+
+                        </div>
+
+                           
+                    </t>
+                    
+                </t>
+            </t>
+            </template>
+    </data>
+</odoo>
