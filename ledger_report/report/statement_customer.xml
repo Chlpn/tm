@@ -20,7 +20,7 @@
                                 <tr >
                                 <th style=" width:5%; text-align:center;">Sr No.</th>
                                 <th style=" width:10%; text-align:center;">Date</th>
-                                <th style=" width:25%; padding-left:8px; text-align:left;">Customer</th>
+                                <th style=" width:25%; padding-left:8px; text-align:left;">Ref:</th>
                                 <th style=" width:20%; text-align:left;">Particulars</th>
                                 <th style=" width:15%; text-align:right;">Debit</th>
                                 <th style=" width:15%; text-align:right;">Credit</th>
