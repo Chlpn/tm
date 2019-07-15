@@ -37,16 +37,15 @@ class MerchantTransfer(models.Model):
         ir_model_obj = self.env['ir.model.data']
         model, rjournal_id = ir_model_obj.get_object_reference('transaction_management', 'merchant_journal')
         self.journal_id = rjournal_id
-        if self.merchant_ac:
-            self.env.cr.execute(
+        self.env.cr.execute(
             """select linked_bank_ac from machine_master where merchant_bank_ac=%s and  linked_bank_ac is not NULL LIMIT 1""", (self.merchant_ac.id,))
 
-            value = self.env.cr.fetchone()
+        value = self.env.cr.fetchone()
 
-            if value is None:
-                self.linked_bank_ac = 0
-            else:
-                self.linked_bank_ac = value[0]
+        if type(value[0]) is int:
+            self.linked_bank_ac = value[0]
+        else:
+            self.linked_bank_ac = 0
 
 
     @api.multi
