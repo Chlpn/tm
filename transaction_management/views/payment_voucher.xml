@@ -105,6 +105,7 @@
             <field name="res_model">payment.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+             <field name="domain">[('state','!=','none')]</field>
             <field name="context">{'search_default_valid':1,}</field>
         </record>
 
