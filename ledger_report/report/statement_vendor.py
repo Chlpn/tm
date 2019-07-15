@@ -48,7 +48,7 @@ class render_ldger(models.AbstractModel):
             move_dic['debit']=moveline_data[4]
             move_dic['credit']=moveline_data[5]
             move_dic['balance']=moveline_data[6]
-            closing_balance=moveline_data[7]
+            closing_balance=moveline_data[6]
             move_list.append(move_dic)
             move_dic={}
         
