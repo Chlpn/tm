@@ -44,9 +44,9 @@ class MerchantTransfer(models.Model):
             value = self.env.cr.fetchone()
 
             if value is None:
-                self.linked_bank_ac = value[0]
-            else:
                 self.linked_bank_ac = 0
+            else:
+                self.linked_bank_ac = value[0]
 
 
     @api.multi
