@@ -37,7 +37,7 @@ class MerchantTransfer(models.Model):
     def _onchange_merchant(self):
         if self.merchant_ac:
             self.env.cr.execute(
-            """select linked_bank_ac from machine_master where merchant_bank_ac=%s LIMIT 1""", (self.merchant_ac,))
+            """select linked_bank_ac from machine_master where merchant_bank_ac=%s LIMIT 1""", (self.merchant_ac.id,))
 
             value = self.env.cr.fetchone()
             if value is int:
