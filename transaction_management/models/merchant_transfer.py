@@ -20,7 +20,7 @@ class MerchantTransfer(models.Model):
                                       ('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id)])
 
     journal_id = fields.Many2one('account.journal', string="Journal",  required=True, readonly=True,
-                                 domain= lambda self:['journal_id','=',self.env.ref('merchant_transfer.merchant_journal').id ])
+                                 domain= lambda self:['journal_id','=',self.env.ref('transaction_management.merchant_journal').id ])
 
     description = fields.Char(string='Description')
     amount = fields.Float('Transferred Amount', required=True)
