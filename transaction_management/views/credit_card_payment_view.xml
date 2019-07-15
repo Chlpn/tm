@@ -82,6 +82,22 @@
             </field>
         </record>
 
+        <!--Creating search view-->
+        <record id="view_cc_payment_search" model="ir.ui.view">
+            <field name="name">view.cc_payment.search</field>
+            <field name="model">cc.payment</field>
+            <field name="arch" type="xml">
+                <search string="CC Payment Search">
+                    <group string="Filter By">
+                        <filter name="valid" string="Valid" domain="[('state', '!=','cl')]"/>
+                    </group>
+                    <group string="Group By">
+                        <filter name="by_machine_name" string="Machines" domain="[]" context="{'group_by':'machine_name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <record model="ir.actions.act_window" id="action_cc_payment">
             <field name="name">Credit Card Payment</field>
             <field name="type">ir.actions.act_window</field>
@@ -89,7 +105,7 @@
             <field name="res_model">cc.payment</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('state','!=','cl')]</field>
+
         </record>
 
 
