@@ -72,6 +72,7 @@
                     <field name="journal_id"/>
                     <field name="partner_id"/>
                     <field name="transaction_date"/>
+                    <filter name="valid" string="Valid" domain="[('state', '!=','cancel')]"/>
                 </search>
             </field>
         </record>
@@ -83,7 +84,7 @@
             <field name="res_model">receipt.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('state','!=','cancel')]</field>
+            <field name="context">{'search_default_valid':1,}</field>
         </record>
 
         <menuitem name="Receipt Voucher" id="menu_receipt_voucher" action="action_receipt_voucher"

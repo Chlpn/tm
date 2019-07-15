@@ -107,6 +107,21 @@
             </field>
         </record>
 
+        <!--  Transaction Management Search View -->
+        <record model="ir.ui.view" id="transaction_master_search">
+            <field name="name">transaction.master.search</field>
+            <field name="model">trans.master</field>
+            <field name="arch" type="xml">
+                <search string="Transaction Management">
+                    <field name="transaction_no"/>
+                    <field name="machine_name"/>
+                    <field name="customer"/>
+                    <field name="transaction_date"/>
+                    <filter name="valid" string="Valid" domain="[('state', '!=','cancelled')]"/>
+                </search>
+            </field>
+        </record>
+
         <record model="ir.actions.act_window" id="action_transaction_master">
             <field name="name">Transactions</field>
             <field name="type">ir.actions.act_window</field>
@@ -114,7 +129,7 @@
             <field name="res_model">trans.master</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('state','!=','cancelled')]</field>
+            <field name="context">{'search_default_valid':1,}</field>
         </record>
 
 

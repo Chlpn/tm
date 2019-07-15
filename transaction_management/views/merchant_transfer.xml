@@ -75,6 +75,7 @@
                     <field name="merchant_ac"/>
                     <field name="linked_bank_ac"/>
                     <field name="transaction_date"/>
+                    <filter name="valid" string="Valid" domain="[('state', '!=','cancel')]"/>
                 </search>
             </field>
         </record>
@@ -87,7 +88,7 @@
             <field name="res_model">merchant.transfer</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('state','!=','cancel')]</field>
+            <field name="context">{'search_default_valid':1,}</field>
         </record>
 
         <menuitem name="Merchant Transfer" id="menu_merchant_transfer" action="action_merchant_transfer" parent="menu_transactions" sequence="5"/>
