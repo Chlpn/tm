@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <record id="seq_payment_voucher" model="ir.sequence">
+            <field name="name">Transaction</field>
+            <field name="code">merchant.transferr</field>
+            <field name="prefix">MR</field>
+            <field name="padding">3</field>
+        </record>
+     <!--  Merchant Transfer Form View -->
+        <record model="ir.ui.view" id="merchant_transfer_form">
+            <field name="name">merchant.transfer.form</field>
+            <field name="model">merchant.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Merchant Transfer">
+                    <header>
+                        <button name="post" states="draft" string="Post" type="object"/>
+                        <button name="action_cancel" states="post" string="Cancel" type="object"/>
+                        <button name="action_draft" states="cancel" string="Set to Draft" type="object"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,post,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+
+                         <group>
+                             <group>
+                                <field name="transaction_date" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
+                                <field name="merchant_ac" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
+                                <field name="linked_bank_ac" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
+                                <field name="amount" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
+
+                             </group>
+                             <group>
+                                <field name="account_move_id" attrs="{'invisible':[('state','in',('draft'))]}"/>
+                                <field name="journal_id" attrs="{'invisible':[('state','in',('draft'))]}"/>
+                                <field name="description" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Merchant Transfer Tree View -->
+        <record model="ir.ui.view" id="merchant_transfer_tree">
+            <field name="name">merchant.transfer.tree</field>
+            <field name="model">merchant.transfer</field>
+            <field name="arch" type="xml">
+                <tree string="Merchant Transfer">
+                    <field name="name"/>
+                    <field name="transaction_date"/>
+                    <field name="merchant_ac"/>
+                    <field name="linked_bank_ac"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Mercahnt Transfer Search View -->
+        <record model="ir.ui.view" id="merchant_transfer_search">
+            <field name="name">merchant.transfer.search</field>
+            <field name="model">merchant.transfer</field>
+            <field name="arch" type="xml">
+                <search string="Merchant Transfer">
+                    <field name="name"/>
+                    <field name="merchant_ac"/>
+                    <field name="linked_bank_ac"/>
+                    <field name="transaction_date"/>
+                </search>
+            </field>
+        </record>
+
+
+         <record model="ir.actions.act_window" id="action_merchant_transfer">
+            <field name="name">Merchant Transfer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">merchant.transfer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Merchant Transfer" id="menu_merchant_transfer" action="action_merchant_transfer" parent="menu_transactions" sequence="5"/>
+
+
+    </data>
+</odoo>

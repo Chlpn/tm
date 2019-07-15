@@ -17,6 +17,7 @@
                 'views/payment_voucher.xml',
                 'views/receipt_voucher.xml',
                 'views/branch_view.xml',
+                'views/machine_master_view.xml'
                 'data/masters.xml',
                 'security/ir.model.access.csv',
                 'reports/report.xml',

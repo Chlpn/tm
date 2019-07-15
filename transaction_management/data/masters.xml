@@ -9,6 +9,14 @@
 
         </record>
 
+        <record id="merchant_journal" model="account.journal">
+            <field name="name">Merchant Journal</field>
+            <field name="type">general</field>
+            <field name="code">MRJ</field>
+            <field name="show_on_dashboard">false</field>
+
+        </record>
+
         <record id="1_bank" model="machine.bank">
             <field name="name">Abu Dhabi Commercial Bank</field>
         </record>
