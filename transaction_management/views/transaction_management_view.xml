@@ -114,6 +114,7 @@
             <field name="res_model">trans.master</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','cancelled')]</field>
         </record>
 
 

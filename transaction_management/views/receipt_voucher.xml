@@ -83,6 +83,7 @@
             <field name="res_model">receipt.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','cancel')]</field>
         </record>
 
         <menuitem name="Receipt Voucher" id="menu_receipt_voucher" action="action_receipt_voucher"

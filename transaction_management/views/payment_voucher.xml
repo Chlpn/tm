@@ -104,6 +104,7 @@
             <field name="res_model">payment.voucher</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','cancel')]</field>
         </record>
 
         <menuitem name="Payment Voucher" id="menu_payment_voucher" action="action_payment_voucher" parent="menu_transactions" sequence="2"/>
