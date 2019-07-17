@@ -139,10 +139,10 @@ class ReceiptVoucher(models.Model):
             bline_ids = [
                 (0, 0,
                  {'journal_id': bjournal_id, 'account_id': maccount_id,
-                  'name': voucher_name, 'partner_id': self.commercial_partner_id.id,
+                  'name': description, 'partner_id': self.commercial_partner_id.id,
                   'amount_currency': 0.0, 'debit': self.amount}),
                 (0, 0, {'journal_id': bjournal_id, 'account_id': baccount_id,
-                        'name': voucher_name, 'amount_currency': 0.0, 'credit': self.amount,
+                        'name': description, 'amount_currency': 0.0, 'credit': self.amount,
                         })
             ]
             bvals = {

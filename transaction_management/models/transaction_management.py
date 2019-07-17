@@ -49,7 +49,7 @@ class TransMaster(models.Model):
 
     @api.onchange('machine_name')
     def _onchange_machine_name(self):
-        self.company_id = self.machine_name.company_id.id
+        #self.company_id = self.machine_name.company_id.id
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
         if self.machine_name.rent_again:
