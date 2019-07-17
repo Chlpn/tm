@@ -9,10 +9,7 @@ class TransMaster(models.Model):
     _description = "Transaction Management"
     _rec_name = 'transaction_no'
 
-    company_id = fields.Many2one(
-        'res.company',
-        'Company'
-    )
+    company_id = fields.Many2one('res.company')
     transaction_no = fields.Char(string='Transaction Number')
     transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
     transaction_amount = fields.Float(string='Amount', digits=dp.get_precision('Account'))
