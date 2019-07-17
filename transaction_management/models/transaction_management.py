@@ -11,8 +11,7 @@ class TransMaster(models.Model):
 
     company_id = fields.Many2one(
         'res.company',
-        'Company',
-        default=lambda self: self.env.user.company_id
+        'Company'
     )
     transaction_no = fields.Char(string='Transaction Number')
     transaction_date = fields.Date(string='Date',default=fields.Date.context_today, required=True)
@@ -49,6 +48,7 @@ class TransMaster(models.Model):
 
     @api.onchange('machine_name')
     def _onchange_machine_name(self):
+        self.company_id = self.machine_name.company_id.id
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
         if self.machine_name.rent_again:
