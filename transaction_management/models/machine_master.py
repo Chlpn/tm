@@ -68,8 +68,8 @@ class MachineMaster(models.Model):
 
     @api.multi
     def swipe_card(self):
-        if self.company_id.id != self.env.user.company_id.id:
-            raise UserError(_("Change Company to %s")%(self.company_id))
+        if self.branch.company_id.id != self.env.user.company_id.id:
+            raise UserError(_("Change Company to %s")%(self.company_id.id))
         else:
             return {
                 'type': 'ir.actions.act_window',
