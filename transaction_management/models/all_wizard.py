@@ -150,7 +150,8 @@ class SwipeCard(models.TransientModel):
             'customer': cc_payment.customer.id,
             'customer_mobile': cc_payment.customer_mobile,
             'note': cc_payment.note,
-            'ccpayment_ref':cc_payment.serial
+            'ccpayment_ref':cc_payment.serial,
+            'company_id': self.machine_name.company_id
 
         }
 
@@ -232,6 +233,7 @@ class SwipeCard(models.TransientModel):
                 'balance': self.rec_balance,
                 'customer': self.rec_customer.id,
                 'customer_mobile': self.rec_customer_mobile,
+                'company_id': self.machine_name.company_id
 
 
             }
