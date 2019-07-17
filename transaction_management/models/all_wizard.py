@@ -166,7 +166,11 @@ class SwipeCard(models.TransientModel):
     class SwipeCard2(models.TransientModel):
         _name = "swipe.card.wizard2"
 
-        company_id = fields.Many2one('res.company')
+        company_id = fields.Many2one(
+            'res.company',
+            'Company',
+            default=lambda self: self.env.user.company_id
+        )
         rec_amount = fields.Float(string='Amount Swiped', default='',digits=dp.get_precision('Account'))
         rec_percentage = fields.Float(string='Sales Percentage',digits=dp.get_precision('Account'))
         rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
@@ -186,7 +190,7 @@ class SwipeCard(models.TransientModel):
         @api.onchange('rec_amount','rec_percentage')
         def _onchange_amount_to_customer(self):
             mm_master = self.env['machine.master'].browse(self.env.context.get('active_id'))
-            self.company_id = mm_master.company_id
+
             self.rec_cost_percentage = mm_master.cost_percentage
             self.rec_commission = (self.rec_amount * self.rec_percentage / 100)
             self.rec_cost_to_commission = (self.rec_amount * self.rec_cost_percentage / 100.0)
@@ -228,7 +232,7 @@ class SwipeCard(models.TransientModel):
                 'balance': self.rec_balance,
                 'customer': self.rec_customer.id,
                 'customer_mobile': self.rec_customer_mobile,
-                'company_id': self.company_id.id
+
 
 
             }
