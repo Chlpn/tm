@@ -68,15 +68,18 @@ class MachineMaster(models.Model):
 
     @api.multi
     def swipe_card(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Swipe Card',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_model': 'swipe.card.wizard2',
-            'target': 'new',
-            'context': 'None'
-        }
+        if self.company_id != self.env.user.company_id:
+            raise UserError(_("Change Company to %s")%(self.company_id))
+        else:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Swipe Card',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'res_model': 'swipe.card.wizard2',
+                'target': 'new',
+                'context': 'None'
+            }
 
 
     @api.multi
