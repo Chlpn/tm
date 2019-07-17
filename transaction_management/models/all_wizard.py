@@ -232,7 +232,7 @@ class SwipeCard(models.TransientModel):
                 'balance': self.rec_balance,
                 'customer': self.rec_customer.id,
                 'customer_mobile': self.rec_customer_mobile,
-                'company_id': mm_master.company_id
+                'company_id': mm_master.company_id.id
 
 
             }
