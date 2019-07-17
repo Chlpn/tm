@@ -31,7 +31,7 @@
                     <field name="sales_percentage"/>
                     <field name="cost_percentage"/>
                     <field name="merchant_bank_ac" attrs="{'invisible': ['|',('rented', '=', True),('rent_again', '=', True)],'required': [('rented', '=', False)]}" options="{'no_create': True}"/>
-                    <field name="linked_bank_ac" attrs="{'invisible': ['|',('rented', '=', True),('rent_again', '=', True)],'required': ['|',('rented', '=', False),('rent_again', '=', False)]}" options="{'no_create': True}"/>
+                    <field name="linked_bank_ac" attrs="{'invisible': ['|',('rented', '=', True),('rent_again', '=', True)]}" options="{'no_create': True}"/>
                     <field name="cost_ac"  readonly="1"/>
                     <field name="income_ac"  readonly="1"/>
                     <field name="cash_ac"  readonly="1"/>
