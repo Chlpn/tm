@@ -96,16 +96,16 @@ class ReceiptVoucher(models.Model):
             raise UserError(_('Selected journal is not a Cash Journal.'))
 
         if self.description:
-            description = self.description + ' /' + self.name
+            description =  self.name+ ' /' + self.description
         else:
             description='label'
         line_ids = [
             (0, 0,
              {'journal_id': self.journal_id.id, 'account_id': self.account_id.id,
-              'name': voucher_name, 'partner_id': self.commercial_partner_id.id,
+              'name': description, 'partner_id': self.commercial_partner_id.id,
               'amount_currency': 0.0, 'credit': self.amount}),
             (0, 0, {'journal_id': self.journal_id.id, 'account_id': self.journal_id.default_debit_account_id.id,
-                    'name': voucher_name, 'amount_currency': 0.0, 'debit': self.amount,
+                    'name': description, 'amount_currency': 0.0, 'debit': self.amount,
                     })
         ]
         vals = {
