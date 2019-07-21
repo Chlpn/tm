@@ -1,0 +1,210 @@
+odoo.define('chlpn_enhanced.tour', function (require) {
+'use strict';
+
+var Tour = require('web.Tour');
+
+Tour.register({
+    id:   'chlpn_enhanced_widgets',
+    name: "Tests the filters and other widgets",
+    mode: 'test',
+    path: '/web#action=chlpn_enhanced.action_account_report_pnl',
+
+    steps: [
+        {
+            title:      "wait web client",
+            waitFor:    ".breadcrumb",
+        },
+        {
+            title:      "change date filter",
+            element:    ".o_chlpn_enhanced_date-filter > a"
+        },
+        {
+            title:      "change date filter",
+            element:    ".o_chlpn_enhanced_one-filter[data-value='last_year'] > a"
+        },
+        {
+            title:      "wait refresh",
+            waitNot:    ".o_chlpn_enhanced_date-filter.open",
+            waitFor:    "tr[data-id='1'] span:contains(0.00)"
+        },
+        {
+            title:      "change comparison filter",
+            element:    ".o_chlpn_enhanced_date-filter-cmp > a"
+        },
+        {
+            title:      "change comparison filter",
+            element:    ".o_chlpn_enhanced_use-previous-period > a"
+        },
+        {
+            title:      "change comparison filter",
+            element:    '.o_chlpn_enhanced_previous-period button',
+            onload: function () {
+                $('input[name="periods_number"]').val(3);
+            },
+        },
+        {
+            title:      "wait refresh",
+            waitNot:    ".o_chlpn_enhanced_date-filter-cmp.open",
+            waitFor:    "th + th + th + th + th",
+        },
+        {
+            title:      "click summary",
+            element:    'input[name="summary"]'
+        },
+        {
+            title:      "edit summary",
+            element:    'textarea[name="summary"]',
+            sampleText: 'v9 accounting reports are fabulous !'
+        },
+        {
+            title:      "save summary",
+            element:    '.o_chlpn_enhanced_summary button'
+        },
+        {
+            title:      "wait refresh",
+            waitFor:    ".o_chlpn_enhanced_saved_summary",
+        },
+/*        { // PDF printing can't be tested with phantomjs
+            title:      "export pdf",
+            element:    '.o_account-widget-pdf'
+        },*/
+        {
+            title:      "export xlsx",
+            element:    '.o_account-widget-xlsx'
+        },
+        {
+            title:      "change bool filter",
+            element:    ".o_chlpn_enhanced_date-filter-bool > a"
+        },
+        {
+            title:      "change bool filter",
+            element:    '.o_chlpn_enhanced_one-filter-bool[data-value="all_entries"]'
+        },
+        {
+            title:      "wait refresh",
+            waitNot:    ".o_chlpn_enhanced_date-filter-bool.open",
+        },
+        {
+            title:      "change date filter",
+            element:    ".o_chlpn_enhanced_date-filter > a"
+        },
+        {
+            title:      "change date filter",
+            element:    '.o_chlpn_enhanced_one-filter[data-value="this_month"] > a'
+        },
+        {
+            title:      "wait refresh",
+            waitNot:    ".o_chlpn_enhanced_date-filter.open",
+        },
+        {
+            title:      "unfold",
+            element:    '.o_chlpn_enhanced_unfoldable'
+        },
+        {
+            title:      "wait unfolding",
+            waitFor:    'tr.account_id'
+        },
+        {
+            title:      "dropdown",
+            element:    'tr.account_id a[data-toggle="dropdown"]'
+        },
+        {
+            title:      "footnote",
+            waitFor:    'tr.account_id div.dropdown.open',
+            element:    'tr.account_id .o_chlpn_enhanced_add-footnote'
+        },
+        {
+            title:      "footnote",
+            element:    'textarea.o_chlpn_enhanced_footnote_note',
+            sampleText: 'You can even add footnotes !'
+        },
+        {
+            title:      "save footnote",
+            element:    'div.modal-footer > button.btn-primary'
+        },
+        {
+            title:      "wait for footnote",
+            waitFor:    'p.footnote'
+        },
+        {
+            title:      "dropdown",
+            element:    'tr.account_id a[data-toggle="dropdown"]'
+        },
+        {
+            title:      "leave",
+            waitFor:    'tr.account_id div.dropdown.open',
+            element:    'tr.account_id .o_chlpn_enhanced_web_action'
+        },
+    ]
+});
+
+Tour.register({
+    id:   'account_followup_reports_widgets',
+    name: "Tests the filters and other widgets for the followups",
+    mode: 'test',
+    path: '/web#action=chlpn_enhanced.action_account_followup_all',
+
+    steps: [
+        {
+            title:      "wait web client",
+            waitFor:    ".o_chlpn_enhanced_page:contains(Agrolait)",
+        },
+        {
+            title:      "click trust ball",
+            waitFor:    ".o_chlpn_enhanced_page:contains(Agrolait) i.oe-account_followup-trust",
+        },
+        {
+            title:      "change trust",
+            waitFor:    ".o_chlpn_enhanced_page:contains(Agrolait) a[data-new-trust='good']",
+        },
+        {
+            title:      "click excluded",
+            element:    ".o_chlpn_enhanced_page:contains(Best Designers) input[name='blocked']",
+        },
+        {
+            title:      "change filter",
+            element:    ".o_chlpn_enhanced_followup-filter > a",
+        },
+        {
+            title:      "change filter",
+            element:    ".o_chlpn_enhanced_one-filter[data-value='action'] > a",
+        },
+        {
+            title:      "check change of both excluded and filter change", // The same filter is used as above just to refresh the page and see if best designers disappears as all lines are excluded
+            waitNot:    ".o_chlpn_enhanced_page:contains(Best Designers)",
+        },
+/*        { // PDF printing can't be tested with phantomjs
+            title:      "print letter",
+            element:    ".o_chlpn_enhanced_page:contains(Agrolait) button.followup-letter",
+        },*/
+/*        { // Also prints pdf
+            title:      "send email",
+            element:    ".o_chlpn_enhanced_page:contains(Agrolait) button.followup-email",
+        },
+        {
+            title:      "check email",
+            waitFor:    ".o_chlpn_enhanced_page:contains(Agrolait) div.alert-info",
+        },*/
+        {
+            title:      "click skip",
+            element:    ".o_chlpn_enhanced_page:contains(Agrolait) button.o_chlpn_enhanced_followup_skip",
+        },
+        {
+            title:      "check it disappeared",
+            waitNot:    ".o_chlpn_enhanced_page:contains(Agrolait)",
+        },
+        {
+            title:      "change filter",
+            element:    ".o_chlpn_enhanced_followup-filter > a",
+        },
+        {
+            title:      "change filter",
+            element:    ".o_chlpn_enhanced_one-filter[data-value='all'] > a",
+        },
+        {
+            title:      "check Agrolait is back in after filter change",
+            waitFor:    ".o_chlpn_enhanced_page:contains(Agrolait)",
+        },
+    ]
+});
+});
