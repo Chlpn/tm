@@ -76,6 +76,9 @@ class ProcessDeposit(models.TransientModel):
                 chstate = 'fd'
             else:
                 chstate = 'pd'
+        elif cc_payment.state == 'dr':
+            chstate = 'up'
+
         self.env.cr.execute(
                     """select cash_journal_id from company_branch where company_id=%s""",
                     (self.company_id.id,))
@@ -130,6 +133,8 @@ class SwipeCard(models.TransientModel):
                 chstate = 'fs'
             else:
                 chstate = 'ps'
+        elif cc_payment.state == 'dr':
+            chstate = 'up'
 
         vals = {
             'machine_name': self.machine_name.id,
