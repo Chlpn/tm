@@ -51,7 +51,7 @@
                                     u'commission', u'cost_to_commission', u'margin'], 'search_default_by_today':1,}</field>
         </record>
 
-        <menuitem name="Transaction Report" id="transaction_report" parent="menu_transaction_reports" action="action_transaction_report" sequence="1"/>
+        <menuitem name="Transaction Report" id="transaction_report" parent="menu_transaction_reports" action="action_transaction_report" groups= "group_trans_admin" sequence="1"/>
 
     </data>
 </odoo>

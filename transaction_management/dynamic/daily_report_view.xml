@@ -38,6 +38,7 @@
         name="Daily Summary Report"
         parent="menu_transaction_reports"
         action="action_daily_summary_report"
+              groups="group_trans_admin"
         sequence="6"/>
     <report
             id="report_daily_summary"
