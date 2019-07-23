@@ -8,26 +8,30 @@ access_machine_master_billing,machine.master.billing,model_machine_master,accoun
 access_machine_master_advisor,machine.master.advisor,model_machine_master,account.group_account_manager,1,1,1,1
 access_machine_master_accountant,machine.master.accountant,model_machine_master,account.group_account_user,1,1,1,1
 
-access_machine_bank_billing,machine.bank.billing,model_machine_bank,account.group_account_invoice,1,0,0,0
+access_machine_bank_billing,machine.bank.billing,model_machine_bank,account.group_account_invoice,0,0,0,0
 access_machine_bank_advisor,machine.bank.advisor,model_machine_bank,account.group_account_manager,1,1,1,1
 access_machine_bank_accountant,machine.bank.accountant,model_machine_bank,account.group_account_user,1,1,1,1
 
-access_receipt_voucher_billing,receipt.voucher.billing,model_receipt_voucher,account.group_account_invoice,1,1,1,0
+access_receipt_voucher_billing,receipt.voucher.billing,model_receipt_voucher,account.group_account_invoice,0,1,1,0
 access_receipt_voucher_advisor,receipt.voucher.advisor,model_receipt_voucher,account.group_account_manager,1,1,1,1
 access_receipt_voucher_accountant,receipt.voucher.accountant,model_receipt_voucher,account.group_account_user,1,1,1,0
 
-access_payment_voucher_billing,payment.voucher.billing,model_payment_voucher,account.group_account_invoice,1,0,0,0
+access_payment_voucher_billing,payment.voucher.billing,model_payment_voucher,account.group_account_invoice,0,0,0,0
 access_payment_voucher_advisor,payment.voucher.advisor,model_payment_voucher,account.group_account_manager,1,1,1,1
 access_payment_voucher_accountant,payment.voucher.accountant,model_payment_voucher,account.group_account_user,1,1,1,0
 
-access_company_branch_billing,company.branch.billing,model_company_branch,account.group_account_invoice,1,1,1,0
+access_company_branch_billing,company.branch.billing,model_company_branch,account.group_account_invoice,0,1,1,0
 access_company_branch_advisor,company.branch.advisor,model_company_branch,account.group_account_manager,1,1,1,1
 access_company_branch_accountant,company.branch.accountant,model_company_branch,account.group_account_user,1,1,1,0
 
-access_inter_company_billing,inter.company.billing,model_inter_company,account.group_account_invoice,1,0,0,0
+access_inter_company_billing,inter.company.billing,model_inter_company,account.group_account_invoice,0,0,0,0
 access_inter_company_advisor,inter.company.advisor,model_inter_company,account.group_account_manager,1,1,1,1
 access_inter_company_accountant,inter.company.accountant,model_inter_company,account.group_account_user,1,0,0,0
 
-access_cc_payment_billing,cc.payment.billing,model_cc_payment,account.group_account_invoice,1,1,1,0
+access_cc_payment_billing,cc.payment.billing,model_cc_payment,account.group_account_invoice,0,1,1,0
 access_cc_payment_advisor,cc.payment.advisor,model_cc_payment,account.group_account_manager,1,1,1,0
 access_cc_payment_accountant,cc.payment.accountant,model_cc_payment,account.group_account_user,1,1,1,0
+
+access_merchant_transfer_billing,merchant.transfer.billing,model_merchant_transfer,account.group_account_invoice,0,1,1,0
+access_merchant_transfer_advisor,merchant.transfer.advisor,model_merchant_transfer,account.group_account_manager,1,1,1,0
+access_merchant_transfer_accountant,merchant.transfer.accountant,model_merchant_transfer,account.group_account_user,1,1,1,0
