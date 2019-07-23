@@ -129,7 +129,7 @@
             <field name="res_model">trans.master</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('company_id','!=',[('id','in',[company.id for company in user.company_ids])])]</field>
+            <field name="domain">[('company_id','==',[user.company_id.id])]</field>
 
         </record>
 
