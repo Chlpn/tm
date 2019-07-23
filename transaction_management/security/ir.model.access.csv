@@ -11,26 +11,26 @@ access_machine_bank_billing,machine.bank.billing,model_machine_bank,account.grou
 access_machine_bank_advisor,machine.bank.advisor,model_machine_bank,account.group_trans_admin,1,1,1,1
 
 
-access_receipt_voucher_billing,receipt.voucher.billing,model_receipt_voucher,account.group_trans_user,1,1,1,0
-access_receipt_voucher_advisor,receipt.voucher.advisor,model_receipt_voucher,account.group_trans_admin,1,1,1,1
+access_receipt_voucher_billing,receipt.voucher.billing,model_receipt_voucher,group_trans_user,1,1,1,0
+access_receipt_voucher_advisor,receipt.voucher.advisor,model_receipt_voucher,group_trans_admin,1,1,1,1
 
 
-access_payment_voucher_billing,payment.voucher.billing,model_payment_voucher,account.group_trans_user,1,0,0,0
-access_payment_voucher_advisor,payment.voucher.advisor,model_payment_voucher,account.group_trans_admin,1,1,1,1
+access_payment_voucher_billing,payment.voucher.billing,model_payment_voucher,group_trans_user,1,0,0,0
+access_payment_voucher_advisor,payment.voucher.advisor,model_payment_voucher,group_trans_admin,1,1,1,1
 
 
-access_company_branch_billing,company.branch.billing,model_company_branch,account.group_trans_user,1,1,1,0
-access_company_branch_advisor,company.branch.advisor,model_company_branch,account.group_trans_admin,1,1,1,1
+access_company_branch_billing,company.branch.billing,model_company_branch,group_trans_user,1,1,1,0
+access_company_branch_advisor,company.branch.advisor,model_company_branch,group_trans_admin,1,1,1,1
 
 
-access_inter_company_billing,inter.company.billing,model_inter_company,account.group_trans_user,1,0,0,0
-access_inter_company_advisor,inter.company.advisor,model_inter_company,account.group_trans_admin,1,1,1,1
+access_inter_company_billing,inter.company.billing,model_inter_company,group_trans_user,1,0,0,0
+access_inter_company_advisor,inter.company.advisor,model_inter_company,group_trans_admin,1,1,1,1
 
 
-access_cc_payment_billing,cc.payment.billing,model_cc_payment,account.group_trans_user,1,1,1,0
-access_cc_payment_advisor,cc.payment.advisor,model_cc_payment,account.group_trans_admin,1,1,1,0
+access_cc_payment_billing,cc.payment.billing,model_cc_payment,group_trans_user,1,1,1,0
+access_cc_payment_advisor,cc.payment.advisor,model_cc_payment,group_trans_admin,1,1,1,0
 
 
-access_merchant_transfer_billing,merchant.transfer.billing,model_merchant_transfer,account.group_trans_user,1,1,1,0
-access_merchant_transfer_advisor,merchant.transfer.advisor,model_merchant_transfer,account.group_trans_admin,1,1,1,0
+access_merchant_transfer_billing,merchant.transfer.billing,model_merchant_transfer,group_trans_user,1,1,1,0
+access_merchant_transfer_advisor,merchant.transfer.advisor,model_merchant_transfer,group_trans_admin,1,1,1,0
 
