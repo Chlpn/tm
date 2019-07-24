@@ -36,6 +36,8 @@
                     <field name="income_ac"  readonly="1"/>
                     <field name="cash_ac"  readonly="1"/>
                     <field name="company_owned"/>
+                        <field name="company_id" readonly="1"/>
+
                     </group>
                     </sheet>
                 </form>

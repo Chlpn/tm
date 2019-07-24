@@ -10,6 +10,8 @@ class MachineMaster(models.Model):
     _description = "Machine Master"
 
     active = fields.Boolean(string="Active", default=1)
+
+
     company_id = fields.Many2one(
         'res.company',
         'Company',
