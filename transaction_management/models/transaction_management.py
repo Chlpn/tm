@@ -150,17 +150,18 @@ class TransMaster(models.Model):
 
     @api.multi
     def post(self):
-        if self.transaction_no is False:
-            self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
+        if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+            if self.transaction_no is False:
+                self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
 
-        journal_id = self.machine_name.branch.journal_id.id
-        if self.machine_name.rented is True :
-            post_account = self.machine_name.rented_from.property_account_payable_id.id
-        else :
-            post_account = self.machine_name.merchant_bank_ac.id
+            journal_id = self.machine_name.branch.journal_id.id
+            if self.machine_name.rented is True :
+                post_account = self.machine_name.rented_from.property_account_payable_id.id
+            else :
+                post_account = self.machine_name.merchant_bank_ac.id
 
-        if self.balance > 0:
-            line_ids = [
+            if self.balance > 0:
+                line_ids = [
                     (0, 0,
                      {'journal_id': journal_id, 'account_id': post_account,
                       'name': self.machine_name.name + "/" + self.transaction_no,'partner_id': self.machine_name.rented_from.id,
@@ -177,12 +178,12 @@ class TransMaster(models.Model):
                             'name': self.machine_name.name + "/" + self.transaction_no,'partner_id': self.customer.id,
                             'amount_currency': 0.0, 'credit': self.balance})
 
-            ]
+                ]
 
 
 
-        elif self.balance < 0:
-            line_ids = [
+            elif self.balance < 0:
+                line_ids = [
                     (0, 0,
                      {'journal_id': journal_id,
                       'account_id': post_account,
@@ -202,10 +203,10 @@ class TransMaster(models.Model):
                             'name': self.machine_name.name + "/" + self.transaction_no, 'partner_id': self.customer.id,
                             'amount_currency': 0.0, 'debit': abs(self.balance)})
 
-            ]
+                ]
 
-        else :
-            line_ids = [
+            else :
+                line_ids = [
                     (0, 0,
                      {'journal_id': journal_id,
                       'account_id': post_account,
@@ -222,39 +223,39 @@ class TransMaster(models.Model):
                             'name': self.machine_name.name + "/" + self.transaction_no,
                             'amount_currency': 0.0, 'credit': self.commission}),
 
-            ]
+                ]
 
-        vals = {
+            vals = {
             'journal_id': journal_id,
             'ref': self.machine_name.name + "/" + self.transaction_no,
             'date': self.transaction_date,
             'line_ids': line_ids,
-        }
-        account_move = self.env['account.move'].create(vals)
-        account_move.post()
-        self.journal_ref = account_move.id
+            }
+            account_move = self.env['account.move'].create(vals)
+            account_move.post()
+            self.journal_ref = account_move.id
 
-        if self.machine_name.rent_again:
-            rjournal_id = self.machine_name.parent_name.branch.journal_id.id
-            comp = self.machine_name.branch.company_id.id
-            ccomp = self.machine_name.parent_name.branch.company_id.id
-            self.env.cr.execute(
+            if self.machine_name.rent_again:
+                rjournal_id = self.machine_name.parent_name.branch.journal_id.id
+                comp = self.machine_name.branch.company_id.id
+                ccomp = self.machine_name.parent_name.branch.company_id.id
+                self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                 (ccomp, comp))
-            vvalue = self.env.cr.fetchone()
-            if vvalue is None:
-                paccount = 0
-            else:
-                paccount = vvalue[0]
-            if self.machine_name.parent_name.rented:
-                parent_account = self.machine_name.parent_name.rented_from.property_account_payable_id.id
-                parent_vendor = self.machine_name.parent_name.rented_from.id
-            else:
-                parent_account = self.machine_name.parent_name.merchant_bank_ac.id
-                parent_vendor = self.machine_name.parent_name.company_id.id
+                vvalue = self.env.cr.fetchone()
+                if vvalue is None:
+                    paccount = 0
+                else:
+                    paccount = vvalue[0]
+                if self.machine_name.parent_name.rented:
+                    parent_account = self.machine_name.parent_name.rented_from.property_account_payable_id.id
+                    parent_vendor = self.machine_name.parent_name.rented_from.id
+                else:
+                    parent_account = self.machine_name.parent_name.merchant_bank_ac.id
+                    parent_vendor = self.machine_name.parent_name.company_id.id
 
             #raise UserError(_('comp %d ccomp %d rjournal_id %d paccount %d parent_account %d')%(comp,ccomp,rjournal_id,paccount,parent_account))
-            rline_ids = [
+                rline_ids = [
                 (0, 0,
                  {'journal_id': rjournal_id,
                   'account_id': paccount,
@@ -270,17 +271,17 @@ class TransMaster(models.Model):
                         'partner_id': parent_vendor,
                         'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_parent}),
 
-            ]
-            pvals = {
+                ]
+                pvals = {
                 'journal_id': rjournal_id,
                 'ref': self.machine_name.name + "/" + self.transaction_no,
                 'date': self.transaction_date,
                 'line_ids': rline_ids,
-            }
-            raccount_move = self.env['account.move'].create(pvals)
-            raccount_move.post()
-            self.rentagain_journal_ref = raccount_move.id
-        self.state = 'posted'
+                }
+                raccount_move = self.env['account.move'].create(pvals)
+                raccount_move.post()
+                self.rentagain_journal_ref = raccount_move.id
+            self.state = 'posted'
 
     @api.model
     def create(self,values):

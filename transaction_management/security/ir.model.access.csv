@@ -34,3 +34,6 @@ access_cc_payment_advisor,cc.payment.advisor,model_cc_payment,group_trans_admin,
 access_merchant_transfer_billing,merchant.transfer.billing,model_merchant_transfer,group_trans_user,0,0,0,0
 access_merchant_transfer_advisor,merchant.transfer.advisor,model_merchant_transfer,group_trans_admin,1,1,1,0
 
+
+
+
