@@ -68,16 +68,16 @@
                     <field name="customer_mobile" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="balance" readonly="1"/>
-                    <field name="cost_to_commission" readonly="1" groups="transaction_management.group_trans_admin"/>
-                    <field name="margin" readonly="1" groups="transaction_management.group_trans_admin"/>
-                    <field name="cost_percentage" readonly="1" groups="transaction_management.group_trans_admin"/>
+                    <field name="cost_to_commission" readonly="1" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
+                    <field name="margin" readonly="1" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
+                    <field name="cost_percentage" readonly="1" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
 
                     <field name="company_id" required='True' readonly="1" />
-                           <field name="parent_percentage" invisible="1" groups="transaction_management.group_trans_admin" />
-                           <field name="cost_to_parent" invisible="1" groups="transaction_management.group_trans_admin" />
+                           <field name="parent_percentage" invisible="1" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}" />
+                           <field name="cost_to_parent" invisible="1" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}" />
 
                             <separator string="JOURNAL DETAILS" colspan="4" />
-                    <field name="journal_ref" readonly="1" nolabel="1" groups="transaction_management.group_trans_admin"/>
+                    <field name="journal_ref" readonly="1" nolabel="1" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
                         </group>
                     <separator string="NOTES" colspan="4" />
                     <field name="note" copy="False"/>
@@ -100,8 +100,8 @@
                     <field name="amount_to_swipe" string="Amount Swiped"/>
                     <field name="amount_to_customer"/>
                     <field name="commission"/>
-                    <field name="cost_to_commission" groups="transaction_management.group_trans_admin"/>
-                    <field name="margin" groups="transaction_management.group_trans_admin"/>
+                    <field name="cost_to_commission" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
+                    <field name="margin" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
                     <field name="sales_percentage"/>
                 </tree>
             </field>
