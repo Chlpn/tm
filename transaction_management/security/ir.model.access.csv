@@ -19,7 +19,7 @@ access_payment_voucher_billing,payment.voucher.billing,model_payment_voucher,gro
 access_payment_voucher_advisor,payment.voucher.advisor,model_payment_voucher,group_trans_admin,1,1,1,1
 
 
-access_company_branch_billing,company.branch.billing,model_company_branch,group_trans_user,0,0,0,0
+access_company_branch_billing,company.branch.billing,model_company_branch,group_trans_user,1,0,0,0
 access_company_branch_advisor,company.branch.advisor,model_company_branch,group_trans_admin,1,1,1,1
 
 
