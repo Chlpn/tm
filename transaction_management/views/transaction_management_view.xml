@@ -96,7 +96,6 @@
                     <field name="transaction_no"/>
                     <field name="transaction_date"/>
                     <field name="machine_name"/>
-
                     <field name="customer"/>
                     <field name="amount_to_swipe" string="Amount Swiped"/>
                     <field name="amount_to_customer"/>
