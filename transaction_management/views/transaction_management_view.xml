@@ -56,7 +56,6 @@
                        <group colspan="4" col="4">
                     <field name="machine_name" options="{'no_quick_create':True,'no_create_edit':True}" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}" domain="[('branch.company_id', '=',
                                                       company_id)]"/>
-                           <field domain="[('company_id', '=', user.company_id)]" name="machine_name" groups="group_trans_user"/>
                     <field name="transaction_date" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="transaction_amount" required='True' attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="amount_to_swipe" required='True' readonly="1"/>
@@ -97,7 +96,7 @@
                     <field name="transaction_no"/>
                     <field name="transaction_date"/>
                     <field name="machine_name"/>
-                    <field domain="[('company_id', '=', company_id)]" name="machine_name" groups="group_trans_user"/>
+
                     <field name="customer"/>
                     <field name="amount_to_swipe" string="Amount Swiped"/>
                     <field name="amount_to_customer"/>
