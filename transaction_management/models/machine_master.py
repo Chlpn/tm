@@ -15,7 +15,7 @@ class MachineMaster(models.Model):
     company_id = fields.Many2one(
         'res.company',
         'Company',
-        default=lambda self: self.env.user.company_id
+        default=lambda self: self.branch.company_id.id
     )
     branch = fields.Many2one('company.branch', string ="Branch")
     name = fields.Char(string='Machine Name')
@@ -37,6 +37,7 @@ class MachineMaster(models.Model):
 
     @api.onchange('parent_name','branch')
     def _onchange_parent_name(self):
+        self.company_id = self.branch.company_id.id
         self.cost_ac = self.branch.cost_ac.id
         self.income_ac = self.branch.income_ac.id
         self.cash_ac = self.branch.cash_ac.id
