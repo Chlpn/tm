@@ -21,23 +21,21 @@
                     <group colspan="4" col="4">
                     <field name="branch" widget="selection"/>
                     <field name="name" required="1"/>
-                    <field name="rent_again" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
-                    <field name="parent_name" groups="transaction_management.group_trans_admin" attrs="{'invisible': [('rent_again', '=', False)],'required': [('rent_again', '=', True)]}" options="{'no_quick_create':True,'no_create_edit':True}" domain="[('rent_again', '=', False)]"/>
+                    <field name="rent_again"/>
+                    <field name="parent_name" attrs="{'invisible': [('rent_again', '=', False)],'required': [('rent_again', '=', True)]}" options="{'no_quick_create':True,'no_create_edit':True}" domain="[('rent_again', '=', False)]"/>
                     <field name="merchant_id"/>
                     <field name="terminal_id"/>
-                    <field name="bank_name" required="1" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
-                    <field name="rented" groups="transaction_management.group_trans_admin" attrs="{'invisible': [('rent_again', '=', True)]}" />
-                    <field name="rented_from" groups="transaction_management.group_trans_admin" attrs="{'invisible': ['|',('rented', '=', False),('rent_again', '=', True)],'required': [('rented', '=', True)]}" options="{'no_quick_create': True}"/>
+                    <field name="bank_name" required="1"/>
+                    <field name="rented" attrs="{'invisible': [('rent_again', '=', True)]}" />
+                    <field name="rented_from" attrs="{'invisible': ['|',('rented', '=', False),('rent_again', '=', True)],'required': [('rented', '=', True)]}" options="{'no_quick_create': True}"/>
                     <field name="sales_percentage"/>
-                    <field name="cost_percentage" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
-                    <field name="merchant_bank_ac" groups="transaction_management.group_trans_admin" attrs="{'invisible': ['|',('rented', '=', True),('rent_again', '=', True)],'required': [('rented', '=', False)]}" options="{'no_create': True}"/>
-                    <field name="linked_bank_ac"  groups="transaction_management.group_trans_admin" attrs="{'invisible': ['|',('rented', '=', True),('rent_again', '=', True)]}" options="{'no_create': True}"/>
-                    <field name="cost_ac"  attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}" readonly="1"/>
-                    <field name="income_ac"  attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}" readonly="1"/>
-                    <field name="cash_ac"  attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}" readonly="1"/>
-                    <field name="company_owned" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}" />
-                        <field name="company_id" readonly="1" invisible="1"/>
-
+                    <field name="cost_percentage"/>
+                    <field name="merchant_bank_ac" attrs="{'invisible': ['|',('rented', '=', True),('rent_again', '=', True)],'required': [('rented', '=', False)]}" options="{'no_create': True}"/>
+                    <field name="linked_bank_ac" attrs="{'invisible': ['|',('rented', '=', True),('rent_again', '=', True)]}" options="{'no_create': True}"/>
+                    <field name="cost_ac"  readonly="1"/>
+                    <field name="income_ac"  readonly="1"/>
+                    <field name="cash_ac"  readonly="1"/>
+                    <field name="company_owned"/>
                     </group>
                     </sheet>
                 </form>
@@ -54,7 +52,7 @@
                     <field name="bank_name"/>
                     <field name="rented"/>
                     <field name="sales_percentage"/>
-                    <field name="cost_percentage" attrs="{'invisible':[('groups','!=','transaction_management.group_trans_admin')]}"/>
+                    <field name="cost_percentage"/>
                 </tree>
             </field>
         </record>
