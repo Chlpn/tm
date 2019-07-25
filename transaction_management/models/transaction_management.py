@@ -75,47 +75,48 @@ class TransMaster(models.Model):
         if self.machine_name:
 
             if self.machine_name.rented is False:
-                if self.machine_name.rent_again:
-                    comp = self.machine_name.branch.company_id.id
-                    ccomp = self.machine_name.parent_name.branch.company_id.id
-                    self.env.cr.execute(
+                if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+                    if self.machine_name.rent_again:
+                        comp = self.machine_name.branch.company_id.id
+                        ccomp = self.machine_name.parent_name.branch.company_id.id
+                        self.env.cr.execute(
                         """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                         (comp, ccomp))
-                    value = self.env.cr.fetchone()
-                    if value is None:
-                        account = 0
+                        value = self.env.cr.fetchone()
+                        if value is None:
+                            account = 0
+                        else:
+                            account = value[0]
                     else:
-                        account = value[0]
-                else:
 
-                    account = self.machine_name.merchant_bank_ac.id
-                self.env.cr.execute(
+                        account = self.machine_name.merchant_bank_ac.id
+                    self.env.cr.execute(
                     """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
                         (account,))
 
-            else:
-                account = self.machine_name.rented_from.property_account_payable_id.id
-                customer = self.machine_name.rented_from.id
-                self.env.cr.execute(
+                else:
+                    account = self.machine_name.rented_from.property_account_payable_id.id
+                    customer = self.machine_name.rented_from.id
+                    self.env.cr.execute(
                     """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
                     (account, customer))
 
-            value = self.env.cr.fetchone()
-            caccount = self.machine_name.branch.cash_ac.id
-            self.env.cr.execute(
+                value = self.env.cr.fetchone()
+                caccount = self.machine_name.branch.cash_ac.id
+                self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
                 (caccount,))
-            value2 = self.env.cr.fetchone()
+                value2 = self.env.cr.fetchone()
 
-            if value is None:
-                self.machine_balance = 0
-            else:
-                self.machine_balance = -1 * value[0]
+                if value is None:
+                    self.machine_balance = 0
+                else:
+                    self.machine_balance = -1 * value[0]
 
-            if value2 is None:
-                self.cash_balance = 0
-            else:
-                self.cash_balance = value2[0]
+                if value2 is None:
+                    self.cash_balance = 0
+                else:
+                    self.cash_balance = value2[0]
 
 
     @api.onchange('transaction_amount','commission_included','sales_percentage')
@@ -131,8 +132,9 @@ class TransMaster(models.Model):
             self.cash_paid_customer = self.amount_to_customer
             self.balance = self.amount_to_customer - self.cash_paid_customer
             self.margin = self.commission - self.cost_to_commission
-            if self.machine_name.rent_again:
-                self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
+            if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+                if self.machine_name.rent_again:
+                    self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
 
         else:
             self.amount_to_swipe = self.transaction_amount
@@ -142,8 +144,9 @@ class TransMaster(models.Model):
             self.cash_paid_customer = self.amount_to_customer
             self.balance = self.amount_to_customer - self.cash_paid_customer
             self.margin = self.commission - self.cost_to_commission
-            if self.machine_name.rent_again:
-                self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
+            if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+                if self.machine_name.rent_again:
+                    self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
 
     @api.onchange('cash_paid_customer')
     def _cash_paid_customer(self):
