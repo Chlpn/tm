@@ -40,6 +40,7 @@ access_account_move_billing,account.move.billing,account.model_account_move,grou
 access_account_move_line_billing,account.move.line.billing,account.model_account_move_line,group_trans_user,1,0,0,0
 access_inter_company_billing,inter.company.billing,model_inter_company,group_trans_user,1,0,0,0
 access_account_account_billing,account.account.billing,account.model_account_account,group_trans_user,1,0,0,0
+access_account_journal_billing,account.journal.billing,account.model_account_journal,group_trans_user,1,0,0,0
 
 
 
