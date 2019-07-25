@@ -52,8 +52,9 @@ class TransMaster(models.Model):
         #self.company_id = self.machine_name.company_id.id
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
-        if self.machine_name.rent_again:
-            self.parent_percentage = self.machine_name.parent_name.cost_percentage
+        if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+            if self.machine_name.rent_again:
+                self.parent_percentage = self.machine_name.parent_name.cost_percentage
 
     @api.depends('customer')
     def _compute_cbal(self):
@@ -150,6 +151,11 @@ class TransMaster(models.Model):
 
     @api.multi
     def post(self):
+
+        if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+            if self.machine_name.rent_again:
+                self.parent_percentage = self.machine_name.parent_name.cost_percentage
+                self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
         if self.transaction_no is False:
             self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
 
