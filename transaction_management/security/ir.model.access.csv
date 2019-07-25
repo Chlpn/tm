@@ -34,6 +34,14 @@ access_cc_payment_advisor,cc.payment.advisor,model_cc_payment,group_trans_admin,
 access_merchant_transfer_billing,merchant.transfer.billing,model_merchant_transfer,group_trans_user,0,0,0,0
 access_merchant_transfer_advisor,merchant.transfer.advisor,model_merchant_transfer,group_trans_admin,1,1,1,0
 
+access_res_company_billing,res.company.billing,model_res_company,group_trans_user,1,0,0,0
+access_res_partner_billing,res.partner.billing,model_res_partner,group_trans_user,1,0,0,0
+access_account_move_billing,account.move.billing,model_account_move,group_trans_user,1,0,0,0
+access_account_move_line_billing,account.move.line.billing,model_account_move_line,group_trans_user,1,0,0,0
+access_inter_company_billing,inter.company.billing,model_inter_company,group_trans_user,1,0,0,0
+access_account_account_billing,account.account.billing,model_account_account,group_trans_user,1,0,0,0
+
+
 
 
 
