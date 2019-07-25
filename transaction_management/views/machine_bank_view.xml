@@ -55,6 +55,6 @@
         <menuitem name="Reports" id="menu_transaction_reports" parent="menu_transaction_management" groups="group_trans_admin" sequence="4"/>
 
         <menuitem name="Banks" id="menu_machine_banks" parent="menu_transaction_settings" sequence="6"
-                  action="action_machine_bank"/>
+                  action="action_machine_bank" groups="group_trans_admin"/>
     </data>
 </odoo>

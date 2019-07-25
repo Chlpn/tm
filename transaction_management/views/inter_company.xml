@@ -11,10 +11,10 @@
                     <sheet>
                          <group>
                              <field name="company_id"/>
-                             <field name="related_company_id" domain="[('company_id','!=',company_id)]"/>
+                             <field name="related_company_id" domain="[('company_id','!=',company_id)]" groups="group_trans_admin"/>
 
                              <field name="related_ac" domain="[('company_id', '=',
-                                                      company_id)]"/>
+                                                      company_id)]" groups="group_trans_admin"/>
 
                          </group>
                     </sheet>
@@ -29,8 +29,8 @@
             <field name="arch" type="xml">
                 <tree string="Inter Company Account">
                     <field name="company_id"/>
-                    <field name="related_company_id"/>
-                    <field name="related_ac"/>
+                    <field name="related_company_id" groups="group_trans_admin"/>
+                    <field name="related_ac" groups="group_trans_admin"/>
                 </tree>
             </field>
         </record>
@@ -59,6 +59,6 @@
 
 
         <menuitem name="Intercompany Accounts" id="menu_inter_company" parent="menu_transaction_settings" sequence="8"
-                  action="action_inter_company"/>
+                  action="action_inter_company" groups="group_trans_admin"/>
     </data>
 </odoo>

@@ -68,19 +68,19 @@
                     <field name="customer_mobile" attrs="{'required': [('balance', '!=',0)],'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="cash_paid_customer" attrs="{'readonly':[('state','in',('posted', 'cancelled'))]}"/>
                     <field name="balance" readonly="1"/>
-                    <field name="cost_to_commission" readonly="1"/>
-                    <field name="margin" readonly="1"/>
-                    <field name="cost_percentage" readonly="1"/>
+                    <field name="cost_to_commission" readonly="1" groups="group_trans_admin"/>
+                    <field name="margin" readonly="1" groups="group_trans_admin"/>
+                    <field name="cost_percentage" readonly="1" groups="group_trans_admin"/>
 
-                    <field name="company_id" required='True' readonly="1" />
-                           <field name="parent_percentage" invisible="1" />
-                           <field name="cost_to_parent" invisible="1" />
+                    <field name="company_id" required='True' readonly="1" groups="group_trans_admin" />
+                           <field name="parent_percentage" invisible="1" groups="group_trans_admin" />
+                           <field name="cost_to_parent" invisible="1" groups="group_trans_admin"/>
 
-                            <separator string="JOURNAL DETAILS" colspan="4" />
-                    <field name="journal_ref" readonly="1" nolabel="1"/>
+                            <separator string="JOURNAL DETAILS" colspan="4" groups="group_trans_admin" />
+                    <field name="journal_ref" readonly="1" nolabel="1" groups="group_trans_admin"/>
                         </group>
-                    <separator string="NOTES" colspan="4" />
-                    <field name="note" copy="False"/>
+                    <separator string="NOTES" colspan="4" groups="group_trans_admin"/>
+                    <field name="note" copy="False" groups="group_trans_admin"/>
 
                     </sheet>
                 </form>
@@ -100,8 +100,8 @@
                     <field name="amount_to_swipe" string="Amount Swiped"/>
                     <field name="amount_to_customer"/>
                     <field name="commission"/>
-                    <field name="cost_to_commission"/>
-                    <field name="margin"/>
+                    <field name="cost_to_commission" groups="group_trans_admin"/>
+                    <field name="margin" groups="group_trans_admin"/>
                     <field name="sales_percentage"/>
                 </tree>
             </field>
