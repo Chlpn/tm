@@ -30,7 +30,7 @@
     </record>
 
         <record id="branch_rule" model="ir.rule">
-        <field name="name">Machine Master multi-company</field>
+        <field name="name">Branch Master multi-company</field>
         <field name="model_id" ref="model_company_branch"/>
         <field name="global" eval="True"/>
         <field name="domain_force">['|','|','&amp;',('company_id.child_ids','child_of',[user.company_id.id]),('company_id','child_of',[user.company_id.id]),('company_id','=',False),('company_id', 'in', [company.id for company in user.company_ids])]</field>

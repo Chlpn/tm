@@ -3,7 +3,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_trans_master_billing,trans.master.billing,model_trans_master,group_trans_user,1,1,1,1
 access_trans_master_advisor,trans.master.advisor,model_trans_master,group_trans_admin,1,1,1,0
 
-access_machine_master_billing,machine.master.billing,model_machine_master,group_trans_user,1,1,0,0
+access_machine_master_billing,machine.master.billing,model_machine_master,group_trans_user,1,1,1,1
 access_machine_master_advisor,machine.master.advisor,model_machine_master,group_trans_admin,1,1,1,1
 
 
