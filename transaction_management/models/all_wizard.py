@@ -203,7 +203,7 @@ class SwipeCard(models.TransientModel):
             self.rec_cash_paid_customer = self.rec_amount_to_customer
             self.rec_balance = self.rec_amount_to_customer - self.rec_cash_paid_customer
 
-            if self.machine_name.rent_again & self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+            if self.mm_master.rent_again & self.env['res.users'].has_group('transaction_management.group_trans_admin'):
                 self.rec_par_cost = mm_master.parent_name.cost_percentage
             else:
                 self.rec_par_cost = 0.0
