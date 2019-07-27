@@ -156,7 +156,7 @@ class TransMaster(models.Model):
 
     @api.multi
     def post(self):
-        if self.machine_name.rent_again & self.env['res.users'].has_group('transaction_management.group_account_manager'):
+        if self.machine_name.rent_again & self.env['res.users'].has_group('transaction_management.group_trans_admin'):
             self.parent_percentage = self.machine_name.parent_name.cost_percentage
             self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
 
