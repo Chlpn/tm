@@ -296,7 +296,7 @@ class TransMaster(models.Model):
     def create(self,values):
 
         record = super(TransMaster, self).create(values)
-        if self.machine_name.rent_again & self.env['res.users'].has_group('transaction_management.group_trans_admin'):
+        if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
             record.post()
         return record
 
