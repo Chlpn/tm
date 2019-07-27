@@ -199,6 +199,16 @@
             <field name="sequence" eval="1"/>
             <field name="level" eval="2" />
         </record>
+        <record id="account_financial_report_bank_view0" model="account.financial.html.report.line">
+            <field name="name">Merchant Receivables</field>
+            <field name="code">MA</field>
+            <field name="parent_id" ref='account_financial_report_current_assets_view0'/>
+            <field name="domain" eval="[('account_id.user_type_id', '=', ref('account.data_account_type_credit_card'))]" />
+            <field name="groupby">account_id</field>
+            <field name="formulas">balance = sum.balance</field>
+            <field name="sequence" eval="1"/>
+            <field name="level" eval="3" />
+        </record>
         <record id="account_financial_report_receivable0" model="account.financial.html.report.line">
             <field name="name">Receivables</field>
             <field name="code">REC</field>
@@ -272,7 +282,7 @@
             <field name="name">Current Liabilities</field>
             <field name="code">CL1</field>
             <field name="parent_id" ref='account_financial_report_current_liabilities0'/>
-            <field name="domain" eval="[('account_id.user_type_id', 'in', [ref('account.data_account_type_current_liabilities'), ref('account.data_account_type_credit_card')])]"/>
+            <field name="domain" eval="[('account_id.user_type_id', 'in', [ref('account.data_account_type_current_liabilities')])]"/>
             <field name="groupby">account_id</field>
             <field name="formulas">balance = -sum.balance</field>
             <field name="sequence" eval="1"/>
