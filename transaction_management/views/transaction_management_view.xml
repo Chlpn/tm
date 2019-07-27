@@ -132,7 +132,25 @@
             <field name="domain">[('state','!=','none')]</field>
 
         </record>
+        <!--post multiple draft-->
+        <record id="action_server_post_all" model="ir.actions.server">
+            <field name="name">Post Selected</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_trans_master" />
+            <field name="state">code</field>
+            <field name="code">records.immediate_make_pending()</field>
+        </record>
 
+        <record model="ir.values" id="action_module_post_all">
+            <field name="name">action_module_post_all</field>
+            <field name="action_id" ref="action_server_module_post_all" />
+            <field name="value" eval="'ir.actions.server,' + str(ref('action_server_module_post_all'))" />
+            <field name="key">action</field>
+            <field name="model_id" ref="model_trans_master" />
+            <field name="model">trans.master</field>
+            <field name="key2">client_action_multi</field>
+        </record>
 
         <menuitem name="Transactions" id="menu_transaction_master" parent="menu_transactions" sequence="2"
                   action="action_transaction_master"/>
