@@ -19,7 +19,7 @@
                     <header>
                         <button name="post" states="draft" string="Post" type="object"/>
                         <button name="print_invoice" states="posted" string="Invoice" type="object"/>
-                        <button name="action_cancel" states="posted" string="Cancel" type="object"/>
+                        <button name="action_cancel" states="posted,draft" string="Cancel" type="object"/>
                         <button name="action_draft" states="cancelled" string="Set to Draft" type="object"/>
                         <field name="state" widget="statusbar"
                                statusbar_visible="draft,posted"/>
