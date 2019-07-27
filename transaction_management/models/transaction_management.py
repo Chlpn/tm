@@ -52,9 +52,8 @@ class TransMaster(models.Model):
         #self.company_id = self.machine_name.company_id.id
         self.sales_percentage = self.machine_name.sales_percentage
         self.cost_percentage =self.machine_name.cost_percentage
-        if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
-            if self.machine_name.rent_again:
-                self.parent_percentage = self.machine_name.parent_name.cost_percentage
+        if self.machine_name.rent_again:
+            self.parent_percentage = self.machine_name.parent_name.cost_percentage
 
     @api.depends('customer')
     def _compute_cbal(self):
@@ -75,22 +74,21 @@ class TransMaster(models.Model):
         if self.machine_name:
 
             if self.machine_name.rented is False:
-                if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
-                    if self.machine_name.rent_again:
-                        comp = self.machine_name.branch.company_id.id
-                        ccomp = self.machine_name.parent_name.branch.company_id.id
-                        self.env.cr.execute(
+                if self.machine_name.rent_again:
+                    comp = self.machine_name.branch.company_id.id
+                    ccomp = self.machine_name.parent_name.branch.company_id.id
+                    self.env.cr.execute(
                         """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                         (comp, ccomp))
-                        value = self.env.cr.fetchone()
-                        if value is None:
-                            account = 0
-                        else:
-                            account = value[0]
+                    value = self.env.cr.fetchone()
+                    if value is None:
+                        account = 0
                     else:
+                        account = value[0]
+                else:
 
-                        account = self.machine_name.merchant_bank_ac.id
-                    self.env.cr.execute(
+                    account = self.machine_name.merchant_bank_ac.id
+                self.env.cr.execute(
                     """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
                         (account,))
 
@@ -132,9 +130,8 @@ class TransMaster(models.Model):
             self.cash_paid_customer = self.amount_to_customer
             self.balance = self.amount_to_customer - self.cash_paid_customer
             self.margin = self.commission - self.cost_to_commission
-            if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
-                if self.machine_name.rent_again:
-                    self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
+            if self.machine_name.rent_again:
+                self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
 
         else:
             self.amount_to_swipe = self.transaction_amount
@@ -144,9 +141,8 @@ class TransMaster(models.Model):
             self.cash_paid_customer = self.amount_to_customer
             self.balance = self.amount_to_customer - self.cash_paid_customer
             self.margin = self.commission - self.cost_to_commission
-            if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
-                if self.machine_name.rent_again:
-                    self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
+            if self.machine_name.rent_again:
+                self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
 
     @api.onchange('cash_paid_customer')
     def _cash_paid_customer(self):
@@ -154,11 +150,6 @@ class TransMaster(models.Model):
 
     @api.multi
     def post(self):
-
-        if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
-            if self.machine_name.rent_again:
-                self.parent_percentage = self.machine_name.parent_name.cost_percentage
-                self.cost_to_parent = (self.amount_to_swipe * self.parent_percentage / 100)
         if self.transaction_no is False:
             self.transaction_no = self.env['ir.sequence'].next_by_code('trans.master') or 'new'
 
@@ -295,8 +286,7 @@ class TransMaster(models.Model):
     def create(self,values):
 
         record = super(TransMaster, self).create(values)
-        if self.env['res.users'].has_group('transaction_management.group_trans_admin'):
-            record.post()
+        record.post()
         return record
 
     #@api.multi
