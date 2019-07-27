@@ -52,7 +52,8 @@
         <menuitem name="Transaction Management" id="menu_transactions" parent="menu_transaction_management" sequence="1"/>
 
         <menuitem name="Settings" id="menu_transaction_settings" parent="menu_transaction_management" sequence="5"/>
-        <menuitem name="Reports" id="menu_transaction_reports" parent="menu_transaction_management"  sequence="4"/>
+        <menuitem name="Reports" id="menu_transaction_reports" parent="menu_transaction_management"
+                  groups="transaction_management.group_trans_admin,transaction_management.group_trans_user"  sequence="4"/>
 
         <menuitem name="Banks" id="menu_machine_banks" parent="menu_transaction_settings" sequence="6"
                   action="action_machine_bank" groups="transaction_management.group_trans_admin"/>
