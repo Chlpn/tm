@@ -101,22 +101,22 @@ class TransMaster(models.Model):
                     """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and account_move_line.partner_id=%s and  account_move.state='posted' group by account_id""",
                     (account, customer))
 
-                value = self.env.cr.fetchone()
-                caccount = self.machine_name.branch.cash_ac.id
-                self.env.cr.execute(
+            value = self.env.cr.fetchone()
+            caccount = self.machine_name.branch.cash_ac.id
+            self.env.cr.execute(
                 """select sum(debit-credit) from account_move_line left join account_move on account_move_line.move_id=account_move.id where account_id=%s and  account_move.state='posted' group by account_id""",
                 (caccount,))
-                value2 = self.env.cr.fetchone()
+            value2 = self.env.cr.fetchone()
 
-                if value is None:
-                    self.machine_balance = 0
-                else:
-                    self.machine_balance = -1 * value[0]
+            if value is None:
+                self.machine_balance = 0
+            else:
+                self.machine_balance = -1 * value[0]
 
-                if value2 is None:
-                    self.cash_balance = 0
-                else:
-                    self.cash_balance = value2[0]
+            if value2 is None:
+                self.cash_balance = 0
+            else:
+                self.cash_balance = value2[0]
 
 
     @api.onchange('transaction_amount','commission_included','sales_percentage')
