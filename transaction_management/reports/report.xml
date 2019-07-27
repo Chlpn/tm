@@ -45,7 +45,7 @@
             <field name="res_model">trans.master</field>
             <field name="view_type">form</field>
             <field name="view_mode">pivot,graph</field>
-            <field name="domain">[('state','=','posted')]</field>
+            <field name="domain">[('state','=','posted,'draft')]</field>
             <field name="context">{u'pivot_column_groupby': [], u'pivot_row_groupby': [u'company_id', u'transaction_date:day', u'machine_name'],
                                     u'pivot_measures': [u'__count__', u'amount_to_swipe', u'amount_to_customer',
                                     u'commission', u'cost_to_commission', u'margin'], 'search_default_by_today':1,}</field>
