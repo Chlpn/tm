@@ -152,7 +152,7 @@ class TransMaster(models.Model):
     def immediate_post_all(self):
         for record in self.search([]):
             #if record.state is 'draft':
-            record.post()
+            record.post(self)
 
     @api.multi
     def post(self):
