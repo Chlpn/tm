@@ -149,6 +149,11 @@ class TransMaster(models.Model):
         self.balance = self.amount_to_customer - self.cash_paid_customer
 
     @api.multi
+    def immediate_post_all(self):
+        for record in self.search([]):
+            record.post()
+
+    @api.multi
     def post(self):
         if self.machine_name.rent_again & self.env['res.users'].has_group('account.group_account_manager'):
             self.parent_percentage = self.machine_name.parent_name.cost_percentage
