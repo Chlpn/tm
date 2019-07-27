@@ -133,7 +133,7 @@
 
         </record>
         <!--post multiple draft-->
-        <record id="action_server_post_all" model="ir.actions.server">
+        <record id="action_server_module_post_all" model="ir.actions.server">
             <field name="name">Post Selected</field>
             <field name="condition">True</field>
             <field name="type">ir.actions.server</field>
