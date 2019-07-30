@@ -31,7 +31,7 @@ class ReceiveCommission(models.TransientModel):
 
         value = self.env.cr.fetchone()
         cjournal = value[0]
-        
+
 
 
         vals = {
