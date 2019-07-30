@@ -60,7 +60,7 @@ class ccPayment(models.Model):
             self.commission_paid = 0.0
             self.commission_swiped = self.payment_amount * self.commission / 100
             charge = self.commission_swiped * self.commission /100
-            self.total_to_swipe = self.payment_amount + charge + self.commission_pay
+            self.total_to_swipe = self.payment_amount + charge + self.commission_swiped
             self.amount_to_deposit = self.payment_amount
 
 
