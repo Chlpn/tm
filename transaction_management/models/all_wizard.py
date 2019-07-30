@@ -8,13 +8,12 @@ from datetime import datetime
 
 class ReceiveCommission(models.TransientModel):
     _name = "receive.commission.wizard"
-    
+
     company_id = fields.Many2one(
         'res.company',
         'Company',
         default=lambda self: self.env.user.company_id
     )
-
 
     rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
     rec_amount = fields.Float(string='Amount')
@@ -23,24 +22,22 @@ class ReceiveCommission(models.TransientModel):
     def rec_com(self):
         cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
         chstate = cc_payment.state
-        #if cc_payment.commission_pay < self.rec_amount:
-            #raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
+        # if cc_payment.commission_pay < self.rec_amount:
+        # raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
         self.env.cr.execute(
-                    """select cash_journal_id from company_branch where company_id=%s""",
-                    (self.company_id.id,))
+            """select cash_journal_id from company_branch where company_id=%s""",
+            (self.company_id.id,))
 
         value = self.env.cr.fetchone()
         cjournal = value[0]
 
-
-
         vals = {
-                   'journal_id':cjournal,
-                    'partner_id':cc_payment.customer.id,
-                    'transaction_date':self.rec_date,
-                    'account_id':cc_payment.customer.property_account_receivable_id.id,
-                    'amount': self.rec_amount,
-                    'description': 'credit card payment-' + cc_payment.serial,
+            'journal_id': cjournal,
+            'partner_id': cc_payment.customer.id,
+            'transaction_date': self.rec_date,
+            'account_id': cc_payment.customer.property_account_receivable_id.id,
+            'amount': self.rec_amount,
+            'description': 'credit card payment-' + cc_payment.serial,
         }
         receipt_voucher = self.env['receipt.voucher'].create(vals)
         receipt_voucher.post()
@@ -51,6 +48,48 @@ class ReceiveCommission(models.TransientModel):
                           'payment_ref': [(4, receipt_voucher.id)]
                           })
 
+
+class ReceiveAdd(models.TransientModel):
+    _name = "receive.add.wizard"
+
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        default=lambda self: self.env.user.company_id
+    )
+
+    rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
+    rec_amount = fields.Float(string='Amount')
+
+    @api.multi
+    def rec_add(self):
+        cc_payment = self.env['cc.payment'].browse(self.env.context.get('active_id'))
+
+        # if cc_payment.commission_pay < self.rec_amount:
+        # raise UserError(_('Commission remaining to pay is %f, please change the amount')%(cc_payment.commission_pay))
+        self.env.cr.execute(
+            """select cash_journal_id from company_branch where company_id=%s""",
+            (self.company_id.id,))
+
+        value = self.env.cr.fetchone()
+        cjournal = value[0]
+
+        vals = {
+            'journal_id': cjournal,
+            'partner_id': cc_payment.customer.id,
+            'transaction_date': self.rec_date,
+            'account_id': cc_payment.customer.property_account_receivable_id.id,
+            'amount': self.rec_amount,
+            'description': 'credit card payment-' + cc_payment.serial,
+        }
+        receipt_voucher = self.env['receipt.voucher'].create(vals)
+        receipt_voucher.post()
+        cc_payment.write({
+                          'add_amount': cc_payment.add_amount + self.rec_amount,
+                          'amount_to_deposit': cc_payment.amount_to_deposit + self.rec_amount,
+
+                          'payment_ref': [(4, receipt_voucher.id)]
+                          })
 
 
 class ProcessDeposit(models.TransientModel):

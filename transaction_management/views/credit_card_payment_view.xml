@@ -20,6 +20,7 @@
                         <button name="rec_com" string="Commission" type="object"/>
                         <button name="dep_pay" string="Deposit Payment" type="object"/>
                         <button name="swipe" string="Swipe Amount" type="object"/>
+                        <button name="rec_add" string="Additional Payment" type="object"/>
                         <button name="cancel_trans" string="Cancel" type="object"/>
 
                         <field name="state" widget="statusbar"/>
@@ -33,6 +34,7 @@
                            <field name="payment_amount" attrs="{'readonly':[('state','not in',('dr'))]}" />
                            <field name="commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                             <field name="commission_pay" readonly="1"/>
+                           <field name="add_amount" readonly="1"/>
                            <field name="swipe_commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                             <field name="commission_paid" readonly="1"/>
                            <field name="commission_swiped" readonly="1"/>
