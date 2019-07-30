@@ -14,7 +14,7 @@ class MerchantTransfer(models.Model):
     transaction_date = fields.Date(string='Transaction Date', required=True, default=fields.Date.context_today)
     merchant_ac = fields.Many2one('account.account', string="Merchant Account", required=True, ondelete='restrict',
                               domain=lambda self: [
-                                  ('user_type_id', '=', self.env.ref('account.data_account_type_credit_card').id)])
+                                  ('user_type_id', '=', self.env.ref('account.data_account_type_fixed_assets').id)])
     linked_bank_ac = fields.Many2one('account.account', string="Linked Bank Account", required=True, ondelete='restrict',readonly=True,
                                   domain=lambda self: [
                                       ('user_type_id', '=', self.env.ref('account.data_account_type_liquidity').id)])
