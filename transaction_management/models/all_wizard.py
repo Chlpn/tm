@@ -31,10 +31,7 @@ class ReceiveCommission(models.TransientModel):
 
         value = self.env.cr.fetchone()
         cjournal = value[0]
-        if cc_payment.swipe_commission:
-            tts = cc_payment.total_to_swipe
-        else:
-            tts = cc_payment.total_to_swipe - self.rec_amount
+        
 
 
         vals = {
@@ -50,7 +47,7 @@ class ReceiveCommission(models.TransientModel):
         cc_payment.write({'state': 'up',
                           'commission_paid': cc_payment.commission_paid + self.rec_amount,
                           'commission_pay': cc_payment.commission_pay - self.rec_amount,
-                          'total_to_swipe': tts,
+
                           'payment_ref': [(4, receipt_voucher.id)]
                           })
 
