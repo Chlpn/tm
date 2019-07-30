@@ -20,7 +20,7 @@ class ccPayment(models.Model):
     commission = fields.Float(string='Commission Percentage', default=3.0,digits=dp.get_precision('Account'))
     commission_pay = fields.Float(string='Commission to be Paid', digits=dp.get_precision('Account'), readonly=True)
     commission_paid = fields.Float(string='Commission Paid', digits=dp.get_precision('Account'), readonly=True)
-    commission_swiped = fields.Float(string='Commission Swiped', digits=dp.get_precision('Account'), readonly=True)
+    commission_swiped = fields.Float(string='Swipe Commission', digits=dp.get_precision('Account'), readonly=True)
     swipe_commission = fields.Boolean(string='Commission to Swipe', default=False)
     total_to_swipe = fields.Float(string='Amount to Swipe', store=True, digits=dp.get_precision('Account'), readonly=True)
     payment_date = fields.Date(string='Due Date', default=fields.Date.context_today, required=True)
@@ -56,12 +56,12 @@ class ccPayment(models.Model):
             self.total_to_swipe = self.payment_amount
             self.amount_to_deposit = self.payment_amount
         else:
-            self.commission_pay = self.payment_amount * self.commission / 100
+            self.commission_pay = 0
             self.commission_paid = 0.0
             charge = self.commission_pay * self.commission /100
             self.total_to_swipe = self.payment_amount + charge + self.commission_pay
             self.amount_to_deposit = self.payment_amount
-            self.commission_swiped = self.commission_pay
+            self.commission_swiped = self.payment_amount * self.commission / 100
 
 
 
