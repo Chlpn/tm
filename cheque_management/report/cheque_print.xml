@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="cheque_print_report">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+
+                        <div class="page" style="padding-top: 15x;">
+
+<!--                    <strong>A/C Payee only</strong>-->
+
+                    <table style="width:100%; ">
+                        <tr >
+                            <td style="width:73%; height:37px; padding-left:13%;">
+                            </td>
+                            <td style="width:27%;  height:37px; padding-left:23%; font:15px lucida-console,sans-serif !important; ">
+                                <strong>
+                            <span  t-field="o.cheque_date"/>
+                                </strong>
+
+                            </td>
+                        </tr>
+
+                        <tr style="padding-top:10x; " >
+                            <td style="padding-left:15%; padding-top:5x; height:46px " colspan="2">
+                                <span style="font:15px lucida-console,sans-serif !important;" t-field="o.name_in_cheque"/>
+                            </td>
+
+                        </tr>
+                    </table>
+
+<br></br>
+<!--                    <strong>Amount in words:</strong>-->
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:73%;  height:30px; padding-left:7%; font:15px lucida-console,sans-serif !important;">
+                                <span t-esc="o.amount_to_text(o.amount)"/>
+                            </td>
+                            <td style="width:27%; height:30px; padding-left:15%; font:15px lucida-console,sans-serif !important;">
+                                <strong>**<span t-field="o.amount"/>**</strong>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+<!-- <table   style="border-spacing:0;margin-bottom:0;height: 187px; width: 800px; border: 2px solid black;">
+             
+                <tr>
+                    <td>
+                       A/C Payee only
+                    </td>
+                    <td></td>
+                  
+                   
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Date:<span t-field="o.cheque_date" ></span></td>
+                </tr>
+                <tr>
+                    <td>Name:</td><td style="padding-right:2cm;"><hr style="padding-right:2cm;"></hr></td>
+                </tr>
+                <tr>
+                    <td>Amount in words:</td><td><hr></hr></td>
+                </tr>
+            </table>                       -->
+                        </div>
+                           
+
+                    
+                </t>
+            </t>
+            </template>
+    </data>
+</odoo>
