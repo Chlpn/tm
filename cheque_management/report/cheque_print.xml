@@ -13,13 +13,14 @@
                         <tr >
                             <td style="width:73%; height:37px; padding-left:13%;">
                             </td>
-                            <td style="width:27%;  height:37px; padding-left:23%; font:15px lucida-console,sans-serif !important; ">
+                            <td style="width:27%;  height:37px; padding-left:15%; font:15px lucida-console,sans-serif !important; ">
                                 <strong>
                             <span  t-field="o.cheque_date"/>
                                 </strong>
 
                             </td>
                         </tr>
+                        <tr style="height:25px"></tr>
 
                         <tr style="padding-top:10x; " >
                             <td style="padding-left:15%; padding-top:5x; height:46px " colspan="2">
@@ -33,10 +34,10 @@
 <!--                    <strong>Amount in words:</strong>-->
                     <table style="width:100%;">
                         <tr>
-                            <td style="width:73%;  height:30px; padding-left:7%; font:15px lucida-console,sans-serif !important;">
+                            <td style="width:73%;  height:30px; padding-left:9%; font:15px lucida-console,sans-serif !important;">
                                 <span t-esc="o.amount_to_text(o.amount)"/>
                             </td>
-                            <td style="width:27%; height:30px; padding-left:15%; font:15px lucida-console,sans-serif !important;">
+                            <td style="width:27%; height:30px; padding-left:9%; font:15px lucida-console,sans-serif !important;">
                                 <strong>**<span t-field="o.amount"/>**</strong>
                             </td>
                         </tr>
