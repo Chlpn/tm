@@ -5,7 +5,7 @@
             <t t-call="report.html_container">
                 <t t-foreach="docs" t-as="o">
 
-                        <div class="page" style="padding-top: 15x;">
+                        <div class="page" style="padding-top: 20x;">
 
 <!--                    <strong>A/C Payee only</strong>-->
 
