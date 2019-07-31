@@ -20,10 +20,10 @@
 
                             </td>
                         </tr>
-                        <tr style="height:45px"></tr>
+                        <tr style="height:40px"></tr>
 
                         <tr style="padding-top:5x; " >
-                            <td style="padding-left:7%; padding-top:5x; height:46px " colspan="2">
+                            <td style="padding-left:8%; padding-top:5x; height:46px " colspan="2">
                                 <span style="font:15px lucida-console,sans-serif !important;" t-field="o.name_in_cheque"/>
                             </td>
 
@@ -38,8 +38,17 @@
                                 <span t-esc="o.amount_to_text(o.amount)"/>
                             </td>
                             <td style="width:27%; height:30px; padding-left:9%; padding-top:8px; font:15px lucida-console,sans-serif !important;">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:73%;  height:30px; padding-left:7%; font:15px lucida-console,sans-serif !important;">
+
+                            </td>
+                            <td style="width:27%; height:30px; padding-left:9%; font:15px lucida-console,sans-serif !important;">
                                 <strong>**<span t-field="o.amount"/>**</strong>
                             </td>
+
                         </tr>
                     </table>
 
