@@ -86,7 +86,7 @@ class MerchantTransfer(models.Model):
         self.write({'name': merchant_transfer})
 
         if self.description:
-            desc = "Merchant Transfer/"+self.tamount+"/"+ self.description + '/' + self.name
+            desc = "Merchant Transfer/"+str(self.tamount)+"/"+ self.description + '/' + self.name
         line_ids = [
             (0, 0,
              {'journal_id': self.journal_id.id, 'account_id': self.linked_bank_ac.id,

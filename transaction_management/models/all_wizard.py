@@ -37,7 +37,7 @@ class ReceiveCommission(models.TransientModel):
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
             'amount': self.rec_amount,
-            'description': 'cc payment/' + cc_payment.payment_amount +'/Comm paid,Ref:'+ cc_payment.serial,
+            'description': 'cc payment/' + str(cc_payment.payment_amount) +'/Comm paid,Ref:'+ cc_payment.serial,
         }
         receipt_voucher = self.env['receipt.voucher'].create(vals)
         receipt_voucher.post()
@@ -80,7 +80,7 @@ class ReceiveAdd(models.TransientModel):
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
             'amount': self.rec_amount,
-            'description': 'cc payment/' +cc_payment.payment_amount+'/Additional Paymnet,Ref:'+ cc_payment.serial,
+            'description': 'cc payment/' +str(cc_payment.payment_amount)+'/Additional Paymnet,Ref:'+ cc_payment.serial,
         }
         receipt_voucher = self.env['receipt.voucher'].create(vals)
         receipt_voucher.post()
@@ -132,7 +132,7 @@ class ProcessDeposit(models.TransientModel):
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
             'amount': self.rec_amount,
-            'description': 'cc payment/' +cc_payment.payment_amount+'/Deposit2Card,Ref:'+ cc_payment.serial,
+            'description': 'cc payment/' +str(cc_payment.payment_amount)+'/Deposit2Card,Ref:'+ cc_payment.serial,
         }
         payment_voucher = self.env['payment.voucher'].create(vals)
         payment_voucher.post()
@@ -194,7 +194,7 @@ class SwipeCard(models.TransientModel):
             'balance': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
             'customer': cc_payment.customer.id,
             'customer_mobile': cc_payment.customer_mobile,
-            'note': cc_payment.note,
+            'note': 'cc payment/' +str(cc_payment.payment_amount)+',Ref:'+ cc_payment.serial+cc_payment.note,
             'ccpayment_ref':cc_payment.serial
 
         }
