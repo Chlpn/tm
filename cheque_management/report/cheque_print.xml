@@ -34,13 +34,14 @@
 <!--                    <strong>Amount in words:</strong>-->
                     <table style="width:100%;">
                         <tr>
-                            <td style="width:73%;  height:30px; padding-left:7%; font:15px lucida-console,sans-serif !important;">
+                            <td style="width:73%; padding-top: 15x; height:30px; padding-left:7%; font:15px lucida-console,sans-serif !important;">
                                 <span t-esc="o.amount_to_text(o.amount)"/>
                             </td>
                             <td style="width:27%; height:30px; padding-left:9%; padding-top:8px; font:15px lucida-console,sans-serif !important;">
 
                             </td>
                         </tr>
+                        <tr style="height:40px"></tr>
                         <tr>
                             <td style="width:73%;  height:30px; padding-left:7%; font:15px lucida-console,sans-serif !important;">
 
