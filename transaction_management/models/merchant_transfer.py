@@ -23,6 +23,7 @@ class MerchantTransfer(models.Model):
 
     description = fields.Char(string='Description')
     amount = fields.Float('Transferred Amount', required=True)
+    tamount = fields.Float('Total Amount Swiped')
     account_move_id = fields.Many2one('account.move', string="Accounting Entry", readonly=True)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -85,11 +86,11 @@ class MerchantTransfer(models.Model):
         self.write({'name': merchant_transfer})
 
         if self.description:
-            desc = self.description + ' /' + self.name
+            desc = "Merchant Transfer/"+self.tamount+"/"+ self.description + '/' + self.name
         line_ids = [
             (0, 0,
              {'journal_id': self.journal_id.id, 'account_id': self.linked_bank_ac.id,
-              'name': desc,
+              'name':  desc,
               'amount_currency': 0.0, 'debit': self.amount}),
             (0, 0, {'journal_id': self.journal_id.id, 'account_id': self.merchant_ac.id,
                     'name': desc, 'amount_currency': 0.0, 'credit': self.amount,

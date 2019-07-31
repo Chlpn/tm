@@ -36,6 +36,7 @@
                                 <field name="merchant_ac" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
                                 <field name="linked_bank_ac" readonly="1" />
                                 <field name="amount" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
+                                <field name="tamount" attrs="{'readonly':[('state','in',('post', 'cancel'))]}"/>
 
                              </group>
                              <group>

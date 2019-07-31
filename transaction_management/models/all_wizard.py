@@ -37,7 +37,7 @@ class ReceiveCommission(models.TransientModel):
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
             'amount': self.rec_amount,
-            'description': 'credit card payment-' + cc_payment.serial,
+            'description': 'cc payment/' + cc_payment.payment_amount +'/Comm paid,Ref:'+ cc_payment.serial,
         }
         receipt_voucher = self.env['receipt.voucher'].create(vals)
         receipt_voucher.post()
@@ -80,7 +80,7 @@ class ReceiveAdd(models.TransientModel):
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
             'amount': self.rec_amount,
-            'description': 'credit card payment-' + cc_payment.serial,
+            'description': 'cc payment/' +cc_payment.payment_amount+'/Additional Paymnet,Ref:'+ cc_payment.serial,
         }
         receipt_voucher = self.env['receipt.voucher'].create(vals)
         receipt_voucher.post()
@@ -132,7 +132,7 @@ class ProcessDeposit(models.TransientModel):
             'transaction_date': self.rec_date,
             'account_id': cc_payment.customer.property_account_receivable_id.id,
             'amount': self.rec_amount,
-            'description': 'credit card payment-'+ cc_payment.serial,
+            'description': 'cc payment/' +cc_payment.payment_amount+'/Deposit2Card,Ref:'+ cc_payment.serial,
         }
         payment_voucher = self.env['payment.voucher'].create(vals)
         payment_voucher.post()
