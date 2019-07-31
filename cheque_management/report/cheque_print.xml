@@ -5,7 +5,7 @@
             <t t-call="report.html_container">
                 <t t-foreach="docs" t-as="o">
 
-                        <div class="page" style="padding-top: 20x;">
+                        <div class="page" style="padding-top: 15x;">
 
 <!--                    <strong>A/C Payee only</strong>-->
 
@@ -23,14 +23,14 @@
                         <tr style="height:40px"></tr>
 
                         <tr style="padding-top:5x; " >
-                            <td style="padding-left:8%; padding-top:5x; height:46px " colspan="2">
+                            <td style="padding-left:10%; padding-top:5x; height:46px " colspan="2">
                                 <span style="font:15px lucida-console,sans-serif !important;" t-field="o.name_in_cheque"/>
                             </td>
 
                         </tr>
                     </table>
 
-<br></br>
+
 <!--                    <strong>Amount in words:</strong>-->
                     <table style="width:100%;">
                         <tr>
