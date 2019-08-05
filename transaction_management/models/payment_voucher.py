@@ -37,6 +37,18 @@ class PaymentVoucher(models.Model):
     _sql_constraints = [('name_uniq', 'unique (name)', 'Cash payment voucher must be unique !')]
     _defaults = {'name': lambda self, cr, uid, context: 'Payment'}
 
+    @api.onchange('transaction_date,partner_id')
+    def _onchange_journal(self):
+        comp = self.env.user.company_id.id
+        self.env.cr.execute(
+            """select cash_journal_id from company_branch where company_id=%s""", (comp,))
+        value = self.env.cr.fetchone()
+        if value is None:
+            self.journal_id = 0
+        else:
+            self.journal_id = value[1]
+
+
     @api.onchange('partner_id')
     def _onchange_partner(self):
 
