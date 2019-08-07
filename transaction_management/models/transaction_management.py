@@ -175,18 +175,18 @@ class TransMaster(models.Model):
                     (0, 0,
                      {'journal_id': journal_id, 'account_id': post_account,
                       'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),'partner_id': self.machine_name.rented_from.id,
-                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                      'amount_currency': 0.0, 'debit': float_round(self.amount_to_swipe - self.cost_to_commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id, 'name':self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                            'amount_currency': 0.0, 'debit': float_round(self.cost_to_commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
                             'name':self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                            'amount_currency': 0.0, 'credit': float_round(self.cash_paid_customer,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'credit': self.commission}),
+                            'amount_currency': 0.0, 'credit': float_round(self.commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),'partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'credit': self.balance})
+                            'amount_currency': 0.0, 'credit': float_round(self.balance,precision_digits=2)})
 
             ]
 
@@ -199,19 +199,19 @@ class TransMaster(models.Model):
                       'account_id': post_account,
                       'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
                       'partner_id': self.machine_name.rented_from.id,
-                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                      'amount_currency': 0.0, 'debit': float_round(self.amount_to_swipe - self.cost_to_commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                            'amount_currency': 0.0, 'debit': float_round(self.cost_to_commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                            'amount_currency': 0.0, 'credit': float_round(self.cash_paid_customer,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'credit': self.commission}),
+                            'amount_currency': 0.0, 'credit': float_round(self.commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.customer.property_account_receivable_id.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe), 'partner_id': self.customer.id,
-                            'amount_currency': 0.0, 'debit': abs(self.balance)})
+                            'amount_currency': 0.0, 'debit': float_round(abs(self.balance),precision_digits=2)})
 
             ]
 
@@ -222,16 +222,16 @@ class TransMaster(models.Model):
                       'account_id': post_account,
                       'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
                       'partner_id': self.machine_name.rented_from.id,
-                      'amount_currency': 0.0, 'debit': self.amount_to_swipe - self.cost_to_commission}),
+                      'amount_currency': 0.0, 'debit': float_round(self.amount_to_swipe - self.cost_to_commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cost_ac.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'debit': self.cost_to_commission}),
+                            'amount_currency': 0.0, 'debit': float_round(self.cost_to_commission,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.cash_ac.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'credit': self.cash_paid_customer}),
+                            'amount_currency': 0.0, 'credit': float_round(self.cash_paid_customer,precision_digits=2)}),
                     (0, 0, {'journal_id': journal_id, 'account_id': self.machine_name.income_ac.id,
                             'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                            'amount_currency': 0.0, 'credit': self.commission}),
+                            'amount_currency': 0.0, 'credit': float_round(self.commission,precision_digits=2)}),
 
             ]
 

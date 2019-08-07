@@ -64,7 +64,13 @@ class ccPayment(models.Model):
             self.total_to_swipe = self.payment_amount + charge + self.commission_swiped
             self.amount_to_deposit = self.payment_amount + self.add_amount
 
+    @api.model
+    def create(self, values):
 
+        record = super(ccPayment, self).create(values)
+        if self.swipe_commission:
+            self.state = 'up'
+        return record
 
 
 

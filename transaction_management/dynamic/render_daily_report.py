@@ -116,7 +116,7 @@ class render_ldger(models.AbstractModel):
 
         self.env.cr.execute("""select (select name from res_partner where id=a.partner_id) as partner, sum(a.debit-a.credit) as balance from account_move_line as a left join
          account_move as b on a.move_id=b.id where a.account_id=%s and b.company_id=%s and b.state='posted' and a.date<=%s group by 
-         a.partner_id """, (
+         a.partner_id order by balance desc """, (
         ledger_data.branch_name.acc_rec_id.id, cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         datass = self.env.cr.fetchall()
 
