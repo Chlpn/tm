@@ -3,6 +3,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 import odoo.addons.decimal_precision as dp
+from odoo.tools import float_compare, float_round
 from datetime import datetime
 
 
@@ -184,14 +185,14 @@ class SwipeCard(models.TransientModel):
             'amount_to_swipe': self.rec_amount,
             'cost_percentage': self.machine_name.cost_percentage,
             'sales_percentage': cc_payment.commission,
-            'commission': (self.rec_amount * cc_payment.commission / 100.0),
-            'cost_to_commission': (self.rec_amount * self.machine_name.cost_percentage / 100.0),
+            'commission': float_round((self.rec_amount * cc_payment.commission / 100.0),precision_digits=2),
+            'cost_to_commission': float_round((self.rec_amount * self.machine_name.cost_percentage / 100.0),precision_digits=2),
             'parent_percentage': par_cost,
-            'cost_to_parent': (self.rec_amount * par_cost / 100.0),
-            'margin': (self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * self.machine_name.cost_percentage / 100.0),
+            'cost_to_parent': float_round((self.rec_amount * par_cost / 100.0),precision_digits=2),
+            'margin': float_round((self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * self.machine_name.cost_percentage / 100.0),precision_digits=2),
             'cash_paid_customer': 0.0,
-            'amount_to_customer': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
-            'balance': self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),
+            'amount_to_customer': float_round(self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),precision_digits=2),
+            'balance': float_round(self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),precision_digits=2),
             'customer': cc_payment.customer.id,
             'customer_mobile': cc_payment.customer_mobile,
             'note': 'cc payment/' + str(cc_payment.payment_amount)+ ',Ref:' + str(cc_payment.serial) + str(cc_payment.note),
