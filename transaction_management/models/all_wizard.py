@@ -191,7 +191,7 @@ class SwipeCard(models.TransientModel):
             'cost_to_parent': float_round((self.rec_amount * par_cost / 100.0),precision_digits=2),
             'margin': float_round((self.rec_amount * cc_payment.commission / 100.0) - (self.rec_amount * self.machine_name.cost_percentage / 100.0),precision_digits=2),
             'cash_paid_customer': 0.0,
-            'amount_to_customer': float_round(self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),precision_digits=2),
+            'amount_to_customer': float_round(self.rec_amount ,precision_digits=2) -float_round((self.rec_amount * cc_payment.commission / 100.0),precision_digits=2),
             'balance': float_round(self.rec_amount - (self.rec_amount * cc_payment.commission / 100.0),precision_digits=2),
             'customer': cc_payment.customer.id,
             'customer_mobile': cc_payment.customer_mobile,
