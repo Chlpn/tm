@@ -298,20 +298,20 @@
                             <tbody>
 
                                  <br></br>
- <tr t-foreach="databnk" t-as="daa">
-        <td style=" width:5%; text-align:center;"><span t-esc="daa_index+1"/></td>
+ <tr t-foreach="databnk" t-as="dbnk">
+        <td style=" width:5%; text-align:center;"><span t-esc="dbnk_index+1"/></td>
 
-        <td style=" width:15%; text-align:left;"> <span t-esc="daa['bank']"/> </td>
+        <td style=" width:15%; text-align:left;"> <span t-esc="dbnk['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['opening']"/> </td>
 
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['debit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['debit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['credit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['credit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['closing']"/> </td>
-          <t t-set="total" t-value="total + daa['closing']"/>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['closing']"/> </td>
+          <t t-set="total" t-value="total + dbnk['closing']"/>
 
 
 
@@ -355,20 +355,20 @@
                             <tbody>
 
                                  <br></br>
- <tr t-foreach="datamer" t-as="daa">
-        <td style=" width:5%; text-align:center;"><span t-esc="daa_index+1"/></td>
+ <tr t-foreach="datamer" t-as="dmer">
+        <td style=" width:5%; text-align:center;"><span t-esc="dmer_index+1"/></td>
 
-        <td style=" width:15%; text-align:left;"> <span t-esc="daa['bank']"/> </td>
+        <td style=" width:15%; text-align:left;"> <span t-esc="dmer['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['opening']"/> </td>
 
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['debit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['debit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['credit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['credit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="daa['closing']"/> </td>
-        <t t-set="total" t-value="total + daa['closing']"/>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['closing']"/> </td>
+        <t t-set="total" t-value="total + dmer['closing']"/>
 
 
 
