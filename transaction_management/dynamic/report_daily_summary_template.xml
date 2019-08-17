@@ -360,14 +360,14 @@
 
         <td style=" width:15%; text-align:left;"> <span t-esc="dmer['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer[''%.2f'opening']"/> </td>
 
 
         <td style=" width:20%; text-align:right;"> <span t-esc="dmer['debit']"/> </td>
 
         <td style=" width:20%; text-align:right;"> <span t-esc="dmer['credit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['closing']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer[''%.2f'closing']"/> </td>
         <t t-set="total" t-value="total + dmer['closing']"/>
 
 
