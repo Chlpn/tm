@@ -303,7 +303,7 @@
 
         <td style=" width:15%; text-align:left;"> <span t-esc="dbnk['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dbnk['opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f' dbnk['opening']"/> </td>
 
 
         <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dbnk['debit']"/> </td>
