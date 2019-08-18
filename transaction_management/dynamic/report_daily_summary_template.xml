@@ -303,14 +303,14 @@
 
         <td style=" width:15%; text-align:left;"> <span t-esc="dbnk['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dbnk['opening']"/> </td>
 
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['debit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dbnk['debit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['credit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dbnk['credit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['closing']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dbnk['closing']"/> </td>
           <t t-set="total" t-value="total + dbnk['closing']"/>
 
 
@@ -324,7 +324,7 @@
         <td style=" width:20%; text-align:right;"><strong></strong></td>
         <td style=" width:20%; text-align:right;"><strong>  </strong></td>
         <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
-        <td style=" width:20%; text-align:right;"><strong> <span t-esc="total"/> </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc="'%.2f'total"/> </strong></td>
 
 
 
@@ -360,14 +360,14 @@
 
         <td style=" width:15%; text-align:left;"> <span t-esc="dmer['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer[''%.2f'opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dmer['opening']"/> </td>
 
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['debit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dmer['debit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['credit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dmer['credit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer[''%.2f'closing']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc="'%.2f'dmer['closing']"/> </td>
         <t t-set="total" t-value="total + dmer['closing']"/>
 
 
@@ -381,7 +381,7 @@
         <td style=" width:20%; text-align:right;"><strong></strong></td>
         <td style=" width:20%; text-align:right;"><strong>  </strong></td>
         <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
-        <td style=" width:20%; text-align:right;"><strong> <span t-esc="total"/> </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc="'%.2f'total"/> </strong></td>
 
 
 
