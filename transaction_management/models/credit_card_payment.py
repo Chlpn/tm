@@ -27,7 +27,7 @@ class ccPayment(models.Model):
     payment_date = fields.Date(string='Due Date', default=fields.Date.context_today, required=True)
     amount_deposited = fields.Float(string='Amount deposited', store=True, digits=dp.get_precision('Account'), readonly=True)
     amount_to_deposit = fields.Float(string='Amount remaining to deposit', store=True, digits=dp.get_precision('Account'), readonly=True)
-    #machine_name = fields.Many2one('machine.master', ondelete='restrict')
+    bank_name = fields.Many2one('card.bank', ondelete='restrict')
     amount_swiped = fields.Float(string='Amount swiped', store=True, digits=dp.get_precision('Account'), readonly=True)
 
 
