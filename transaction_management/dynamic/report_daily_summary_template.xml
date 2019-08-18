@@ -595,8 +595,8 @@
  <tr t-foreach="datadv" t-as="da">
         <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="da['balance']"/> </td>
-     <t t-set="balance" t-value="balance + da['balance']"/>
+        <td style=" width:25%; text-align:right;"> <span t-esc="da['amount_to_customer']"/> </td>
+     <t t-set="balance" t-value="balance + da['amount_to_customer']"/>
 
  </tr>
                                 <br></br>

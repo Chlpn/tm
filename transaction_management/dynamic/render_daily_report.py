@@ -282,13 +282,9 @@ class render_ldger(models.AbstractModel):
         dataadv = self.env.cr.fetchall()
 
         for moveline_datadv in dataadv:
-            move_dicadv['machine'] = moveline_datadv[0]
-            move_dicadv['amount_swiped'] = moveline_datadv[1]
-            move_dicadv['amount_pay'] = moveline_datadv[2]
-            move_dicadv['amount_paid'] = moveline_datadv[3]
-            move_dicadv['commission'] = moveline_datadv[4]
-            move_dicadv['cost_commission'] = moveline_datadv[5]
-            move_dicadv['margin'] = moveline_datadv[6]
+            move_dicadv['customer'] = moveline_datadv[0]
+            move_dicadv['amount_to_customer'] = moveline_datadv[1]
+
 
             move_listadv.append(move_dicadv)
             move_dicadv = {}
