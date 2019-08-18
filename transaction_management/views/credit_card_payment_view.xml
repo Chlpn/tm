@@ -99,6 +99,10 @@
             <field name="model">cc.payment</field>
             <field name="arch" type="xml">
                 <search string="CC Payment Search">
+                     <field name="serial"/>
+                    <field name="bank_name"/>
+                    <field name="customer"/>
+                    <field name="transaction_date"/>
                     <group string="Filter By">
                         <filter name="valid" string="Valid" domain="[('state', '!=','cl')]"/>
                     </group>
