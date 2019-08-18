@@ -102,7 +102,7 @@
                      <field name="serial"/>
                     <field name="bank_name"/>
                     <field name="customer"/>
-                    <field name="transaction_date"/>
+                    <field name="processing_date"/>
                     <group string="Filter By">
                         <filter name="valid" string="Valid" domain="[('state', '!=','cl')]"/>
                     </group>
