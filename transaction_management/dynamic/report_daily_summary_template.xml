@@ -47,18 +47,18 @@
 
         <td style=" width:10%; text-align:left;"> <span t-esc="daa['machine']"/> </td>
 
-        <td style=" width:15%; text-align:right;"> <span t-esc="daa['amount_swiped']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% daa['amount_swiped']"/> </td>
      <t t-set="ams" t-value="ams + daa['amount_swiped']"/>
 
-        <td style=" width:15%; text-align:right;"> <span t-esc="daa['amount_pay']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% daa['amount_pay']"/> </td>
      <t t-set="apy" t-value="apy + daa['amount_pay']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="daa['amount_paid']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% daa['amount_paid']"/> </td>
      <t t-set="apd" t-value="apd + daa['amount_paid']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="daa['commission']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% daa['commission']"/> </td>
      <t t-set="comm" t-value="comm + daa['commission']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="daa['cost_commission']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% daa['cost_commission']"/> </td>
      <t t-set="ctc" t-value="ctc + daa['cost_commission']"/>
-        <td style=" width:10%; text-align:right;"> <span t-esc="daa['margin']"/> </td>
+        <td style=" width:10%; text-align:right;"> <span t-esc=" '%.2f'% daa['margin']"/> </td>
 
      <t t-set="mar" t-value="mar + daa['margin']"/>
 
@@ -114,18 +114,18 @@
 
         <td style=" width:10%; text-align:left;"> <span t-esc="da2['machine']"/> </td>
 
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_swiped']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['amount_swiped']"/> </td>
      <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
 
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_pay']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['amount_pay']"/> </td>
      <t t-set="apy" t-value="apy + da2['amount_pay']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['amount_paid']"/> </td>
      <t t-set="apd" t-value="apd + da2['amount_paid']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['commission']"/> </td>
      <t t-set="comm" t-value="comm + da2['commission']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['cost_commission']"/> </td>
      <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
-        <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
+        <td style=" width:10%; text-align:right;"> <span t-esc=" '%.2f'% da2['margin']"/> </td>
 
      <t t-set="mar" t-value="mar + da2['margin']"/>
 
@@ -181,18 +181,18 @@
 
         <td style=" width:10%; text-align:left;"> <span t-esc="da2['machine']"/> </td>
 
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_swiped']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['amount_swiped']"/> </td>
      <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
 
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_pay']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['amount_pay']"/> </td>
      <t t-set="apy" t-value="apy + da2['amount_pay']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['amount_paid']"/> </td>
      <t t-set="apd" t-value="apd + da2['amount_paid']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['commission']"/> </td>
      <t t-set="comm" t-value="comm + da2['commission']"/>
-        <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
+        <td style=" width:15%; text-align:right;"> <span t-esc=" '%.2f'% da2['cost_commission']"/> </td>
      <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
-        <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
+        <td style=" width:10%; text-align:right;"> <span t-esc=" '%.2f'% da2['margin']"/> </td>
 
      <t t-set="mar" t-value="mar + da2['margin']"/>
 
@@ -303,14 +303,14 @@
 
         <td style=" width:15%; text-align:left;"> <span t-esc="dbnk['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dbnk['opening']"/> </td>
 
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['debit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dbnk['debit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['credit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dbnk['credit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['closing']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dbnk['closing']"/> </td>
           <t t-set="total" t-value="total + dbnk['closing']"/>
 
 
@@ -324,7 +324,7 @@
         <td style=" width:20%; text-align:right;"><strong></strong></td>
         <td style=" width:20%; text-align:right;"><strong>  </strong></td>
         <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
-        <td style=" width:20%; text-align:right;"><strong> <span t-esc="total"/> </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc=" '%.2f'% total"/> </strong></td>
 
 
 
@@ -360,14 +360,14 @@
 
         <td style=" width:15%; text-align:left;"> <span t-esc="dmer['bank']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['opening']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dmer['opening']"/> </td>
 
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['debit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dmer['debit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['credit']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dmer['credit']"/> </td>
 
-        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['closing']"/> </td>
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dmer['closing']"/> </td>
         <t t-set="total" t-value="total + dmer['closing']"/>
 
 
@@ -381,7 +381,7 @@
         <td style=" width:20%; text-align:right;"><strong></strong></td>
         <td style=" width:20%; text-align:right;"><strong>  </strong></td>
         <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
-        <td style=" width:20%; text-align:right;"><strong> <span t-esc="total"/> </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc=" '%.2f'% total"/> </strong></td>
 
 
 
@@ -478,7 +478,7 @@
  <tr t-foreach="data" t-as="da">
         <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="da['balance']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc=" '%.2f'% da['balance']"/> </td>
      <t t-set="balance" t-value="balance + da['balance']"/>
 
  </tr>
@@ -486,7 +486,7 @@
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
         <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
-        <td style=" width:25%; text-align:right;"><strong> <span t-esc="balance"/> </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc=" '%.2f'% balance"/> </strong></td>
 
 
  </tr>
@@ -516,7 +516,7 @@
  <tr t-foreach="data1" t-as="da1">
         <td style=" width:5%; text-align:center;"><span t-esc="da1_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="da1['vendor']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="da1['balance']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc=" '%.2f'% da1['balance']"/> </td>
      <t t-set="balance1" t-value="balance1 + da1['balance']"/>
 
  </tr>
@@ -524,7 +524,7 @@
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
         <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
-        <td style=" width:25%; text-align:right;"><strong> <span t-esc="balance1"/> </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc=" '%.2f'% balance1"/> </strong></td>
 
 
  </tr>
@@ -557,7 +557,7 @@
         <td style=" width:5%; text-align:center;"><span t-esc="dap_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dap['partner']"/> </td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dap['account']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="dap['amount']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc=" '%.2f'% dap['amount']"/> </td>
      <t t-set="balancep" t-value="balancep + dap['amount']"/>
 
  </tr>
@@ -566,7 +566,7 @@
         <td style=" width:5%; text-align:center;"><span /></td>
         <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
         <td style=" width:10%; text-align:left;"><span /></td>
-        <td style=" width:25%; text-align:right;"> <strong><span t-esc="balancep"/> </strong></td>
+        <td style=" width:25%; text-align:right;"> <strong><span t-esc=" '%.2f'% balancep"/> </strong></td>
 
 
  </tr>
@@ -595,7 +595,7 @@
  <tr t-foreach="datadv" t-as="da">
         <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="da['amount_to_customer']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc=" '%.2f'% da['amount_to_customer']"/> </td>
      <t t-set="balance" t-value="balance + da['amount_to_customer']"/>
 
  </tr>
@@ -603,7 +603,7 @@
  <tr>
         <td style=" width:5%; text-align:center;"><span /></td>
         <td style=" width:10%; text-align:left;"><strong> Total Due  </strong></td>
-        <td style=" width:25%; text-align:right;"><strong> <span t-esc="balance"/> </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc=" '%.2f'% balance"/> </strong></td>
 
 
  </tr>
@@ -636,7 +636,7 @@
         <td style=" width:5%; text-align:center;"><span t-esc="dar_index+1"/></td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dar['partner']"/> </td>
         <td style=" width:10%; text-align:left;"> <span t-esc="dar['account']"/> </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="dar['amount']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc=" '%.2f'% dar['amount']"/> </td>
      <t t-set="balancer" t-value="balancer + dar['amount']"/>
 
  </tr>
@@ -645,7 +645,7 @@
         <td style=" width:5%; text-align:center;"><span /></td>
         <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
         <td style=" width:10%; text-align:left;"><span /></td>
-        <td style=" width:25%; text-align:right;"> <strong><span t-esc="balancer"/></strong> </td>
+        <td style=" width:25%; text-align:right;"> <strong><span t-esc=" '%.2f'% balancer"/></strong> </td>
 
 
  </tr>
