@@ -24,7 +24,8 @@
                 'reports/report.xml',
                 'reports/invoice_report.xml',
                 'dynamic/daily_report_view.xml',
-                'dynamic/report_daily_summary_template.xml'
+                'dynamic/report_daily_summary_template.xml',
+                'views/card_bank_view.xml',
 
 
             ],
