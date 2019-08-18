@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+     <!--  Card Bank Form View -->
+        <record model="ir.ui.view" id="card_bank_form">
+            <field name="name">card.bank.form</field>
+            <field name="model">card.bank</field>
+            <field name="arch" type="xml">
+                <form string="Card Bank" duplicate="0">
+                    <sheet>
+                         <group>
+                             <field name="name"/>
+                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Card Bank Tree View -->
+        <record model="ir.ui.view" id="card_bank_tree">
+            <field name="name">card.bank.tree</field>
+            <field name="model">card.bank</field>
+            <field name="arch" type="xml">
+                <tree string="Card Banks">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Card Bank Search View -->
+        <record model="ir.ui.view" id="card_bank_search">
+            <field name="name">card.bank.search</field>
+            <field name="model">card.bank</field>
+            <field name="arch" type="xml">
+                <search string="Card Banks">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_card_bank">
+            <field name="name">Card Banks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">card.bank</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem name="Card Banks" id="menu_card_banks" parent="menu_transaction_settings" sequence="5"
+                  action="action_card_bank" groups="transaction_management.group_trans_admin"/>
+    </data>
+</odoo>
