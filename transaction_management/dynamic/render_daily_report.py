@@ -273,7 +273,27 @@ class render_ldger(models.AbstractModel):
 
         datab = move_listb
 
+        # fetch advance payment
+        move_dicadv = {}
+        move_listadv = []
 
+        self.env.cr.execute("""select (select name from res_partner where id=trans_master.customer),sum(amount_to_customer) from trans_master where ccpayment_ref is NULL and cash_paid_customer=0 and transaction_date=%s and state='posted' group by customer""",
+                            (datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+        dataadv = self.env.cr.fetchall()
+
+        for moveline_datadv in dataadv:
+            move_dicadv['machine'] = moveline_datadv[0]
+            move_dicadv['amount_swiped'] = moveline_datadv[1]
+            move_dicadv['amount_pay'] = moveline_datadv[2]
+            move_dicadv['amount_paid'] = moveline_datadv[3]
+            move_dicadv['commission'] = moveline_datadv[4]
+            move_dicadv['cost_commission'] = moveline_datadv[5]
+            move_dicadv['margin'] = moveline_datadv[6]
+
+            move_listadv.append(move_dicadv)
+            move_dicadv = {}
+
+        datadv = move_listadv
         # fetch payment vouchers
 
         move_dic3 = {}
@@ -336,6 +356,7 @@ class render_ldger(models.AbstractModel):
             'data4': data4,
             'dataa': dataa,
             'datab': datab,
+            'datadv': datadv,
             'databnk': databnk,
             'datamer': datamer,
             'report_date': ledger_data.report_date,
