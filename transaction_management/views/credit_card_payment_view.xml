@@ -36,7 +36,7 @@
                            <field name="customer" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                             <field name="customer_mobile" attrs="{'readonly':[('state','not in',('dr'))]}"/>
 
-                           <field name="bank_name" options="{'no_quick_create':True,'no_create_edit':True}" required='True' attrs="{'readonly':[('state','not in',('dr'))]}" />
+                           <field name="bank_name" options="{'no_quick_create':True,'no_create_edit':True}"  attrs="{'readonly':[('state','not in',('dr'))]}" />
 
                            <field name="commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                             <field name="commission_pay" readonly="1"/>
