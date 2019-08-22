@@ -15,7 +15,7 @@
 
                             <field name="rec_date"/>
 
-                            <field name="rec_amount" default_focus="1" class="my-focus-field"/>
+                            <field name="rec_amount" default_focus="1" class="my-focus-field"> {'default_rec_amount': context.get('rec_amount', False),} </field>
 
 
 
@@ -65,7 +65,7 @@
                     <group>
 
                             <field name="rec_date"/>
-                            <field name="rec_amount" default_focus="1" class="my-focus-field"/>
+                            <field name="rec_amount" default_focus="1" class="my-focus-field"> {'default_rec_amount': context.get('rec_amount', False),} </field>
 
 
                     </group>
@@ -90,7 +90,7 @@
 
                             <field name="rec_date"/>
                         <field name="machine_name" options="{'no_quick_create':True,'no_create_edit':True}" required='True'  domain="[('branch.company_id', '=',
-                                                      company_id)]" default_focus="1" class="my-focus-field"/>
+                                                      company_id)]" default_focus="1" class="my-focus-field"> {'default_rec_amount': context.get('rec_amount', False),} </field>
                             <field name="rec_amount"/>
                          <field name="company_id" required='True' readonly="1" />
 

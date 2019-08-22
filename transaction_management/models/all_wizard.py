@@ -19,10 +19,6 @@ class ReceiveCommission(models.TransientModel):
     rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
     rec_amount = fields.Float(string='Amount')
 
-    @api.model
-    def default_get(self):
-        self.rec_amount = self._context.get('rec_amount')
-
 
     @api.multi
     def rec_com(self):
@@ -111,9 +107,7 @@ class ProcessDeposit(models.TransientModel):
     rec_date = fields.Date(string='Date', default=fields.Date.context_today, required=True)
     rec_amount = fields.Float(string='Amount Deposited')
 
-    @api.model
-    def default_get(self):
-        self.rec_amount = self._context.get('rec_amount')
+
 
     @api.multi
     def dep_pay(self):
@@ -167,9 +161,7 @@ class SwipeCard(models.TransientModel):
     machine_name = fields.Many2one('machine.master', ondelete='restrict')
     rec_amount = fields.Float(string='Amount Swiped')
 
-    @api.model
-    def default_get(self):
-        self.rec_amount = self._context.get('rec_amount')
+
 
     @api.multi
     def swipe(self):
