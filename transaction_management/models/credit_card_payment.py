@@ -53,7 +53,7 @@ class ccPayment(models.Model):
 
         record = super(ccPayment, self).create(values)
         if self.swipe_commission:
-            self.state = 'up'
+            record.state = 'up'
         return record
 
 
