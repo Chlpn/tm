@@ -105,6 +105,8 @@ class ccPayment(models.Model):
 
     @api.multi
     def dep_pay(self):
+        if self.swipe_commission==True and self.state=='dr':
+            self.state = 'up'
         return {
             'type': 'ir.actions.act_window',
             'name': 'Deposit Payment',
@@ -119,6 +121,8 @@ class ccPayment(models.Model):
 
     @api.multi
     def swipe(self):
+        if self.swipe_commission==True and self.state=='dr':
+            self.state = 'up'
         return {
             'type': 'ir.actions.act_window',
             'name': 'Swipe Card',
