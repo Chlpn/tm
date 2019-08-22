@@ -52,18 +52,22 @@ class ccPayment(models.Model):
 
     @api.onchange('payment_amount','commission','swipe_commission')
     def _onchange_payment_amount(self):
-        if self.swipe_commission is False:
-            self.commission_pay = self.payment_amount * self.commission / 100
-            self.commission_paid = 0.0
-            self.total_to_swipe = self.payment_amount
-            self.amount_to_deposit = self.payment_amount + self.add_amount
-        else:
-            self.commission_pay = 0
-            self.commission_paid = 0.0
-            self.commission_swiped = self.payment_amount * self.commission / 100
-            charge = self.commission_swiped * self.commission /100
-            self.total_to_swipe = self.payment_amount + charge + self.commission_swiped
-            self.amount_to_deposit = self.payment_amount + self.add_amount
+        if self.state == 'dr':
+            if self.swipe_commission is False:
+
+                self.commission_pay = self.payment_amount * self.commission / 100
+                self.commission_paid = 0.0
+                self.total_to_swipe = self.payment_amount
+                self.amount_to_deposit = self.payment_amount + self.add_amount
+
+
+            else:
+                self.commission_pay = 0
+                self.commission_paid = 0.0
+                self.commission_swiped = self.payment_amount * self.commission / 100
+                charge = self.commission_swiped * self.commission /100
+                self.total_to_swipe = self.payment_amount + charge + self.commission_swiped
+                self.amount_to_deposit = self.payment_amount + self.add_amount
 
     @api.model
     def create(self, values):
