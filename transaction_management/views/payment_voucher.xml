@@ -23,8 +23,10 @@
         <record id="seq_payment_voucher" model="ir.sequence">
             <field name="name">Payment</field>
             <field name="code">payment.voucher</field>
-            <field name="prefix">PAYMENT</field>
-            <field name="padding">3</field>
+            <field name="prefix">P%(y)s%(month)s</field>
+            <field name="padding">6</field>
+            <field name="use_date_range">True</field>
+
         </record>
      <!--  Cash Payment Voucher Form View -->
         <record model="ir.ui.view" id="payment_voucher_form">
