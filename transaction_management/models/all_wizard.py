@@ -43,13 +43,26 @@ class ReceiveCommission(models.TransientModel):
         }
         receipt_voucher = self.env['receipt.voucher'].create(vals)
         receipt_voucher.post()
-        cc_payment.write({'state': 'up',
+        cs = cc_payment.commission_swiped-self.rec_amount
+        charge = cs * cc_payment.commission / 100
+        cscharge = cs + charge
+        if cc_payment.swipe_commission:
+
+            cc_payment.write({'state': 'up',
                           'commission_paid': cc_payment.commission_paid + self.rec_amount,
-                          'commission_pay': cc_payment.commission_pay - self.rec_amount,
+                          'commission_pay': 0,
+                        'commission_swiped': cs,
+                        'total_to_swipe' : cc_payment.payment_amount -cc_payment.amount_swiped +cscharge,
 
                           'payment_ref': [(4, receipt_voucher.id)]
                           })
+        else:
+            cc_payment.write({'state': 'up',
+                              'commission_paid': cc_payment.commission_paid + self.rec_amount,
+                              'commission_pay': cc_payment.commission_pay - self.rec_amount,
 
+                              'payment_ref': [(4, receipt_voucher.id)]
+                              })
 
 class ReceiveAdd(models.TransientModel):
     _name = "receive.add.wizard"
