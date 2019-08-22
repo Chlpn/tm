@@ -48,13 +48,6 @@ class ccPayment(models.Model):
         ('cl', 'Cancelled')
     ], string='Status', default='dr' ,readonly=True)
 
-    @api.model
-    def create(self, values):
-
-        record = super(ccPayment, self).create(values)
-        if self.swipe_commission:
-            record.state = 'up'
-        return record
 
 
     @api.onchange('payment_amount','commission','swipe_commission')
@@ -96,6 +89,8 @@ class ccPayment(models.Model):
 
     @api.multi
     def rec_add(self):
+        if self.swipe_commission==True and self.state=='dr':
+            self.state = 'up'
         return {
             'type': 'ir.actions.act_window',
             'name': 'Receive Additional Payment',
