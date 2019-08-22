@@ -41,7 +41,7 @@
                            <field name="commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                             <field name="commission_pay" readonly="1"/>
 
-                           <field name="swipe_commission" attrs="{'readonly':[('state','not in',('dr','up'))]}"/>
+                           <field name="swipe_commission" attrs="{'readonly':[('state','not in',('dr'))]}"/>
                            <field name="add_amount" readonly="1"/>
 
                             <field name="commission_paid" readonly="1"/>
