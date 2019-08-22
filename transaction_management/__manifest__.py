@@ -3,8 +3,8 @@
     'version': '1.0',
     'category': 'Accounting',
     'sequence': 14,
-    'author': "iSquare Informatics",
-    'website': 'https://www.isi.ae',
+    'author': "Chlpn",
+    'website': 'https://www.chlpn.ae',
     'summary': '',
     'depends': ['account', 'account_accountant','account_cancel','web_readonly_bypass','base_multi_company'],
     'data': [
