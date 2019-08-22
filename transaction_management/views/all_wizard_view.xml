@@ -7,11 +7,15 @@
             <field name="model">receive.commission.wizard</field>
             <field name="arch" type="xml">
                 <form string="Receive Commission">
+                    <script>
+                        $('.my-focus-field').focus()
+
+                    </script>
                     <group>
 
                             <field name="rec_date"/>
 
-                            <field name="rec_amount"/>
+                            <field name="rec_amount" default_focus="1" class="my-focus-field"/>
 
 
 
@@ -29,11 +33,15 @@
             <field name="model">receive.add.wizard</field>
             <field name="arch" type="xml">
                 <form string="Receive Additional Payment for Deposit">
+                    <script>
+                        $('.my-focus-field').focus()
+
+                    </script>
                     <group>
 
                             <field name="rec_date"/>
 
-                            <field name="rec_amount"/>
+                            <field name="rec_amount" default_focus="1" class="my-focus-field"/>
 
 
 
@@ -50,10 +58,14 @@
             <field name="model">process.deposit.wizard</field>
             <field name="arch" type="xml">
                 <form string="Deposit Payment">
+                    <script>
+                        $('.my-focus-field').focus()
+
+                    </script>
                     <group>
 
                             <field name="rec_date"/>
-                            <field name="rec_amount"/>
+                            <field name="rec_amount" default_focus="1" class="my-focus-field"/>
 
 
                     </group>
@@ -70,11 +82,15 @@
             <field name="model">swipe.card.wizard</field>
             <field name="arch" type="xml">
                 <form string="Swipe Card">
+                    <script>
+                        $('.my-focus-field').focus()
+
+                    </script>
                     <group>
 
                             <field name="rec_date"/>
                         <field name="machine_name" options="{'no_quick_create':True,'no_create_edit':True}" required='True'  domain="[('branch.company_id', '=',
-                                                      company_id)]"/>
+                                                      company_id)]" default_focus="1" class="my-focus-field"/>
                             <field name="rec_amount"/>
                          <field name="company_id" required='True' readonly="1" />
 

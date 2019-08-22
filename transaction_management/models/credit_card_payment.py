@@ -83,7 +83,7 @@ class ccPayment(models.Model):
             'view_type': 'form',
             'res_model': 'receive.commission.wizard',
             'target': 'new',
-            'context': 'None'
+            'context': {'default_rec_amount': self.commission_pay}
         }
 
     @api.multi
@@ -107,7 +107,7 @@ class ccPayment(models.Model):
             'view_type': 'form',
             'res_model': 'process.deposit.wizard',
             'target': 'new',
-            'context': 'None'
+            'context': {'default_rec_amount': self.amount_to_deposit}
         }
 
 
@@ -121,7 +121,7 @@ class ccPayment(models.Model):
             'view_type': 'form',
             'res_model': 'swipe.card.wizard',
             'target': 'new',
-            'context': 'None'
+            'context': {'default_rec_amount': self.total_to_swipe}
         }
 
     @api.multi
