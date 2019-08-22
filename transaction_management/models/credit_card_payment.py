@@ -77,6 +77,8 @@ class ccPayment(models.Model):
 
     @api.multi
     def rec_com(self):
+        if self.swipe_commission==True and self.state=='dr':
+            self.state = 'up'
         return {
             'type': 'ir.actions.act_window',
             'name': 'Receive Commission',
