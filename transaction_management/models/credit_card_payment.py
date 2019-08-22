@@ -48,6 +48,14 @@ class ccPayment(models.Model):
         ('cl', 'Cancelled')
     ], string='Status', default='dr' ,readonly=True)
 
+    @api.model
+    def create(self, values):
+
+        record = super(ccPayment, self).create(values)
+        if self.swipe_commission:
+            self.state = 'up'
+        return record
+
 
     @api.onchange('payment_amount','commission','swipe_commission')
     def _onchange_payment_amount(self):
