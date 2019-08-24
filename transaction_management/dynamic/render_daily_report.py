@@ -59,8 +59,8 @@ class render_ldger(models.AbstractModel):
 
         # fetch commission received
         self.env.cr.execute(
-            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
-            (ledger_data.branch_name.income_ac.id, cid,
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and  b.state='posted' and a.date=%s""",
+            (ledger_data.branch_name.income_ac.id,
              datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         commnr = self.env.cr.fetchone()
         if commnr is None:
@@ -81,8 +81,8 @@ class render_ldger(models.AbstractModel):
 
         # fetch commission expenses
         self.env.cr.execute(
-            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and a.company_id=%s and  b.state='posted' and a.date=%s""",
-            (ledger_data.branch_name.cost_ac.id, cid,
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and  b.state='posted' and a.date=%s""",
+            (ledger_data.branch_name.cost_ac.id,
              datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cost = self.env.cr.fetchone()
         if cost is None:
@@ -93,8 +93,8 @@ class render_ldger(models.AbstractModel):
 
         # fetch general expenses
         self.env.cr.execute(
-            """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.company_id=%s and a.date=%s""",
-            (cid, datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.date=%s""",
+            (datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         gen = self.env.cr.fetchone()
         if type(gen[0]) is float:
             gex = gen[0]

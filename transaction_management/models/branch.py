@@ -29,6 +29,7 @@ class branch(models.Model):
 
     acc_payable_id = fields.Many2one('account.account', string="Accounts Payable", ondelete='restrict')
     acc_rec_id = fields.Many2one('account.account', string="Accounts Receivable", ondelete='restrict')
-
+    running_captial = fields.Float(string='Set Running Capital')
+    capital_date = fields.Date(string='Capital Date', default=fields.Date.context_today, required=True)
 
 

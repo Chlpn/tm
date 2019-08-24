@@ -21,6 +21,9 @@
                              <field name="cash_journal_id" groups="transaction_management.group_trans_admin"/>
                              <field name="acc_payable_id" groups="transaction_management.group_trans_admin"/>
                              <field name="acc_rec_id" groups="transaction_management.group_trans_admin"/>
+                             <field name="running_capital" groups="transaction_management.group_trans_admin"/>
+                             <field name="capital_date" groups="transaction_management.group_trans_admin"/>
+
 
                          </group>
                     </sheet>
