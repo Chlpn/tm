@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_running_capital_template">
+
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.internal_layout">
+                        <div class="page">
+                            <div style="text-align:center;">
+                            <h2><span  t-esc="branch_name.company_id.name"/></h2>
+                                <h3><span>Running Capital Report</span></h3>
+                            </div>
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;">Report Date:-<span t-esc="report_date"/></div>
+
+
+                            <br/>
+
+
+                            <!-- machine summary All-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>All Machines Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Machine Name</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Swiped</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount to Pay</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Paid</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Commission</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Cost to Commission</th>
+                                <th style=" width:10%; padding-left:8px; text-align:right;">Margin</th>
+                                <t t-set="ams" t-value="0"/>
+                                <t t-set="apy" t-value="0"/>
+                                <t t-set="apd" t-value="0"/>
+                                <t t-set="comm" t-value="0"/>
+                                <t t-set="ctc" t-value="0"/>
+                                <t t-set="mar" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="dataa" t-as="daa">
+        <td style=" width:5%; text-align:center;"><span t-esc="daa_index+1"/></td>
+
+        <td style=" width:10%; text-align:left;"> <span t-esc="daa['machine']"/> </td>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="daa['amount_swiped']"/> </td>
+     <t t-set="ams" t-value="ams + daa['amount_swiped']"/>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="daa['amount_pay']"/> </td>
+     <t t-set="apy" t-value="apy + daa['amount_pay']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="daa['amount_paid']"/> </td>
+     <t t-set="apd" t-value="apd + daa['amount_paid']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="daa['commission']"/> </td>
+     <t t-set="comm" t-value="comm + daa['commission']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="daa['cost_commission']"/> </td>
+     <t t-set="ctc" t-value="ctc + daa['cost_commission']"/>
+        <td style=" width:10%; text-align:right;"> <span t-esc="daa['margin']"/> </td>
+
+     <t t-set="mar" t-value="mar + daa['margin']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
+        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br></br><br></br><br></br>
+                            <!-- machine summary - Abu Dhabi-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Machine Summary- Abu Dhabi</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Machine Name</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Swiped</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount to Pay</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Paid</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Commission</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Cost to Commission</th>
+                                <th style=" width:10%; padding-left:8px; text-align:right;">Margin</th>
+                                <t t-set="ams" t-value="0"/>
+                                <t t-set="apy" t-value="0"/>
+                                <t t-set="apd" t-value="0"/>
+                                <t t-set="comm" t-value="0"/>
+                                <t t-set="ctc" t-value="0"/>
+                                <t t-set="mar" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data2" t-as="da2">
+        <td style=" width:5%; text-align:center;"><span t-esc="da2_index+1"/></td>
+
+        <td style=" width:10%; text-align:left;"> <span t-esc="da2['machine']"/> </td>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_swiped']"/> </td>
+     <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_pay']"/> </td>
+     <t t-set="apy" t-value="apy + da2['amount_pay']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
+     <t t-set="apd" t-value="apd + da2['amount_paid']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
+     <t t-set="comm" t-value="comm + da2['commission']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
+     <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
+        <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
+
+     <t t-set="mar" t-value="mar + da2['margin']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
+        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                        <br></br><br></br><br></br>
+                        <!-- machine summary - Own Machine Summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Own Machine Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:center;">Machine Name</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Swiped</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount to Pay</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Amount Paid</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Commission</th>
+                                <th style=" width:15%; padding-left:8px; text-align:right;">Cost to Commission</th>
+                                <th style=" width:10%; padding-left:8px; text-align:right;">Margin</th>
+                                <t t-set="ams" t-value="0"/>
+                                <t t-set="apy" t-value="0"/>
+                                <t t-set="apd" t-value="0"/>
+                                <t t-set="comm" t-value="0"/>
+                                <t t-set="ctc" t-value="0"/>
+                                <t t-set="mar" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="datab" t-as="da2">
+        <td style=" width:5%; text-align:center;"><span t-esc="da2_index+1"/></td>
+
+        <td style=" width:10%; text-align:left;"> <span t-esc="da2['machine']"/> </td>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_swiped']"/> </td>
+     <t t-set="ams" t-value="ams + da2['amount_swiped']"/>
+
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_pay']"/> </td>
+     <t t-set="apy" t-value="apy + da2['amount_pay']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
+     <t t-set="apd" t-value="apd + da2['amount_paid']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
+     <t t-set="comm" t-value="comm + da2['commission']"/>
+        <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
+     <t t-set="ctc" t-value="ctc + da2['cost_commission']"/>
+        <td style=" width:10%; text-align:right;"> <span t-esc="da2['margin']"/> </td>
+
+     <t t-set="mar" t-value="mar + da2['margin']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
+        <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br></br><br></br><br></br>
+                        <!-- Basic summary-->
+
+                            <br/>
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Cash Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:left;">Particulars</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr >
+        <td style=" width:5%; text-align:center;">1.</td>
+        <td style=" width:10%; text-align:left;"> Cash Opening Balance </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="cob"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">2.</td>
+        <td style=" width:10%; text-align:left;"> Cash Paid to Customer </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * apd"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">3.</td>
+        <td style=" width:10%; text-align:left;"> Other Payments </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * pamnt"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">4.</td>
+        <td style=" width:10%; text-align:left;"> Other Receipts </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="ramnt"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">5.</td>
+        <td style=" width:10%; text-align:left;"> Cash Closing Balance </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="ccb"/> </td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+
+                        <!-- Bank Summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Bank Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:15%; text-align:center;">Account Name</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Opening Balance</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Debit</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Credit</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Closing Balance</th>
+
+
+                                <t t-set="total" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="databnk" t-as="dbnk">
+        <td style=" width:5%; text-align:center;"><span t-esc="dbnk_index+1"/></td>
+
+        <td style=" width:15%; text-align:left;"> <span t-esc="dbnk['bank']"/> </td>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dbnk['opening']"/> </td>
+
+
+        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['debit']"/> </td>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc="dbnk['credit']"/> </td>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dbnk['closing']"/> </td>
+          <t t-set="total" t-value="total + dbnk['closing']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:15%; text-align:left;"><strong></strong></td>
+        <td style=" width:20%; text-align:right;"><strong></strong></td>
+        <td style=" width:20%; text-align:right;"><strong>  </strong></td>
+        <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc=" '%.2f'% total"/> </strong></td>
+
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br></br><br></br><br></br>
+
+ <!-- Merchant Summary-->
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Merchant Receivable Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:15%; text-align:center;">Account Name</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Opening Balance</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Debit</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Credit</th>
+                                <th style=" width:20%; padding-left:8px; text-align:right;">Closing Balance</th>
+
+
+                                <t t-set="total" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="datamer" t-as="dmer">
+        <td style=" width:5%; text-align:center;"><span t-esc="dmer_index+1"/></td>
+
+        <td style=" width:15%; text-align:left;"> <span t-esc="dmer['bank']"/> </td>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dmer['opening']"/> </td>
+
+
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['debit']"/> </td>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc="dmer['credit']"/> </td>
+
+        <td style=" width:20%; text-align:right;"> <span t-esc=" '%.2f'% dmer['closing']"/> </td>
+        <t t-set="total" t-value="total + dmer['closing']"/>
+
+
+
+ </tr>
+                                <br></br>
+ <tr>
+
+        <td style=" width:5%; text-align:left;">  </td>
+        <td style=" width:15%; text-align:left;"><strong></strong></td>
+        <td style=" width:20%; text-align:right;"><strong></strong></td>
+        <td style=" width:20%; text-align:right;"><strong>  </strong></td>
+        <td style=" width:20%; text-align:right;"><strong>  Total   </strong></td>
+        <td style=" width:20%; text-align:right;"><strong> <span t-esc=" '%.2f'% total"/> </strong></td>
+
+
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br></br><br></br><br></br>
+
+
+    <!-- Revenue Summary-->
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Revenue Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:left;">Particulars</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr >
+        <td style=" width:5%; text-align:center;">1.</td>
+        <td style=" width:10%; text-align:left;"> Commission Received </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1* core"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">2.</td>
+        <td style=" width:10%; text-align:left;"> Rent to Branch Income </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1*rg"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">3.</td>
+        <td style=" width:10%; text-align:left;"> Commission Expenses </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * ce"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">4.</td>
+        <td style=" width:10%; text-align:left;"> Gross Profit </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1*((core+rg)+ce)"/> </td>
+
+
+ </tr>
+
+ <tr >
+        <td style=" width:5%; text-align:center;">5.</td>
+        <td style=" width:10%; text-align:left;"> General Expenses </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1* gex"/> </td>
+
+
+ </tr>
+                                <tr >
+        <td style=" width:5%; text-align:center;">6.</td>
+        <td style=" width:10%; text-align:left;"> Net Profit </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1*((core+rg)+ce+gex)"/> </td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+
+                            <!-- customer receivable summary-->
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Customer Receivable</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:left;">Customer</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
+<t t-set="balance" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data" t-as="da">
+        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc=" '%.2f'% da['balance']"/> </td>
+     <t t-set="balance" t-value="balance + da['balance']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc=" '%.2f'% balance"/> </strong></td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br/> <br/> <br/>
+
+     <!-- Vendor payable Summary -->
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Vendor Payment</u></strong></div>
+
+
+           <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:left;">Vendor</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right   ;">Balance</th>
+<t t-set="balance1" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data1" t-as="da1">
+        <td style=" width:5%; text-align:center;"><span t-esc="da1_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="da1['vendor']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc=" '%.2f'% da1['balance']"/> </td>
+     <t t-set="balance1" t-value="balance1 + da1['balance']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc=" '%.2f'% balance1"/> </strong></td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br/> <br/> <br/>
+                            -->
+     <!-- Payment Summary -->
+
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Payment Vouchers</u></strong></div>
+
+
+           <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:left;">Partner</th>
+                                    <th style=" width:10%; text-align:left;">Account</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
+<t t-set="balancep" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data3" t-as="dap">
+        <td style=" width:5%; text-align:center;"><span t-esc="dap_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dap['partner']"/> </td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dap['account']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="dap['amount']"/> </td>
+     <t t-set="balancep" t-value="balancep + dap['amount']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:10%; text-align:left;"><span /></td>
+        <td style=" width:25%; text-align:right;"> <strong><span t-esc=" '%.2f'% balancep"/> </strong></td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br/> <br/> <br/>
+
+
+       <!-- Advance swipe summary-->
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Advance Swipe Summary</u></strong></div>
+                        <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:left;">Customer</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Amount Due</th>
+<t t-set="balance" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="datadv" t-as="da">
+        <td style=" width:5%; text-align:center;"><span t-esc="da_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="da['customer']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="da['amount_to_customer']"/> </td>
+     <t t-set="balance" t-value="balance + da['amount_to_customer']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"><strong> Total Due  </strong></td>
+        <td style=" width:25%; text-align:right;"><strong> <span t-esc=" '%.2f'% balance"/> </strong></td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+                            <br/> <br/> <br/>
+
+     <!-- Receipt Summary -->
+
+
+                            <div style="margin-left:auto;margin-right:auto;text-align:center;"><strong><u>Receipt Vouchers</u></strong></div>
+
+
+           <table class="table table-condensed" style=" width:100%;">
+                            <thead >
+                                <tr >
+                                <th style=" width:5%; text-align:center;">Sr No.</th>
+                                <th style=" width:10%; text-align:left;">Partner</th>
+                                    <th style=" width:10%; text-align:left;">Account</th>
+                                <th style=" width:25%; padding-left:8px; text-align:right;">Balance</th>
+<t t-set="balancer" t-value="0"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                 <br></br>
+ <tr t-foreach="data4" t-as="dar">
+        <td style=" width:5%; text-align:center;"><span t-esc="dar_index+1"/></td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dar['partner']"/> </td>
+        <td style=" width:10%; text-align:left;"> <span t-esc="dar['account']"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="dar['amount']"/> </td>
+     <t t-set="balancer" t-value="balancer + dar['amount']"/>
+
+ </tr>
+                                <br></br>
+ <tr>
+        <td style=" width:5%; text-align:center;"><span /></td>
+        <td style=" width:10%; text-align:left;"><strong> Total  </strong></td>
+        <td style=" width:10%; text-align:left;"><span /></td>
+        <td style=" width:25%; text-align:right;"> <strong><span t-esc=" '%.2f'% balancer"/></strong> </td>
+
+
+ </tr>
+
+
+                            </tbody>
+                        </table>
+
+
+
+                        <br/>
+
+
+                        </div>
+
+                           
+                    </t>
+                    
+                </t>
+            </t>
+            </template>
+    </data>
+</odoo>
