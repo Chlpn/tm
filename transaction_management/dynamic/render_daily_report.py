@@ -59,9 +59,8 @@ class render_ldger(models.AbstractModel):
 
         # fetch commission received
         self.env.cr.execute(
-            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and  b.state='posted' and a.date=%s""",
-            (ledger_data.branch_name.income_ac.id,
-             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id  left join account_account as c on a.account_id=c.id where a.account_id!=%s and c.user_type_id=14 and  b.state='posted' and a.date=%s""",
+            (ledger_data.branch_name.rentagain_income_ac.id,datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         commnr = self.env.cr.fetchone()
         if commnr is None:
             core = 0
@@ -81,9 +80,8 @@ class render_ldger(models.AbstractModel):
 
         # fetch commission expenses
         self.env.cr.execute(
-            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id where a.account_id=%s and  b.state='posted' and a.date=%s""",
-            (ledger_data.branch_name.cost_ac.id,
-             datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
+            """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id where c.user_type_id=17 and  b.state='posted' and a.date=%s""",
+            (datetime.datetime.strptime(ledger_data.report_date, '%Y-%m-%d'),))
         cost = self.env.cr.fetchone()
         if cost is None:
             ce = 0
