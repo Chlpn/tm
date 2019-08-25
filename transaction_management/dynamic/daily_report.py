@@ -29,7 +29,7 @@ class running_capital_report(models.TransientModel):
     _name = "running.capital.report"
     _description = "Running Capital Report"
 
-    branch_name = fields.Many2one('company.branch', string="Branch", required=True)
+
     report_date = fields.Date(string='Date From', default=fields.Date.context_today, required=True)
     report_date2 = fields.Date(string='Date From', required=True)
 
