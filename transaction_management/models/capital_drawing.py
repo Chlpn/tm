@@ -39,14 +39,18 @@ class CapitalDrawing(models.Model):
         date2 = datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d') - datetime.timedelta(days=1)
 
         self.env.cr.execute(
-            """select linked_bank_ac from machine_master where merchant_bank_ac=%s and  linked_bank_ac is not NULL LIMIT 1""",
+            """select  calculation_date,net_balance from capital_drawing order by calculation_date desc limit 1""",
             (self.merchant_ac.id,))
 
         value = self.env.cr.fetchone()
 
-        if type(value[0]) is int:
-            self.linked_bank_ac = value[0]
+        if type(value[0]) is datetime:
+            date3 = value[0]
         else:
-            self.linked_bank_ac = 0
+            date = 0
+
+        if date2 == date3:
+
+
 
 
