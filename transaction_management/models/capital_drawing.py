@@ -3,6 +3,7 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from odoo.tools import amount_to_text_en
+import datetime
 
 
 
@@ -32,4 +33,20 @@ class CapitalDrawing(models.Model):
     ], string='Status', default='dr', readonly=True)
     _sql_constraints = [('name_uniq', 'unique (name)', 'Document Number must be unique !')]
     _defaults = {'name': lambda self, cr, uid, context: 'Capital Drawing'}
+
+    @api.onchange('calculation_date')
+    def _onchange_date(self):
+        date2 = datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d') - datetime.timedelta(days=1)
+
+        self.env.cr.execute(
+            """select linked_bank_ac from machine_master where merchant_bank_ac=%s and  linked_bank_ac is not NULL LIMIT 1""",
+            (self.merchant_ac.id,))
+
+        value = self.env.cr.fetchone()
+
+        if type(value[0]) is int:
+            self.linked_bank_ac = value[0]
+        else:
+            self.linked_bank_ac = 0
+
 

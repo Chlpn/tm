@@ -40,7 +40,7 @@
                                 <field name="transaction_date" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
                                 <field name="account_move_id" attrs="{'invisible':[('state','in',('draft'))]}"/>
                                 <field name="description" attrs="{'readonly':[('state','in',('post','cancel'))]}"/>
-                                 <field name="locked_balance" attrs="{ 'readonly':[('state','in',('post','cancel'))]}"/>
+                                 <field name="locked_balance" />
                             </group>
                         </group>
                     </sheet>
