@@ -29,7 +29,7 @@ class CapitalDrawing(models.Model):
         ('pd', 'Profit Paid'),
         ('rec', 'Profit Paid & Expense Received'),
         ('cancel', 'Cancelled'),
-    ], string='Status', default='draft', readonly=True)
+    ], string='Status', default='dr', readonly=True)
     _sql_constraints = [('name_uniq', 'unique (name)', 'Document Number must be unique !')]
     _defaults = {'name': lambda self, cr, uid, context: 'Capital Drawing'}
 
