@@ -23,6 +23,7 @@ class ReceiptVoucher(models.Model):
     amount = fields.Float('Amount', required=True)
     account_move_id = fields.Many2one('account.move', string="Accounting Entry", readonly=True)
     intercompany_move_id = fields.Many2one('account.move', string="Intercompany Entry", readonly=True)
+    locked_balance=fields.Boolean(string='Locked Balance',default=False)
     state = fields.Selection([
         ('draft', 'Draft'),
        ('post', 'Posted'),
