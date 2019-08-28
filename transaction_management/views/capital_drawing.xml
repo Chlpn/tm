@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  Capital Drawing form View -->
+        <record model="ir.ui.view" id="capital_drawing_form">
+            <field name="name">capital.drawing.form</field>
+            <field name="model">capital.drawing</field>
+            <field name="arch" type="xml">
+                <form string="Capital Drawing" duplicate="0">
+                    <header>
+                        <button name="pay" string="Pay Profit" states="cal" type="object"/>
+                        <button name="rec" string="rec Expense" states="pd" type="object"/>
+                        <button name="action_cancel" states="pd,cal,rec" string="Cancel" type="object"/>
+                        <button name="action_draft" states="cancel" string="Set to Draft" type="object"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="dr,cal,pd,rec"/>
+                    </header>
+                    <sheet>
+                       <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+
+                         <group>
+                             <group>
+                                <field name="calculation_date" attrs="{'readonly':[('state','not in',('dr'))]}"/>
+                                <field name="previous_balance"/>
+                                <field name="gross_profit"/>
+                                <field name="expenses"/>
+                                <field name="net_profit"/>
+                                <field name="lock_amount"/>
+
+                             </group>
+                             <group>
+                                <field name="gross_amount"/>
+                                 <field name="amount_paid"/>
+                                 <field name="amount_received"/>
+                                 <field name="net_amount"/>
+                                 <field name="payment_ref"/>
+                                 <field name="receipt_ref"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Capital Drawing Tree View -->
+        <record model="ir.ui.view" id="capital_drawing_tree">
+            <field name="name">capital.drawing.tree</field>
+            <field name="model">capital.drawing</field>
+            <field name="arch" type="xml">
+                <tree string="Capital Drawing">
+                    <field name="name"/>
+                    <field name="calculation_date"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_capital_drawing">
+            <field name="name">Capital Drawing</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+            <field name="res_model">capital.drawing</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Capital Drawings" id="menu_capital_drawing" parent="menu_transactions" sequence="6"
+                  action="action_capital_drawing"/>
+
+    </data>
+</odoo>

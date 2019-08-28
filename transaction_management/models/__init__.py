@@ -9,4 +9,4 @@ import credit_card_payment
 import all_wizard
 import merchant_transfer
 import card_bank
-
+import capital_drawing

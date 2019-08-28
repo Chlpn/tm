@@ -26,6 +26,7 @@
                 'dynamic/daily_report_view.xml',
                 'dynamic/report_daily_summary_template.xml',
                 'views/card_bank_view.xml',
+                'views/capital_drawing.xml',
                 'dynamic/running_capital_template.xml'
 
 
