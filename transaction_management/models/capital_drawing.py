@@ -39,7 +39,7 @@ class CapitalDrawing(models.Model):
         date2 = datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d') - datetime.timedelta(days=1)
 
         self.env.cr.execute(
-            """select  calculation_date,net_balance from capital_drawing order by calculation_date desc limit 1""",)
+            """select  calculation_date,net_amount from capital_drawing order by calculation_date desc limit 1""",)
 
         value = self.env.cr.fetchone()
 
