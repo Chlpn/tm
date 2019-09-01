@@ -46,10 +46,13 @@ class CapitalDrawing(models.Model):
 
         if type(value[0]) is datetime:
             date3 = value[0]
+            self.previous_balance =value[1]
         else:
             date = 0
 
-        if date2 == date3:
+
+
+
 
 
 
