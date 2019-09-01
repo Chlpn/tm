@@ -43,7 +43,7 @@ class CapitalDrawing(models.Model):
 
         value = self.env.cr.fetchall()
 
-        if type(value[0]) is datetime:
+        if type(value[1]) is float:
             date3 = value[0]
             self.previous_balance =value[1]
         else:
