@@ -39,16 +39,24 @@ class CapitalDrawing(models.Model):
         date2 = datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d') - datetime.timedelta(days=1)
 
         self.env.cr.execute(
-            """select  net_amount from capital_drawing order by calculation_date desc limit 1""",)
+            """select  net_amount from capital_drawing where calculation_date=%s order by calculation_date desc limit 1""",(date2,) )
 
-        value = self.env.cr.fetchone()
-
-        if value[0] is None:
-            #date3 = value[0]
-            self.previous_balance = 0
+        date= self.env.cr.fetchone()
+        if date[0] is None:
+            raise UserError(_('Capital drawings missing for past days with referernce to create date, please create capital drawings for missing date'))
 
         else:
-            self.previous_balance = value[0]
+            self.env.cr.execute(
+            """select  net_amount from capital_drawing order by calculation_date desc limit 1""",)
+
+            net_amnt = self.env.cr.fetchone()
+
+            if net_amnt[0] is None:
+                #date3 = value[0]
+                self.previous_balance = 0
+
+            else:
+                self.previous_balance = net_amnt[0]
 
 
 
