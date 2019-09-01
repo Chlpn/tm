@@ -93,7 +93,7 @@ class CapitalDrawing(models.Model):
                 self.expenses = gex
 
                 self.net_profit = self.gross_profit - self.expenses
-                self.gross_amount = self.gross_amount+self.net_profit + self.lock_amount
+                self.gross_amount = self.previous_balance+self.net_profit + self.lock_amount
                 self.net_amount = self.gross_amount -self.amount_paid + self.amount_received
 
 
