@@ -39,15 +39,15 @@ class CapitalDrawing(models.Model):
         date2 = datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d') - datetime.timedelta(days=1)
 
         self.env.cr.execute(
-            """select  calculation_date,net_amount from capital_drawing order by calculation_date desc limit 1""",)
+            """select  net_amount from capital_drawing order by calculation_date desc limit 1""",)
 
         value = self.env.cr.fetchall()
 
-        if type(value[1]) is float:
-            date3 = value[0]
-            self.previous_balance =value[1]
+        if type(value[0]):
+            #date3 = value[0]
+            self.previous_balance =value[0]
         else:
-            date = 0
+            self.previous_balance = 0
 
 
 
