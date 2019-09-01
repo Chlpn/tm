@@ -16,6 +16,7 @@
             <field name="arch" type="xml">
                 <form string="Capital Drawing" duplicate="0">
                     <header>
+                        <button name="conf" string="Confirm" states="dr" type="'object"/>
                         <button name="pay" string="Pay Profit" states="cal" type="object"/>
                         <button name="rec" string="rec Expense" states="pd" type="object"/>
                         <button name="action_cancel" states="pd,cal,rec" string="Cancel" type="object"/>

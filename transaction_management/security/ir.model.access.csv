@@ -45,6 +45,8 @@ access_inter_company_billing,inter.company.billing,model_inter_company,group_tra
 access_account_account_billing,account.account.billing,account.model_account_account,group_trans_user,1,0,0,0
 access_account_journal_billing,account.journal.billing,account.model_account_journal,group_trans_user,1,0,0,0
 
+access_capital_drawing_billing,capital.drawing.billing,model_capital_drawing,group_trans_user,0,0,0,0
+access_capital_drawing_advisor,capital.drawing.advisor,model_capital_drawing,group_trans_admin,1,1,1,0
 
 
 
