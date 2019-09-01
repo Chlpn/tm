@@ -34,7 +34,7 @@ class CapitalDrawing(models.Model):
     _sql_constraints = [('name_uniq', 'unique (name)', 'Document Number must be unique !')]
     _defaults = {'name': lambda self, cr, uid, context: 'Capital Drawing'}
 
-    @api.onchange('calculation_date')
+    @api.onchange('calculation_date','amount_paid','amount_received')
     def _onchange_date(self):
         date2 = datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d') - datetime.timedelta(days=1)
 
