@@ -92,9 +92,9 @@ class CapitalDrawing(models.Model):
 
                 self.expenses = gex
 
-                # fetch general expenses
+                # fetch lock amount
                 self.env.cr.execute(
-                    """select sum(amount) from receipt_voucher where locked_balance=True and transaction_date='%s' and state='post'""",
+                    """select sum(amount) from receipt_voucher where locked_balance=True and transaction_date=%s and state='post'""",
                     (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
                 lock_bal = self.env.cr.fetchone()
                 if type(lock_bal[0]) is float:
