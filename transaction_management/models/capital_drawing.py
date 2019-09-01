@@ -42,71 +42,71 @@ class CapitalDrawing(models.Model):
             """select  net_amount from capital_drawing where calculation_date=%s order by calculation_date desc limit 1""",(date2,) )
 
         date= self.env.cr.fetchone()
-        if date[0] is None:
-            raise UserError(_('Capital drawings missing for past days with referernce to create date, please create capital drawings for missing date'))
+        #if date[0] is None:
+           # raise UserError(_('Capital drawings missing for past days with referernce to create date, please create capital drawings for missing date'))
 
-        else:
-            self.env.cr.execute(
+        #else:
+        self.env.cr.execute(
             """select  net_amount from capital_drawing order by calculation_date desc limit 1""",)
 
-            net_amnt = self.env.cr.fetchone()
+        net_amnt = self.env.cr.fetchone()
 
-            if net_amnt[0] is None:
+        if net_amnt[0] is None:
                 #date3 = value[0]
-                self.previous_balance = 0
+            self.previous_balance = 0
 
-            else:
-                self.previous_balance = net_amnt[0]
+        else:
+            self.previous_balance = net_amnt[0]
 
                 # fetch commission received
-                self.env.cr.execute(
+            self.env.cr.execute(
                     """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id  left join account_account as c on a.account_id=c.id where c.user_type_id=14 and  b.state='posted' and a.date=%s""",
                     (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
-                commnr = self.env.cr.fetchone()
-                if commnr is None:
-                    core = 0
-                else:
-                    core = commnr[0]
+            commnr = self.env.cr.fetchone()
+            if commnr is None:
+                core = 0
+            else:
+                core = commnr[0]
 
 
 
-                # fetch commission expenses
-                self.env.cr.execute(
+            # fetch commission expenses
+            self.env.cr.execute(
                     """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id where c.user_type_id=17 and  b.state='posted' and a.date=%s""",
                     (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
-                cost = self.env.cr.fetchone()
-                if cost is None:
-                    ce = 0
-                else:
-                    ce = cost[0]
-                self.gross_profit = -1*(core +ce)
-                # fetch general expenses
-                self.env.cr.execute(
+            cost = self.env.cr.fetchone()
+            if cost is None:
+                ce = 0
+            else:
+                ce = cost[0]
+            self.gross_profit = -1*(core +ce)
+            # fetch general expenses
+            self.env.cr.execute(
                     """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.date=%s""",
                     (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
-                gen = self.env.cr.fetchone()
-                if type(gen[0]) is float:
-                    gex = gen[0]
-                else:
-                    gex = 0
+            gen = self.env.cr.fetchone()
+            if type(gen[0]) is float:
+                gex = gen[0]
+            else:
+                gex = 0
 
-                self.expenses = gex
+            self.expenses = gex
 
-                # fetch lock amount
-                self.env.cr.execute(
+            # fetch lock amount
+            self.env.cr.execute(
                     """select sum(amount) from receipt_voucher where locked_balance=True and transaction_date=%s and state='post'""",
                     (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
-                lock_bal = self.env.cr.fetchone()
-                if type(lock_bal[0]) is float:
-                    self.lock_amount = lock_bal[0]
-                else:
-                    self.lock_amount = 0
+            lock_bal = self.env.cr.fetchone()
+            if type(lock_bal[0]) is float:
+                self.lock_amount = lock_bal[0]
+            else:
+                self.lock_amount = 0
 
-                self.expenses = gex
+            self.expenses = gex
 
-                self.net_profit = self.gross_profit - self.expenses
-                self.gross_amount = self.previous_balance+self.net_profit + self.lock_amount
-                self.net_amount = self.gross_amount -self.amount_paid + self.amount_received
+            self.net_profit = self.gross_profit - self.expenses
+            self.gross_amount = self.previous_balance+self.net_profit + self.lock_amount
+            self.net_amount = self.gross_amount -self.amount_paid + self.amount_received
 
 
 
