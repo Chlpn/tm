@@ -41,7 +41,7 @@ class CapitalDrawing(models.Model):
         self.env.cr.execute(
             """select  calculation_date,net_amount from capital_drawing order by calculation_date desc limit 1""",)
 
-        value = self.env.cr.fetchone()
+        value = self.env.cr.fetchall()
 
         if type(value[0]) is datetime:
             date3 = value[0]
