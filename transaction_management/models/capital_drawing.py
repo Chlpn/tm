@@ -42,7 +42,7 @@ class CapitalDrawing(models.Model):
             """select  net_amount from capital_drawing where calculation_date=%s order by calculation_date desc limit 1""",(date2,) )
 
         date= self.env.cr.fetchone()
-        if date[0] is None:
+        if date[0] is not datetime:
             raise UserError(_('Capital drawings missing for past days with referernce to create date, please create capital drawings for missing date'))
 
         else:
@@ -89,6 +89,18 @@ class CapitalDrawing(models.Model):
                     gex = gen[0]
                 else:
                     gex = 0
+
+                self.expenses = gex
+
+                # fetch general expenses
+                self.env.cr.execute(
+                    """select sum(amount) from receipt_voucher where locked_balance=True and transaction_date='%s' and state='post'""",
+                    (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+                lock_bal = self.env.cr.fetchone()
+                if type(lock_bal[0]) is float:
+                    self.lock_amount = lock_bal[0]
+                else:
+                    self.lock_amount = 0
 
                 self.expenses = gex
 
