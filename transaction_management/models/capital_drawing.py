@@ -79,7 +79,7 @@ class CapitalDrawing(models.Model):
                     ce = 0
                 else:
                     ce = cost[0]
-                self.gross_profit = core +ce
+                self.gross_profit = -1*(core +ce)
                 # fetch general expenses
                 self.env.cr.execute(
                     """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.date=%s""",
