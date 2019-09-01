@@ -58,6 +58,43 @@ class CapitalDrawing(models.Model):
             else:
                 self.previous_balance = net_amnt[0]
 
+                # fetch commission received
+                self.env.cr.execute(
+                    """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id  left join account_account as c on a.account_id=c.id where c.user_type_id=14 and  b.state='posted' and a.date=%s""",
+                    (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+                commnr = self.env.cr.fetchone()
+                if commnr is None:
+                    core = 0
+                else:
+                    core = commnr[0]
+
+
+
+                # fetch commission expenses
+                self.env.cr.execute(
+                    """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id where c.user_type_id=17 and  b.state='posted' and a.date=%s""",
+                    (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+                cost = self.env.cr.fetchone()
+                if cost is None:
+                    ce = 0
+                else:
+                    ce = cost[0]
+                self.gross_profit = core +ce
+                # fetch general expenses
+                self.env.cr.execute(
+                    """select sum(debit)-sum(credit) as expense from account_move_line as a left join account_account as b on a.account_id=b.id left join account_move as c on a.move_id = c.id where b.user_type_id = 16 and c.state='posted' and a.date=%s""",
+                    (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+                gen = self.env.cr.fetchone()
+                if type(gen[0]) is float:
+                    gex = gen[0]
+                else:
+                    gex = 0
+
+                self.expenses = gex
+
+                self.net_profit = self.gross_profit - self.expenses
+                self.gross_amount = self.net_profit + self.lock_amount
+                self.net_amount = self.gross_amount -self.amount_paid + self.amount_received
 
 
 
