@@ -43,11 +43,12 @@ class CapitalDrawing(models.Model):
 
         value = self.env.cr.fetchall()
 
-        if type(value[0]):
+        if value[0] is None:
             #date3 = value[0]
-            self.previous_balance =value[0]
-        else:
             self.previous_balance = 0
+
+        else:
+            self.previous_balance = value[0]
 
 
 
