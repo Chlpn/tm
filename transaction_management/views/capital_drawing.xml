@@ -49,6 +49,7 @@
                                  <field name="net_amount"/>
 
                             </group>
+                        </group>
                              <notebook>
                             <page string="Payment Reference">
                                 <field name="payment_ref" readonly="1" />
@@ -57,7 +58,7 @@
                                 <field name="receipt_ref" readonly="1"/>
                             </page>
                              </notebook>
-                        </group>
+
                     </sheet>
                 </form>
             </field>
