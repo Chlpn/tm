@@ -38,16 +38,16 @@
                                 <field name="gross_profit"/>
                                 <field name="expenses"/>
                                 <field name="net_profit"/>
-                                <field name="lock_amount"/>
+
 
                              </group>
                              <group>
+                                 <field name="lock_amount"/>
                                 <field name="gross_amount"/>
                                  <field name="amount_paid"/>
                                  <field name="amount_received"/>
                                  <field name="net_amount"/>
-                                 <field name="payment_ref"/>
-                                 <field name="receipt_ref"/>
+
                             </group>
                              <notebook>
                             <page string="Payment Reference">
