@@ -49,6 +49,13 @@
                                  <field name="payment_ref"/>
                                  <field name="receipt_ref"/>
                             </group>
+                             <notebook>
+                            <page string="Payment Reference">
+                                <field name="payment_ref" readonly="1" />
+                            </page>
+                            <page string="Deposit Reference">
+                                <field name="receipt_ref" readonly="1"/>
+                            </page>
                         </group>
                     </sheet>
                 </form>
