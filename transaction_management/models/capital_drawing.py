@@ -41,13 +41,13 @@ class CapitalDrawing(models.Model):
         self.env.cr.execute(
             """select  net_amount from capital_drawing where calculation_date=%s order by calculation_date desc limit 1""",(date2,) )
 
-        date= self.env.cr.fetchone()
+        #date= self.env.cr.fetchone()
         #if date[0] is None:
            # raise UserError(_('Capital drawings missing for past days with referernce to create date, please create capital drawings for missing date'))
 
         #else:
-        self.env.cr.execute(
-            """select  net_amount from capital_drawing order by calculation_date desc limit 1""",)
+        #self.env.cr.execute(
+        #    """select  net_amount from capital_drawing order by calculation_date desc limit 1""",)
 
         net_amnt = self.env.cr.fetchone()
 
