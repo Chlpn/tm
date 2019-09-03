@@ -72,6 +72,8 @@
                 <tree string="Capital Drawing">
                     <field name="name"/>
                     <field name="calculation_date"/>
+                    <field name="previous_balance"/>
+                    <field name="net_amount"/>
                     <field name="state"/>
 
                 </tree>
