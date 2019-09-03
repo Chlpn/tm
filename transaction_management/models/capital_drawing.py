@@ -22,8 +22,8 @@ class CapitalDrawing(models.Model):
     amount_paid = fields.Float('Amount Paid')
     amount_received = fields.Float('Amount Received')
     net_amount = fields.Float('Net Balance')
-    payment_ref = fields.Many2many('payment.voucher', 'cd_payment_rel', 'cd_id', 'pay_id', 'Payment Reference')
-    receipt_ref = fields.Many2many('receipt.voucher', 'cd_receipt_rel', 'cd_id', 'rec_id', 'Receipt Reference')
+    payment_ref = fields.Many2many('payment.voucher', 'cd_pay_rel', 'cdp_id', 'pay_id', 'Payment Reference')
+    receipt_ref = fields.Many2many('receipt.voucher', 'cd_rec_rel', 'cdr_id', 'rec_id', 'Receipt Reference')
     state = fields.Selection([
         ('dr', 'Draft'),
         ('cal', 'Calculated'),
