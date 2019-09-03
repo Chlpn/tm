@@ -51,12 +51,13 @@ class CapitalDrawing(models.Model):
 
         net_amnt = self.env.cr.fetchone()
 
-        if type(net_amnt[0]) is int:
-                #date3 = value[0]
+        if net_amnt is None:
+            self.previous_balance = 0
+            #date3 = value[0]
             self.previous_balance = net_amnt[0]
 
         else:
-            self.previous_balance = 0
+            self.previous_balance = net_amnt[0]
 
                 # fetch commission received
             self.env.cr.execute(
