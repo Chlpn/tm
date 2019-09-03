@@ -60,14 +60,14 @@ class CapitalDrawing(models.Model):
             self.previous_balance = 0
 
                 # fetch commission received
-            self.env.cr.execute(
+        self.env.cr.execute(
                     """select sum(debit)-sum(credit) as commission from account_move_line as a left join account_move as b on a.move_id=b.id  left join account_account as c on a.account_id=c.id where c.user_type_id=14 and  b.state='posted' and a.date=%s""",
                     (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
-            commnr = self.env.cr.fetchone()
-            if commnr is None:
-                core = 0
-            else:
-                core = commnr[0]
+        commnr = self.env.cr.fetchone()
+        if commnr is None:
+            core = 0
+        else:
+            core = commnr[0]
 
 
 
