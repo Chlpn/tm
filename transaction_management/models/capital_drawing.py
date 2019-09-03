@@ -51,7 +51,7 @@ class CapitalDrawing(models.Model):
 
         net_amnt = self.env.cr.fetchone()
 
-        if type(net_amnt[0]) is Float:
+        if type(net_amnt[0]) is float:
             self.previous_balance = net_amnt[0]
             #date3 = value[0]
 
