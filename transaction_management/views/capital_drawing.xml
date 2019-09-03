@@ -52,10 +52,10 @@
                         </group>
                              <notebook>
                             <page string="Payment Reference">
-                                <field name="payment_ref" readonly="1" />
+                                <field name="payment_ref" />
                             </page>
                             <page string="Deposit Reference">
-                                <field name="receipt_ref" readonly="1"/>
+                                <field name="receipt_ref" />
                             </page>
                              </notebook>
 
