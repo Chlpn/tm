@@ -12,7 +12,9 @@ class CapitalDrawing(models.Model):
     _name = "capital.drawing"
 
     name = fields.Char(string='Name', size=64, readonly=True)
+    _sql_constraints = [('name_uniq', 'unique (name)', 'Number must be unique !')]
     calculation_date = fields.Date(string='Transaction Date', required=True, default=fields.Date.context_today)
+    _sql_constraints = [('calc_date', 'unique (calculation_date)', 'only one document can be created for a paritcular date !')]
     previous_balance= fields.Float('Previous Balance' )
     gross_profit = fields.Float('Gross Profit' )
     expenses = fields.Float('Total Expenses')
