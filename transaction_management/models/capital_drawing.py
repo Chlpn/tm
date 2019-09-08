@@ -26,6 +26,19 @@ class CapitalDrawing(models.Model):
     net_amount = fields.Float('Net Balance')
     payment_ref = fields.Many2many('payment.voucher', 'cd_pay_rel', 'cdp_id', 'pay_id', 'Payment Reference')
     receipt_ref = fields.Many2many('receipt.voucher', 'cd_rec_rel', 'cdr_id', 'rec_id', 'Receipt Reference')
+
+    bank = fields.Float('Bank Balance')
+    cash = fields.Float('Cash Balance')
+    mer_rec = fields.Float('Merchant Receivables')
+    adv_swipe = fields.Float('Advance Swipe')
+    rec = fields.Float('Total Receivables')
+    loc_rec = fields.Float('Locked Receivables' )
+    curr_rec = fields.Float('Current Receivable')
+    liab = fields.Float('Liabilities' )
+    run_cap = fields.Float('Running Capital' )
+    calc_diff = fields.Float('Calcualted difference' )
+    deviation = fields.Float('Other difference' )
+
     state = fields.Selection([
         ('dr', 'Draft'),
         ('cal', 'Calculated'),

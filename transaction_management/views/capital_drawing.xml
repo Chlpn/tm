@@ -58,6 +58,25 @@
                                 <field name="receipt_ref" />
                             </page>
                              </notebook>
+                        <group>
+                            <group>
+                            <field name="bank"/>
+                                <field name="cash"/>
+                                 <field name="mer_rec"/>
+                                 <field name="adv_swipe"/>
+                                 <field name="rec"/>
+                            <field name="loc_rec"/>
+                                </group>
+                            <group>
+                                 <field name="curr_rec"/>
+                                 <field name="liab"/>
+                                 <field name="run_cap"/>
+                            <field name="calc_diff"/>
+                                 <field name="deviation"/>
+                                </group>
+
+
+                        </group>
 
                     </sheet>
                 </form>
