@@ -169,7 +169,7 @@ class CapitalDrawing(models.Model):
         # fetch locked capital and locked date
 
         self.env.cr.execute(
-            """select  running_capital,capital_date from company_branch where company_id=1""", )
+            """select  running_capital,capital_date,locked_rec from company_branch where company_id=1""", )
         cl = self.env.cr.fetchone()
         if cl[0] is None:
             self.lock_amount = 0
@@ -177,16 +177,9 @@ class CapitalDrawing(models.Model):
         else:
             self.lock_capital = cl[0]
             self.lock_date = cl[1]
+            self.loc_rec =cl[2]
 
-        # fetch locked receivables balance
-        self.env.cr.execute(
-                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id  where c.user_type_id=1 and  b.state='posted' and a.date<=%s""",
-                (datetime.datetime.strptime(self.lock_date, '%Y-%m-%d'),))
-        cl = self.env.cr.fetchone()
-        if cl is None:
-            self.loc_rec = 0
-        else:
-            self.loc_rec = cl[0]
+
 
 
 
