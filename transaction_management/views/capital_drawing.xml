@@ -65,9 +65,12 @@
                                  <field name="mer_rec"/>
                                  <field name="adv_swipe"/>
                                  <field name="rec"/>
-                            <field name="loc_rec"/>
+                                <field name="loc_rec"/>
+
                                 </group>
                             <group>
+                                <field name="lock_capital"/>
+                                <field name="lock_date"/>
                                  <field name="curr_rec"/>
                                  <field name="liab"/>
                                  <field name="run_cap"/>

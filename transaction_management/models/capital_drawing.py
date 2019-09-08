@@ -38,6 +38,8 @@ class CapitalDrawing(models.Model):
     run_cap = fields.Float('Running Capital' )
     calc_diff = fields.Float('Calcualted difference' )
     deviation = fields.Float('Other difference' )
+    lock_date = fields.Date(string='Lock Date')
+    lock_capital =fields.Float('Locked Capital' )
 
     state = fields.Selection([
         ('dr', 'Draft'),
@@ -124,9 +126,97 @@ class CapitalDrawing(models.Model):
         self.gross_amount = self.previous_balance+self.net_profit + self.lock_amount
         self.net_amount = self.gross_amount -self.amount_paid + self.amount_received
 
+        # fetch cash closing balance
+        self.env.cr.execute(
+            """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id  where c.user_type_id=18 and  b.state='posted' and a.date<=%s""",
+            (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+        cl = self.env.cr.fetchone()
+        if cl is None:
+            self.cash = 0
+        else:
+            self.cash = cl[0]
+
+        # fetch bank closing balance
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id  where c.user_type_id=3 and  b.state='posted' and a.date<=%s""",
+                (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+        cl = self.env.cr.fetchone()
+        if cl is None:
+            self.bank = 0
+        else:
+            self.bank = cl[0]
+
+        # fetch merchant closing balance
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id  where c.user_type_id=8 and  b.state='posted' and a.date<=%s""",
+                (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+        cl = self.env.cr.fetchone()
+        if cl is None:
+            self.mer_rec = 0
+        else:
+            self.mer_rec = cl[0]
+
+        # fetch receivables balance
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id  where c.user_type_id=1 and  b.state='posted' and a.date<=%s""",
+                (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+        cl = self.env.cr.fetchone()
+        if cl is None:
+            self.rec = 0
+        else:
+            self.rec = cl[0]
+
+        # fetch locked capital and locked date
+
+        self.env.cr.execute(
+            """select  running_capital,capital_date from company_branch where company_id=1""", )
+        cl = self.env.cr.fetchone()
+        if cl[0] is None:
+            self.lock_amount = 0
+
+        else:
+            self.lock_capital = cl[0]
+            self.lock_date = cl[1]
+
+        # fetch locked receivables balance
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id  where c.user_type_id=1 and  b.state='posted' and a.date<=%s""",
+                (datetime.datetime.strptime(self.lock_date, '%Y-%m-%d'),))
+        cl = self.env.cr.fetchone()
+        if cl is None:
+            self.loc_rec = 0
+        else:
+            self.loc_rec = cl[0]
 
 
 
+        # fetch advance payment
 
+        self.env.cr.execute(
+            """select sum(amount_to_customer) from trans_master where ccpayment_ref is NULL and cash_paid_customer=0 and transaction_date=%s and state='posted'""",
+            (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+        cl = self.env.cr.fetchone()
+        if cl[0] is None:
+            self.adv_swipe = 0
 
+        else:
+            self.adv_swipe = cl[0]
 
+        # fetch liabilities balance
+        self.env.cr.execute(
+                """select sum(debit)-sum(credit) as opening_balance from account_move_line as a left join account_move as b on a.move_id=b.id left join account_account as c on a.account_id=c.id  where c.user_type_id=2 and  b.state='posted' and a.date<=%s""",
+                (datetime.datetime.strptime(self.calculation_date, '%Y-%m-%d'),))
+
+        cl = self.env.cr.fetchone()
+        if cl is None:
+            self.liab = 0
+        else:
+            self.liab = cl[0]
+
+        self.curr_rec = self.rec - self.loc_rec + self.adv_swipe + self.lock_amount
+
+        self.run_cap = self.cash + self.bank + self.mer_rec -self.adv_swipe -self.net_amount-self.liab
+
+        self.calc_diff = self.lock_capital - self.run_cap
+
+        self.deviation = self.calc_diff -self.curr_rec
