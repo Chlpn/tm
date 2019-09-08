@@ -36,8 +36,8 @@ class CapitalDrawing(models.Model):
     curr_rec = fields.Float('Current Receivable')
     liab = fields.Float('Liabilities' )
     run_cap = fields.Float('Running Capital' )
-    calc_diff = fields.Float('Calcualted difference' )
-    deviation = fields.Float('Other difference' )
+    calc_diff = fields.Float('Calculated difference' )
+    deviation = fields.Float('Other deviation' )
     lock_date = fields.Date(string='Lock Date')
     lock_capital =fields.Float('Locked Capital' )
 
@@ -204,7 +204,7 @@ class CapitalDrawing(models.Model):
         if cl is None:
             self.liab = 0
         else:
-            self.liab = cl[0]
+            self.liab = -1 * cl[0]
 
         self.curr_rec = self.rec - self.loc_rec + self.adv_swipe + self.lock_amount
 
