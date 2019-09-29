@@ -84,6 +84,7 @@
                 <tree string="Credit Card Payment" default_order="payment_date desc">
                     <field name="serial"/>
                     <field name="customer" />
+                    <field name="bank_name"/>
                     <field name="payment_date" />
                     <field name="commission_paid" />
                     <field name="amount_deposited" />
