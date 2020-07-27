@@ -254,7 +254,6 @@ class SwipeCard(models.TransientModel):
         @api.onchange('rec_amount','rec_percentage')
         def _onchange_amount_to_customer(self):
             mm_master = self.env['machine.master'].browse(self.env.context.get('active_id'))
-
             self.rec_cost_percentage = mm_master.cost_percentage
             self.rec_commission = (self.rec_amount * self.rec_percentage / 100)
             self.rec_cost_to_commission = (self.rec_amount * self.rec_cost_percentage / 100.0)
@@ -305,5 +304,18 @@ class SwipeCard(models.TransientModel):
 
             mm_master.swipe_card()
 
-
-
+        @api.multi
+        def swipe3(self):
+            self.swipe2()
+            view = self.env.ref('transaction_management.wizard_swipe_card2')
+            ctx = self.env.context
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Swipe Card',
+                'view_id': view.id,
+                'view_mode': 'form',
+                'view_type': 'form',
+                'res_model': 'swipe.card.wizard2',
+                'target': 'new',
+                'context': ctx
+            }

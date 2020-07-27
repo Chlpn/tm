@@ -135,8 +135,10 @@
 
                     </group>
                     <footer>
-                        <button name="swipe2" string="Swipe" type="object" class="oe_highlight"/>
+                        <button name="swipe3" string="Swipe &amp; New" type="object" class="oe_highlight"/> or
+                        <button name="swipe2" string="Swipe &amp; Close" type="object" class="oe_highlight"/>
                         or <button string="Cancel" class="oe_link" special="cancel" />
+
                     </footer>
                 </form>
             </field>
