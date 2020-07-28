@@ -241,14 +241,14 @@ class TransMaster(models.Model):
             'date': self.transaction_date,
             'line_ids': line_ids,
         }
-        account_move = self.env['account.move'].create(vals)
+        account_move = self.env['account.move'].sudo().create(vals)
         account_move.post()
         self.journal_ref = account_move.id
 
         if self.machine_name.rent_again & self.env['res.users'].has_group('transaction_management.group_trans_admin'):
-            rjournal_id = self.machine_name.parent_name.branch.journal_id.id
-            comp = self.machine_name.branch.company_id.id
-            ccomp = self.machine_name.parent_name.branch.company_id.id
+            rjournal_id = self.sudo().machine_name.parent_name.branch.journal_id.id
+            comp = self.machine_name.sudo().branch.company_id.id
+            ccomp = self.sudo().machine_name.parent_name.branch.company_id.id
             self.env.cr.execute(
                 """select related_ac from inter_company where company_id=%s and related_company_id=%s""",
                 (ccomp, comp))
@@ -270,10 +270,10 @@ class TransMaster(models.Model):
                  {'journal_id': rjournal_id,
                   'account_id': paccount,
                   'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
-                  'partner_id': self.machine_name.branch.company_id.id,
+                  'partner_id': self.sudo().machine_name.branch.company_id.id,
                   'amount_currency': 0.0, 'credit': float_round(self.amount_to_swipe - self.cost_to_commission,precision_digits=2)}),
                 (0, 0,
-                 {'journal_id': rjournal_id, 'account_id': self.machine_name.parent_name.branch.rentagain_income_ac.id,
+                 {'journal_id': rjournal_id, 'account_id': self.sudo().machine_name.parent_name.branch.rentagain_income_ac.id,
                   'name': self.transaction_no+"/"+self.machine_name.name+"/"+str(self.amount_to_swipe),
                   'amount_currency': 0.0, 'credit': float_round(self.cost_to_commission - self.cost_to_parent, precision_digits=2)}),
                 (0, 0, {'journal_id': rjournal_id, 'account_id': parent_account,
@@ -288,7 +288,7 @@ class TransMaster(models.Model):
                 'date': self.transaction_date,
                 'line_ids': rline_ids,
             }
-            raccount_move = self.env['account.move'].create(pvals)
+            raccount_move = self.env['account.move'].sudo().create(pvals)
             raccount_move.post()
             self.rentagain_journal_ref = raccount_move.id
         self.state = 'posted'
