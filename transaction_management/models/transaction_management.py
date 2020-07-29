@@ -151,7 +151,7 @@ class TransMaster(models.Model):
 
     @api.multi
     def immediate_post_all(self):
-        for record in self.search([]):
+        for record in self:
             #if record.state is 'draft':
             record.post()
 
