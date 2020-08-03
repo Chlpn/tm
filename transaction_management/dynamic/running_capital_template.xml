@@ -101,6 +101,7 @@
                                 <t t-set="ams" t-value="0"/>
                                 <t t-set="apy" t-value="0"/>
                                 <t t-set="apd" t-value="0"/>
+                                <t t-set="apd2" t-value="0"/>
                                 <t t-set="comm" t-value="0"/>
                                 <t t-set="ctc" t-value="0"/>
                                 <t t-set="mar" t-value="0"/>
@@ -121,6 +122,7 @@
      <t t-set="apy" t-value="apy + da2['amount_pay']"/>
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['amount_paid']"/> </td>
      <t t-set="apd" t-value="apd + da2['amount_paid']"/>
+     <t t-set="apd2" t-value="apd2 + da2['amount_paid']"/>
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['commission']"/> </td>
      <t t-set="comm" t-value="comm + da2['commission']"/>
         <td style=" width:15%; text-align:right;"> <span t-esc="da2['cost_commission']"/> </td>
@@ -140,6 +142,7 @@
         <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
+        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd2"/> </strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
         <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
@@ -246,7 +249,7 @@
  <tr >
         <td style=" width:5%; text-align:center;">2.</td>
         <td style=" width:10%; text-align:left;"> Cash Paid to Customer </td>
-        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * apd"/> </td>
+        <td style=" width:25%; text-align:right;"> <span t-esc="-1 * apd2"/> </td>
 
 
  </tr>
