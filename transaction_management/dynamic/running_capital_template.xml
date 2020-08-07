@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>F
 <odoo>
     <data>
         <template id="report_running_capital_template">
@@ -142,7 +142,6 @@
         <td style=" width:15%; text-align:right;"><strong><span t-esc="ams"/></strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="apy"/> </strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd"/> </strong></td>
-        <td style=" width:15%; text-align:right;"><strong> <span t-esc="apd2"/> </strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="comm"/> </strong></td>
         <td style=" width:15%; text-align:right;"><strong> <span t-esc="ctc"/> </strong></td>
         <td style=" width:10%; text-align:right;"><strong> <span t-esc="mar"/> </strong></td>
