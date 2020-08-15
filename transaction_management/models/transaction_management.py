@@ -361,12 +361,12 @@ class TransMaster(models.Model):
     @api.constrains('amount_to_swipe','amount_to_customer','sales_percentage')
     def _check_something(self):
         for record in self:
-            if record.amount_to_swipe <= 0:
-                raise ValueError("Value of Amount to swipe must be greater than Zero")
+            if record.amount_to_swipe = 0:
+                raise ValueError("Value of Amount to swipe must not be Zero")
             if record.amount_to_customer <= 0:
-                raise ValueError("Value of Amount to Customer must be greater than Zero")
+                raise ValueError("Value of Amount to swipe must not be Zero")
             if record.sales_percentage <= 0:
-                raise ValueError("Value of Sales Percentage must be greater than Zero")
+                raise ValueError("Value of Amount to swipe must not be Zero")
 
     @api.multi
     def print_invoice(self):
