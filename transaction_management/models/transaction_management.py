@@ -363,9 +363,9 @@ class TransMaster(models.Model):
         for record in self:
             if record.amount_to_swipe = 0:
                 raise ValueError("Value of Amount to swipe must not be Zero")
-            if record.amount_to_customer <= 0:
+            if record.amount_to_customer = 0:
                 raise ValueError("Value of Amount to swipe must not be Zero")
-            if record.sales_percentage <= 0:
+            if record.sales_percentage = 0:
                 raise ValueError("Value of Amount to swipe must not be Zero")
 
     @api.multi
